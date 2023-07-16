@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Forum&family=Inter&display=swap" rel="stylesheet">
@@ -15,84 +16,84 @@
 <body>
     <div class="container">
         <header class="header">
-            <nav class="nav">
-                <div class="nav_menu">
-                    <a href="#" title="Logo" class="nav_logo">
-                        <p class="logo">Brooklyn Public Library</p>
-                    </a>
-                    <div class="nav_menu_list">
-                        <div class="nav_menu_list_button">
+            <div class="profile_gap">
+                <nav class="nav">
+                    <div class="nav_menu">
+                        <a href="#" title="Logo" class="nav_logo">
+                            <h1>Brooklyn Public Library</h1>
+                        </a>
+                        <div class="nav_menu_list">
                             <ul class="nav_menu_items">
-                                <li class="nav_menu_item"><a href="#" title="About" class="nav_menu_link">About</a></li>
-                                <li class="nav_menu_item"><a href="#" title="Favorites" class="nav_menu_link">Favorites</a></li>
-                                <li class="nav_menu_item"><a href="#" title="Coffee shop" class="nav_menu_link">Coffee shop</a></li>
-                                <li class="nav_menu_item"><a href="#" title="Contacts" class="nav_menu_link">Contacts</a></li>
-                                <li class="nav_menu_item"><a href="#" title="Library Card" class="nav_menu_link">Library Card</a></li>
+                                <li class="nav_menu_item"><a href="#about" title="About" class="nav_menu_link">About</a></li>
+                                <li class="nav_menu_item"><a href="#favorites" title="Favorites" class="nav_menu_link">Favorites</a></li>
+                                <li class="nav_menu_item"><a href="#coffee-shop" title="Coffee shop" class="nav_menu_link">Coffee shop</a></li>
+                                <li class="nav_menu_item"><a href="#contacts" title="Contacts" class="nav_menu_link">Contacts</a></li>
+                                <li class="nav_menu_item"><a href="#library-cards" title="Library Card" class="nav_menu_link">Library Card</a></li>
                             </ul>
                         </div>
-                        <button class="nav_menu_button">
-                            <img src="./assets/svg/icon_profile.svg" alt="profile" class="profile">
-                        </button>
                     </div>
+                </nav>
+                <div class="profile">
+                    <a href="#"><img src="./assets/svg/icon_profile.svg" alt="profile"></a>
                 </div>
-            </nav>
-            <section class="section_welcome">
-                <div class="welcome">
-                    <h1>Welcome<br>to the Brooklyn<br>Library</h1>
+            </div>
+            <section class="Welcome">
+                <div class="welcome_block">
+                    <p class="welcome_to_library">Welcome<br>to the Brooklyn<br>Library</p>
                 </div>
             </section>
         </header>
 
         <main class="main">
-            <section class="about">
-                <div class="section_title_line">
+            <section class="About">
+                <div class="section_title_line" id="about">
                     <h2>About</h2>
                     <hr class="line">
                 </div>
-                <div class="text_block_about">The Brooklyn Library is a free workspace, a large number of books and a
-                    cozy coffee shop inside
-                </div>
-                <div class="images_nav">
+                <div class="text_block_about">The Brooklyn Library is a free workspace, a large number of books and a cozy coffee shop inside</div>
+                <div class="images_menu">
                     <div class="images">
                         <img src="./assets/img/image_1.jpg" alt="A woman in the library">
                         <img src="./assets/img/image_2.jpg" alt="Sculptures">
                         <img src="./assets/img/image_3.jpg" alt="Book shelves">
                     </div>
-                    <div class="nav_dots">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="68" height="16" viewBox="0 0 68 16" fill="none">
-                            <rect width="16" height="16" rx="8" fill="#BB945F" />
-                            <rect x="26" width="16" height="16" rx="8" fill="#0C0C0E" />
-                            <rect x="52" width="16" height="16" rx="8" fill="#0C0C0E" />
-                        </svg>
+                    <div class="pagination_dots">
+                        <div class="pagination_block">
+                            <div class ="circle_checked"></div>
+                        </div>
+                        <div class="pagination_block">
+                            <div class="circle_black"></div>
+                        </div>
+                        <div class="pagination_block">
+                            <div class="circle_black"></div>
+                        </div>
                     </div>
                 </div>
             </section>
-            <section class="favorites">
-                <div class="section_title_line">
+            <section class="Favorites">
+                <div class="section_title_line" id="favorites">
                     <h2>Favorites</h2>
                     <hr class="line">
                 </div>
                 <div class="text_favorites">Pick favorites of season</div>
-                <div class="radio_block">
-                    <fieldset>
-                        <div class="type_radio">
-                            <input type="radio" id="winter" name="season" value="winter" class="season_input" checked>
-                            <label for="winter" class="radio_label_text">Winter</label>
-                        </div>
-                        <div class="type_radio">
-                            <input type="radio" id="spring" name="season" value="spring" class="season_input">
-                            <label for="spring" class="radio_label_text">Spring</label>
-                        </div>
-                        <div class="type_radio">
-                            <input type="radio" id="summer" name="season" value="summer" class="season_input">
-                            <label for="summer" class="radio_label_text">Summer</label>
-                        </div>
-                        <div class="type_radio">
-                            <input type="radio" id="autumn" name="season" value="autumn" class="season_input">
-                            <label for="autumn" class="radio_label_text">Autumn</label>
-                        </div>
-                    </fieldset>
-                </div>
+                <fieldset class="radio_block">
+                    <div class="radio_block_item">
+                        <input type="radio" id="winter" name="topic" value="winter" class="radio_item" checked>
+                        <label for="winter" class="radio_label_text_checked">Winter</label>
+                    </div>                      
+                    <div class="radio_block_item">
+                        <input type="radio" id="spring" name="topic" value="spring" class="radio_item">
+                        <label for="spring" class="radio_label_text">Spring</label>
+                    </div>
+                    <div class="radio_block_item">
+                        <input type="radio" id="summer" name="topic" value="summer" class="radio_item">
+                        <label for="summer" class="radio_label_text">Summer</label>
+                    </div>
+                    <div class="radio_block_item">
+                        <input type="radio" id="autumn" name="topic" value="autumn" class="radio_item">
+                        <label for="autumn" class="radio_label_text">Autumn</label>
+                    </div>
+                </fieldset>
                 <ul class="cards">
                     <li class="cards_item">
                         <article class="card">
@@ -108,7 +109,7 @@
                                 <button class="card_button_item">Buy</button>
                             </div>
                             <div class="card_image">
-                                <img class="card_image_item" src="./assets/img/book_1.jpg" alt="The book eaters">
+                                <img class="card_image_item" src="./assets/img/book_1_the_book_eaters.jpg" alt="The book eaters">
                             </div>
                         </article>
                     </li>
@@ -120,14 +121,12 @@
                                 <h4 class="card_title_1">Cackle</h4>
                                 <h5 class="card_title_2">By Rachel Harrison</h5>
                                 <p class="card_text">Are your Halloween movies of choice The Witches of Eastwick and
-                                    Practical Magic? Look
-                                    no further than here - where a woman recovering from a breakup moves to a quaint
-                                    town in upstate New
-                                    York and befriends a beautiful witch.</p>
+                                    Practical Magic? Look no further than here - where a woman recovering from a breakup moves to a quaint
+                                    town in upstate New York and befriends a beautiful witch.</p>
                                 <button class="card_button_item">Buy</button>
                             </div>
                             <div class="card_image">
-                                <img class="card_image_item" src="./assets/img/book_2.jpg" alt="The book eaters">
+                                <img class="card_image_item" src="./assets/img/book_2_cackle.jpg" alt="Cackle">
                             </div>
                         </article>
                     </li>
@@ -145,7 +144,7 @@
                                 <button class="card_button_item">Buy</button>
                             </div>
                             <div class="card_image">
-                                <img class="card_image_item" src="./assets/img/book_3.jpg" alt="The book eaters">
+                                <img class="card_image_item" src="./assets/img/book_3_dante.jpg" alt="Dante: Poet of the Secular World">
                             </div>
                         </article>
                     </li>
@@ -159,25 +158,203 @@
                                 <p class="card_text">A timely and revelatory new biography of Queen Elizabeth (and her
                                     family) exploring how the Windsors have evolved and thrived as the modern world has
                                     changed around them.</p>
+                                <button class="card_button_item_own" disabled>Own</button>
+                            </div>
+                            <div class="card_image">
+                                <img class="card_image_item" src="./assets/img/book_4_last_queen.jpg" alt="The Last Queen">
+                            </div>
+                        </article>
+                    </li>
+                    <li class="cards_hide">
+                        <article class="card">
+                            <div class="card_content">
+                                <h3>Staff Picks</h3>
+                                <hr class="card_line">
+                                <h4 class="card_title_1">The Body</h4>
+                                <h5 class="card_title_2">By Stephen King</h5>
+                                <p class="card_text">Powerful novel that takes you back to a nostalgic time, exploring both the beauty and danger and loss of innocence that is youth.</p>
                                 <button class="card_button_item">Buy</button>
                             </div>
                             <div class="card_image">
-                                <img class="card_image_item" src="./assets/img/book_4.jpg" alt="The book eaters">
+                                <img class="card_image_item" src="./assets/img/book_5_stephen_king_the_body.jpg" alt="The Body">
+                            </div>
+                        </article>
+                    </li>
+                    <li class="cards_hide">
+                        <article class="card">
+                            <div class="card_content">
+                                <h3>Staff Picks</h3>
+                                <hr class="card_line">
+                                <h4 class="card_title_1">Carry: A Memoir of Survival on Stolen Land</h4>
+                                <h5 class="card_title_2">By Toni Jenson</h5>
+                                <p class="card_text">This memoir about the author's relationship with gun violence feels both expansive and intimate, resulting in a lyrical indictment of the way things are.</p>
+                                <button class="card_button_item">Buy</button>
+                            </div>
+                            <div class="card_image">
+                                <img class="card_image_item" src="./assets/img/book_6_carry.jpg" alt="Carry: A Memoir of Survival on Stolen Land">
+                            </div>
+                        </article>
+                    </li>
+                    <li class="cards_hide">
+                        <article class="card">
+                            <div class="card_content">
+                                <h3>Staff Picks</h3>
+                                <hr class="card_line">
+                                <h4 class="card_title_1">Days of Distraction</h4>
+                                <h5 class="card_title_2">By Alexandra Chang</h5>
+                                <p class="card_text">A sardonic view of Silicon Valley culture, a meditation on race, and a journal of displacement and belonging, all in one form-defying package of spare prose.</p>
+                                <button class="card_button_item">Buy</button>
+                            </div>
+                            <div class="card_image">
+                                <img class="card_image_item" src="./assets/img/book_7_days_of_distraction.jpg" alt="Days of Distraction">
+                            </div>
+                        </article>
+                    </li>
+                    <li class="cards_hide">
+                        <article class="card">
+                            <div class="card_content">
+                                <h3>Staff Picks</h3>
+                                <hr class="card_line">
+                                <h4 class="card_title_1">Dominicana</h4>
+                                <h5 class="card_title_2">By Angie Cruz</h5>
+                                <p class="card_text">A fascinating story of a teenage girl who marries a man twice her age with the promise to bring her to America. Her marriage is an opportunity for her family to eventually immigrate. For fans of Isabel Allende and Julia Alvarez.</p>
+                                <button class="card_button_item">Buy</button>
+                            </div>
+                            <div class="card_image">
+                                <img class="card_image_item" src="./assets/img/book_8_dominicana.jpg" alt="Dominicana">
+                            </div>
+                        </article>
+                    </li>
+                    <li class="cards_hide">
+                        <article class="card">
+                            <div class="card_content">
+                                <h3>Staff Picks</h3>
+                                <hr class="card_line">
+                                <h4 class="card_title_1">Crude: A Memoir</h4>
+                                <h5 class="card_title_2">By Pablo Fajardo & Sophie Tardy-Joubert</h5>
+                                <p class="card_text">Drawing and color by Damien Roudeau | This book illustrates the struggles of a group of indigenous Ecuadoreans as they try to sue the ChevronTexaco company for damage their oil fields did to the Amazon and her people.</p>
+                                <button class="card_button_item">Buy</button>
+                            </div>
+                            <div class="card_image">
+                                <img class="card_image_item" src="./assets/img/book_9_crude.jpg" alt="Crude: A Memoir">
+                            </div>
+                        </article>
+                    </li>
+                    <li class="cards_hide">
+                        <article class="card">
+                            <div class="card_content">
+                                <h3>Staff Picks</h3>
+                                <hr class="card_line">
+                                <h4 class="card_title_1">Let My People Go Surfing</h4>
+                                <h5 class="card_title_2">By Yvon Chouinard</h5>
+                                <p class="card_text">Chouinard—climber, businessman, environmentalist—shares tales of courage and persistence from his experience of founding and leading Patagonia, Inc. Full title: Let My People Go Surfing: The Education of a Reluctant Businessman, Including 10 More Years of Business Unusual.</p>
+                                <button class="card_button_item">Buy</button>
+                            </div>
+                            <div class="card_image">
+                                <img class="card_image_item" src="./assets/img/book_10_let_my_people_go_surfing.jpg" alt="Let My People Go Surfing">
+                            </div>
+                        </article>
+                    </li>
+                    <li class="cards_hide">
+                        <article class="card">
+                            <div class="card_content">
+                                <h3>Staff Picks</h3>
+                                <hr class="card_line">
+                                <h4 class="card_title_1">The Octopus Museum: Poems</h4>
+                                <h5 class="card_title_2">By Brenda Shaughnessy</h5>
+                                <p class="card_text">This collection of bold and scathingly beautiful feminist poems imagines what comes after our current age of environmental destruction, racism, sexism, and divisive politics.</p>
+                                <button class="card_button_item">Buy</button>
+                            </div>
+                            <div class="card_image">
+                                <img class="card_image_item" src="./assets/img/book_11_the_octopus_museum.jpg" alt="The Octopus Museum: Poems">
+                            </div>
+                        </article>
+                    </li>
+                    <li class="cards_hide">
+                        <article class="card">
+                            <div class="card_content">
+                                <h3>Staff Picks</h3>
+                                <hr class="card_line">
+                                <h4 class="card_title_1">Shark Dialogues: A Novel</h4>
+                                <h5 class="card_title_2">By Kiana Davenport</h5>
+                                <p class="card_text">An epic saga of seven generations of one family encompasses the tumultuous history of Hawaii as a Hawaiian woman gathers her four granddaughters together in an erotic tale of villains and dreamers, queens and revolutionaries, lepers and healers.</p>
+                                <button class="card_button_item">Buy</button>
+                            </div>
+                            <div class="card_image">
+                                <img class="card_image_item" src="./assets/img/book_12_shark_dialogues.jpg" alt="Shark Dialogues: A Novel">
+                            </div>
+                        </article>
+                    </li>
+                    <li class="cards_hide">
+                        <article class="card">
+                            <div class="card_content">
+                                <h3>Staff Picks</h3>
+                                <hr class="card_line">
+                                <h4 class="card_title_1">Casual Conversation</h4>
+                                <h5 class="card_title_2">By Renia White</h5>
+                                <p class="card_text">White's impressive debut collection takes readers through and beyond the concepts of conversation and the casual - both what we say to each other and what we don't, examining the possibilities around how we construct and communicate identity.</p>
+                                <button class="card_button_item">Buy</button>
+                            </div>
+                            <div class="card_image">
+                                <img class="card_image_item" src="./assets/img/book_13_casual_conversation.jpg" alt="Casual Conversation">
+                            </div>
+                        </article>
+                    </li>
+                    <li class="cards_hide">
+                        <article class="card">
+                            <div class="card_content">
+                                <h3>Staff Picks</h3>
+                                <hr class="card_line">
+                                <h4 class="card_title_1">The Great Fire</h4>
+                                <h5 class="card_title_2">By Lou Ureneck</h5>
+                                <p class="card_text">The harrowing story of an ordinary American and a principled Naval officer who, horrified by the burning of Smyrna, led an extraordinary rescue effort that saved a quarter of a million refugees from the Armenian Genocide.</p>
+                                <button class="card_button_item">Buy</button>
+                            </div>
+                            <div class="card_image">
+                                <img class="card_image_item" src="./assets/img/book_14_the_great_fire.jpg" alt="The Great Fire">
+                            </div>
+                        </article>
+                    </li>
+                    <li class="cards_hide">
+                        <article class="card">
+                            <div class="card_content">
+                                <h3>Staff Picks</h3>
+                                <hr class="card_line">
+                                <h4 class="card_title_1">Rickey: The Life and Legend</h4>
+                                <h5 class="card_title_2">By Howard Bryant</h5>
+                                <p class="card_text">With the fall rolling around, one can't help but think of baseball's postseason coming up! And what better way to prepare for it than reading the biography of one of the game's all-time greatest performers, the Man of Steal, Rickey Henderson?</p>
+                                <button class="card_button_item">Buy</button>
+                            </div>
+                            <div class="card_image">
+                                <img class="card_image_item" src="./assets/img/book_15_rickey.jpg" alt="Rickey: The Life and Legend">
+                            </div>
+                        </article>
+                    </li>
+                    <li class="cards_hide">
+                        <article class="card">
+                            <div class="card_content">
+                                <h3>Staff Picks</h3>
+                                <hr class="card_line">
+                                <h4 class="card_title_1">Slug: And Other Stories</h4>
+                                <h5 class="card_title_2">By Megan Milks</h5>
+                                <p class="card_text">Exes Tegan and Sara find themselves chained together by hairballs of codependency. A father and child experience the shared trauma of giving birth to gods from their wounds.</p>
+                                <button class="card_button_item">Buy</button>
+                            </div>
+                            <div class="card_image">
+                                <img class="card_image_item" src="./assets/img/book_16_slug.jpg" alt="Slug: And Other Stories">
                             </div>
                         </article>
                     </li>
                 </ul>
             </section>
-            <section class="coffee_shop">
-                <div class="section_title_line">
+            <section class="CoffeShop">
+                <div class="section_title_line" id="coffee-shop">
                     <h2>Coffee Shop</h2>
                     <hr class="line">
                 </div>
                 <div class="text_block_coffee_shop">In our library, we have of cozy coffee shop, welcoming in customers
-                    with frothy
-                    cappuccinos and friendly conversation. You can get a favorite book and read in coffee shop. Our
-                    barista to cook
-                    you best coffee, and also you can try desserts from bakery.
+                    with frothy cappuccinos and friendly conversation. You can get a favorite book and read in coffee shop. Our
+                    barista to cook you best coffee, and also you can try desserts from bakery.
                 </div>
                 <div class="coffee_shop_menu_container">
                     <ul class="coffee_shop_content">
@@ -189,45 +366,45 @@
                                             <h3 class="coffee_shop_title">Coffee & Tea</h3>
                                         </li>
                                         <li class="coffee_shop_menu_item">
-                                            <p>Cold Brew Coffee</p>
+                                            <p class="coffee_shop_text">Cold Brew Coffee</p>
                                             <div class="right_position">
                                                 <hr class="line_menu">
-                                                <p>$3</p>
+                                                <p class="coffee_shop_dollars">$3</p>
                                             </div>
                                         </li>
                                         <li class="coffee_shop_menu_item">
-                                            <p>French Press Pot</p>
+                                            <p class="coffee_shop_text">French Press Pot</p>
                                             <div class="right_position">
                                                 <hr class="line_menu">
-                                                <p>$5</p>
+                                                <p class="coffee_shop_dollars">$5</p>
                                             </div>
                                         </li>
                                         <li class="coffee_shop_menu_item">
-                                            <p>Espresso</p>
+                                            <p class="coffee_shop_text">Espresso</p>
                                             <div class="right_position">
                                                 <hr class="line_menu">
-                                                <p>$2</p>
+                                                <p class="coffee_shop_dollars">$2</p>
                                             </div>
                                         </li>
                                         <li class="coffee_shop_menu_item">
-                                            <p>Cappuccino</p>
+                                            <p class="coffee_shop_text">Cappuccino</p>
                                             <div class="right_position">
                                                 <hr class="line_menu">
-                                                <p>$4</p>
+                                                <p class="coffee_shop_dollars">$4</p>
                                             </div>
                                         </li>
                                         <li class="coffee_shop_menu_item">
-                                            <p>Hot tea</p>
+                                            <p class="coffee_shop_text">Hot tea</p>
                                             <div class="right_position">
                                                 <hr class="line_menu">
-                                                <p>$2</p>
+                                                <p class="coffee_shop_dollars">$2</p>
                                             </div>
                                         </li>
                                         <li class="coffee_shop_menu_item">
-                                            <p>Cold tea</p>
+                                            <p class="coffee_shop_text">Cold tea</p>
                                             <div class="right_position">
                                                 <hr class="line_menu">
-                                                <p>$2</p>
+                                                <p class="coffee_shop_dollars">$2</p>
                                             </div>
                                         </li>
                                     </ul>
@@ -242,34 +419,34 @@
                                             <h3 class="coffee_shop_title">Desserts & Cakes</h3>
                                         </li>
                                         <li class="coffee_shop_menu_item">
-                                            <p>Forest Gateau</p>
+                                            <p class="coffee_shop_text">Forest Gateau</p>
                                             <hr class="line_menu">
-                                            <p>$16</p>
+                                            <p class="coffee_shop_dollars">$16</p>
                                         </li>
                                         <li class="coffee_shop_menu_item">
-                                            <p>Blue Moon</p>
+                                            <p class="coffee_shop_text">Blue Moon</p>
                                             <hr class="line_menu">
-                                            <p>$16</p>
+                                            <p class="coffee_shop_dollars">$16</p>
                                         </li>
                                         <li class="coffee_shop_menu_item">
-                                            <p>Truffle Cake</p>
+                                            <p class="coffee_shop_text">Truffle Cake</p>
                                             <hr class="line_menu">
-                                            <p>$15</p>
+                                            <p class="coffee_shop_dollars">$15</p>
                                         </li>
                                         <li class="coffee_shop_menu_item">
-                                            <p>Chocolate Cake</p>
+                                            <p class="coffee_shop_text">Chocolate Cake</p>
                                             <hr class="line_menu">
-                                            <p>$18</p>
+                                            <p class="coffee_shop_dollars">$18</p>
                                         </li>
                                         <li class="coffee_shop_menu_item">
-                                            <p>Poet’s Dream Cake</p>
+                                            <p class="coffee_shop_text">Poet's Dream Cake</p>
                                             <hr class="line_menu">
-                                            <p>$16</p>
+                                            <p class="coffee_shop_dollars">$16</p>
                                         </li>
                                         <li class="coffee_shop_menu_item">
-                                            <p>Pineapple Cake</p>
+                                            <p class="coffee_shop_text">Pineapple Cake</p>
                                             <hr class="line_menu">
-                                            <p>$14</p>
+                                            <p class="coffee_shop_dollars">$14</p>
                                         </li>
                                     </ul>
                                 </div>
@@ -278,8 +455,8 @@
                     </ul>
                 </div>
             </section>
-            <section class="our_contacts">
-                <div class="section_title_line">
+            <section class="Contacts">
+                <div class="section_title_line" id="contacts">
                     <h2>Our Contacts</h2>
                     <hr class="line">
                 </div>
@@ -290,24 +467,23 @@
                         </div>
 
                         <div class="contacts_items_line">
-                            <p class="contacts_item">Please call (617) 730-2370</p>
-                            <p class="contacts_item">For TTY service, please call (617) 730-2370</p>
-                            <p class="contacts_item">Putterham Library: (617) 730-2385</p>
+                            <p class="contacts_item">Please call <a href="tel:6177302370" class="contacts_item_link">(617) 730-2370</a></p>
+                            <p class="contacts_item">For TTY service, please call <a href="tel:6177302370" class="contacts_item_link">(617) 730-2370</a></p>
+                            <p class="contacts_item">Putterham Library: <a href="tel:6177302385" class="contacts_item_link">(617) 730-2385</a></p>
                         </div>
 
                         <div class="contacts_items_line">
                             <p class="contacts_item_title">Senior Staff</p>
-                            <p class="contacts_item">Library Director: <span class="contats_item_title">Amanda
-                                    Hirst</span></p>
+                            <p class="contacts_item">Library Director: <a href=" mailto:AmandaHirst@gmail.com" class="contacts_item_link">Amanda Hirst</a></p>
                         </div>
                     </div>
-                    <div class="map">
+                    <div class="map" id="map">
                         <img src="assets/img/map.jpg" alt="Карта">
                     </div>
                 </div>
             </section>
-            <section class="digital_library_cards">
-                <div class="section_title_line">
+            <section class="LibraryCard">
+                <div class="section_title_line" id="library-cards">
                     <h2>Digital Library Cards</h2>
                     <hr class="line">
                 </div>
@@ -316,15 +492,12 @@
                         <div class="find_card_form_title">
                             <h3 class="find_card_title">Find your Library card</h3>
                         </div>
-
                         <form action="parser" method="get" class="form">
                             <div class="form_bg">
                                 <h4 class="form_title">Brooklyn Public Library</h4>
                                 <div class="form_inputs">
-                                    <label><input type="text" class="form_input_item" name="name"
-                                            placeholder="Reader's name" required></label>
-                                    <label><input type="text" class="form_input_item" name="card_number"
-                                            placeholder="Card number" required></label>
+                                    <label><input type="text" class="form_input_item" name="name" placeholder="Reader's name" required></label>
+                                    <label><input type="text" class="form_input_item" name="card_number" placeholder="Card number" required></label>
                                 </div>
                             </div>
                             <div class="form_button">
@@ -334,9 +507,7 @@
                     </div>
                     <div class="get_card">
                         <h4 class="get_card_title">Get a reader card</h4>
-                        <p class="get_card_text">You will be able to see a reader card after logging into account or you
-                            can
-                            register a new account</p>
+                        <p class="get_card_text">You will be able to see a reader card after logging into account or you can register a new account</p>
                         <div class="get_card_buttons">
                             <button class="get_card_button">Sing Up</button>
                             <button class="get_card_button">Log in</button>
@@ -348,28 +519,31 @@
         <footer class="footer">
             <div class="address_socials_schedule">
                 <div class="address_socials">
-                    <div class="address">286 Cadman Plaza, New York, NY 11238, United States</div>
+                    <a href="#map" class="address">286 Cadman Plaza, New York, NY 11238, United States</a>
                     <ul class="socials">
-                        <li><a href="#"><img src="./assets/svg/twitter.svg" alt="Twitter"></a></li>
-                        <li><a href="#"><img src="./assets/svg/instagram.svg" alt="Instagram"></a></li>
-                        <li><a href="#"><img src="./assets/svg/facebook.svg" alt="Facebook"></a></li>
+                        <li><a href="https://hca.twimg.com/ru/using-twitter/create-twitter-account" target="_blank"><img src="./assets/svg/twitter.svg" alt="Twitter"></a></li>
+                        <li><a href="https://www.instagram.com/nadyavalin/" target="_blank"><img src="./assets/svg/instagram.svg" alt="Instagram"></a></li>
+                        <li><a href="https://www.facebook.com/nadezhda.tkachuk30?mibextid=ZbWKwL" target="_blank"><img src="./assets/svg/facebook.svg" alt="Facebook"></a></li>
                     </ul>
                 </div>
                 <div class="schedule">
-                    <p>Mon - Fri</p>
-                    <p>08:00 am - 07:00 pm</p>
-                    <p>Sat - Sun</p>
-                    <p>10:00 am - 06:00 pm</p>
+                    <div class="schedule_gap">
+                        <p>Mon - Fri</p>
+                        <p>08:00 am - 07:00 pm</p>
+                    </div>
+                    <div class="schedule_gap">
+                        <p>Sat - Sun</p>
+                        <p>10:00 am - 06:00 pm</p>
+                    </div>
                 </div>
             </div>
             <hr class="hr_footer">
             <div class="copyrights">
                 <p>2023</p>
-                <p class="copyrights_center_title">The Rolling Scopes School</p>
-                <p>Username</p>
+                <a href="https://rs.school/js-stage0/" target="_blank" class="copyrights_RSS">The Rolling Scopes School</a>
+                <a href="https://github.com/nadyavalin" target="_blank">Nadezhda</a>
             </div>
         </footer>
     </div>
 </body>
-
 </html>

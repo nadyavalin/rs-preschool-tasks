@@ -15,6 +15,8 @@ body {
     font-family: 'Inter', sans-serif;
     color:#000000;
     font-size: 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 ul {
@@ -34,7 +36,7 @@ a:hover {
 
 .container {
     margin: 0 auto;
-    width: 1440px;
+    max-width: 1440px;
 }
 
 .header {
@@ -43,31 +45,10 @@ a:hover {
     background-size: cover;
     background-repeat: no-repeat;
     height: 690px;
-    padding-right: 20px;
-    padding-left: 20px;
     display: grid;
 }
 
-.about, .favorites, .coffee_shop, .our_contacts, .digital_library_cards {
-    padding-right: 20px;
-    padding-left: 20px;
-    padding-top: 20px;
-    padding-bottom: 40px;
-}
-
-.nav {
-    background-color: #0C0C0E;
-    height: 90px;
-    display: flex;
-    align-items: center;
-}
-
-.nav_menu {
-    margin: 0 auto;
-    width: 100%;
-}
-
-p.logo {
+h1 {
     color: #FFFFFF;
     font-family: 'Forum';
     font-size: 30px;
@@ -77,17 +58,41 @@ p.logo {
     letter-spacing: 0.6px;
 }
 
+.About {
+    padding-top: 20px;
+}
+
+.Favorites, .CoffeShop, .Contacts, .LibraryCard {
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+.LibraryCard {
+    padding-top: 15px;
+}
+
+.nav {
+    background-color: #0C0C0E;
+    height: 90px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav_menu {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
 .nav_menu_items {
     display: flex;
     justify-content: center;
 }
 
-.nav_menu_list_button {
-    display: flex;
-    gap: 40px;
-}
-
-.nav_menu, .nav_menu_list, .nav_menu_button {
+.nav_menu, .nav_menu_list, .profile {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -97,11 +102,17 @@ p.logo {
     gap: 30px;
 }
 
-.nav_menu_button {
+.profile {
     border: none;
     background-color: transparent;
     cursor: pointer;
+}
+
+.profile_gap {
+    display: flex;
     gap: 40px;
+    padding-right: 20px;
+    padding-left: 20px;
 }
 
 .nav_menu_link {
@@ -114,7 +125,19 @@ p.logo {
     color: #555555;
 }
 
-h1 {
+.Welcome {
+    height: 600px;
+    background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.10) 100%);
+}
+
+.welcome_block {
+    width: 600px;
+    height: 220px;
+    background-color: #0C0C0E;
+    margin-top: 220px;
+}
+
+.welcome_to_library {
     color: #FFFFFF;
     text-align: center;
     font-family: 'Forum';
@@ -123,23 +146,7 @@ h1 {
     line-height: 50px;
     letter-spacing: 3px;
     text-transform: uppercase;
-}
-
-.nav_menu_button {
-    margin-left: 40px;
-}
-
-.section_welcome {
-    height: 600px;
-    background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.10) 100%);
-}
-
-.welcome {
-    width: 600px;
-    height: 220px;
     padding: 35px 40px;
-    background-color: #0C0C0E;
-    margin-top: 220px;
 }
 
 h2 {
@@ -177,10 +184,11 @@ h3.coffee_shop_title {
 }
 
 .text_block_about {
-    padding-bottom: 20px;
-    line-height: 40px;
-    letter-spacing: 2px;
+    width: 1440px;
     text-align: center;
+    font-style: normal;
+    line-height: 40px;
+    padding-bottom: 20px;
 }
 
 .text_block_coffee_shop {
@@ -190,72 +198,128 @@ h3.coffee_shop_title {
     text-align: center;
 }
 
-.images {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.images_nav {
+.images_menu {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.nav_dots {
-    width: 68px;
+.images {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.pagination_dots {
+    padding-top: 35px;
+    padding-bottom: 35px;
+    display: flex;
+}
+
+.pagination_block {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.circle_checked {
+    background-color: #BB945F;
+    width: 16px;
     height: 16px;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    border-radius: 50px;
+}
+
+.circle_black {
+    background-color: #0C0C0E;
+    width: 16px;
+    height: 16px;
+    border-radius: 50px;
 }
 
 .text_favorites {
-    font-weight: 700;
-    line-height: normal;
-    padding-bottom: 40px;
     text-align: left;
-}
-
-
-fieldset {
-    border: 0;
-    display: flex;
-    justify-content: left;
-    gap: 90px;
+    font-weight: 700;
+    word-spacing: 2px;
+    padding-bottom: 37px;
 }
 
 .radio_block {
-    padding-bottom: 40px;
+    padding-bottom: 35px;
+    display: flex;
+    gap: 80px;
+    border: 0;
+}
+
+.radio_block input[type=radio] {
+	display: none;
+}
+
+.radio_block_item {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.radio_block label {
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	padding-left: 37px;
+	line-height: 20px;
+}
+
+.radio_block label:before {
+	content: "";
+	display: inline-block;
+	width: 17px;
+	height: 18px;
+	position: absolute;
+	left: 0;
+	bottom: 1px;
+	background: url(./assets/svg/radio_unchecked.svg) 0 0 no-repeat;
+}
+
+/* Checked */
+.radio_block input[type=radio]:checked + label:before {
+	background: url(./assets/svg/radio_checked.svg) 0 0 no-repeat;
+}
+
+.radio_item {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #000000;
+    transition: 0.5s ease-in-out;
 }
 
 .radio_label_text {
-    font-family: 'Inter';
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
     line-height: normal;
+    cursor: pointer;
 }
 
-.radio_label_text:checked {
-    font-family: 'Inter';
-    font-size: 20px;
-    font-style: normal;
+.radio_label_text_checked {
     font-weight: 700;
     line-height: normal;
+    cursor: pointer;
 }
-
-.season_input {
-    border-radius: 50%;
-    width: 17px;
-    height: 17px;
-    border: 2px solid #0C0C0E;
-    transition: 0.2s all linear;
-    position: relative;
-    top: 4px;
-  }
 
 .cards {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    gap: 40px;
+}
+
+.cards_hide {
+    display: none; /* невидимые карточки */
     flex-wrap: wrap;
     justify-content: space-between;
     text-align: left;
@@ -270,6 +334,7 @@ fieldset {
     display: flex;
     width: 550px;
     height: 555px;
+    margin-right: 40px;
 }
 
 .card_content {
@@ -280,12 +345,8 @@ fieldset {
     flex-grow: 1;
 }
 
- .card {
-    height: 100%;
-}
-
 h3 {
-    color: #000000;
+    font-size: 20px;
     font-family: 'Forum';
     font-weight: 400;
     line-height: 40px;
@@ -314,6 +375,7 @@ h5.card_title_2 {
     line-height: 40px;
     letter-spacing: 2px;
     text-transform: capitalize;
+    padding-bottom: 20px;
 }
 
 .card_text {
@@ -338,14 +400,42 @@ h5.card_title_2 {
     line-height: normal;
     letter-spacing: 1px;
     background-color: #FFFFFF;
-    cursor: pointer;
     margin-top: auto;
+    border: 1px solid #0C0C0E;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.card_button_item:hover {
+    background-color: #BB945F;
+    border: 1px solid #BB945F;
+}
+
+.card_button_item_own {
+    width: 75px;
+    height: 30px;
+    color: #BB945F;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1px;
+    background-color: #FFFFFF;
+    margin-top: auto;
+    border: 1px solid #BB945F;
+    border-radius: 2px;
 }
 
 .card_image {
     position: relative;
-    top: 222px;
+    top: 254px;
+    right: 6px;
 }
+
+/* .card_image_item {
+
+} класс пока не используется */
 
 hr.line_menu {
     width: 100px;
@@ -353,7 +443,7 @@ hr.line_menu {
     background-color: #BB945F;
 }
 
-.coffee_shop {
+.CoffeShop {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -361,9 +451,7 @@ hr.line_menu {
 }
 
 .coffee_shop_menu_container {
-    width: 1440px;
-    padding-right: 20px;
-    padding-left: 20px;
+    width: 100%;
 }
 
 .coffee_shop_content {
@@ -390,7 +478,20 @@ hr.line_menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 60px;
+    gap: 58px;
+}
+
+.coffee_shop_text {
+    line-height: 40px;
+    letter-spacing: 2px;
+    text-transform: capitalize;
+}
+
+.coffee_shop_dollars {
+    font-family: 'Forum';
+    line-height: 40px;
+    letter-spacing: 2px;
+    text-transform: capitalize;
 }
 
 .right_position {
@@ -417,17 +518,22 @@ hr.line_menu {
 }
 
 .contacts_item_title {
+    text-align: left;
     font-weight: 700;
-    line-height: 40px; /* 200% */
+    line-height: 40px;
     letter-spacing: 2px;
     text-transform: capitalize;
 }
 
 .contacts_item {
     font-weight: 400;
-    line-height: 40px; /* 200% */
+    line-height: 40px;
     letter-spacing: 2px;
     text-transform: capitalize;
+}
+
+a.contacts_item_link:hover {
+    color: #8E8E8E;
 }
 
 .find_get_card {
@@ -471,7 +577,7 @@ h3.find_card_title {
     background-color: #BB945F;
     margin: 20px;
     padding: 20px;
-    padding-bottom: 25px;
+    margin-bottom: 16px;
 }
 
 h4.form_title {
@@ -498,7 +604,7 @@ h4.form_title {
     border-radius: 10px;
     background-color: #ffffff;
     border-style: hidden;
-    color: #8E8E8E;
+    color: #BB945F;
     font-family: 'Forum';
     font-size: 30px;
     font-style: normal;
@@ -527,6 +633,12 @@ h4.form_title {
     line-height: normal;
     letter-spacing: 1px;
     cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.form_button_item:hover {
+    border: 1px solid #BB945F;
+    background-color: #BB945F;
 }
 
 .get_card {
@@ -550,7 +662,7 @@ h4.get_card_title {
     text-align: right;
     font-family: 'Inter';
     font-weight: 400;
-    line-height: 40px; /* 200% */
+    line-height: 40px;
     letter-spacing: 0.4px;
 }
 
@@ -571,6 +683,12 @@ h4.get_card_title {
     border-radius: 2px;
     border: 1px solid #0C0C0E;
     cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.get_card_button:hover {
+    border: 1px solid #BB945F;
+    background-color: #BB945F;
 }
 
 .footer {
@@ -584,14 +702,14 @@ h4.get_card_title {
 .address_socials_schedule {
     display: flex;
     justify-content: space-between;
-    padding-top: 20px;
+    padding-top: 21px;
     padding-bottom: 30px;
 }
 
 .address_socials {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 18px;
 }
 
 .address {
@@ -601,6 +719,10 @@ h4.get_card_title {
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
+}
+
+.address:hover {
+    color: #8E8E8E;
 }
 
 .socials {
@@ -619,6 +741,9 @@ h4.get_card_title {
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .hr_footer {
@@ -635,17 +760,12 @@ h4.get_card_title {
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
-    line-height: 40px; /* 200% */
+    line-height: 40px;
     letter-spacing: 2px;
-    padding-top: 44px;
-    padding-bottom: 44px;
+    padding-top: 34px;
+    padding-bottom: 34px;
 }
 
-.copyrights_center_title {
-    display: flex;
-    width: 400px;
-    height: 22px;
-    flex-direction: column;
-    justify-content: center;
-    flex-shrink: 0;
+.copyrights_RSS {
+    margin-left: 55px;
 }
