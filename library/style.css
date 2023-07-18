@@ -141,6 +141,7 @@ h1 {
     height: 220px;
     background-color: #0C0C0E;
     z-index: 1;
+    margin-top: 60px;
 }
 
 .welcome-block__title {
@@ -202,8 +203,8 @@ h2 {
 
 .pagination {
     display: flex;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: 35px;
+    padding-bottom: 35px;
 }
 
 .pagination-block {
@@ -246,20 +247,20 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 40px;
+    gap: 35px;
 }
 
-.favorites-block_text {
+.favorites-block__text {
     text-align: left;
     font-weight: 700;
     word-spacing: 2px;
 }
 
 .season-block {
-    padding-bottom: 35px;
     display: flex;
     gap: 80px;
     border: 0;
+    padding-bottom: 38px;
 }
 
 .season-block input[type=radio] {
@@ -307,12 +308,11 @@ h2 {
 .label__text {
     line-height: normal;
     cursor: pointer;
-    filter: opacity(100%);
     transition: 0.5s ease;
 }
 
 .label__text:hover{
-    filter: opacity(70%);
+    text-shadow: 1px 1px 1px #000000, 0 0 10em #0C0C0E;
 }
 
 .label__text_checked {
@@ -470,7 +470,7 @@ h3.coffee-shop__title {
     margin-bottom: 40px;
 }
 
-.right {
+.right-pos {
     display: flex;
     justify-content: flex-end;
 }
@@ -491,18 +491,23 @@ h3.coffee-shop__title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 60px;
+    gap: 59px;
 }
 
 .coffee-shop__text {
     line-height: 40px;
     letter-spacing: 2px;
     text-transform: capitalize;
-    width: 215px;
+}
+
+.left {
+    width: 200px;
 }
 
 .right {
-    text-align: flex-end;
+    display: flex;
+    justify-content: flex-end;
+    width: 220px;
 }
 
 .coffee-shop__line {
@@ -521,12 +526,13 @@ h3.coffee-shop__title {
 .contacts-block {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 40px;
+    margin-bottom: 35px;
 }
 
 .contacts-block__items {
     display: flex;
     flex-direction: column;
+    gap: 40px;
 }
 
 .contacts-block__title {
@@ -535,10 +541,15 @@ h3.coffee-shop__title {
     line-height: 40px;
     letter-spacing: 2px;
     text-transform: capitalize;
-    margin-bottom: 40px;
 }
 
-.contacts__items {
+.contacts__items_phones {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contacts__items_email {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -552,13 +563,11 @@ h3.coffee-shop__title {
 
 .contacts__item_link {
     font-weight: 400;
-    color: #0C0C0E;
-    transition: weight 0.5s ease; /* почему-то не работает как положено */
+    transition: 0.5s ease;
 }
 
 .contacts__item_link:hover {
-    font-weight: 700;
-    color: #0C0C0E;
+    text-shadow: 1px 1px 1px #000000, 0 0 10em #0C0C0E;
 }
 
 .find-get-card {
@@ -586,37 +595,35 @@ h3.find-card__title {
     width: 600px;
     height: 386px;
     border: 3px solid #BB945F;
-    border-style: groove;
+    box-shadow: 0px 2px 5px 0px #8E8E8E;
     background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.form_field {
+.form__field {
     width: 560px;
     height: 272px;
     background-color: #BB945F;
     margin: 20px;
     padding: 20px;
-    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 15px;
 }
 
-h4.form_title {
+h4.form__title {
     font-family: 'Forum';
     font-size: 30px;
     font-style: normal;
     font-weight: 400;
     line-height: 50px;
     letter-spacing: 0.6px;
-    padding-bottom: 20px;
 }
 
-.form_inputs {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 25px;
-}
-
-.form_input_item {
+.form__input {
     width: 520px;
     height: 66px;
     border-radius: 10px;
@@ -632,12 +639,19 @@ h4.form_title {
     padding: 8px 20px;
 }
 
-.form_button {
-    display: flex;
-    justify-content: center;
+.form__input:valid {
+    border-color: green;
+    color: green;
+    box-shadow: none;
 }
 
-.form_button_item {
+.form__input:invalid {
+    border-color: red;
+    color: red;
+    box-shadow: none;
+}
+
+.form__button {
     display: inline-flex;
     padding: 10px 40px;
     text-align: flex-end;
@@ -654,19 +668,19 @@ h4.form_title {
     transition: 0.5s ease;
 }
 
-.form_button_item:hover {
+.form__button:hover {
     border: 1px solid #BB945F;
     background-color: #BB945F;
 }
 
-.get_card {
+.get-card {
     width: 456px;
     display: flex;
     flex-direction: column;
     gap: 35px;
 }
 
-h4.get_card_title {
+h4.get-card__title {
     font-family: 'Forum';
     font-size: 30px;
     font-style: normal;
@@ -676,7 +690,7 @@ h4.get_card_title {
     text-align: right;
 }
 
-.get_card_text {
+.get-card__description {
     text-align: right;
     font-family: 'Inter';
     font-weight: 400;
@@ -684,13 +698,13 @@ h4.get_card_title {
     letter-spacing: 0.4px;
 }
 
-.get_card_buttons {
+.get-card__buttons {
     display: flex;
     justify-content: flex-end;
     gap: 20px;
 }
 
-.get_card_button {
+.get-card__button {
     display: flex;
     width: 75px;
     height: 30px;
@@ -703,9 +717,13 @@ h4.get_card_title {
     transition: 0.5s ease;
 }
 
-.get_card_button:hover {
+.get-card__button:hover {
     border: 1px solid #BB945F;
     background-color: #BB945F;
+}
+
+.library-cards {
+    margin-bottom: 20px;
 }
 
 .footer {
@@ -716,14 +734,14 @@ h4.get_card_title {
     color: #ffffff;
 }
 
-.address_socials_schedule {
+.footer-block {
     display: flex;
     justify-content: space-between;
     padding-top: 21px;
     padding-bottom: 30px;
 }
 
-.address_socials {
+.footer-block__location {
     display: flex;
     flex-direction: column;
     gap: 18px;
@@ -731,10 +749,7 @@ h4.get_card_title {
 
 .address {
     width: 229px;
-    font-family: 'Inter';
     font-size: 15px;
-    font-style: normal;
-    font-weight: 400;
     line-height: 20px;
 }
 
@@ -746,24 +761,52 @@ h4.get_card_title {
     display: flex;
     width: 102px;
     height: 24px;
-    justify-content: center;
-    align-items: flex-start;
     gap: 15px;
+}
+
+.twitter {
+    background-color: #0C0C0E;
+    border-radius: 6px;
+    border: 1px solid #0C0C0E
+}
+
+.twitter:hover {
+    background-color: #1faee9;
+    border: 1px solid #FFFFFF;
+}
+
+.instagram {
+    background-color: #0C0C0E;
+    border-radius: 6px;
+    border: 1px solid #0C0C0E
+}
+
+.instagram:hover {
+    background-color: #E4405F;
+    border: 1px solid #FFFFFF;
+}
+
+.facebook {
+    background-color: #0C0C0E;
+    border-radius: 6px;
+    border: 1px solid #0C0C0E
+}
+
+.facebook:hover {
+    background-color: #3b5998;
+    border: 1px solid #FFFFFF;
 }
 
 .schedule {
     text-align: right;
-    font-family: 'Inter';
     font-size: 15px;
-    font-style: normal;
-    font-weight: 400;
     line-height: 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.hr_footer {
+.footer-block_hr {
     width: 1400px;
     height: 1px;
     background-color: #ffffff;
@@ -773,10 +816,6 @@ h4.get_card_title {
     display: flex;
     justify-content: space-between;
     text-align: center;
-    font-family: 'Inter';
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
     line-height: 40px;
     letter-spacing: 2px;
     padding-top: 34px;

@@ -66,7 +66,7 @@
                     <hr class="line">
                 </div>
                 <div class="favorites-block">
-                    <p class="favorites-block_text">Pick favorites of season</p>
+                    <p class="favorites-block__text">Pick favorites of season</p>
                     <fieldset class="season-block">
                         <div class="season-block__item">
                             <input type="radio" id="winter" name="topic" value="winter" class="radio" checked>
@@ -109,8 +109,7 @@
                             <h5 class="book-author">By Rachel Harrison</h5>
                             <p class="card__description">Are your Halloween movies of choice The Witches of Eastwick and
                                 Practical Magic? Look no further than here - where a woman recovering from a breakup moves to a
-                                quaint
-                                town in upstate New York and befriends a beautiful witch.</p>
+                                quaint town in upstate New York and befriends a beautiful witch.</p>
                             <button class="card__button">Buy</button>
                             <img class="card-image__item" src="./assets/img/book_2_cackle.jpg" alt="Cackle">
                         </article>
@@ -316,39 +315,39 @@
                         <h3 class="coffee-shop__title">Coffee & Tea</h3>
                         <ul class="coffee-shop__list">
                             <li class="coffee-shop__list_item">
-                                <p class="coffee-shop__text">Cold Brew Coffee</p>
+                                <p class="coffee-shop__text left">Cold Brew Coffee</p>
                                 <hr class="coffee-shop__line">
                                 <p class="coffee-shop__price">$3</p>
                             </li>
                             <li class="coffee-shop__list_item">
-                                <p class="coffee-shop__text">French Press Pot</p>
+                                <p class="coffee-shop__text left">French Press Pot</p>
                                 <hr class="coffee-shop__line">
                                 <p class="coffee-shop__price">$5</p>
                             </li>
                             <li class="coffee-shop__list_item">
-                                <p class="coffee-shop__text">Espresso</p>
+                                <p class="coffee-shop__text left">Espresso</p>
                                 <hr class="coffee-shop__line">
                                 <p class="coffee-shop__price">$2</p>
                             </li>
                             <li class="coffee-shop__list_item">
-                                <p class="coffee-shop__text">Cappuccino</p>
+                                <p class="coffee-shop__text left">Cappuccino</p>
                                 <hr class="coffee-shop__line">
                                 <p class="coffee-shop__price">$4</p>
                             </li>
                             <li class="coffee-shop__list_item">
-                                <p class="coffee-shop__text">Hot tea</p>
+                                <p class="coffee-shop__text left">Hot tea</p>
                                 <hr class="coffee-shop__line">
                                 <p class="coffee-shop__price">$2</p>
                             </li>
                             <li class="coffee-shop__list_item">
-                                <p class="coffee-shop__text">Cold tea</p>
+                                <p class="coffee-shop__text left">Cold tea</p>
                                 <hr class="coffee-shop__line">
                                 <p class="coffee-shop__price">$2</p>
                             </li>
                         </ul>
                     </article>
                     <article class="coffee-shop__item">
-                        <h3 class="coffee-shop__title right">Desserts & Cakes</h3>
+                        <h3 class="coffee-shop__title right-pos">Desserts & Cakes</h3>
                         <ul class="coffee-shop__list">
                             <li class="coffee-shop__list_item">
                                 <p class="coffee-shop__text right">Forest Gateau</p>
@@ -392,12 +391,12 @@
                 <div class="contacts-block">
                     <div class="contacts-block__items">
                         <p class="contacts-block__title">For all Library inquiries:</p>
-                        <div class="contacts__items">
+                        <div class="contacts__items_phones">
                             <p class="contacts__item">Please call <a href="tel:6177302370" class="contacts__item_link">(617) 730-2370</a></p>
                             <p class="contacts__item">For TTY service, please call <a href="tel:6177302370" class="contacts__item_link">(617) 730-2370</a></p>
                             <p class="contacts__item">Putterham Library: <a href="tel:6177302385" class="contacts__item_link">(617) 730-2385</a></p>
                         </div>
-                        <div class="contacts__items">
+                        <div class="contacts__items_email">
                             <p class="contacts-block__title">Senior Staff</p>
                             <p class="contacts-block__title">Library Director: <a href=" mailto:AmandaHirst@gmail.com" class="contacts__item_link">Amanda Hirst</a></p>
                         </div>
@@ -416,24 +415,20 @@
                     <div class="find-card-block">
                         <h3 class="find-card__title">Find your Library card</h3>
                         <form action="parser" method="get" class="form">
-                            <div class="form_field">
-                                <h4 class="form_title">Brooklyn Public Library</h4>
-                                <div class="form_inputs">
-                                    <label><input type="text" class="form_input_item" name="name" placeholder="Reader's name" required></label>
-                                    <label><input type="text" class="form_input_item" name="card_number" placeholder="Card number" required></label>
-                                </div>
+                            <div class="form__field">
+                                <h4 class="form__title">Brooklyn Public Library</h4>
+                                <label><input type="text" pattern="[A-Za-zА-Яа-яЁё]{3,}" class="form__input" name="name" placeholder="Reader's name" required></label>
+                                <label><input type="text" pattern="[0-9]{1,4}-[0-9]{1,4}" maxlength="9" class="form__input" name="card_number" placeholder="Card number" required title="XXXX-XXXX"></label>
                             </div>
-                            <div class="form_button">
-                                <button class="form_button_item">Check the card</button>
-                            </div>
+                            <button class="form__button">Check the card</button>
                         </form>
                     </div>
-                    <div class="get_card">
-                        <h4 class="get_card_title">Get a reader card</h4>
-                        <p class="get_card__description">You will be able to see a reader card after logging into account or you can register a new account</p>
-                        <div class="get_card_buttons">
-                            <button class="get_card_button">Sing Up</button>
-                            <button class="get_card_button">Log in</button>
+                    <div class="get-card">
+                        <h4 class="get-card__title">Get a reader card</h4>
+                        <p class="get-card__description">You will be able to see a reader card after logging into account or you can register a new account</p>
+                        <div class="get-card__buttons">
+                            <button class="get-card__button">Sing Up</button>
+                            <button class="get-card__button">Log in</button>
                         </div>
                     </div>
                 </div>
@@ -442,27 +437,27 @@
         </main>
 
         <footer class="footer">
-            <div class="address_socials_schedule">
-                <div class="address_socials">
+            <div class="footer-block">
+                <div class="footer-block__location">
                     <a href="#map" class="address">286 Cadman Plaza, New York, NY 11238, United States</a>
                     <ul class="socials">
-                        <li><a href="https://hca.twimg.com/ru/using-twitter/create-twitter-account" target="_blank"><img src="./assets/svg/twitter.svg" alt="Twitter"></a></li>
-                        <li><a href="https://www.instagram.com/nadyavalin/" target="_blank"><img src="./assets/svg/instagram.svg" alt="Instagram"></a></li>
-                        <li><a href="https://www.facebook.com/nadezhda.tkachuk30?mibextid=ZbWKwL" target="_blank"><img src="./assets/svg/facebook.svg" alt="Facebook"></a></li>
+                        <li class="twitter"><a href="https://hca.twimg.com/ru/using-twitter/create-twitter-account" target="_blank"><img src="./assets/svg/twitter.svg" alt="Twitter"></a></li>
+                        <li class="instagram"><a href="https://www.instagram.com/nadyavalin/" target="_blank"><img src="./assets/svg/instagram.svg" alt="Instagram"></a></li>
+                        <li class="facebook"><a href="https://www.facebook.com/nadezhda.tkachuk30?mibextid=ZbWKwL" target="_blank"><img src="./assets/svg/facebook.svg" alt="Facebook"></a></li>
                     </ul>
                 </div>
                 <div class="schedule">
-                    <div class="schedule_gap">
+                    <div>
                         <p>Mon - Fri</p>
                         <p>08:00 am - 07:00 pm</p>
                     </div>
-                    <div class="schedule_gap">
+                    <div>
                         <p>Sat - Sun</p>
                         <p>10:00 am - 06:00 pm</p>
                     </div>
                 </div>
             </div>
-            <hr class="hr_footer">
+            <hr class="footer-block_hr">
             <div class="copyrights">
                 <p>2023</p>
                 <a href="https://rs.school/js-stage0/" target="_blank" class="copyrights_RSS">The Rolling Scopes School</a>
