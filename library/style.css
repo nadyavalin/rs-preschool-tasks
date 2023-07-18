@@ -69,21 +69,6 @@ h1 {
     color: #8E8E8E;
 }
 
-.About {
-    padding-top: 20px;
-}
-
-.Favorites, .CoffeShop, .Contacts, .LibraryCard {
-    padding-right: 20px;
-    padding-left: 20px;
-    padding-top: 20px;
-    padding-bottom: 40px;
-}
-
-.LibraryCard {
-    padding-top: 15px;
-}
-
 .nav {
     width: 100%;
     display: flex;
@@ -109,7 +94,7 @@ h1 {
 
 .profile__gap {
     display: flex;
-    align-items: center; 
+    align-items: center;
     gap: 40px;
 }
 
@@ -122,6 +107,13 @@ h1 {
 
 .nav-menu__link:hover {
     color: #555555;
+}
+
+.main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .welcome {
@@ -141,7 +133,7 @@ h1 {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 300px;
 }
 
 .welcome-block {
@@ -176,23 +168,13 @@ h2 {
     text-transform: capitalize;
 }
 
-h3.coffee_shop_title {
-    color: #BB945F;
-    font-family: 'Forum';
-    font-size: 40px;
-    font-weight: 400;
-    line-height: 40px;
-    letter-spacing: 2px;
-    text-transform: capitalize;
-}
-
 .line {
     width: 50px;
     height: 1px;
     background-color: #0C0C0E;
 }
 
-.section_title_line {
+.title-line {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -200,22 +182,13 @@ h3.coffee_shop_title {
     padding-bottom: 40px;
 }
 
-.text_block_about {
-    width: 1440px;
+.about-text-block {
     text-align: center;
-    font-style: normal;
     line-height: 40px;
     padding-bottom: 20px;
 }
 
-.text_block_coffee_shop {
-    padding-bottom: 40px;
-    line-height: 40px;
-    letter-spacing: 2px;
-    text-align: center;
-}
-
-.images_menu {
+.gallery {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -227,13 +200,13 @@ h3.coffee_shop_title {
     gap: 25px;
 }
 
-.pagination_dots {
-    padding-top: 35px;
-    padding-bottom: 35px;
+.pagination {
     display: flex;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
-.pagination_block {
+.pagination-block {
     width: 26px;
     height: 26px;
     display: flex;
@@ -248,41 +221,52 @@ h3.coffee_shop_title {
     width: 16px;
     height: 16px;
     border-radius: 50px;
+    filter: opacity(100%);
+    transition: 0.5s ease;
 }
 
-.circle_black {
+.circle_checked:hover {
+    filter: opacity(50%);
+}
+
+.circle {
     background-color: #0C0C0E;
     width: 16px;
     height: 16px;
     border-radius: 50px;
+    filter: opacity(100%);
+    transition: 0.5s ease;
 }
 
-.text_favorites {
+.circle:hover {
+    filter: opacity(50%);
+}
+
+.favorites-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.favorites-block_text {
     text-align: left;
     font-weight: 700;
     word-spacing: 2px;
-    padding-bottom: 37px;
 }
 
-.radio_block {
+.season-block {
     padding-bottom: 35px;
     display: flex;
     gap: 80px;
     border: 0;
 }
 
-.radio_block input[type=radio] {
+.season-block input[type=radio] {
 	display: none;
 }
 
-.radio_block_item {
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
-    padding: 5px;
-}
-
-.radio_block label {
+.season-block label {
 	display: inline-block;
 	cursor: pointer;
 	position: relative;
@@ -290,7 +274,7 @@ h3.coffee_shop_title {
 	line-height: 20px;
 }
 
-.radio_block label:before {
+.season-block label:before {
 	content: "";
 	display: inline-block;
 	width: 17px;
@@ -302,26 +286,45 @@ h3.coffee_shop_title {
 }
 
 /* Checked */
-.radio_block input[type=radio]:checked + label:before {
+.season-block input[type=radio]:checked + label:before {
 	background: url(./assets/svg/radio_checked.svg) 0 0 no-repeat;
 }
 
-.radio_item {
+.season-block__item {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.radio {
     width: 16px;
     height: 16px;
     border: 1px solid #000000;
-    transition: 0.5s ease-in-out;
+    transition: 0.5s ease;
 }
 
-.radio_label_text {
+.label__text {
     line-height: normal;
     cursor: pointer;
+    filter: opacity(100%);
+    transition: 0.5s ease;
 }
 
-.radio_label_text_checked {
+.label__text:hover{
+    filter: opacity(70%);
+}
+
+.label__text_checked {
+    line-height: normal;
+    cursor: pointer;
     font-weight: 700;
-    line-height: normal;
-    cursor: pointer;
+    filter: opacity(100%);
+    transition: 0.5s ease;
+}
+
+.label__text_checked:hover {
+    filter: opacity(70%);
 }
 
 .cards {
@@ -329,21 +332,12 @@ h3.coffee_shop_title {
     flex-wrap: wrap;
     justify-content: space-between;
     text-align: left;
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
     gap: 40px;
+    margin-bottom: 40px;
 }
 
-.cards_hide {
+.hide {
     display: none; /* невидимые карточки */
-    flex-wrap: wrap;
-    justify-content: space-between;
-    text-align: left;
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    gap: 40px;
 }
 
 .card {
@@ -354,12 +348,19 @@ h3.coffee_shop_title {
     margin-right: 40px;
 }
 
-.card_content {
+.card__content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 15px 20px 15px;
     flex-grow: 1;
+    position: relative;
+}
+
+.card-image__item {
+    position: absolute;
+    bottom: -1px;
+    right: -40px;
 }
 
 h3 {
@@ -377,7 +378,7 @@ h3 {
     background-color: #BB945F;
 }
 
-h4.card_title_1 {
+h4.book-title {
     padding-top: 20px;
     font-size: 15px;
     font-weight: 700;
@@ -386,7 +387,7 @@ h4.card_title_1 {
     text-transform: uppercase;
 }
 
-h5.card_title_2 {
+h5.book-author {
     font-size: 15px;
     font-weight: 700;
     line-height: 40px;
@@ -395,7 +396,7 @@ h5.card_title_2 {
     padding-bottom: 20px;
 }
 
-.card_text {
+.card__description {
     display: flex;
     width: 355px;
     flex-direction: column;
@@ -407,7 +408,7 @@ h5.card_title_2 {
     text-transform: capitalize;
 }
 
-.card_button_item {
+.card__button {
     width: 75px;
     height: 30px;
     color: #0C0C0E;
@@ -424,12 +425,12 @@ h5.card_title_2 {
     transition: 0.5s ease;
 }
 
-.card_button_item:hover {
+.card__button:hover {
     background-color: #BB945F;
     border: 1px solid #BB945F;
 }
 
-.card_button_item_own {
+.card__button_own {
     width: 75px;
     height: 30px;
     color: #BB945F;
@@ -444,132 +445,135 @@ h5.card_title_2 {
     border-radius: 2px;
 }
 
-.card_image {
-    position: relative;
-    top: 254px;
-    right: 6px;
+.text_block_coffee_shop {
+    padding-bottom: 40px;
+    line-height: 40px;
+    letter-spacing: 2px;
+    text-align: center;
 }
 
-/* .card_image_item {
+.coffee-shop__container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
 
-} класс пока не используется */
+h3.coffee-shop__title {
+    color: #BB945F;
+    font-family: 'Forum';
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 40px;
+    letter-spacing: 2px;
+    text-transform: capitalize;
+    margin-bottom: 40px;
+}
 
-hr.line_menu {
+.right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.coffee-shop__item {
+    display: flex;
+    flex-direction: column;
+}
+
+.coffee-shop__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+}
+
+.coffee-shop__list_item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+}
+
+.coffee-shop__text {
+    line-height: 40px;
+    letter-spacing: 2px;
+    text-transform: capitalize;
+    width: 215px;
+}
+
+.right {
+    text-align: flex-end;
+}
+
+.coffee-shop__line {
     width: 100px;
     height: 1px;
     background-color: #BB945F;
 }
 
-.CoffeShop {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.coffee_shop_menu_container {
-    width: 100%;
-}
-
-.coffee_shop_content {
-    display: flex;
-    justify-content: space-between;
-}
-
-.coffee_shop_menu_drinks {
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 40px;
-}
-
-.coffee_shop_menu_desserts {
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 40px;
-}
-
-.coffee_shop_menu_item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 58px;
-}
-
-.coffee_shop_text {
-    line-height: 40px;
-    letter-spacing: 2px;
-    text-transform: capitalize;
-}
-
-.coffee_shop_dollars {
+.coffee-shop__price {
     font-family: 'Forum';
     line-height: 40px;
     letter-spacing: 2px;
     text-transform: capitalize;
 }
 
-.right_position {
-    display: inline-flex;
-    align-items: center;
-    gap: 60px;
-}
-
-.contacts_items_map {
+.contacts-block {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 40px;
 }
 
-.contacts_items {
+.contacts-block__items {
     display: flex;
     flex-direction: column;
-    gap: 40px;
 }
 
-.contacts_items_line {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.contacts_item_title {
+.contacts-block__title {
     text-align: left;
     font-weight: 700;
     line-height: 40px;
     letter-spacing: 2px;
     text-transform: capitalize;
+    margin-bottom: 40px;
 }
 
-.contacts_item {
-    font-weight: 400;
+.contacts__items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contacts__item {
     line-height: 40px;
     letter-spacing: 2px;
     text-transform: capitalize;
 }
 
-a.contacts_item_link:hover {
-    color: #8E8E8E;
+.contacts__item_link {
+    font-weight: 400;
+    color: #0C0C0E;
+    transition: weight 0.5s ease; /* почему-то не работает как положено */
 }
 
-.find_get_card {
+.contacts__item_link:hover {
+    font-weight: 700;
+    color: #0C0C0E;
+}
+
+.find-get-card {
     display: flex;
     justify-content: space-between;
-    gap: 344px;
 }
 
-.find_card_title_form {
+.find-card-block {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 30px;
 }
 
-.find_card_form_title {
-    text-align: center;
-}
-
-h3.find_card_title {
+h3.find-card__title {
     font-family: 'Inter';
     font-size: 30px;
     font-style: normal;
@@ -581,16 +585,14 @@ h3.find_card_title {
 .form {
     width: 600px;
     height: 386px;
-    flex-shrink: 0;
     border: 3px solid #BB945F;
     border-style: groove;
     background-color: #ffffff;
 }
 
-.form_bg {
+.form_field {
     width: 560px;
     height: 272px;
-    flex-shrink: 0;
     background-color: #BB945F;
     margin: 20px;
     padding: 20px;
@@ -617,7 +619,6 @@ h4.form_title {
 .form_input_item {
     width: 520px;
     height: 66px;
-    flex-shrink: 0;
     border-radius: 10px;
     background-color: #ffffff;
     border-style: hidden;
@@ -639,7 +640,7 @@ h4.form_title {
 .form_button_item {
     display: inline-flex;
     padding: 10px 40px;
-    align-items: flex-end;
+    text-align: flex-end;
     border-radius: 2px;
     border: 1px solid #0C0C0E;
     text-align: center;
@@ -696,7 +697,6 @@ h4.get_card_title {
     padding: 10px 0px;
     justify-content: center;
     align-items: center;
-    flex-shrink: 0;
     border-radius: 2px;
     border: 1px solid #0C0C0E;
     cursor: pointer;
