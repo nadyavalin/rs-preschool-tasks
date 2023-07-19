@@ -24,9 +24,9 @@ ul {
 }
 
 a {
+    color: #FFFFFF;
     text-decoration: none;
     color: inherit;
-    cursor: pointer;
     transition: color 0.5s ease;
 }
 
@@ -82,6 +82,20 @@ h1 {
     gap: 30px;
 }
 
+.nav-menu__link {
+    color: #FFFFFF;
+    line-height: 50px;
+    text-decoration: underline 1px rgba(255, 255, 255, 0);
+    text-underline-offset: 0.5em;
+    transition: text-decoration-color 500ms, text-underline-offset 500ms;
+}
+
+.nav-menu__link:hover {
+    color: #8E8E8E;
+    text-decoration-color: #8E8E8E;
+    text-underline-offset: 0.4em;
+}
+
 .profile__icon {
     filter: opacity(100%);
     cursor: pointer;
@@ -96,17 +110,6 @@ h1 {
     display: flex;
     align-items: center;
     gap: 40px;
-}
-
-.nav-menu__link {
-    color: #FFFFFF;
-    line-height: 50px;
-    cursor: pointer;
-    transition: color 0.5s ease;
-}
-
-.nav-menu__link:hover {
-    color: #555555;
 }
 
 .main {
@@ -563,12 +566,15 @@ h3.coffee-shop__title {
 
 .contacts__item_link {
     font-weight: 400;
-    transition: 0.5s ease;
+    text-decoration: underline 1px rgba(0, 0, 0, 0);
+    text-underline-offset: 0.5em;
+    transition: text-decoration-color 500ms, text-underline-offset 500ms;
 }
 
 .contacts__item_link:hover {
-    text-decoration: underline;
     color: #0C0C0E;
+    text-decoration-color: #000000;
+    text-underline-offset: 0.4em;
 }
 
 .find-get-card {
