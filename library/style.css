@@ -24,9 +24,9 @@ ul {
 }
 
 a {
+    color: #FFFFFF;
     text-decoration: none;
     color: inherit;
-    cursor: pointer;
     transition: color 0.5s ease;
 }
 
@@ -82,6 +82,20 @@ h1 {
     gap: 30px;
 }
 
+.nav-menu__link {
+    color: #FFFFFF;
+    line-height: 50px;
+    text-decoration: underline 1px rgba(255, 255, 255, 0);
+    text-underline-offset: 0.5em;
+    transition: text-decoration-color 500ms, text-underline-offset 500ms;
+}
+
+.nav-menu__link:hover {
+    color: #8E8E8E;
+    text-decoration-color: #8E8E8E;
+    text-underline-offset: 0.4em;
+}
+
 .profile__icon {
     filter: opacity(100%);
     cursor: pointer;
@@ -96,17 +110,6 @@ h1 {
     display: flex;
     align-items: center;
     gap: 40px;
-}
-
-.nav-menu__link {
-    color: #FFFFFF;
-    line-height: 50px;
-    cursor: pointer;
-    transition: color 0.5s ease;
-}
-
-.nav-menu__link:hover {
-    color: #555555;
 }
 
 .main {
@@ -312,7 +315,7 @@ h2 {
 }
 
 .label__text:hover{
-    text-shadow: 1px 1px 1px #000000, 0 0 10em #0C0C0E;
+    text-shadow: 1px 1px 1px #8E8E8E;
 }
 
 .label__text_checked {
@@ -320,11 +323,11 @@ h2 {
     cursor: pointer;
     font-weight: 700;
     filter: opacity(100%);
-    transition: 0.5s ease;
+    transition: text-shadow 0.5s ease;
 }
 
 .label__text_checked:hover {
-    filter: opacity(70%);
+    text-shadow: 1px 1px 1px #8E8E8E;
 }
 
 .cards {
@@ -445,7 +448,7 @@ h5.book-author {
     border-radius: 2px;
 }
 
-.text_block_coffee_shop {
+.coffee-shop__introduction {
     padding-bottom: 40px;
     line-height: 40px;
     letter-spacing: 2px;
@@ -563,11 +566,15 @@ h3.coffee-shop__title {
 
 .contacts__item_link {
     font-weight: 400;
-    transition: 0.5s ease;
+    text-decoration: underline 1px rgba(0, 0, 0, 0);
+    text-underline-offset: 0.5em;
+    transition: text-decoration-color 500ms, text-underline-offset 500ms;
 }
 
 .contacts__item_link:hover {
-    text-shadow: 1px 1px 1px #000000, 0 0 10em #0C0C0E;
+    color: #0C0C0E;
+    text-decoration-color: #000000;
+    text-underline-offset: 0.4em;
 }
 
 .find-get-card {
@@ -767,7 +774,9 @@ h4.get-card__title {
 .twitter {
     background-color: #0C0C0E;
     border-radius: 6px;
-    border: 1px solid #0C0C0E
+    border: 1px solid #0C0C0E;
+    transition: background-color 0.5s ease;
+    transition: border 0.5s ease;
 }
 
 .twitter:hover {
@@ -778,7 +787,9 @@ h4.get-card__title {
 .instagram {
     background-color: #0C0C0E;
     border-radius: 6px;
-    border: 1px solid #0C0C0E
+    border: 1px solid #0C0C0E;
+    transition: background-color 0.5s ease;
+    transition: border 0.5s ease;
 }
 
 .instagram:hover {
@@ -789,7 +800,9 @@ h4.get-card__title {
 .facebook {
     background-color: #0C0C0E;
     border-radius: 6px;
-    border: 1px solid #0C0C0E
+    border: 1px solid #0C0C0E;
+    transition: background-color 0.5s ease;
+    transition: border 0.5s ease;
 }
 
 .facebook:hover {
