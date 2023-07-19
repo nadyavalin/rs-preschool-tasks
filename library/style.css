@@ -769,7 +769,6 @@ h4.get-card__title {
     background-color: #0C0C0E;
     border-radius: 6px;
     border: 1px solid #0C0C0E;
-    cursor: pointer;
     transition: background-color 0.5s ease;
     transition: border 0.5s ease;
 }
@@ -783,7 +782,6 @@ h4.get-card__title {
     background-color: #0C0C0E;
     border-radius: 6px;
     border: 1px solid #0C0C0E;
-    cursor: pointer;
     transition: background-color 0.5s ease;
     transition: border 0.5s ease;
 }
@@ -797,7 +795,6 @@ h4.get-card__title {
     background-color: #0C0C0E;
     border-radius: 6px;
     border: 1px solid #0C0C0E;
-    cursor: pointer;
     transition: background-color 0.5s ease;
     transition: border 0.5s ease;
 }
