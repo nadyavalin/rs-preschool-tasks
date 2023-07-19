@@ -26,6 +26,7 @@ ul {
 a {
     color: #FFFFFF;
     text-decoration: none;
+    cursor: pointer;
     color: inherit;
     transition: color 0.5s ease;
 }
@@ -85,6 +86,7 @@ h1 {
 .nav-menu__link {
     color: #FFFFFF;
     line-height: 50px;
+    cursor: pointer;
     text-decoration: underline 1px rgba(255, 255, 255, 0);
     text-underline-offset: 0.5em;
     transition: text-decoration-color 500ms, text-underline-offset 500ms;
@@ -147,7 +149,7 @@ h1 {
     margin-top: 60px;
 }
 
-.welcome-block__title {
+h2.welcome-block__title {
     color: #FFFFFF;
     text-align: center;
     font-family: 'Forum';
@@ -205,9 +207,9 @@ h2 {
 }
 
 .pagination {
-    display: flex;
     padding-top: 35px;
     padding-bottom: 35px;
+    display: flex;
 }
 
 .pagination-block {
@@ -414,6 +416,9 @@ h5.book-author {
 .card__button {
     width: 75px;
     height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #0C0C0E;
     text-align: center;
     font-size: 10px;
@@ -426,12 +431,18 @@ h5.book-author {
     border-radius: 2px;
     cursor: pointer;
     transition: 0.5s ease;
-}
+} /* доделать увеличение области кликабельности кнопки */
 
 .card__button:hover {
     background-color: #BB945F;
     border: 1px solid #BB945F;
 }
+
+.card__button_around-area {
+    width: 85px;
+    height: 40px;
+    display: flex;
+} /* доделать увеличение области кликабельности кнопки */
 
 .card__button_own {
     width: 75px;
