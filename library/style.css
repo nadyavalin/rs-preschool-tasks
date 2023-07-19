@@ -312,7 +312,7 @@ h2 {
 }
 
 .label__text:hover{
-    text-shadow: 1px 1px 1px #000000, 0 0 10em #0C0C0E;
+    text-shadow: 1px 1px 1px #8E8E8E;
 }
 
 .label__text_checked {
@@ -320,11 +320,11 @@ h2 {
     cursor: pointer;
     font-weight: 700;
     filter: opacity(100%);
-    transition: 0.5s ease;
+    transition: text-shadow 0.5s ease;
 }
 
 .label__text_checked:hover {
-    filter: opacity(70%);
+    text-shadow: 1px 1px 1px #8E8E8E;
 }
 
 .cards {
@@ -445,7 +445,7 @@ h5.book-author {
     border-radius: 2px;
 }
 
-.text_block_coffee_shop {
+.coffee-shop__introduction {
     padding-bottom: 40px;
     line-height: 40px;
     letter-spacing: 2px;
@@ -567,7 +567,8 @@ h3.coffee-shop__title {
 }
 
 .contacts__item_link:hover {
-    text-shadow: 1px 1px 1px #000000, 0 0 10em #0C0C0E;
+    text-decoration: underline;
+    color: #0C0C0E;
 }
 
 .find-get-card {
@@ -767,7 +768,10 @@ h4.get-card__title {
 .twitter {
     background-color: #0C0C0E;
     border-radius: 6px;
-    border: 1px solid #0C0C0E
+    border: 1px solid #0C0C0E;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    transition: border 0.5s ease;
 }
 
 .twitter:hover {
@@ -778,7 +782,10 @@ h4.get-card__title {
 .instagram {
     background-color: #0C0C0E;
     border-radius: 6px;
-    border: 1px solid #0C0C0E
+    border: 1px solid #0C0C0E;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    transition: border 0.5s ease;
 }
 
 .instagram:hover {
@@ -789,7 +796,10 @@ h4.get-card__title {
 .facebook {
     background-color: #0C0C0E;
     border-radius: 6px;
-    border: 1px solid #0C0C0E
+    border: 1px solid #0C0C0E;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    transition: border 0.5s ease;
 }
 
 .facebook:hover {
