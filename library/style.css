@@ -258,7 +258,7 @@ h2 {
     gap: 80px;
     border: 0;
     margin-top: -2px;
-    margin-bottom: -5px;
+    margin-bottom: -7px;
 }
 
 .season-block input[type=radio] {
@@ -366,6 +366,7 @@ h3 {
     width: 60px;
     height: 1px;
     background-color: #BB945F;
+    margin-bottom: -2px;
 }
 
 h4.book-card__title {
@@ -575,7 +576,7 @@ h3.coffee-shop-block__title {
 .find-get-card {
     display: flex;
     justify-content: space-between;
-    margin-top: 5px;
+    margin-top: 3px;
 }
 
 .find-card-block {
