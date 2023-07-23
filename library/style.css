@@ -183,13 +183,18 @@ h2 {
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    margin-bottom: 40px;
+}
+
+.about {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .about-text-block {
     text-align: center;
     line-height: 40px;
-    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .gallery {
@@ -217,6 +222,7 @@ h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transition: 0.5s ease;
     cursor: pointer;
 }
 
@@ -225,10 +231,9 @@ h2 {
     width: 16px;
     height: 16px;
     border-radius: 50px;
-    transition: 0.5s ease;
 }
 
-.circle:hover {
+.pagination-block:hover {
     opacity: 0.5
 }
 
@@ -236,11 +241,10 @@ h2 {
     background-color: #BB945F;
 }
 
-.favorites-block {
+.favorites {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 35px;
+    gap: 40px;
 }
 
 .favorites-block__text {
@@ -253,7 +257,8 @@ h2 {
     display: flex;
     gap: 80px;
     border: 0;
-    margin-bottom: 38px;
+    margin-top: -2px;
+    margin-bottom: -5px;
 }
 
 .season-block input[type=radio] {
@@ -416,25 +421,23 @@ h5.book-card__author {
 }
 
 .book-card__button_own {
-    width: 75px;
-    height: 30px;
     color: #BB945F;
-    text-align: center;
-    font-size: 10px;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 1px;
-    background-color: #FFFFFF;
-    margin-top: auto;
     border: 1px solid #BB945F;
-    border-radius: 2px;
+    pointer-events: none;
+}
+
+.coffee-shop {
+    display: flex;
+    flex-direction: column;
+    gap: 35px; 
 }
 
 .coffee-shop__introduction {
-    margin-bottom: 40px;
     line-height: 40px;
     letter-spacing: 2px;
     text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .coffee-shop__container {
@@ -505,10 +508,16 @@ h3.coffee-shop-block__title {
     text-transform: capitalize;
 }
 
+.contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 40px; 
+    margin-bottom: 35px;
+}
+
 .contacts-block {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 35px;
 }
 
 .contacts-block__items {
@@ -556,9 +565,17 @@ h3.coffee-shop-block__title {
     text-underline-offset: 0.4em;
 }
 
+.library-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    margin-bottom: 20px;
+}
+
 .find-get-card {
     display: flex;
     justify-content: space-between;
+    margin-top: 5px;
 }
 
 .find-card-block {
@@ -708,21 +725,16 @@ h4.get-card__title {
     background-color: #BB945F;
 }
 
-.library-cards {
-    margin-bottom: 20px;
-}
-
 .footer {
     background-color:#0C0C0E;
     height: 250px;
     color: #ffffff;
-    padding: 0 20px 34px 20px;
+    padding: 21px 20px 34px 20px;
 }
 
 .footer-block {
     display: flex;
     justify-content: space-between;
-    padding-top: 21px;
     margin-bottom: 30px;
 }
 
@@ -730,7 +742,6 @@ h4.get-card__title {
     display: flex;
     flex-direction: column;
     gap: 18px;
-    
 }
 
 .address {
