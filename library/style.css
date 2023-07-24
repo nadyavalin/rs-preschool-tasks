@@ -255,15 +255,20 @@ h2 {
 
 .season-block {
     display: flex;
-    gap: 80px;
+    gap: 82px;
     border: 0;
-    margin-top: -2px;
-    margin-bottom: -7px;
+    margin-left: -3px;
+    margin-top: -4px;
+    margin-bottom: -5px;
 }
 
 .season-block input[type=radio] {
 	display: none;
 }
+
+.season-block input[type="radio"]:checked + label {
+    font-weight: bold;
+ }
 
 .season-block label {
 	display: inline-block;
@@ -313,10 +318,6 @@ h2 {
     text-shadow: 2px 1px 1px #8E8E8E;
 }
 
-.season-block__item-label_checked {
-    font-weight: 700;
-}
-
 .book-cards {
     display: flex;
     flex-wrap: wrap;
@@ -330,7 +331,7 @@ h2 {
     border: 1px solid #000000;
     display: flex;
     width: 550px;
-    height: 555px;
+    height: 556px;
     margin-right: 40px;
 }
 
@@ -389,7 +390,7 @@ h5.book-card__author {
 
 .book-card__description {
     display: flex;
-    width: 355px;
+    width: 357px;
     flex-direction: column;
     justify-content: center;
     font-size: 15px;
@@ -456,7 +457,7 @@ h3.coffee-shop-block__title {
     line-height: 40px;
     letter-spacing: 2px;
     text-transform: capitalize;
-    margin-bottom: 40px;
+    margin-bottom: 39px;
 }
 
 .coffee-shop-block__title_right-pos {
@@ -625,6 +626,7 @@ h4.form__title {
     font-weight: 400;
     line-height: 50px;
     letter-spacing: 0.6px;
+    margin-top: -2px;
 }
 
 .form__input {
