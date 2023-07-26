@@ -147,7 +147,7 @@ h1 {
     margin-top: 60px;
 }
 
-h3.welcome-block__title {
+h2.welcome-block__title {
     color: #FFFFFF;
     text-align: center;
     font-family: 'Forum';
@@ -431,7 +431,7 @@ h5.book-card__author {
 .coffee-shop {
     display: flex;
     flex-direction: column;
-    gap: 35px; 
+    gap: 35px;
 }
 
 .coffee-shop__introduction {
@@ -513,7 +513,7 @@ h3.coffee-shop-block__title {
 .contacts {
     display: flex;
     flex-direction: column;
-    gap: 40px; 
+    gap: 40px;
     margin-bottom: 35px;
 }
 
