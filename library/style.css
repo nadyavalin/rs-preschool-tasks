@@ -16,7 +16,6 @@ body {
     color:#000000;
     font-size: 20px;
     overflow-y: scroll;
-    overflow-x: hidden;
 }
 
 ul {
@@ -587,7 +586,7 @@ h3.coffee-shop-block__title {
     gap: 30px;
 }
 
-h3.find-card__title {
+.find-card__title {
     font-family: 'Inter';
     font-size: 30px;
     font-style: normal;
@@ -751,6 +750,7 @@ h4.get-card__title {
     width: 229px;
     font-size: 15px;
     line-height: 20px;
+    margin-bottom: -2px;
 }
 
 .address:hover {
