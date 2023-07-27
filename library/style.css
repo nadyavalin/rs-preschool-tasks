@@ -37,7 +37,7 @@ a:hover {
 
 .container {
     margin: 0 auto;
-    max-width: 1440px;
+    width: 1440px;
 }
 
 .header {
@@ -234,7 +234,7 @@ h2 {
 }
 
 .pagination-block:hover {
-    opacity: 0.5
+    opacity: 0.5;
 }
 
 .circle_checked {
