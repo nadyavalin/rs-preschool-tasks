@@ -366,7 +366,6 @@ h3 {
     width: 60px;
     height: 1px;
     background-color: #BB945F;
-    margin-bottom: -2px;
 }
 
 h4.book-card__title {
@@ -528,11 +527,19 @@ h3.coffee-shop-block__title {
 }
 
 .contacts-block__title {
-    text-align: left;
     font-weight: 700;
+    text-align: left;
     line-height: 40px;
     letter-spacing: 2px;
     text-transform: capitalize;
+
+font-family: 'Inter';
+font-style: normal;
+
+}
+
+.contacts-block__title_director {
+    font-weight: 400;
 }
 
 .contacts-block__phones {
@@ -545,6 +552,7 @@ h3.coffee-shop-block__title {
     line-height: 40px;
     letter-spacing: 2px;
     text-transform: capitalize;
+    font-weight: 400;
 }
 
 .contacts-block__email {
@@ -558,6 +566,9 @@ h3.coffee-shop-block__title {
     text-decoration: underline 1px rgba(0, 0, 0, 0);
     text-underline-offset: 0.5em;
     transition: text-decoration-color 500ms, text-underline-offset 500ms;
+    line-height: 40px;
+    letter-spacing: 2px;
+    text-transform: capitalize;
 }
 
 .contacts-block__link:hover {
@@ -565,6 +576,11 @@ h3.coffee-shop-block__title {
     text-decoration-color: #000000;
     text-underline-offset: 0.4em;
 }
+
+.contacts-block__link_director {
+    font-weight: 700;
+}
+
 
 .library-cards {
     display: flex;
