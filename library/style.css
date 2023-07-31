@@ -256,7 +256,6 @@ h2 {
     display: flex;
     gap: 82px;
     border: 0;
-    margin-left: -3px;
     margin-top: -4px;
     margin-bottom: -5px;
 }
@@ -273,7 +272,7 @@ h2 {
 	display: inline-block;
 	cursor: pointer;
 	position: relative;
-	padding-left: 37px;
+	padding-left: 42px;
 	line-height: 20px;
 }
 
@@ -284,7 +283,6 @@ h2 {
 	height: 18px;
 	position: absolute;
 	left: 0;
-	bottom: 1px;
 	background: url(./assets/svg/radio_unchecked.svg) 0 0 no-repeat;
 }
 
@@ -297,7 +295,6 @@ h2 {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
-    padding: 5px;
 }
 
 .season-block__item-input {
@@ -310,7 +307,12 @@ h2 {
 .season-block__item-label {
     line-height: normal;
     cursor: pointer;
+    padding: 5px;
     transition: text-shadow 0.5s ease;
+}
+
+.season-block__item-label::before {
+    padding: 5px;
 }
 
 .season-block__item-label:hover{
