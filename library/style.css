@@ -79,6 +79,7 @@ h1 {
     outline: none;
     background-color: #0C0C0E;
     z-index: 3;
+    cursor: pointer;
 }
 
 .header.open .header__burger-btn {
@@ -525,6 +526,10 @@ h3.coffee-shop-block__title {
     flex-direction: column;
 }
 
+.coffee-shop-block_right {
+    align-items: flex-end;
+}
+
 .coffee-shop-block__list {
     display: flex;
     flex-direction: column;
@@ -534,7 +539,6 @@ h3.coffee-shop-block__title {
 
 .coffee-shop-block__item {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     gap: 59px;
 }
@@ -638,6 +642,10 @@ font-style: normal;
     font-weight: 700;
 }
 
+.map {
+    display: flex;
+    justify-content: flex-end;
+}
 
 .library-cards {
     display: flex;
@@ -889,21 +897,77 @@ h4.get-card__title {
     margin-left: 55px;
 }
 
-@media (max-width: 1024px) {
-    .nave-menu__items {
-        gap: 20px;
+/* 1440 */
+@media (min-width: 1440px) {
+    .image {
+        display: none;
     }
 
-    .nav-menu__link {
-        font-size: 16px;
+    .arrow {
+        display: none;
     }
 
-    h1 {
-        font-size: 26px;
+    .book-cards {
+        justify-content: center;
+    }
+
+    .contacts-block {
+        flex-direction: column;
+    }
+
+    .map {
+        margin-top: 100px;
+        justify-content: center;
     }
 }
 
+/* 1024 */
+@media (max-width: 1024px) {
+    .nav-menu__link {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .image {
+        display: none;
+    }
+
+    .arrow {
+        display: none;
+    }
+
+    .coffee-shop__container {
+        flex-direction: column;
+    }
+
+    .find-get-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .coffee-shop-block_right {
+        margin-top: 40px;
+    }
+
+    .get-card {
+        margin-top: 21px;
+        align-items: center;
+    }
+
+    .get-card__description {
+        text-align: center;
+    }
+}
+
+/* 768 */
 @media (max-width: 768px) {
+    h1 {
+        font-size: 30px;
+    }
+
     .header.open .nav {
         transform: translateX(100%);
     }
@@ -944,6 +1008,7 @@ h4.get-card__title {
 
     .nav-menu__link {
         width: 100%;
+        font-size: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -953,8 +1018,21 @@ h4.get-card__title {
         transform: translateX(-100%);
         visibility: visible;
     }
+
+    .image {
+        display: none;
+    }
+
+    .image, .image-desktop {
+        display: none;
+    }
+
+    .arrow {
+        display: block;
+    }
 }
 
+/* 640 */
 @media (max-width: 640px) {
 
 }
