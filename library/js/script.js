@@ -12,7 +12,7 @@ window.addEventListener('keydown', (e) => {
     }
 });
 
-// Меню закрывается при клике вне его
+// Меню закрывается (НЕТ) при клике вне его
 document.body.addEventListener('click', event => {
     if (event._isClickWithInMenu === "click") {
         document.querySelector(".header").classList.remove("open")

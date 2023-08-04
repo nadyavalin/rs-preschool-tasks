@@ -37,7 +37,6 @@ a:hover {
 .container {
     margin: 0 auto;
     max-width: 1440px;
-    position: relative;
 }
 
 .header {
@@ -256,13 +255,22 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
 
 .images {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     gap: 25px;
 }
+
+.image_size {
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+    transition: width 0.3s ease;
+}
+
 
 .pagination {
     margin-top: 35px;
@@ -593,10 +601,8 @@ h3.coffee-shop-block__title {
     line-height: 40px;
     letter-spacing: 2px;
     text-transform: capitalize;
-
-font-family: 'Inter';
-font-style: normal;
-
+    font-family: 'Inter';
+    font-style: normal;
 }
 
 .contacts-block__title_director {
@@ -879,7 +885,7 @@ h4.get-card__title {
 }
 
 .footer-block__hr {
-    width: 1400px;
+    width: 100%;
     height: 1px;
     background-color: #ffffff;
 }
@@ -897,10 +903,36 @@ h4.get-card__title {
     margin-left: 55px;
 }
 
-/* 1440 */
-@media (min-width: 1440px) {
-    .image {
+/* 1920 */
+@media (min-width: 1920px) {
+    .image_desktop-hidden {
         display: none;
+    }
+
+    .arrow {
+        display: none;
+    }
+}
+
+/* 1920 */
+@media (max-width: 1920px) {
+    .image_desktop-hidden {
+        display: none;
+    }
+
+    .arrow {
+        display: none;
+    }
+}
+
+/* 1440 */
+@media (max-width: 1440px) {
+    .image_desktop-hidden {
+        display: none;
+    }
+
+    .image_size {
+        max-width: 30%;
     }
 
     .arrow {
@@ -921,6 +953,11 @@ h4.get-card__title {
     }
 }
 
+/* 1200 */
+@media (max-width: 1200px) {
+
+}
+
 /* 1024 */
 @media (max-width: 1024px) {
     .nav-menu__link {
@@ -931,12 +968,12 @@ h4.get-card__title {
         font-size: 20px;
     }
 
-    .image {
+    .arrow {
         display: none;
     }
 
-    .arrow {
-        display: none;
+    .book-cards {
+        justify-content: center;
     }
 
     .coffee-shop__container {
@@ -969,7 +1006,8 @@ h4.get-card__title {
     }
 
     .header.open .nav {
-        transform: translateX(100%);
+        transform: translateX(-100%);
+        visibility: visible;
     }
 
     .header__burger-btn {
@@ -1014,16 +1052,12 @@ h4.get-card__title {
         justify-content: center;
     }
 
-    .header.open .nav {
-        transform: translateX(-100%);
-        visibility: visible;
+    .image_size {
+        max-width: 100%;
+        width: 450px;
     }
 
-    .image {
-        display: none;
-    }
-
-    .image, .image-desktop {
+    .image_tablet-hidden {
         display: none;
     }
 
@@ -1033,6 +1067,12 @@ h4.get-card__title {
 }
 
 /* 640 */
-@media (max-width: 640px) {
+@media (max-width: 40px) {
+    .season-block {
+        gap: 32px;
+    }
 
+    .season-block label {
+        padding-left: 22px;
+    }
 }
