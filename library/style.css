@@ -73,8 +73,8 @@ h1 {
 .header__burger-btn {
     display: none;
     position: relative;
-    width: 65px;
-    height: 50px;
+    width: 45px;
+    height: 26px;
     border: none;
     outline: none;
     background-color: transparent;
@@ -92,7 +92,6 @@ h1 {
     width: 45px;
     height: 2px;
     background-color: #FFFFFF;
-    left: 10px;
     transition: transform .5s;
     will-change: transform;
 }
@@ -274,6 +273,12 @@ h2 {
     width: 100%;
     object-fit: cover;
     transition: width 0.3s ease;
+}
+
+.arrow {
+    display: none;
+    margin: 0 34px;
+    padding-top: 40px;
 }
 
 
@@ -965,21 +970,55 @@ h4.get-card__title {
     }
 }
 
-/* 1200 */
-@media (max-width: 1200px) {
-
-}
-
 /* 1024 */
 @media (max-width: 1024px) {
+    .header.open .nav {
+        transform: translateX(-100%);
+        visibility: visible;
+    }
+
+    .header__burger-btn {
+        display: block;
+    }
+
+    .nav {
+        position: absolute;
+        right: -344px;
+        top: 0;
+        width: 344px;
+        height: 570px;
+        background-color: #000000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+        visibility: hidden;
+        transition: transform .5s, visibility .5s;
+        will-change: transform;
+    }
+
+    .nav-menu__items {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nav-menu__item {
+        width: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .nav-menu__link {
-        font-size: 14px;
-    }
-
-    h1 {
+        width: 100%;
         font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-
+    
     .arrow {
         display: none;
     }
@@ -1013,57 +1052,6 @@ h4.get-card__title {
 
 /* 768 */
 @media (max-width: 768px) {
-    h1 {
-        font-size: 30px;
-    }
-
-    .header.open .nav {
-        transform: translateX(-100%);
-        visibility: visible;
-    }
-
-    .header__burger-btn {
-        display: block;
-    }
-
-    .nav {
-        position: absolute;
-        right: -332px;
-        top: 0;
-        width: 332px;
-        height: 570px;
-        background-color: #000000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 2;
-        visibility: hidden;
-        transition: transform .5s, visibility .5s;
-        will-change: transform;
-    }
-
-    .nav-menu__items {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .nav-menu__item {
-        width: 300px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .nav-menu__link {
-        width: 100%;
-        font-size: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
     .image_size {
         max-width: 100%;
         width: 450px;
@@ -1075,6 +1063,39 @@ h4.get-card__title {
 
     .arrow {
         display: block;
+    }
+
+    .pagination {
+        margin-top: 20px;
+    }
+
+    .map-img {
+        max-width: 95%;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .coffee-shop__introduction {
+        width: 750px;
+        margin-top: 2px;
+        padding-right: 17px;
+    }
+
+    .get-card__description {
+        width: 600px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+
+/* 766 */
+@media (max-width: 766px) {
+    .coffee-shop__introduction {
+        width: 100%;
+    }
+
+    .get-card__description {
+        width: 100%;
     }
 }
 
@@ -1088,8 +1109,15 @@ h4.get-card__title {
         padding-left: 22px;
     }
 
-    .map-img {
-        max-width: 100%;
-        justify-content: center;
+    .form {
+        width: 100%;
+    }
+
+    .form__field {
+        width: 100%;
+    }
+
+    .form__input {
+        width: 100%;
     }
 }
