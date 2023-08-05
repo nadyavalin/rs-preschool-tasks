@@ -37,6 +37,8 @@ a:hover {
 .container {
     margin: 0 auto;
     max-width: 1440px;
+    overflow: hidden;
+    position: relative;
 }
 
 .header {
@@ -71,18 +73,17 @@ h1 {
 .header__burger-btn {
     display: none;
     position: relative;
-    right: 0px;
     width: 65px;
     height: 50px;
     border: none;
     outline: none;
-    background-color: #0C0C0E;
+    background-color: transparent;
     z-index: 3;
     cursor: pointer;
 }
 
 .header.open .header__burger-btn {
-    background-color: #000000;
+    background-color: transparent;
 }
 
 .header__burger-btn span {
@@ -107,6 +108,10 @@ h1 {
 
 .header__burger-btn span:nth-child(3) {
     transform: translateY(10px);
+}
+
+.header.open .header__burger-btn span {
+    background-color: #FFFFFF;
 }
 
 /* Cross */
@@ -653,6 +658,13 @@ h3.coffee-shop-block__title {
     justify-content: flex-end;
 }
 
+.map-img {
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+    transition: width 0.3s ease;
+}
+
 .library-cards {
     display: flex;
     flex-direction: column;
@@ -1067,12 +1079,17 @@ h4.get-card__title {
 }
 
 /* 640 */
-@media (max-width: 40px) {
+@media (max-width: 640px) {
     .season-block {
         gap: 32px;
     }
 
     .season-block label {
         padding-left: 22px;
+    }
+
+    .map-img {
+        max-width: 100%;
+        justify-content: center;
     }
 }
