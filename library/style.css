@@ -1090,6 +1090,18 @@ h4.get-card__title {
 
 /* 766 */
 @media (max-width: 766px) {
+    .season-block {
+        gap: 48px;
+    }
+
+    .season-block label {
+        padding-left: 32px;
+    }
+
+    .get-card {
+        width: 100%;
+    }
+    
     .coffee-shop__introduction {
         width: 100%;
     }
@@ -1102,13 +1114,16 @@ h4.get-card__title {
 /* 640 */
 @media (max-width: 640px) {
     .season-block {
-        gap: 32px;
+        gap: 48px;
     }
 
     .season-block label {
-        padding-left: 22px;
+        padding-left: 32px;
     }
+}
 
+/* 610 */
+@media (max-width: 610px) {
     .form {
         width: 100%;
     }
@@ -1119,5 +1134,9 @@ h4.get-card__title {
 
     .form__input {
         width: 100%;
+    }
+
+    h4.form__title {
+        font-size: 25px;
     }
 }
