@@ -278,10 +278,44 @@ h2 {
 
 .arrow {
     display: none;
-    margin: 0 34px;
-    padding-top: 40px;
 }
 
+.arrow-button_block {
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrow-button {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 0.5s ease;
+    margin-top: 38px;
+    margin-right: 22px;
+}
+
+.arrow-button_right {
+    display: none;
+    margin-right: 0;
+    margin-left: 22px;
+}
+
+.arrow-button::before {
+    content: "";
+    display: none;
+}
+
+.arrow-button:hover {
+    background-color: #eae9e9;
+    border-radius: 50px;
+    display: none;
+}
 
 .pagination {
     margin-top: 35px;
@@ -495,7 +529,6 @@ h5.book-card__author {
 
 .book-card__button:hover {
     background-color: #BB945F;
-    border: 1px solid #BB945F;
 }
 
 .book-card__button_own {
@@ -533,7 +566,7 @@ h3.coffee-shop-block__title {
     line-height: 40px;
     letter-spacing: 2px;
     text-transform: capitalize;
-    margin-bottom: 39px;
+    margin-bottom: 40px;
 }
 
 .coffee-shop-block__title_right-pos {
@@ -1068,6 +1101,26 @@ h4.get-card__title {
         display: block;
     }
 
+    .arrow-button_block {
+        display: flex;
+    }
+    
+    .arrow-button {
+        display: flex;
+    }
+    
+    .arrow-button::before {
+        display: inline-block;
+    }
+    
+    .arrow-button:hover {
+        display: flex;
+    }
+
+    .arrow-button_right {
+        display: flex;
+    }   
+
     .pagination {
         margin-top: 20px;
     }
@@ -1080,7 +1133,7 @@ h4.get-card__title {
 
     .coffee-shop__introduction {
         width: 750px;
-        margin-top: 2px;
+        margin-top: 3px;
         padding-right: 17px;
     }
 
@@ -1088,6 +1141,10 @@ h4.get-card__title {
         width: 600px;
         margin-top: 5px;
         margin-bottom: 5px;
+    }
+
+    .copyrights_RSS {
+        margin-left: 0;
     }
 }
 
