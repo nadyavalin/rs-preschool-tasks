@@ -233,6 +233,7 @@ h2 {
 .line {
     width: 50px;
     height: 1px;
+    border: none;
     background-color: #0C0C0E;
 }
 
@@ -441,6 +442,7 @@ h3 {
 .book-card__line {
     width: 60px;
     height: 1px;
+    border: none;
     background-color: #BB945F;
 }
 
@@ -577,6 +579,7 @@ h3.coffee-shop-block__title {
 .coffee-shop-block__line {
     width: 100px;
     height: 1px;
+    border: none;
     background-color: #BB945F;
 }
 
