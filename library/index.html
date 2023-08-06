@@ -10,22 +10,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Forum&family=Inter&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Brooklyn Public Library</title>
+
+    <script src="js/script.js"></script>
 </head>
 <body>
     <div class="container">
         <header class="header">
             <a href="#"><h1 class="logo">Brooklyn Public Library</h1></a>
             <div class="profile__gap">
-                <nav class="nav">
+                <nav class="nav" id="menu">
                     <ul class="nav-menu__items">
-                        <li><a href="#about" class="nav-menu__link">About</a></li>
-                        <li><a href="#favorites" class="nav-menu__link">Favorites</a></li>
-                        <li><a href="#coffee-shop" class="nav-menu__link">Coffee shop</a></li>
-                        <li><a href="#contacts" class="nav-menu__link">Contacts</a></li>
-                        <li><a href="#library-cards" class="nav-menu__link">Library Card</a></li>
+                        <li class="nav-menu__item"><a href="#about" class="nav-menu__link">About</a></li>
+                        <li class="nav-menu__item"><a href="#favorites" class="nav-menu__link">Favorites</a></li>
+                        <li class="nav-menu__item"><a href="#coffee-shop" class="nav-menu__link">Coffee shop</a></li>
+                        <li class="nav-menu__item"><a href="#contacts" class="nav-menu__link">Contacts</a></li>
+                        <li class="nav-menu__item"><a href="#library-cards" class="nav-menu__link">Library Card</a></li>
                     </ul>
                 </nav>
-                <img src="./assets/svg/icon_profile.svg" alt="Profile" class="profile__icon">
+                <div class="profile__gap">
+                    <img src="./assets/svg/icon_profile.svg" alt="Profile" class="profile__icon">
+                    <button class="header__burger-btn" id="burger">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
             </div>
         </header>
         <section class="welcome">
@@ -40,16 +47,26 @@
                     <h2>About</h2>
                     <hr class="line">
                 </div>
-                    <p class="about-text-block">The Brooklyn Library is a free workspace, a large number of books and a cozy coffee shop inside</p>
-                    <div class="gallery">
-                        <div class="images">
-                            <img src="./assets/img/image_1.jpg" alt="A woman in the library">
-                            <img src="./assets/img/image_2.jpg" alt="Sculptures">
-                            <img src="./assets/img/image_3.jpg" alt="Book shelves">
-                        </div>
+                <p class="about-text-block">The Brooklyn Library is a free workspace, a large number of books and a cozy coffee shop inside</p>
+                <div class="gallery">
+                    <div class="images">
+                        <img src="./assets/svg/arrow_left.svg" alt="Left arrow" class="arrow">
+                        <img src="./assets/img/image_1.jpg" alt="A woman in the library" class="image_size">
+                        <img src="./assets/img/image_2.jpg" alt="Sculptures" class="image_tablet-hidden image_size">
+                        <img src="./assets/img/image_3.jpg" alt="Book shelves" class="image_tablet-hidden image_size">
+                        <img src="./assets/img/image_4.jpg" alt="Book shelves" class="image_desktop-hidden">
+                        <img src="./assets/img/image_5.jpg" alt="Book shelves" class="image_desktop-hidden">
+                        <img src="./assets/svg/arrow_right.svg" alt="Right arrow" class="arrow">
+                    </div>
                     <div class="pagination">
                         <div class="pagination-block">
-                            <div class ="circle circle_checked"></div>
+                            <div class="circle circle_checked"></div>
+                        </div>
+                        <div class="pagination-block">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="pagination-block">
+                            <div class="circle"></div>
                         </div>
                         <div class="pagination-block">
                             <div class="circle"></div>
@@ -344,7 +361,7 @@
                             </li>
                         </ul>
                     </article>
-                    <article class="coffee-shop-block">
+                    <article class="coffee-shop-block coffee-shop-block_right">
                         <h3 class="coffee-shop-block__title coffee-shop-block__title_right-pos">Desserts & Cakes</h3>
                         <ul class="coffee-shop-block__list">
                             <li class="coffee-shop-block__item">
@@ -400,7 +417,7 @@
                         </div>
                     </div>
                     <div class="map" id="map">
-                        <img src="assets/img/map.jpg" alt="Карта">
+                        <img src="assets/img/map.jpg" alt="Карта" class="map-img">
                     </div>
                 </div>
             </section>
