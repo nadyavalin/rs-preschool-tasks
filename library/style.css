@@ -341,11 +341,19 @@ h2 {
     border-radius: 50px;
 }
 
+.circle__mobile {
+    display: none;
+}
+
 .pagination-block:hover {
     opacity: 0.5;
 }
 
 .circle_checked {
+    background-color: #BB945F;
+}
+
+.circle__mobile_checked {
     background-color: #BB945F;
 }
 
@@ -1096,6 +1104,18 @@ h4.get-card__title {
 
     .image_tablet-hidden {
         display: none;
+    }
+
+    .circle_checked {
+        background-color: #0C0C0E;
+    }
+
+    .circle__mobile_checked {
+        background-color: #BB945F;
+    }
+
+    .circle__mobile {
+        display: block;
     }
 
     .arrow {
