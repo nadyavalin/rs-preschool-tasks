@@ -263,20 +263,16 @@ h2 {
 .container-with-dots {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 1400px;
+    align-items: flex-start;
     margin: 0 auto;
     overflow: hidden;
-    width: 100%;
 }
 
 .images-line {
     display: flex;
     gap: 25px;
-    height: 560px;
-    width: 475px;
     position: relative;
-    left: -475px;
+    left: 0px;
     transition: all 1s ease;
 }
 
@@ -335,6 +331,7 @@ h2 {
     margin-top: 35px;
     margin-bottom: 35px;
     display: flex;
+    align-self: center;
 }
 
 .pagination-dot {
@@ -352,8 +349,12 @@ h2 {
     opacity: 0.5;
 }
 
-.pagination-dot:active {
-    cursor: default;
+.pagination-dot_checked {
+    pointer-events: none;
+}
+
+.pagination-dot_checked .circle {
+    background-color: #BB945F;
 }
 
 .circle {
@@ -365,11 +366,6 @@ h2 {
 
 .pagination-dot__tablet_hidden {
     display: none;
-}
-
-.circle_checked {
-    background-color: #BB945F;
-    cursor: default;
 }
 
 .favorites {
@@ -1105,15 +1101,6 @@ h4.get-card__title {
         gap: 0;
         width: 450px;
         left: 0px;
-    }
-
-    .circle_checked {
-        background-color: #0C0C0E;
-    }
-
-    .circle__tablet_checked {
-        background-color: #BB945F;
-        cursor: default;
     }
 
     .pagination-dot__tablet_hidden {
