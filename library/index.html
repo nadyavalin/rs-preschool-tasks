@@ -29,7 +29,7 @@
                 </nav>
                 <div class="profile__gap">
                     <img src="./assets/svg/icon_profile.svg" alt="Profile" class="profile__icon">
-                    <button class="header__burger-btn" id="burger">
+                    <button class="header__burger-btn">
                         <span></span><span></span><span></span>
                     </button>
                 </div>
@@ -60,6 +60,9 @@
                     </div>
                     <div class="pagination">
                         <div class="pagination-block">
+                            <div class="circle circle__mobile circle__mobile_checked"></div>
+                        </div>
+                        <div class="pagination-block">
                             <div class="circle circle_checked"></div>
                         </div>
                         <div class="pagination-block">
@@ -69,10 +72,7 @@
                             <div class="circle"></div>
                         </div>
                         <div class="pagination-block">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="pagination-block">
-                            <div class="circle"></div>
+                            <div class="circle circle__mobile"></div>
                         </div>
                     </div>
                 </div>
@@ -433,7 +433,7 @@
                             <div class="form__field">
                                 <h4 class="form__title">Brooklyn Public Library</h4>
                                 <label><input type="text" pattern="[A-Za-zА-Яа-яЁё]{3,}" class="form__input" name="name" placeholder="Reader's name" required></label>
-                                <label><input type="text" pattern="[0-9]{1,4}-[0-9]{1,4}" maxlength="9" class="form__input" name="card_number" placeholder="Card number" required title="XXXX-XXXX"></label>
+                                <label><input type="text" pattern="[0-9]{1,4}-[0-9]{1,4}" maxlength="9" class="form__input form__input_margin" name="card_number" placeholder="Card number" required title="XXXX-XXXX"></label>
                             </div>
                             <button class="form__button">Check the card</button>
                         </form>
