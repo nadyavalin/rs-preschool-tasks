@@ -256,22 +256,31 @@ h2 {
     margin-top: 20px;
 }
 
-.gallery {
+.container-with-arrows {
+    display: flex;
+}
+
+.container-with-dots {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 1400px;
+    margin: 0 auto;
+    overflow: hidden;
+    width: 100%; 
 }
 
-.images {
+.images-line {
     display: flex;
-    justify-content: center;
     gap: 25px;
+    height: 560px;
+    width: 475px;
+    position: relative;
+    left: -475px;
+    transition: all 1s ease;
 }
 
-.image_size {
-    height: auto;
-    width: 100%;
+.image {
     object-fit: cover;
     transition: width 0.3s ease;
 }
@@ -294,16 +303,21 @@ h2 {
     height: 45px;
     border: none;
     background-color: transparent;
-    cursor: pointer;
     transition: 0.5s ease;
     margin-top: 38px;
     margin-right: 22px;
 }
 
-.arrow-button_right {
+.arrow-button_prev {
+    display: none;
+    cursor: pointer;
+}
+
+.arrow-button_next {
     display: none;
     margin-right: 0;
     margin-left: 22px;
+    cursor: pointer;
 }
 
 .arrow-button::before {
@@ -317,13 +331,13 @@ h2 {
     display: none;
 }
 
-.pagination {
+.pagination-block {
     margin-top: 35px;
     margin-bottom: 35px;
     display: flex;
 }
 
-.pagination-block {
+.pagination-dot {
     width: 26px;
     height: 26px;
     display: flex;
@@ -331,7 +345,15 @@ h2 {
     justify-content: center;
     align-items: center;
     transition: 0.5s ease;
+}
+
+.pagination-dot:hover {
+    opacity: 0.5;
     cursor: pointer;
+}
+
+.pagination-dot:active {
+    cursor: default;
 }
 
 .circle {
@@ -343,10 +365,6 @@ h2 {
 
 .circle__mobile {
     display: none;
-}
-
-.pagination-block:hover {
-    opacity: 0.5;
 }
 
 .circle_checked {
@@ -969,10 +987,6 @@ h4.get-card__title {
 
 /* 1920 */
 @media (min-width: 1920px) {
-    .image_desktop-hidden {
-        display: none;
-    }
-
     .arrow {
         display: none;
     }
@@ -980,10 +994,6 @@ h4.get-card__title {
 
 /* 1920 */
 @media (max-width: 1920px) {
-    .image_desktop-hidden {
-        display: none;
-    }
-
     .arrow {
         display: none;
     }
@@ -991,14 +1001,6 @@ h4.get-card__title {
 
 /* 1440 */
 @media (max-width: 1440px) {
-    .image_desktop-hidden {
-        display: none;
-    }
-
-    .image_size {
-        max-width: 30%;
-    }
-
     .arrow {
         display: none;
     }
@@ -1097,13 +1099,15 @@ h4.get-card__title {
 
 /* 768 */
 @media (max-width: 768px) {
-    .image_size {
-        max-width: 100%;
+    .container-with-dots {
         width: 450px;
+        overflow: hidden;
     }
-
-    .image_tablet-hidden {
-        display: none;
+    
+    .images-line {
+        gap: 0;
+        width: 450px;
+        left: 0px;
     }
 
     .circle_checked {
@@ -1138,8 +1142,12 @@ h4.get-card__title {
         display: flex;
     }
 
-    .arrow-button_right {
-        display: flex;
+    .arrow-button_prev {
+        display: block;
+    }
+
+    .arrow-button_next {
+        display: block;
     }
 
     .map-img {

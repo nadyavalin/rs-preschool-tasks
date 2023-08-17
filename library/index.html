@@ -10,8 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Forum&family=Inter&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Brooklyn Public Library</title>
-
-    <script src="js/script.js"></script>
 </head>
 <body>
     <div class="container">
@@ -48,30 +46,32 @@
                     <hr class="line">
                 </div>
                 <p class="about-text-block">The Brooklyn Library is a free workspace, a large number of books and a cozy coffee shop inside</p>
-                <div class="gallery">
-                    <div class="images">
-                        <div class="arrow-button_block"><button class="arrow-button"><img src="./assets/svg/arrow_left.svg" alt="Left arrow" class="arrow"></button></div>
-                        <img src="./assets/img/image_1.jpg" alt="A woman in the library" class="image_size">
-                        <img src="./assets/img/image_2.jpg" alt="Sculptures" class="image_tablet-hidden image_size">
-                        <img src="./assets/img/image_3.jpg" alt="Book shelves" class="image_tablet-hidden image_size">
-                        <img src="./assets/img/image_4.jpg" alt="Book shelves" class="image_desktop-hidden">
-                        <img src="./assets/img/image_5.jpg" alt="Book shelves" class="image_desktop-hidden">
-                        <div class="arrow-button_block"><button class="arrow-button arrow-button_right"><img src="./assets/svg/arrow_right.svg" alt="Right arrow" class="arrow"></button></div>
+                <div class="container-with-dots">
+                    <div class="container-with-arrows">
+                        <div class="arrow-button_block"><button class="arrow-button arrow-button_prev"><img src="./assets/svg/arrow_left.svg" alt="Left arrow" class="arrow"></button></div>
+                        <div class="images-line">
+                            <img src="./assets/img/image_1.jpg" alt="A woman in the library" class="image">
+                            <img src="./assets/img/image_2.jpg" alt="Sculptures" class="image">
+                            <img src="./assets/img/image_3.jpg" alt="Book shelves" class="image">
+                            <img src="./assets/img/image_4.jpg" alt="Book shelves" class="image">
+                            <img src="./assets/img/image_5.jpg" alt="Book shelves" class="image">
+                        </div>
+                        <div class="arrow-button_block"><button class="arrow-button arrow-button_next"><img src="./assets/svg/arrow_right.svg" alt="Right arrow" class="arrow"></button></div>
                     </div>
-                    <div class="pagination">
-                        <div class="pagination-block">
+                    <div class="pagination-block">
+                        <div class="pagination-dot pagination-dot_mobile">
                             <div class="circle circle__mobile circle__mobile_checked"></div>
                         </div>
-                        <div class="pagination-block">
+                        <div class="pagination-dot pagination-dot_mobile">
                             <div class="circle circle_checked"></div>
                         </div>
-                        <div class="pagination-block">
+                        <div class="pagination-dot pagination-dot_mobile">
                             <div class="circle"></div>
                         </div>
-                        <div class="pagination-block">
+                        <div class="pagination-dot pagination-dot_mobile">
                             <div class="circle"></div>
                         </div>
-                        <div class="pagination-block">
+                        <div class="pagination-dot pagination-dot_mobile">
                             <div class="circle circle__mobile"></div>
                         </div>
                     </div>
@@ -478,6 +478,7 @@
             </div>
         </footer>
     </div>
+    <script src="./js/script.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
