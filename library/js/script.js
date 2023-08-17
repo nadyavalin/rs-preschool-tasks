@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     const header = document.querySelector(".header");
 
-    document.getElementById("burger").addEventListener("click", function() {
+    document.querySelector(".header__burger-btn").addEventListener("click", function() {
         setTimeout(() => {
           header.classList.toggle("open");
         }, 0)
