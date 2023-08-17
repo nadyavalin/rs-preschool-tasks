@@ -35,7 +35,7 @@ const images = document.querySelectorAll(".image");
 const imagesLine = document.querySelector(".images-line");
 const paginationDots = document.querySelectorAll(".pagination-dot");
 const paginationDotsTablet = document.querySelectorAll(
-  ".pagination-dot_tablet"
+  ".pagination-dot__tablet"
 );
 
 // Slider desktop pagination
@@ -53,7 +53,8 @@ paginationDots.forEach((dot, index) => {
     }
 
     imagesLine.style.left = -offset + "px";
-    updatePaginationDots();
+    updatePaginationDotsDesktop();
+    updatePaginationDotTablet();
   });
 });
 
@@ -67,7 +68,8 @@ document
 
     offset -= 450;
     imagesLine.style.left = -offset + "px";
-    updatePaginationDots();
+    updatePaginationDotsDesktop();
+    updatePaginationDotTablet();
   });
 
 document
@@ -79,16 +81,27 @@ document
 
     offset += 450;
     imagesLine.style.left = -offset + "px";
-    updatePaginationDots();
+    updatePaginationDotsDesktop();
+    updatePaginationDotTablet();
   });
 
-// Slider pagination update
-function updatePaginationDots() {
+// Slider desktop pagination update
+function updatePaginationDotsDesktop() {
   paginationDots.forEach((dot, index) => {
     if (index === activeImage) {
       dot.querySelector(".circle").classList.add("circle_checked");
     } else {
       dot.querySelector(".circle").classList.remove("circle_checked");
+    }
+  });
+}
+//slider tablet pagination update
+function updatePaginationDotTablet() {
+  paginationDots.forEach((dot, index) => {
+    if (index === activeImage) {
+      dot.querySelector(".circle").classList.add("circle__tablet_checked");
+    } else {
+      dot.querySelector(".circle").classList.remove("circle__tablet_checked");
     }
   });
 }
