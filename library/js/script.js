@@ -31,10 +31,11 @@ document.addEventListener("DOMContentLoaded", function () {
 let offset = 0;
 let activeImageIndex = 0;
 let lineWidth = 450;
+
 const images = document.querySelectorAll(".image");
 const imagesLine = document.querySelector(".images-line");
 const paginationDots = document.querySelectorAll(".pagination-dot");
-const paginationDotsTablet = document.querySelectorAll(".pagination-dot__tablet");
+const arrows = document.querySelectorAll(".arrow-button");
 const arrowPrev = document.querySelector(".arrow-button_prev");
 const arrowNext = document.querySelector(".arrow-button_next");
 
@@ -53,38 +54,38 @@ paginationDots.forEach((dot, index) => {
     }
 
     imagesLine.style.left = -offset + "px";
-    updatePaginationDotsDesktop();
+    updatePaginationDots();
   });
 });
 
 // Slider arrows for Prev
 arrowPrev.addEventListener("click", function () {
   if (offset === 0) {
-    paginationDotsTablet.classList.add("pagination-dot_checked"); // не работает
+    // paginationDots[index].classList.add("pagination-dot_checked"); // не работает
     return;
   }
-  paginationDotsTablet.classList.remove("pagination-dot_checked"); // не работает
+    // paginationDots[index].classList.remove("pagination-dot_checked"); // не работает
 
-  offset -= 450; // добавить lineWidth
+  offset -= lineWidth;
   imagesLine.style.left = -offset + "px";
-  updatePaginationDotsDesktop();
+  updatePaginationDots();
 });
 
 // Slider arrows for Next
 arrowNext.addEventListener("click", function () {
   if (offset === 1800) {
-    paginationDotsTablet.classList.add("pagination-dot_checked"); // не работает
+    // paginationDots[index].classList.add("pagination-dot_checked"); // не работает
     return;
   }
-  paginationDotsTablet.classList.remove("pagination-dot_checked"); // не работает
+  // paginationDots[index].classList.remove("pagination-dot_checked"); // не работает
 
-  offset += 450; // добавить lineWidth
+  offset += lineWidth;
   imagesLine.style.left = -offset + "px";
-  updatePaginationDotsDesktop();
+  updatePaginationDots();
 });
 
 // Slider desktop pagination update
-function updatePaginationDotsDesktop() {
+function updatePaginationDots() {
   paginationDots.forEach((dot, index) => {
     if (index === activeImageIndex) {
       dot.classList.add("pagination-dot_checked");
@@ -94,16 +95,25 @@ function updatePaginationDotsDesktop() {
   });
 }
 
-// Slider adaptation
-
-window.addEventListener('resize', imagesLineWidth);
-
-function imagesLineWidth() {
-  lineWidth = document.querySelector(".images-line").offsetWidth; // не работает
-  /*
-  imagesLine.style.width = lineWidth * images.length + "px";
-  images.forEach((item) => (item.style.width = lineWidth + "px"));
-  */
+// Slider arrows update // не работает
+function updateArrows() {
+  arrows.forEach((arrow, index) => {
+    if (index === activeImageIndex) {
+      arrowPrev.classList.remove("arrow-button_stop");
+      arrowNext.classList.remove("arrow-button_stop");
+    } else {
+      arrowPrev.classList.add("arrow-button_stop");
+      arrowNext.classList.add("arrow-button_stop");
+    }
+  });
 }
 
+// Slider adaptation
+/* window.addEventListener('resize', imagesLineWidth);
+function imagesLineWidth() {
+  lineWidth = document.querySelector(".images-line").offsetWidth;
+  imagesLine.style.width = lineWidth * images.length + "px";
+  images.forEach((item) => (item.style.width = lineWidth + "px"));
+}
 imagesLineWidth();
+*/
