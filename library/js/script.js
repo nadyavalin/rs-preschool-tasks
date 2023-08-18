@@ -96,6 +96,7 @@ function updatePaginationDots() {
 }
 
 // Slider arrows update // не работает
+/*
 function updateArrows() {
   arrows.forEach((arrow, index) => {
     if (index === activeImageIndex) {
@@ -107,6 +108,7 @@ function updateArrows() {
     }
   });
 }
+*/
 
 // Slider adaptation
 /* window.addEventListener('resize', imagesLineWidth);
