@@ -29,92 +29,93 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Slider in About block
 let offset = 0;
-let activeImage = 0;
-let lineWidth;
+let activeImageIndex = 0;
+let lineWidth = 450;
+
 const images = document.querySelectorAll(".image");
 const imagesLine = document.querySelector(".images-line");
 const paginationDots = document.querySelectorAll(".pagination-dot");
-const paginationDotsTablet = document.querySelectorAll(
-  ".pagination-dot__tablet"
-);
+const arrows = document.querySelectorAll(".arrow-button");
+const arrowPrev = document.querySelector(".arrow-button_prev");
+const arrowNext = document.querySelector(".arrow-button_next");
 
 // Slider desktop pagination
 paginationDots.forEach((dot, index) => {
   dot.addEventListener("click", function (event) {
-    if (activeImage === index) {
+    if (activeImageIndex === index.length - 1) {
       return;
     }
 
-    activeImage = index;
+    activeImageIndex = index;
     if (window.innerWidth > 768) {
-      offset = activeImage * 475;
+      offset = activeImageIndex * 475;
     } else {
-      offset = activeImage * 450;
+      offset = activeImageIndex * 450;
     }
 
     imagesLine.style.left = -offset + "px";
-    updatePaginationDotsDesktop();
-    updatePaginationDotTablet();
+    updatePaginationDots();
   });
 });
 
-// Slider arrows
-document
-  .querySelector(".arrow-button_prev")
-  .addEventListener("click", function () {
-    if (offset === 0) {
-      return;
-    }
+// Slider arrows for Prev
+arrowPrev.addEventListener("click", function () {
+  if (offset === 0) {
+    // paginationDots[index].classList.add("pagination-dot_checked"); // не работает
+    return;
+  }
+    // paginationDots[index].classList.remove("pagination-dot_checked"); // не работает
 
-    offset -= 450;
-    imagesLine.style.left = -offset + "px";
-    updatePaginationDotsDesktop();
-    updatePaginationDotTablet();
-  });
+  offset -= lineWidth;
+  imagesLine.style.left = -offset + "px";
+  updatePaginationDots();
+});
 
-document
-  .querySelector(".arrow-button_next")
-  .addEventListener("click", function () {
-    if (offset === 1800) {
-      return;
-    }
+// Slider arrows for Next
+arrowNext.addEventListener("click", function () {
+  if (offset === 1800) {
+    // paginationDots[index].classList.add("pagination-dot_checked"); // не работает
+    return;
+  }
+  // paginationDots[index].classList.remove("pagination-dot_checked"); // не работает
 
-    offset += 450;
-    imagesLine.style.left = -offset + "px";
-    updatePaginationDotsDesktop();
-    updatePaginationDotTablet();
-  });
+  offset += lineWidth;
+  imagesLine.style.left = -offset + "px";
+  updatePaginationDots();
+});
 
 // Slider desktop pagination update
-function updatePaginationDotsDesktop() {
+function updatePaginationDots() {
   paginationDots.forEach((dot, index) => {
-    if (index === activeImage) {
-      dot.querySelector(".circle").classList.add("circle_checked");
+    if (index === activeImageIndex) {
+      dot.classList.add("pagination-dot_checked");
     } else {
-      dot.querySelector(".circle").classList.remove("circle_checked");
+      dot.classList.remove("pagination-dot_checked");
     }
   });
 }
-//slider tablet pagination update
-function updatePaginationDotTablet() {
-  paginationDots.forEach((dot, index) => {
-    if (index === activeImage) {
-      dot.querySelector(".circle").classList.add("circle__tablet_checked");
+
+// Slider arrows update // не работает
+/*
+function updateArrows() {
+  arrows.forEach((arrow, index) => {
+    if (index === activeImageIndex) {
+      arrowPrev.classList.remove("arrow-button_stop");
+      arrowNext.classList.remove("arrow-button_stop");
     } else {
-      dot.querySelector(".circle").classList.remove("circle__tablet_checked");
+      arrowPrev.classList.add("arrow-button_stop");
+      arrowNext.classList.add("arrow-button_stop");
     }
   });
 }
+*/
 
 // Slider adaptation
-/*
-window.addEventListener('resize', imagesLineWidth);
-
+/* window.addEventListener('resize', imagesLineWidth);
 function imagesLineWidth() {
   lineWidth = document.querySelector(".images-line").offsetWidth;
   imagesLine.style.width = lineWidth * images.length + "px";
   images.forEach((item) => (item.style.width = lineWidth + "px"));
 }
-
 imagesLineWidth();
 */
