@@ -258,12 +258,13 @@ h2 {
 
 .container-with-arrows {
     display: flex;
+    justify-content: center;
+    margin-left: 20px;
 }
 
 .container-with-dots {
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
     overflow: hidden;
     max-width: 1400px;
 }
@@ -290,6 +291,8 @@ h2 {
     display: none;
     justify-content: center;
     align-items: center;
+    margin-right: 49px;
+    margin-left: 25px;
 }
 
 .arrow-button {
@@ -301,8 +304,7 @@ h2 {
     border: none;
     background-color: transparent;
     transition: 0.5s ease;
-    margin-top: -38px;
-    margin-right: 22px;
+    margin-top: -55px;
 }
 
 .arrow-button_prev {
@@ -469,7 +471,7 @@ h2 {
     margin-right: 40px;
 }
 
-.book-card:nth-child(4) ~ .book-card {
+.book-cards__spring, .book-cards__summer, .book-cards__autumn {
     display: none; /* невидимые карточки */
 }
 
@@ -553,6 +555,7 @@ h5.book-card__author {
 
 .book-card__button:hover {
     background-color: #BB945F;
+    border: 1px solid #BB945F;
 }
 
 .book-card__button_own {
@@ -1138,6 +1141,13 @@ h4.get-card__title {
 
     .arrow-button_next {
         display: flex;
+    }
+
+    /* не работает */
+    .favorites-block {
+        position: sticky;
+        top: 20px;
+        will-change: transform;
     }
 
     .map-img {

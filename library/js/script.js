@@ -30,58 +30,38 @@ document.addEventListener("DOMContentLoaded", function () {
 // Slider in About block
 let offset = 0;
 let activeImageIndex = 0;
-let lineWidth = 450;
+let imageWidth = window.innerWidth > 768 ? 475 : 450;
 
 const images = document.querySelectorAll(".image");
 const imagesLine = document.querySelector(".images-line");
 const paginationDots = document.querySelectorAll(".pagination-dot");
-const arrows = document.querySelectorAll(".arrow-button");
 const arrowPrev = document.querySelector(".arrow-button_prev");
 const arrowNext = document.querySelector(".arrow-button_next");
 
+// Switch slider
+function switchSlide(newOffset) {
+  offset = newOffset;
+  imagesLine.style.left = -offset + "px";
+  activeImageIndex = newOffset / imageWidth;
+  updatePaginationDots();
+  updateArrows();
+}
+
 // Slider desktop pagination
 paginationDots.forEach((dot, index) => {
-  dot.addEventListener("click", function (event) {
-    if (activeImageIndex === index.length - 1) {
-      return;
-    }
-
-    activeImageIndex = index;
-    if (window.innerWidth > 768) {
-      offset = activeImageIndex * 475;
-    } else {
-      offset = activeImageIndex * 450;
-    }
-
-    imagesLine.style.left = -offset + "px";
-    updatePaginationDots();
+  dot.addEventListener("click", function () {
+    switchSlide(index * imageWidth);
   });
 });
 
 // Slider arrows for Prev
 arrowPrev.addEventListener("click", function () {
-  if (offset === 0) {
-    // paginationDots[index].classList.add("pagination-dot_checked"); // не работает
-    return;
-  }
-    // paginationDots[index].classList.remove("pagination-dot_checked"); // не работает
-
-  offset -= lineWidth;
-  imagesLine.style.left = -offset + "px";
-  updatePaginationDots();
+  switchSlide(offset - imageWidth);
 });
 
 // Slider arrows for Next
 arrowNext.addEventListener("click", function () {
-  if (offset === 1800) {
-    // paginationDots[index].classList.add("pagination-dot_checked"); // не работает
-    return;
-  }
-  // paginationDots[index].classList.remove("pagination-dot_checked"); // не работает
-
-  offset += lineWidth;
-  imagesLine.style.left = -offset + "px";
-  updatePaginationDots();
+  switchSlide(offset + imageWidth);
 });
 
 // Slider desktop pagination update
@@ -95,27 +75,23 @@ function updatePaginationDots() {
   });
 }
 
-// Slider arrows update // не работает
-/*
+// Slider arrows update
 function updateArrows() {
-  arrows.forEach((arrow, index) => {
-    if (index === activeImageIndex) {
-      arrowPrev.classList.remove("arrow-button_stop");
-      arrowNext.classList.remove("arrow-button_stop");
-    } else {
-      arrowPrev.classList.add("arrow-button_stop");
-      arrowNext.classList.add("arrow-button_stop");
-    }
-  });
+  if (activeImageIndex === 0) {
+    arrowPrev.classList.add("arrow-button_stop");
+  } else if (activeImageIndex === images.length - 1) {
+    arrowNext.classList.add("arrow-button_stop");
+  } else {
+    arrowPrev.classList.remove("arrow-button_stop");
+    arrowNext.classList.remove("arrow-button_stop");
+  }
 }
-*/
 
 // Slider adaptation
-/* window.addEventListener('resize', imagesLineWidth);
-function imagesLineWidth() {
-  lineWidth = document.querySelector(".images-line").offsetWidth;
-  imagesLine.style.width = lineWidth * images.length + "px";
-  images.forEach((item) => (item.style.width = lineWidth + "px"));
-}
-imagesLineWidth();
-*/
+window.addEventListener("resize", function () {
+  if (window.innerWidth > 768) {
+    imageWidth = 475;
+  } else {
+    imageWidth = 450;
+  }
+});
