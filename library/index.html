@@ -30,20 +30,68 @@
                     </ul>
                 </nav>
                 <div class="profile__gap">
-                    <img src="./assets/svg/icon_profile.svg" alt="Profile" class="profile__icon">
+                    <img src="./assets/svg/icon_profile.svg" alt="Profile" class="profile__icon" id="profile">
                     <button class="header__burger-btn">
                         <span></span><span></span><span></span>
                     </button>
                 </div>
             </div>
         </header>
+        <div class="profile-block">
+            <div class="profile__no-auth profile__no-auth_active">
+                <p class="profile__head">Profile</p>
+                <hr class="profile__line">
+                <div class="profile__btns">
+                    <button class="btn__login">Log In</button>
+                    <button class="btn__register">Register</button>
+                </div>
+            </div>
+
+            <div class="profile__with-auth profile__with-auth_active">
+                <p class="profile__head">Profile</p>
+                <hr class="profile__line">
+                <div class="profile__btns">
+                    <button class="btn__myprofile">My profile</button>
+                    <button class="btn__logout">Log Out</button>
+                </div>
+            </div>
+        </div>
         <section class="welcome">
             <div class="shadow"></div>
             <div class="welcome-block">
                 <h2 class="welcome-block__title">Welcome<br>to the Brooklyn<br>Library</h2>
-            </div>
+            </div>            
         </section>
         <main class="main">
+            <div class="pop-up__register hidden">
+                <div class="pop-up__register_content">
+                    <div class="close-popup"><img src="./assets/svg/close_popup.svg"></div>
+                    <h6 class="pop-up__text">Register</h6>
+                    <form method="get" class="form-register">
+                        <div class="form-register__item">
+                            <label for="first-name">Frist name</label>
+                            <input type="text" name="first-name" id="first-name" required>
+                        </div>
+                        <div class="form-register__item">
+                            <label for="last-name">Last name</label>
+                            <input type="text" name="last-name" id="last-name" required>
+                        </div>
+                        <div class="form-register__item">
+                            <label for="email">E-mail</label>
+                            <input type="email" name="email" id="email" required>
+                        </div>
+                        <div class="form-register__item">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" required>
+                        </div>
+                        <button class="form-register__btn">Sign Up</button>
+                        <div class="have-account">
+                            <p class="have-account__text">Already have an account?</p>
+                            <button class="have-accout__login">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <section class="about" id="about">
                 <div class="title-line">
                     <h2>About</h2>
@@ -92,30 +140,25 @@
                     <hr class="line">
                 </div>
                 <p class="favorites-block__text">Pick favorites of season</p>
-                <div class="favorites-block">
-                    <fieldset class="season-block">
-                        <div class="season-block__item">
-                            <input type="radio" id="winter" name="topic" value="winter" class="season-block__item-input"
-                                checked>
-                            <label for="winter"
-                                class="season-block__item-label season-block__item-label_checked">Winter</label>
-                        </div>
-                        <div class="season-block__item">
-                            <input type="radio" id="spring" name="topic" value="spring"
-                                class="season-block__item-input">
-                            <label for="spring" class="season-block__item-label">Spring</label>
-                        </div>
-                        <div class="season-block__item">
-                            <input type="radio" id="summer" name="topic" value="summer"
-                                class="season-block__item-input">
-                            <label for="summer" class="season-block__item-label">Summer</label>
-                        </div>
-                        <div class="season-block__item">
-                            <input type="radio" id="autumn" name="topic" value="autumn"
-                                class="season-block__item-input">
-                            <label for="autumn" class="season-block__item-label">Autumn</label>
-                        </div>
-                    </fieldset>
+                <div class="season-block">
+                    <div class="season-block__item season-block__item_winter season-block__item_checked">
+                        <input type="radio" id="winter" name="topic" value="winter" class="season-block__item-input"
+                            checked>
+                        <label for="winter"
+                            class="season-block__item-label season-block__item-label_checked">Winter</label>
+                    </div>
+                    <div class="season-block__item season-block__item_spring season-block__item_checked">
+                        <input type="radio" id="spring" name="topic" value="spring" class="season-block__item-input">
+                        <label for="spring" class="season-block__item-label">Spring</label>
+                    </div>
+                    <div class="season-block__item season-block__item_summer season-block__item_checked">
+                        <input type="radio" id="summer" name="topic" value="summer" class="season-block__item-input">
+                        <label for="summer" class="season-block__item-label season-block__item_checked">Summer</label>
+                    </div>
+                    <div class="season-block__item season-block__item_autumn">
+                        <input type="radio" id="autumn" name="topic" value="autumn" class="season-block__item-input">
+                        <label for="autumn" class="season-block__item-label">Autumn</label>
+                    </div>
                 </div>
                 <ul class="book-cards book-cards__winter">
                     <li class="book-card">
@@ -174,7 +217,8 @@
                                 (and her
                                 family) exploring how the Windsors have evolved and thrived as the modern world has
                                 changed around them.</p>
-                            <button class="book-card__button book-card__button_own" disabled>Own</button>
+                            <button class="book-card__button">Buy</button>
+                            <!-- <button class="book-card__button book-card__button_own" disabled>Own</button> -->
                             <img class="book-card__image" src="./assets/img/book_4_last_queen.jpg" alt="The Last Queen">
                         </article>
                     </li>
@@ -381,10 +425,9 @@
                     <hr class="line">
                 </div>
                 <div class="coffee-shop__introduction">In our library, we have of cozy coffee shop, welcoming in
-                    customers
-                    with frothy cappuccinos and friendly conversation. You can get a favorite book and read in coffee
-                    shop. Our
-                    barista to cook you best coffee, and also you can try desserts from bakery.
+                    customers with frothy cappuccinos and friendly conversation. You can get a favorite book and read in
+                    coffee
+                    shop. Our barista to cook you best coffee, and also you can try desserts from bakery.
                 </div>
                 <div class="coffee-shop__container">
                     <article class="coffee-shop-block">

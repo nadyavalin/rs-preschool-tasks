@@ -37,7 +37,6 @@ a:hover {
 .container {
     margin: 0 auto;
     max-width: 1440px;
-    overflow: hidden;
     position: relative;
 }
 
@@ -48,6 +47,7 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 h1 {
@@ -78,7 +78,7 @@ h1 {
     border: none;
     outline: none;
     background-color: transparent;
-    z-index: 3;
+    z-index: 5;
     cursor: pointer;
 }
 
@@ -168,6 +168,203 @@ h1 {
     display: flex;
     align-items: center;
     gap: 40px;
+}
+
+.profile-block {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 15px;
+    margin-top: -15px;
+}
+
+.profile__no-auth, .profile__with-auth {
+    position: absolute;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 80px;
+    height: 120px;
+    z-index: 8;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+.profile__head {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 20px;
+    padding-bottom: 5px;
+}
+
+.profile__line {
+    width: 40px;
+    height: 1px;
+    border: none;
+    background-color: #BB945F;
+    margin-bottom: 15px;
+}
+
+.profile__btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn__login, .btn__register, .btn__myprofile, .btn__logout {
+    border: 0;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+    background-color: transparent;
+    width: 100%;
+}
+
+.btn__login:hover, .btn__register:hover, .btn__myprofile:hover, .btn__logout:hover {
+    background-color: #DFDFDF;
+}
+
+.profile__no-auth_active {
+    position: fixed;
+    transform: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.profile__no-auth_active.open {
+    position: fixed;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+}
+
+.profile__with-auth_active {
+    position: fixed;
+    transform: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.profile__with-auth_active.open {
+    position: fixed;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+}
+
+.pop-up__register {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(30, 30, 30, 0.6);
+    z-index: 9;
+}
+
+.pop-up__register_content {
+    margin-top: 10%;
+    width: 250px;
+    height: 382px;
+    background-color: #FFFFFF;
+    z-index: 10;
+    padding: 23px 25px;
+    position: relative;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.close-popup {
+    position: absolute;
+    top: 16px;
+    right: 14px;    
+}
+
+h6.pop-up__text {
+    text-align: center;
+    font-family: 'Forum';
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.form-register {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-register__item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-register__item label {
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+}
+
+.form-register__item input {
+    width: 200px;
+    height: 20px;
+    flex-shrink: 0;
+    border: 1px solid #BB945F;
+}
+
+.form-register__btn {
+    margin-top: 10px;
+    width: 75px;
+    height: 30px;
+    border: 1px solid #0C0C0E;
+
+    color: #0C0C0E;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    transition: 0.5s ease;
+}
+
+.form-register__btn:hover {
+    background-color: #BB945F;
+    border: 1px solid #BB945F;
+    cursor: pointer;
+}
+
+.have-account {
+    display: flex;
+    gap: 10px;
+}
+
+.have-account__text {
+    text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.16);
+    font-size: 10px;
+}
+
+.have-accout__login {
+    color: #0C0C0E;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration-line: underline;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .main {
@@ -281,6 +478,7 @@ h2 {
 .image {
     object-fit: cover;
     transition: width 0.3s ease;
+    max-width: 100%;
 }
 
 .arrow {
@@ -375,16 +573,17 @@ h2 {
     display: none;
 }
 
-.favorites {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
 .favorites-block__text {
     text-align: left;
     font-weight: 700;
     word-spacing: 2px;
+}
+
+.favorites {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    position: relative;
 }
 
 .season-block {
@@ -429,6 +628,9 @@ h2 {
 .season-block__item {
     display: inline-flex;
     align-items: center;
+}
+
+.season-block__item_checked {
     cursor: pointer;
 }
 
@@ -441,7 +643,6 @@ h2 {
 
 .season-block__item-label {
     line-height: normal;
-    cursor: pointer;
     padding: 5px;
     transition: text-shadow 0.5s ease;
 }
@@ -767,7 +968,7 @@ h3.coffee-shop-block__title {
     height: 386px;
     border: 3px solid #BB945F;
     box-shadow: 0px 2px 5px 0px #8E8E8E;
-    background-color: #ffffff;
+    background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1031,7 +1232,7 @@ h4.get-card__title {
     }
 
     .nav {
-        position: absolute;
+        position: fixed;
         right: -332px;
         top: 0;
         width: 332px;
@@ -1040,7 +1241,7 @@ h4.get-card__title {
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 2;
+        z-index: 3;
         transition: transform .5s;
         will-change: transform;
     }
@@ -1065,6 +1266,10 @@ h4.get-card__title {
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    .profile-block {
+        margin-right: 105px;
     }
 
     .arrow {
@@ -1102,7 +1307,6 @@ h4.get-card__title {
 @media (max-width: 768px) {
     .container-with-dots {
         width: 450px;
-        overflow: hidden;
     }
 
     .images-line {
@@ -1143,11 +1347,16 @@ h4.get-card__title {
         display: flex;
     }
 
-    /* не работает */
-    .favorites-block {
+    .season-block {
         position: sticky;
-        top: 20px;
+        top: 0;
         will-change: transform;
+        z-index: 2;
+        background-color: #CFCFCF;
+        opacity: 80%;
+        height: 60px;
+        margin-bottom: -18px;
+        margin-top: -17px;
     }
 
     .map-img {
