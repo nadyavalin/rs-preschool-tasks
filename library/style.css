@@ -237,7 +237,7 @@ h1 {
 }
 
 .profile__no-auth_active.open {
-    position: fixed;
+    position: absolute;
     transform: none;
     opacity: 1;
     visibility: visible;

@@ -247,19 +247,35 @@ document.body.addEventListener("click", (event) => {
 
 // Pop Up Register
 const btnRegister = document.querySelector(".btn__register");
+const btnRegisterGetCardBlock = document.querySelector(".get-card__button_register");
 const btnLogin = document.querySelector(".btn__login");
+const btnLoginGetCardBlock = document.querySelector(".get-card__button_login");
+const btnLoginFromBuy = document.querySelectorAll(".book-card__button");
+
 const popUpRegister = document.querySelector(".pop-up__register");
 const popUpLogin = document.querySelector(".pop-up__login");
 const popUpCloseBtnRegister = document.querySelector(".close-popup__register");
 const popUpCloseBtnLogin = document.querySelector(".close-popup__login");
 
+btnRegister.addEventListener("click", () => {
+  popUpRegister.classList.toggle("hidden");
+});
+
+btnRegisterGetCardBlock.addEventListener("click", () => {
+  popUpRegister.classList.toggle("hidden");
+});
+
 btnLogin.addEventListener("click", () => {
   popUpLogin.classList.toggle("hidden");
 });
 
-btnRegister.addEventListener("click", () => {
-  popUpRegister.classList.toggle("hidden");
+btnLoginGetCardBlock.addEventListener("click", () => {
+  popUpLogin.classList.toggle("hidden");
 });
+
+/* btnLoginFromBuy.addEventListener("click", () => {
+  popUpLogin.classList.toggle("hidden");
+}); */
 
 popUpRegister.addEventListener("click", (event) => {
   if (event.target.classList.contains("pop-up__register")) {
