@@ -257,7 +257,7 @@ h1 {
     visibility: visible;
 }
 
-.pop-up__register {
+.pop-up__register, .pop-up__login {
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -277,17 +277,29 @@ h1 {
     background-color: #FFFFFF;
     z-index: 10;
     padding: 23px 25px;
-    position: relative;
+    position: fixed;
+}
+
+.pop-up__login_content {
+    margin-top: 10%;
+    width: 250px;
+    height: 262px;
+    background-color: #FFFFFF;
+    z-index: 10;
+    padding: 23px 25px;
+    position: fixed; 
 }
 
 .hidden {
     visibility: hidden;
+    opacity: 0px;
 }
 
-.close-popup {
+.close-popup__register, .close-popup__login {
     position: absolute;
     top: 16px;
-    right: 14px;    
+    right: 14px;
+    cursor: pointer;    
 }
 
 h6.pop-up__text {
@@ -300,47 +312,45 @@ h6.pop-up__text {
     margin-bottom: 20px;
 }
 
-.form-register {
+.form-register, .form-login {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.form-register__item {
+.form-register__item, .form-login__item {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.form-register__item label {
+.form-register__item label, .form-login__item label {
     font-size: 15px;
     line-height: 20px;
     letter-spacing: 0.3px;
 }
 
-.form-register__item input {
+.form-register__item input .form-login__item input {
     width: 200px;
     height: 20px;
     flex-shrink: 0;
     border: 1px solid #BB945F;
 }
 
-.form-register__btn {
+.form__btn {
     margin-top: 10px;
     width: 75px;
     height: 30px;
     border: 1px solid #0C0C0E;
-
     color: #0C0C0E;
     text-align: center;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1px;
-
     transition: 0.5s ease;
 }
 
-.form-register__btn:hover {
+.form__btn:hover {
     background-color: #BB945F;
     border: 1px solid #BB945F;
     cursor: pointer;
@@ -356,7 +366,7 @@ h6.pop-up__text {
     font-size: 10px;
 }
 
-.have-accout__login {
+.have-account__login, .have-account__register {
     color: #0C0C0E;
     font-size: 10px;
     font-weight: 700;

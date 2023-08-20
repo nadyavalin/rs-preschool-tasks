@@ -65,9 +65,9 @@
         <main class="main">
             <div class="pop-up__register hidden">
                 <div class="pop-up__register_content">
-                    <div class="close-popup"><img src="./assets/svg/close_popup.svg"></div>
+                    <div class="close-popup__register"><img src="./assets/svg/close_popup.svg"></div>
                     <h6 class="pop-up__text">Register</h6>
-                    <form method="get" class="form-register">
+                    <form action="#" method="get" class="form-register">
                         <div class="form-register__item">
                             <label for="first-name">Frist name</label>
                             <input type="text" name="first-name" id="first-name" required>
@@ -84,10 +84,31 @@
                             <label for="password">Password</label>
                             <input type="password" name="password" id="password" required>
                         </div>
-                        <button class="form-register__btn">Sign Up</button>
+                        <button class="form__btn">Sign Up</button>
                         <div class="have-account">
                             <p class="have-account__text">Already have an account?</p>
-                            <button class="have-accout__login">Login</button>
+                            <button class="have-account__login">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="pop-up__login hidden">
+                <div class="pop-up__login_content">
+                    <div class="close-popup__login"><img src="./assets/svg/close_popup.svg"></div>
+                    <h6 class="pop-up__text">Login</h6>
+                    <form action="#" method="get" class="form-login">
+                        <div class="form-login__item">
+                            <label for="email">E-mail or readers card</label>
+                            <input type="email" name="email" id="email" required>
+                        </div>
+                        <div class="form-login__item">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" required>
+                        </div>
+                        <button class="form__btn">Log In</button>
+                        <div class="have-account">
+                            <p class="have-account__text">Don’t have an account?</p>
+                            <button class="have-account__register">Register</button>
                         </div>
                     </form>
                 </div>

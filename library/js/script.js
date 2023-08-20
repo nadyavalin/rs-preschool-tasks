@@ -247,14 +247,49 @@ document.body.addEventListener("click", (event) => {
 
 // Pop Up Register
 const btnRegister = document.querySelector(".btn__register");
-const popUpRegister = document.querySelector('.pop-up__register');
+const btnLogin = document.querySelector(".btn__login");
+const popUpRegister = document.querySelector(".pop-up__register");
+const popUpLogin = document.querySelector(".pop-up__login");
+const popUpCloseBtnRegister = document.querySelector(".close-popup__register");
+const popUpCloseBtnLogin = document.querySelector(".close-popup__login");
 
-btnRegister.addEventListener('click', () => {
-  popUpRegister.classList.toggle('hidden')
+btnLogin.addEventListener("click", () => {
+  popUpLogin.classList.toggle("hidden");
 });
 
-popUpRegister.addEventListener('click', (event) => {
-  if (event.target.classList.contains('pop-up__register')) {
-    popUpRegister.classList.toggle('hidden');
+btnRegister.addEventListener("click", () => {
+  popUpRegister.classList.toggle("hidden");
+});
+
+popUpRegister.addEventListener("click", (event) => {
+  if (event.target.classList.contains("pop-up__register")) {
+    popUpRegister.classList.toggle("hidden");
   }
 });
+
+popUpLogin.addEventListener("click", (event) => {
+  if (event.target.classList.contains("pop-up__login")) {
+    popUpLogin.classList.toggle("hidden");
+  }
+});
+
+popUpCloseBtnRegister.addEventListener("click", () => {
+  popUpRegister.classList.toggle("hidden");
+});
+
+popUpCloseBtnLogin.addEventListener("click", () => {
+  popUpLogin.classList.toggle("hidden");
+});
+
+/*
+const btnRegisterFromLogin = doucment.querySelector(".have-account__register");
+const btnLoginFromRegister = document.querySelector(".have-account__login");
+
+btnRegisterFromLogin.addEventListener("click", () => {
+  popUpRegister.classList.toggle("hidden");
+});
+
+btnLoginFromRegister.addEventListener("click", () => {
+  popUpLogin.classList.toggle("hidden");
+});
+*/
