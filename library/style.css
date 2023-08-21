@@ -287,7 +287,7 @@ h1 {
     background-color: #FFFFFF;
     z-index: 10;
     padding: 23px 25px;
-    position: fixed; 
+    position: fixed;
 }
 
 .hidden {
@@ -299,7 +299,7 @@ h1 {
     position: absolute;
     top: 16px;
     right: 14px;
-    cursor: pointer;    
+    cursor: pointer;
 }
 
 h6.pop-up__text {
@@ -330,7 +330,7 @@ h6.pop-up__text {
     letter-spacing: 0.3px;
 }
 
-.form-register__item input .form-login__item input {
+.form-register__item input, .form-login__item input {
     width: 200px;
     height: 20px;
     flex-shrink: 0;
@@ -1239,6 +1239,15 @@ h4.get-card__title {
 
     .header__burger-btn {
         display: block;
+    }
+
+    .header.open .header__burger-btn {
+        position: fixed;
+        right: 20px;
+    }
+
+    .header.open .profile__icon {
+        margin-right: 85px;
     }
 
     .nav {
