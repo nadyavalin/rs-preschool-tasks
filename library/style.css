@@ -271,7 +271,7 @@ h1 {
 }
 
 .pop-up__register_content {
-    margin-top: 10%;
+    margin-top: 30%;
     width: 250px;
     height: 382px;
     background-color: #FFFFFF;
@@ -281,7 +281,7 @@ h1 {
 }
 
 .pop-up__login_content {
-    margin-top: 10%;
+    margin-top: 30%;
     width: 250px;
     height: 262px;
     background-color: #FFFFFF;
@@ -350,6 +350,10 @@ h6.pop-up__text {
     transition: 0.5s ease;
 }
 
+.form__btn .hidden {
+    visibility: hidden;
+}
+
 .form__btn:hover {
     background-color: #BB945F;
     border: 1px solid #BB945F;
@@ -385,7 +389,7 @@ h6.pop-up__text {
 }
 
 .welcome {
-    height: 600px;
+    height: 613px;
     background-image: url(./assets/img/fon_image.jpg);
     background-position: center;
     background-size: cover;
@@ -409,7 +413,7 @@ h6.pop-up__text {
     height: 220px;
     background-color: #0C0C0E;
     z-index: 1;
-    margin-top: 60px;
+    margin-top: 71px;
 }
 
 h2.welcome-block__title {
@@ -1241,6 +1245,7 @@ h4.get-card__title {
         display: block;
     }
 
+    /* стили для того, чтобы крестик фиксировался на бургер-меню при скролле, но тогда скачет иконка профиля
     .header.open .header__burger-btn {
         position: fixed;
         right: 20px;
@@ -1248,7 +1253,7 @@ h4.get-card__title {
 
     .header.open .profile__icon {
         margin-right: 85px;
-    }
+    } */
 
     .nav {
         position: fixed;
