@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // пока убрала, потому что задание "На разрешении 768px, при открытом бургер-меню, оно закрывается и открывается меню авторизации. +2" не отрабатывает
-  // бургер-меню все время закрывается, нужно изменить код, чтобы в зону
+  // бургер-меню все время закрывается, нужно изменить код
 
   document.body.addEventListener("click", (event) => {
     if (
@@ -257,11 +257,17 @@ const btnRegisterGetCardBlock = document.querySelector(
 const btnLogin = document.querySelector(".btn__login");
 const btnLoginGetCardBlock = document.querySelector(".get-card__button_login");
 const btnLoginFromBtnBuy = document.querySelectorAll(".book-card__button");
+const btnMyProfile = document.querySelector(".btn__myprofile");
 
 const popUpRegister = document.querySelector(".pop-up__register");
 const popUpLogin = document.querySelector(".pop-up__login");
+const popUpMyProfile = document.querySelector(".pop-up__my-profile");
+
 const popUpCloseBtnRegister = document.querySelector(".close-popup__register");
 const popUpCloseBtnLogin = document.querySelector(".close-popup__login");
+const popUpCloseBtnMyProfile = document.querySelector(
+  ".close-popup__my-profile"
+);
 
 // при нажатии на кнопку Register в меню профиля открывается и закрывается окно регистрации
 btnRegister.addEventListener("click", () => {
@@ -283,11 +289,10 @@ btnLoginGetCardBlock.addEventListener("click", () => {
   popUpLogin.classList.toggle("hidden");
 });
 
-// при нажатии на любую кнопку Buy открывается меню входа в профиль Login
-// не работает
-/* btnLoginFromBtnBuy.addEventListener("click", () => {
-  popUpLogin.classList.toggle("hidden");
-}); */
+// при нажатии на кнопку My profile открывается окно My profile
+btnMyProfile.addEventListener("click", () => {
+  popUpMyProfile.classList.toggle("hidden");
+});
 
 // закрывает окно регистрации при нажатии вне окна
 popUpRegister.addEventListener("click", (event) => {
@@ -303,6 +308,13 @@ popUpLogin.addEventListener("click", (event) => {
   }
 });
 
+// закрывается окно My profile при нажатии вне окна
+popUpMyProfile.addEventListener("click", (event) => {
+  if (event.target.classList.contains("pop-up__my-profile")) {
+    popUpMyProfile.classList.toggle("hidden");
+  }
+});
+
 // закрывает окно регистрации при нажатии на крест
 popUpCloseBtnRegister.addEventListener("click", () => {
   popUpRegister.classList.toggle("hidden");
@@ -313,8 +325,12 @@ popUpCloseBtnLogin.addEventListener("click", () => {
   popUpLogin.classList.toggle("hidden");
 });
 
-// плавное открытие попап окно
-// сделать код
+// закрывается окно My profile при нажатии на крест
+popUpCloseBtnMyProfile.addEventListener("click", () => {
+  popUpMyProfile.classList.toggle("hidden");
+});
+
+// сделать код плавного открытия попап окна
 
 // в формах регистрации и залогирования тоже есть ссылки Register и Login
 // открытие окна регистрации и окна входа в личный кабинет при нажатии на соответствующие ссылки
@@ -334,7 +350,7 @@ btnLoginFromRegister.addEventListener("click", () => {
 
 // cохраняем данные в LocalStorage
 // регистрация нового пользователя
-function singup(event) {
+function singup(e) {
   event.preventDefault();
 
   const firstname = document.getElementById("firstname").value;
@@ -350,15 +366,63 @@ function singup(event) {
   };
 
   let json = JSON.stringify(user);
-  localStorage.setItem(user, json);
+  localStorage.setItem("user", json);
   console.log("user added");
 
   const popUpRegister = document.querySelector(".pop-up__register");
   popUpRegister.remove();
+  noAuth.remove();
+  withAuth.style.display = "fixed";
 }
 
+/*
+  const logoutBtn = document.querySelector(".btn__logout");
+  logoutBtn.addEventListener("click", function () {
+    localStorage.removeItem("user");
+    location.reload();
+  });
+  */
+
+/*
+ 
+  if (json !== 0) {
+    profile.addEventListener("click", function () {
+      setTimeout(() => {
+        withAuth.classList.toggle("open");
+      }, 0);
+    });
+  }
+    */
+
+/*
+  const replaceIconProfile = document.querySelector(".profile__icon");
+  if (json !== 0) {
+    replaceIconProfile.innerHTML = "<p>NS</p>";
+  }
+  */
+
+// проверяем состояние страницы после обновления - авторизован пользователь или нет
+window.addEventListener("DOMContentLoaded", function () {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (user) {
+    popUpRegister.style.display = "none";
+    noAuth.style.display = "none";
+    withAuth.style.display = "fixed";
+
+    /*
+    const initials = document.getElementById("initials");
+    initials.textContent = user.firstname[0] + user.lastname[0];
+    */
+
+    profile.addEventListener("click", function () {
+      withAuth.classList.toggle("open");
+    });
+  }
+});
+
 // вход в личный кабинет
-function login(event) {
+function login(e) {
   event.preventDefault();
 
   const email = document.getElementById("email").value;
@@ -368,10 +432,16 @@ function login(event) {
   let user = localStorage.getItem(email);
   let data = JSON.parse(user);
 
-  if (email === null) { // не работает
+  if (data === null) {
+    // не работает
     result.innerHTML = "Wrong Email";
-  } else if (email === data.email && password === data.password) {
+  } else if (
+    data !== null &&
+    email === data.email &&
+    password === data.password
+  ) {
     result.innerHTML = "You logged in";
+    localStorage.setItem("user", JSON.stringify(data));
 
     // добавляем код для закрытия поп-ап окна:
     // не работает

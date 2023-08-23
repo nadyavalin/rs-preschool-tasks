@@ -251,7 +251,7 @@ h1 {
 }
 
 .profile__with-auth_active.open {
-    position: fixed;
+    position: absolute;
     transform: none;
     opacity: 1;
     visibility: visible;
@@ -379,6 +379,149 @@ h6.pop-up__text {
     border: 0;
     background-color: transparent;
     cursor: pointer;
+}
+
+.pop-up__my-profile {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(30, 30, 30, 0.6);
+    z-index: 9;
+}
+
+.pop-up__my-profile_content {    
+    margin-top: 30%;
+    width: 600px;
+    height: 400px;
+    background-color: #FFFFFF;
+    border: 1;
+    display: flex;
+    position: relative;
+}
+
+.my-profile_black {
+    width: 170px;
+    background-color: #000000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.initials {
+    width: 80px;
+    height: 80px;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #BB945F;
+    line-height: 20px;
+    text-transform: capitalize;
+}
+
+.name-lastname {
+    width: 70%;
+    padding: 5px 15px 5px 15px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    line-height: 20px;
+    text-transform: capitalize;
+    margin-bottom: -28px;
+}
+
+h5.my-profile__title {
+    font-family: 'Forum';
+    font-size: 40px;
+    line-height: 20px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+}
+
+.my-profile_white {
+    padding: 40px 20px 40px;
+}
+
+.user__counts {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.user__count_item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.user__count_item p {
+    line-height: 20px;
+    letter-spacing: 0.4px;
+    text-transform: capitalize;
+}
+
+.user__count_item span {
+    font-size: 10px;
+    line-height: 20px;
+    letter-spacing: 0.2px;
+}
+
+.user__books {
+    margin-bottom: 40px;
+}
+
+.user__books_title {
+    color: #0C0C0E;
+    font-size: 25px;
+    line-height: 20px;
+    margin-bottom: 30px;
+}
+
+.user__books ul {
+    list-style: disc;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user__books ul li {
+    line-height: 20px;
+    letter-spacing: 2px;
+    text-transform: capitalize;
+    margin-left: 30px;
+}
+
+.user__card-number {
+    display: flex;
+    gap: 15px;
+}
+
+.user__card-number p {
+    color: #0C0C0E;
+    line-height: 20px;
+}
+
+.user__card-number span {
+    color: #BB945F;
+    line-height: 20px;
+}
+
+.close-popup__my-profile {
+    top: 21px;
+    right: 22px;
+    cursor: pointer;
+    position: absolute;
 }
 
 .main {
