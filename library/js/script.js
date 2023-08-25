@@ -372,7 +372,19 @@ function singup(e) {
   const popUpRegister = document.querySelector(".pop-up__register");
   popUpRegister.remove();
   noAuth.remove();
-  withAuth.style.display = "fixed";
+
+  // меняем иконку профиля на инициалы пользователя
+  const profileAuth = document.querySelector(".btn_after-register");
+  profile.classList.add('hidden');
+  profileAuth.classList.remove('hidden');
+
+  const newInitials = `${firstname[0]}${lastname[0]}`;
+  const btnInitials = document.querySelector(".btn_after-register");
+  btnInitials.textContent = newInitials;
+
+  profileAuth.addEventListener("click", () => {
+    withAuth.classList.toggle("open");
+  });
 }
 
 /*
@@ -384,7 +396,7 @@ function singup(e) {
   */
 
 /*
- 
+
   if (json !== 0) {
     profile.addEventListener("click", function () {
       setTimeout(() => {
@@ -410,16 +422,17 @@ window.addEventListener("DOMContentLoaded", function () {
     noAuth.style.display = "none";
     withAuth.style.display = "fixed";
 
-    /*
-    const initials = document.getElementById("initials");
-    initials.textContent = user.firstname[0] + user.lastname[0];
-    */
+    const newInitials = `${firstname[0]}${lastname[0]}`;
+    const btnInitials = document.querySelector(".btn_after-register");
+    btnInitials.textContent = newInitials;
 
-    profile.addEventListener("click", function () {
+    profileAuth.addEventListener("click", () => {
       withAuth.classList.toggle("open");
     });
   }
+
 });
+
 
 // вход в личный кабинет
 function login(e) {

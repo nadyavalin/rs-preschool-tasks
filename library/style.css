@@ -158,10 +158,30 @@ h1 {
     cursor: pointer;
     transition: 0.5s ease;
     z-index: 4;
+    visibility: visible;
+}
+
+.profile__icon .hidden {
+    visibility: hidden;
 }
 
 .profile__icon:hover {
     opacity: 0.5;
+}
+
+.btn_after-register {
+    font-size: 15px;
+    color: #BB945F;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    width: 35px;
+    height: 35px;
+    margin-right: -70px;
+    visibility: visible;
+}
+
+.btn_after-register .hidden {
+    visibility: hidden;
 }
 
 .profile__gap {
@@ -394,7 +414,7 @@ h6.pop-up__text {
     z-index: 9;
 }
 
-.pop-up__my-profile_content {    
+.pop-up__my-profile_content {
     margin-top: 30%;
     width: 600px;
     height: 400px;
