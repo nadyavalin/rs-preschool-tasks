@@ -349,6 +349,7 @@ btnLoginFromRegister.addEventListener("click", () => {
 */
 
 // cохраняем данные в LocalStorage
+// храним данные пользователя
 // регистрация нового пользователя
 function singup(e) {
   event.preventDefault();
@@ -373,27 +374,36 @@ function singup(e) {
   popUpRegister.remove();
   noAuth.remove();
 
-  // меняем иконку профиля на инициалы пользователя
   const profileAuth = document.querySelector(".btn_after-register");
-  profile.classList.add('hidden');
-  profileAuth.classList.remove('hidden');
+  profile.classList.add("hidden");
+  profileAuth.classList.remove("hidden");
 
+  // меняем иконку профиля на инициалы пользователя
   const newInitials = `${firstname[0]}${lastname[0]}`;
+  const nameLastname = `${firstname} ${lastname}`;
   const btnInitials = document.querySelector(".btn_after-register");
+  const textMyProfileInitials = document.querySelector(
+    ".name-lastname__initials"
+  );
+  const textMyProfileName = document.querySelector(".name-lastname__text");
   btnInitials.textContent = newInitials;
+  textMyProfileInitials.textContent = newInitials;
+  textMyProfileName.textContent = nameLastname;
 
   profileAuth.addEventListener("click", () => {
     withAuth.classList.toggle("open");
   });
-}
 
-/*
-  const logoutBtn = document.querySelector(".btn__logout");
-  logoutBtn.addEventListener("click", function () {
-    localStorage.removeItem("user");
-    location.reload();
+  // Log out
+  const logOutBtn = document.querySelector(".btn__logout");
+  logOutBtn.addEventListener("click", function () {
+    withAuth.style.display = "none";
+    noAuth.style.display = "block";
+    btnInitials.style.display = "none";
+    profile.classList.remove("hidden");
+    noAuth.style.display = "block";
   });
-  */
+}
 
 /*
 
@@ -414,25 +424,39 @@ function singup(e) {
   */
 
 // проверяем состояние страницы после обновления - авторизован пользователь или нет
+// не работает
 window.addEventListener("DOMContentLoaded", function () {
   const user = JSON.parse(localStorage.getItem("user"));
 
-  if (user) {
+  if (user === true) {
     popUpRegister.style.display = "none";
     noAuth.style.display = "none";
-    withAuth.style.display = "fixed";
+    withAuth.style.display = "flex";
 
-    const newInitials = `${firstname[0]}${lastname[0]}`;
+    const firstname = document.getElementById("firstname").value;
+    const lastname = document.getElementById("lastname").value;
+    const userdatas = {
+      firstname: firstname,
+      lastname: lastname,
+    };
+
+    const newInitials = `${userdatas.firstname[0]}${userdatas.lastname[0]}`;
+    const nameLastname = `${userdatas.firstname} ${userdatas.lastname}`;
     const btnInitials = document.querySelector(".btn_after-register");
+    const textMyProfileInitials = document.querySelector(
+      ".name-lastname__initials"
+    );
+    const textMyProfileName = document.querySelector(".name-lastname__text");
     btnInitials.textContent = newInitials;
+    textMyProfileInitials.textContent = newInitials;
+    textMyProfileName.textContent = nameLastname;
 
+    const profileAuth = document.querySelector(".btn_after-register");
     profileAuth.addEventListener("click", () => {
       withAuth.classList.toggle("open");
     });
   }
-
 });
-
 
 // вход в личный кабинет
 function login(e) {
@@ -464,3 +488,24 @@ function login(e) {
     result.innerHTML = "Wrong password";
   }
 }
+
+// Card Number
+function generateRandomString(length) {
+  let result = "";
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const digits = "0123456789";
+
+  result += characters.charAt(Math.floor(Math.random() * characters.length)); // первая буква
+
+  for (let i = 0; i < length - 1; i++) {
+    result += digits.charAt(Math.floor(Math.random() * digits.length)); // цифры
+  }
+
+  return result;
+}
+
+// генерируем случайную строку
+const randomString = generateRandomString(8);
+
+const cardNumberElement = document.querySelector(".card-number");
+cardNumberElement.textContent = randomString;

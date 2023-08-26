@@ -202,6 +202,7 @@ h1 {
     background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
+    vertical-align: center;
     justify-content: flex-start;
     align-items: center;
     width: 80px;
@@ -209,6 +210,7 @@ h1 {
     z-index: 8;
     padding-top: 5px;
     padding-bottom: 5px;
+    right: 20px;
     transition: all 0.3s ease;
 }
 
@@ -217,6 +219,8 @@ h1 {
     font-weight: 700;
     line-height: 20px;
     padding-bottom: 5px;
+    display: flex;
+    align-items: center;
 }
 
 .profile__line {
@@ -254,6 +258,8 @@ h1 {
     transform: none;
     opacity: 0;
     visibility: hidden;
+    display: flex;
+    align-items: center;
 }
 
 .profile__no-auth_active.open {
@@ -280,9 +286,9 @@ h1 {
 .pop-up__register, .pop-up__login {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
@@ -291,7 +297,6 @@ h1 {
 }
 
 .pop-up__register_content {
-    margin-top: 30%;
     width: 250px;
     height: 382px;
     background-color: #FFFFFF;
@@ -301,7 +306,6 @@ h1 {
 }
 
 .pop-up__login_content {
-    margin-top: 30%;
     width: 250px;
     height: 262px;
     background-color: #FFFFFF;
@@ -404,9 +408,9 @@ h6.pop-up__text {
 .pop-up__my-profile {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
@@ -415,7 +419,6 @@ h6.pop-up__text {
 }
 
 .pop-up__my-profile_content {
-    margin-top: 30%;
     width: 600px;
     height: 400px;
     background-color: #FFFFFF;
@@ -456,6 +459,23 @@ h6.pop-up__text {
     line-height: 20px;
     text-transform: capitalize;
     margin-bottom: -28px;
+}
+
+.name-lastname__initials {
+    color: #BB945F;
+    text-align: center;
+    line-height: 20px;
+    text-transform: capitalize;
+}
+
+.name-lastname__text {
+    line-height: 20px;
+    text-transform: capitalize;
+}
+
+.card-number {
+    color: #BB945F;
+    line-height: 20px;
 }
 
 h5.my-profile__title {
