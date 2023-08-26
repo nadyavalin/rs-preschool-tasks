@@ -16,9 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // пока убрала, потому что задание "На разрешении 768px, при открытом бургер-меню, оно закрывается и открывается меню авторизации. +2" не отрабатывает
-  // бургер-меню все время закрывается, нужно изменить код
-
   document.body.addEventListener("click", (event) => {
     if (
       !event.target.classList.contains("nav") &&
@@ -249,25 +246,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // здесь должен быть код
 });
 
-// PopUp Login and Register / Sing Up / Log in
+// PopUp Register
 const btnRegister = document.querySelector(".btn__register");
-const btnRegisterGetCardBlock = document.querySelector(
-  ".get-card__button_register"
-);
-const btnLogin = document.querySelector(".btn__login");
-const btnLoginGetCardBlock = document.querySelector(".get-card__button_login");
-const btnLoginFromBtnBuy = document.querySelectorAll(".book-card__button");
-const btnMyProfile = document.querySelector(".btn__myprofile");
-
 const popUpRegister = document.querySelector(".pop-up__register");
-const popUpLogin = document.querySelector(".pop-up__login");
-const popUpMyProfile = document.querySelector(".pop-up__my-profile");
-
 const popUpCloseBtnRegister = document.querySelector(".close-popup__register");
-const popUpCloseBtnLogin = document.querySelector(".close-popup__login");
-const popUpCloseBtnMyProfile = document.querySelector(
-  ".close-popup__my-profile"
-);
 
 // при нажатии на кнопку Register в меню профиля открывается и закрывается окно регистрации
 btnRegister.addEventListener("click", () => {
@@ -275,9 +257,28 @@ btnRegister.addEventListener("click", () => {
 });
 
 // при нажатии на кнопку Sing Up в разделе Get Card открывается и закрывается окно регистрации
+const btnRegisterGetCardBlock = document.querySelector(".get-card__button_register");
 btnRegisterGetCardBlock.addEventListener("click", () => {
   popUpRegister.classList.toggle("hidden");
 });
+
+// закрывает окно регистрации при нажатии вне окна
+popUpRegister.addEventListener("click", (event) => {
+  if (event.target.classList.contains("pop-up__register")) {
+    popUpRegister.classList.toggle("hidden");
+  }
+});
+
+// закрывает окно регистрации при нажатии на крест
+popUpCloseBtnRegister.addEventListener("click", () => {
+  popUpRegister.classList.toggle("hidden");
+});
+
+// PopUp Log in
+const btnLogin = document.querySelector(".btn__login");
+const btnLoginGetCardBlock = document.querySelector(".get-card__button_login");
+const popUpLogin = document.querySelector(".pop-up__login");
+const popUpCloseBtnLogin = document.querySelector(".close-popup__login");
 
 // при нажатии на кнопку Log In в меню профиля открывается и закрывается окно входа в профиль
 btnLogin.addEventListener("click", () => {
@@ -289,16 +290,9 @@ btnLoginGetCardBlock.addEventListener("click", () => {
   popUpLogin.classList.toggle("hidden");
 });
 
-// при нажатии на кнопку My profile открывается окно My profile
-btnMyProfile.addEventListener("click", () => {
-  popUpMyProfile.classList.toggle("hidden");
-});
-
-// закрывает окно регистрации при нажатии вне окна
-popUpRegister.addEventListener("click", (event) => {
-  if (event.target.classList.contains("pop-up__register")) {
-    popUpRegister.classList.toggle("hidden");
-  }
+// закрывает окно входа в личный кабинет при нажатии на крест
+popUpCloseBtnLogin.addEventListener("click", () => {
+  popUpLogin.classList.toggle("hidden");
 });
 
 // закрывает окно входа в личный кабинет при нажатии вне окна
@@ -308,6 +302,16 @@ popUpLogin.addEventListener("click", (event) => {
   }
 });
 
+// PopUp My profile
+const btnMyProfile = document.querySelector(".btn__myprofile");
+const popUpMyProfile = document.querySelector(".pop-up__my-profile");
+const popUpCloseBtnMyProfile = document.querySelector(".close-popup__my-profile");
+
+// при нажатии на кнопку My profile открывается окно My profile
+btnMyProfile.addEventListener("click", () => {
+  popUpMyProfile.classList.toggle("hidden");
+});
+
 // закрывается окно My profile при нажатии вне окна
 popUpMyProfile.addEventListener("click", (event) => {
   if (event.target.classList.contains("pop-up__my-profile")) {
@@ -315,19 +319,33 @@ popUpMyProfile.addEventListener("click", (event) => {
   }
 });
 
-// закрывает окно регистрации при нажатии на крест
-popUpCloseBtnRegister.addEventListener("click", () => {
-  popUpRegister.classList.toggle("hidden");
-});
-
-// закрывает окно входа в личный кабинет при нажатии на крест
-popUpCloseBtnLogin.addEventListener("click", () => {
-  popUpLogin.classList.toggle("hidden");
-});
-
 // закрывается окно My profile при нажатии на крест
 popUpCloseBtnMyProfile.addEventListener("click", () => {
   popUpMyProfile.classList.toggle("hidden");
+});
+
+// PopUp Buy
+const btnBuy = document.querySelectorAll(".book-card__button");
+const popUpBuyCard = document.querySelector(".pop-up__buy-card");
+const popUpCloseBtnBuyCard = document.querySelector(".close-popup__buy-card");
+
+// при нажатии на кнопку Buy открывается окно Buy a Library Card
+btnBuy.forEach((button) => {
+  button.addEventListener("click", () => {
+    popUpBuyCard.classList.toggle("hidden");
+  });
+});
+
+// закрывается окно Buy a Library Card при нажатии вне окна
+popUpBuyCard.addEventListener("click", (event) => {
+  if (event.target.classList.contains("pop-up__buy-card")) {
+    popUpBuyCard.classList.toggle("hidden");
+  }
+});
+
+// закрывать окно Buy a Library Card при нажатии на крест
+popUpCloseBtnBuyCard.addEventListener("click", () => {
+  popUpBuyCard.classList.toggle("hidden");
 });
 
 // сделать код плавного открытия попап окна
@@ -398,10 +416,9 @@ function singup(e) {
   const logOutBtn = document.querySelector(".btn__logout");
   logOutBtn.addEventListener("click", function () {
     withAuth.style.display = "none";
-    noAuth.style.display = "block";
+    noAuth.style.display = "flex";
     btnInitials.style.display = "none";
     profile.classList.remove("hidden");
-    noAuth.style.display = "block";
   });
 }
 
