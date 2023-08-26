@@ -28,6 +28,26 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// Profile menu
+// скрытие Profile menu при клике вне
+const profile = document.querySelector(".profile__icon");
+const noAuth = document.querySelector(".profile__no-auth_active");
+const withAuth = document.querySelector(".profile__with-auth_active");
+const profileBlock = document.querySelector(".profile-block");
+
+document.body.addEventListener("click", (event) => {
+  if (
+    !event.target.classList.contains("profile-block") &&
+    !event.target.closest(".profile__icon") &&
+    !event.target.closest(".profile__no-auth_active") &&
+    noAuth.classList.contains("open")
+  ) {
+    profile.classList.remove("open");
+    noAuth.classList.remove("open");
+    withAuth.classList.remove("open");
+  }
+});
+
 // Next block
 // Slider in About block
 let offset = 0;
@@ -222,11 +242,6 @@ btnAutumn.addEventListener("click", () => {
   fadeIn(bookCardsAutumn, 700, "flex");
 });
 */
-
-// работа с профилем до авторизации
-const profile = document.querySelector(".profile__icon");
-const noAuth = document.querySelector(".profile__no-auth_active");
-const withAuth = document.querySelector(".profile__with-auth_active");
 
 // открывает меню профиля со списком Log In, Register
 profile.addEventListener("click", function () {
@@ -424,15 +439,15 @@ function signup(e) {
   });
 }
 
-  // Log out
-  // не работает
-  const logOutBtn = document.querySelector(".btn__logout");
-  logOutBtn.addEventListener("click", function () {
-    withAuth.style.display = "none";
-    noAuth.style.display = "flex";
-    btnInitials.style.display = "none";
-    profile.classList.remove("hidden");
-  });
+// Log out
+// не работает
+const logOutBtn = document.querySelector(".btn__logout");
+logOutBtn.addEventListener("click", function () {
+  withAuth.style.display = "none";
+  noAuth.style.display = "flex";
+  btnInitials.style.display = "none";
+  profile.classList.remove("hidden");
+});
 
 /*
 

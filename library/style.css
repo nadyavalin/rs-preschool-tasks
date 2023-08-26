@@ -194,8 +194,10 @@ h1 {
 .profile-block {
     display: flex;
     justify-content: flex-end;
-    margin-right: 15px;
+    margin-right: 20px;
     margin-top: -15px;
+    opacity: 1;
+    visibility: visible;
 }
 
 .profile__no-auth, .profile__with-auth {
@@ -203,14 +205,12 @@ h1 {
     background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
-    vertical-align: center;
     justify-content: flex-start;
     align-items: center;
     width: 80px;
     height: 120px;
     z-index: 8;
     padding-top: 5px;
-    padding-bottom: 5px;
     transition: all 0.3s ease;
 }
 
@@ -971,7 +971,7 @@ h2 {
     display: inline-flex;
     align-items: center;
 }
-
+  
 .season-block__item_checked {
     cursor: pointer;
 }
