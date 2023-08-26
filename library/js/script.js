@@ -257,7 +257,9 @@ btnRegister.addEventListener("click", () => {
 });
 
 // при нажатии на кнопку Sing Up в разделе Get Card открывается и закрывается окно регистрации
-const btnRegisterGetCardBlock = document.querySelector(".get-card__button_register");
+const btnRegisterGetCardBlock = document.querySelector(
+  ".get-card__button_register"
+);
 btnRegisterGetCardBlock.addEventListener("click", () => {
   popUpRegister.classList.toggle("hidden");
 });
@@ -305,7 +307,9 @@ popUpLogin.addEventListener("click", (event) => {
 // PopUp My profile
 const btnMyProfile = document.querySelector(".btn__myprofile");
 const popUpMyProfile = document.querySelector(".pop-up__my-profile");
-const popUpCloseBtnMyProfile = document.querySelector(".close-popup__my-profile");
+const popUpCloseBtnMyProfile = document.querySelector(
+  ".close-popup__my-profile"
+);
 
 // при нажатии на кнопку My profile открывается окно My profile
 btnMyProfile.addEventListener("click", () => {
@@ -369,7 +373,7 @@ btnLoginFromRegister.addEventListener("click", () => {
 // cохраняем данные в LocalStorage
 // храним данные пользователя
 // регистрация нового пользователя
-function singup(e) {
+function signup(e) {
   event.preventDefault();
 
   const firstname = document.getElementById("firstname").value;
@@ -384,9 +388,16 @@ function singup(e) {
     password: password,
   };
 
-  let json = JSON.stringify(user);
-  localStorage.setItem("user", json);
-  console.log("user added");
+  let users = localStorage.getItem("users");
+
+  if (users) {
+    users = JSON.parse(users);
+    users.push(user);
+  } else {
+    users = [user];
+  }
+
+  localStorage.setItem("users", JSON.stringify(users));
 
   const popUpRegister = document.querySelector(".pop-up__register");
   popUpRegister.remove();
@@ -411,8 +422,10 @@ function singup(e) {
   profileAuth.addEventListener("click", () => {
     withAuth.classList.toggle("open");
   });
+}
 
   // Log out
+  // не работает
   const logOutBtn = document.querySelector(".btn__logout");
   logOutBtn.addEventListener("click", function () {
     withAuth.style.display = "none";
@@ -420,7 +433,6 @@ function singup(e) {
     btnInitials.style.display = "none";
     profile.classList.remove("hidden");
   });
-}
 
 /*
 
@@ -440,7 +452,6 @@ function singup(e) {
   }
   */
 
-// проверяем состояние страницы после обновления - авторизован пользователь или нет
 // не работает
 window.addEventListener("DOMContentLoaded", function () {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -487,7 +498,6 @@ function login(e) {
   let data = JSON.parse(user);
 
   if (data === null) {
-    // не работает
     result.innerHTML = "Wrong Email";
   } else if (
     data !== null &&
@@ -495,10 +505,9 @@ function login(e) {
     password === data.password
   ) {
     result.innerHTML = "You logged in";
-    localStorage.setItem("user", JSON.stringify(data));
+    localStorage.setItem(data.email, JSON.stringify(data));
 
-    // добавляем код для закрытия поп-ап окна:
-    // не работает
+    // для закрытия поп-ап окна:
     const popUpLogin = document.querySelector(".pop-up__login");
     popUpLogin.style.display = "none";
   } else {
@@ -517,7 +526,6 @@ function generateRandomString(length) {
   for (let i = 0; i < length - 1; i++) {
     result += digits.charAt(Math.floor(Math.random() * digits.length)); // цифры
   }
-
   return result;
 }
 
@@ -526,3 +534,32 @@ const randomString = generateRandomString(8);
 
 const cardNumberElement = document.querySelector(".card-number");
 cardNumberElement.textContent = randomString;
+
+// копирование в буфер обмена
+function copyCodeToClipboard(button) {
+  const text = button.previousElementSibling.textContent; // получаем текст элемента рядом с кнопкой
+  let tempInput = document.createElement("input"); // создаем временный элемент input
+
+  document.body.appendChild(tempInput); // добавляем временный элемент input на страницу
+  tempInput.value = text; // устанавливаем значение временного элемента input равным тексту
+
+  tempInput.select(); // вбираем текст внутри элемента input
+  document.execCommand("copy"); // копируем выбранный текст в буфер обмена
+
+  document.body.removeChild(tempInput); // удаляем временный элемент input
+
+  showNotification("Card number copied to clipboard!"); // Показываем уведомление
+}
+
+// сообщение о том, что код скопирован в буфер обмена
+function showNotification(message) {
+  const notification = document.createElement("div"); // cоздаем элемент для уведомления
+  notification.innerText = message; // eстанавливаем текст уведомления
+  notification.classList.add("notification"); // добавляем класс для стилизации уведомления
+
+  document.body.appendChild(notification); // добавляем уведомление на страницу
+
+  setTimeout(function () {
+    document.body.removeChild(notification); // удаляем уведомление через 3 секунды
+  }, 3000);
+}

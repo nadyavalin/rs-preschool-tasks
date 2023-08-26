@@ -69,7 +69,7 @@
                 <div class="pop-up__register_content">
                     <div class="close-popup__register"><img src="./assets/svg/close_popup.svg"></div>
                     <h6 class="pop-up__text">Register</h6>
-                    <form onsubmit="singup()" class="form-register">
+                    <form onsubmit="signup()" class="form-register">
                         <div class="form-register__item">
                             <label for="firstname">Frist name</label>
                             <input type="text" name="firstname" id="firstname" placeholder="name" required>
@@ -160,7 +160,7 @@
                         <div class="user__card-number">
                             <p>Card number:</p>
                             <span class="card-number"></span>
-                            <img src="./assets/svg/copy.svg" alt="copy">
+                            <button class="card-number__button" onclick="copyCodeToClipboard(this)"><img src="./assets/svg/copy.svg" alt="copy"></button>
                         </div>
                     </div>
                 </div>
