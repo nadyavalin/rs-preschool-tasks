@@ -80,8 +80,8 @@
                         </div>
                         <div class="form-register__item">
                             <label for="email">E-mail</label>
-                            <input type="email" name="email" id="email" placeholder="email@email.com" required
-                                title="Email address must include @">
+                            <input type="email" name="email" id="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" placeholder="email@email.com" required
+                                title="Email address must include @ and .">
                         </div>
                         <div class="form-register__item">
                             <label for="password">Password</label>
@@ -104,7 +104,7 @@
                     <form onsubmit="login()" class="form-login">
                         <div class="form-login__item">
                             <label for="email">E-mail or readers card</label>
-                            <input type="email" name="email" required title="Email address must include @">
+                            <input type="email" name="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" required title="Email address must include @ and .">
                         </div>
                         <div class="form-login__item">
                             <label for="password">Password</label>
