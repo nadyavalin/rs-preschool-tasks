@@ -179,6 +179,7 @@ h1 {
     margin-right: -70px;
     visibility: visible;
     cursor: pointer;
+    z-index: 15;
 }
 
 .btn_after-register .hidden {

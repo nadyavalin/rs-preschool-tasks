@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
       !event.target.classList.contains("nav") &&
       !event.target.closest(".header__burger-btn") &&
       !event.target.closest(".profile__icon") &&
+      !event.target.closest(".btn_after-register") &&
       header.classList.contains("open")
     ) {
       header.classList.remove("open");
@@ -30,9 +31,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Profile menu
 // скрытие Profile menu при клике вне
+// до авторизации
 const profile = document.querySelector(".profile__icon");
 const noAuth = document.querySelector(".profile__no-auth_active");
-const withAuth = document.querySelector(".profile__with-auth_active");
 const profileBlock = document.querySelector(".profile-block");
 
 document.body.addEventListener("click", (event) => {
@@ -44,9 +45,24 @@ document.body.addEventListener("click", (event) => {
   ) {
     profile.classList.remove("open");
     noAuth.classList.remove("open");
+  }
+});
+
+const withAuth = document.querySelector(".profile__with-auth_active");
+
+// после авторизации
+document.body.addEventListener("click", (event) => {
+  if (
+    !event.target.classList.contains("profile-block") &&
+    !event.target.closest(".btn_after-register") &&
+    !event.target.closest(".profile__with-auth_active") &&
+    withAuth.classList.contains("open")
+  ) {
+    profile.classList.remove("open");
     withAuth.classList.remove("open");
   }
 });
+
 
 // Next block
 // Slider in About block
@@ -426,11 +442,10 @@ function signup(e) {
   const newInitials = `${firstname[0]}${lastname[0]}`;
   const nameLastname = `${firstname} ${lastname}`;
   const btnInitials = document.querySelector(".btn_after-register");
-  const textMyProfileInitials = document.querySelector(
-    ".name-lastname__initials"
-  );
+  const textMyProfileInitials = document.querySelector(".name-lastname__initials");
   const textMyProfileName = document.querySelector(".name-lastname__text");
   btnInitials.textContent = newInitials;
+  btnInitials.title = nameLastname;
   textMyProfileInitials.textContent = newInitials;
   textMyProfileName.textContent = nameLastname;
 
@@ -486,9 +501,7 @@ window.addEventListener("DOMContentLoaded", function () {
     const newInitials = `${userdatas.firstname[0]}${userdatas.lastname[0]}`;
     const nameLastname = `${userdatas.firstname} ${userdatas.lastname}`;
     const btnInitials = document.querySelector(".btn_after-register");
-    const textMyProfileInitials = document.querySelector(
-      ".name-lastname__initials"
-    );
+    const textMyProfileInitials = document.querySelector(".name-lastname__initials");
     const textMyProfileName = document.querySelector(".name-lastname__text");
     btnInitials.textContent = newInitials;
     textMyProfileInitials.textContent = newInitials;
@@ -543,10 +556,8 @@ function generateRandomString(length) {
   }
   return result;
 }
-
 // генерируем случайную строку
-const randomString = generateRandomString(8);
-
+const randomString = generateRandomString(9);
 const cardNumberElement = document.querySelector(".card-number");
 cardNumberElement.textContent = randomString;
 

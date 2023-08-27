@@ -104,15 +104,14 @@
                     <form onsubmit="login()" class="form-login">
                         <div class="form-login__item">
                             <label for="email">E-mail or readers card</label>
-                            <input type="email" name="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" required title="Email address must include @ and .">
+                            <input type="email" name="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" placeholder="email@email.com" required title="Email address must include @ and .">
                         </div>
                         <div class="form-login__item">
                             <label for="password">Password</label>
-                            <input type="password" name="password" pattern="^\S{8,}$" maxlength="8" required
+                            <input type="password" name="password" pattern="^\S{8,}$" maxlength="8" placeholder="12345678" required
                                 title="Password length must beat least 8 characters">
                         </div>
                         <button class="form__btn">Log In</button>
-                        <div class="result"></div>
                         <div class="have-account">
                             <p class="have-account__text">Don’t have an account?</p>
                             <button class="have-account__register">Register</button>
