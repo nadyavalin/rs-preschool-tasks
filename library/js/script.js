@@ -41,6 +41,7 @@ document.body.addEventListener("click", (event) => {
     !event.target.classList.contains("profile-block") &&
     !event.target.closest(".profile__icon") &&
     !event.target.closest(".profile__no-auth_active") &&
+    !event.target.closest(".header__burger-btn") &&
     noAuth.classList.contains("open")
   ) {
     profile.classList.remove("open");
@@ -56,6 +57,7 @@ document.body.addEventListener("click", (event) => {
     !event.target.classList.contains("profile-block") &&
     !event.target.closest(".btn_after-register") &&
     !event.target.closest(".profile__with-auth_active") &&
+    !event.target.closest(".header__burger-btn") &&
     withAuth.classList.contains("open")
   ) {
     profile.classList.remove("open");
@@ -390,8 +392,12 @@ btnLoginFromRegister.addEventListener("click", () => {
 });
 */
 
+/* НАЧАЛО ФОРМУЛ регистрации и логирования пользователя */
+
+// если пользователь зарегистрировался или залогинился он должен оставаться там до нажатия на Log Out
 // cохраняем данные в LocalStorage
 // храним данные пользователя
+
 // регистрация нового пользователя
 function signup(e) {
   event.preventDefault();
@@ -514,6 +520,7 @@ logOutBtn.addEventListener("click", function () {
   btnInitials.style.display = "none";
   profile.classList.remove("hidden");
 });
+/* КОНЕЦ ФОРМУЛ регистрации и логирования пользователя */
 
 // Card Number
 function generateRandomString(length) {
