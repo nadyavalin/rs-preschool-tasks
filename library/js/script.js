@@ -453,7 +453,7 @@ function signup(e) {
 window.addEventListener("DOMContentLoaded", function () {
   const user = JSON.parse(localStorage.getItem("user"));
 
-  if (user === true) {
+  if (user) {
     popUpRegister.style.display = "none";
     noAuth.style.display = "none";
     withAuth.style.display = "flex";
