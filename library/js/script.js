@@ -441,7 +441,6 @@ function userDatas() {
   btnInitials.title = nameLastname;
   textMyProfileInitials.textContent = newInitials;
   textMyProfileName.textContent = nameLastname;
-  cardNumberElement.textContent;
 
   const popUpRegister = document.querySelector(".pop-up__register");
   popUpRegister.remove();
@@ -539,8 +538,10 @@ function generateRandomString(length) {
 }
 // генерируем случайную строку
 const randomString = generateRandomString(9);
-const cardNumberElement = document.querySelector(".card-number");
-cardNumberElement.textContent = randomString;
+const cardNumberProfileMenu = document.querySelector(".card-number__profile-menu");
+const cardNumberMyProfile = document.querySelector(".card-number__my-profile");
+cardNumberProfileMenu.textContent = randomString;
+cardNumberMyProfile.textContent = randomString;
 
 // копирование в буфер обмена
 function copyCodeToClipboard(button) {
