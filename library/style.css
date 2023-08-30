@@ -490,6 +490,12 @@ h6.pop-up__text {
     line-height: 20px;
 }
 
+.profile__head.card-number {
+    color: #000000;
+    font-size: 13px;
+    line-height: 20px;
+}
+
 .card-number__button {
     border: 0;
     background-color: #FFFFFF;
@@ -972,7 +978,7 @@ h2 {
     display: inline-flex;
     align-items: center;
 }
-  
+
 .season-block__item_checked {
     cursor: pointer;
 }

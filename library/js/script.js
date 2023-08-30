@@ -65,7 +65,6 @@ document.body.addEventListener("click", (event) => {
   }
 });
 
-
 // Next block
 // Slider in About block
 let offset = 0;
@@ -474,6 +473,7 @@ window.addEventListener("DOMContentLoaded", function () {
     btnInitials.textContent = newInitials;
     textMyProfileInitials.textContent = newInitials;
     textMyProfileName.textContent = nameLastname;
+    cardNumberElement.textContent;
 
     const profileAuth = document.querySelector(".btn_after-register");
     profileAuth.addEventListener("click", () => {
