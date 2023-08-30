@@ -394,38 +394,28 @@ btnLoginFromRegister.addEventListener("click", () => {
 /* НАЧАЛО ФОРМУЛ регистрации и логирования пользователя */
 
 // если пользователь зарегистрировался или залогинился он должен оставаться там до нажатия на Log Out
-// cохраняем и храним данные пользователя в LocalStorage
+// cохраняем данные пользователя в LocalStorage
 window.addEventListener("DOMContentLoaded", function () {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"))
+  saveUserState(user);
+
+  /* код не работает, возможно не нужен
+  // Привязка функции signup() к кнопке регистрации
+  btnRegister.addEventListener("click", signup);
+
+  // Привязка функции login() к кнопке входа
+  btnLogin.addEventListener("click", login);
+  */
+});
+
+// храним данные пользователя в LocalStorage
+function saveUserState(user) {
+  localStorage.setItem("user", JSON.stringify(user));
 
   if (user) {
-    popUpRegister.style.display = "none";
-    noAuth.style.display = "none";
-    withAuth.style.display = "flex";
-
-    const firstname = document.querySelector(".firstname").value;
-    const lastname = document.querySelector(".lastname").value;
-    const userdatas = {
-      firstname: firstname,
-      lastname: lastname,
-    };
-
-    const newInitials = `${userdatas.firstname[0]}${userdatas.lastname[0]}`;
-    const nameLastname = `${userdatas.firstname} ${userdatas.lastname}`;
-    const btnInitials = document.querySelector(".btn_after-register");
-    const textMyProfileInitials = document.querySelector(".name-lastname__initials");
-    const textMyProfileName = document.querySelector(".name-lastname__text");
-    btnInitials.textContent = newInitials;
-    textMyProfileInitials.textContent = newInitials;
-    textMyProfileName.textContent = nameLastname;
-    cardNumberElement.textContent;
-
-    const profileAuth = document.querySelector(".btn_after-register");
-    profileAuth.addEventListener("click", () => {
-      withAuth.classList.toggle("open");
-    });
+    userDatas();
   }
-});
+}
 
 // добавляем инициалы, имя/фамилию, номер карты пользователя
 function userDatas() {
@@ -469,6 +459,7 @@ function signup() {
     email: email,
     password: password,
   };
+  saveUserState(user);
 
   let users = localStorage.getItem("users");
 
@@ -490,6 +481,7 @@ function login() {
   const emailLog = document.querySelector("email-log").value;
   const passwordLog = document.querySelector("password-log").value;
   const result = document.getElementById("result");
+  saveUserState(user);
 
   let user = localStorage.getItem(emailLog);
   let data = JSON.parse(user);
@@ -518,7 +510,7 @@ const logOutBtn = document.querySelector(".btn__logout");
 logOutBtn.addEventListener("click", function () {
   withAuth.style.display = "none";
   noAuth.style.display = "flex";
-  btnInitials.style.display = "none";
+  btnInitials.style.display = "none"; // нет доступа к переменной
   profile.classList.remove("hidden");
 });
 /* КОНЕЦ ФОРМУЛ регистрации и логирования пользователя */
