@@ -394,17 +394,46 @@ btnLoginFromRegister.addEventListener("click", () => {
 /* НАЧАЛО ФОРМУЛ регистрации и логирования пользователя */
 
 // если пользователь зарегистрировался или залогинился он должен оставаться там до нажатия на Log Out
-// cохраняем данные в LocalStorage
-// храним данные пользователя
+// cохраняем и храним данные пользователя в LocalStorage
+window.addEventListener("DOMContentLoaded", function () {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (user) {
+    popUpRegister.style.display = "none";
+    noAuth.style.display = "none";
+    withAuth.style.display = "flex";
+
+    const firstname = document.querySelector(".firstname").value;
+    const lastname = document.querySelector(".lastname").value;
+    const userdatas = {
+      firstname: firstname,
+      lastname: lastname,
+    };
+
+    const newInitials = `${userdatas.firstname[0]}${userdatas.lastname[0]}`;
+    const nameLastname = `${userdatas.firstname} ${userdatas.lastname}`;
+    const btnInitials = document.querySelector(".btn_after-register");
+    const textMyProfileInitials = document.querySelector(".name-lastname__initials");
+    const textMyProfileName = document.querySelector(".name-lastname__text");
+    btnInitials.textContent = newInitials;
+    textMyProfileInitials.textContent = newInitials;
+    textMyProfileName.textContent = nameLastname;
+    cardNumberElement.textContent;
+
+    const profileAuth = document.querySelector(".btn_after-register");
+    profileAuth.addEventListener("click", () => {
+      withAuth.classList.toggle("open");
+    });
+  }
+});
 
 // регистрация нового пользователя
-function signup(e) {
-  event.preventDefault();
+function signup() {
 
-  const firstname = document.getElementById("firstname").value;
-  const lastname = document.getElementById("lastname").value;
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  const firstname = document.querySelector(".firstname").value;
+  const lastname = document.querySelector(".lastname").value;
+  const email = document.querySelector(".email").value;
+  const password = document.querySelector(".password").value;
 
   const user = {
     firstname: firstname,
@@ -448,60 +477,25 @@ function signup(e) {
   });
 }
 
-// если пользователь зарегистрировался или залогинился он должен оставаться там до нажатия на Log Out
-// не работает
-window.addEventListener("DOMContentLoaded", function () {
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  if (user) {
-    popUpRegister.style.display = "none";
-    noAuth.style.display = "none";
-    withAuth.style.display = "flex";
-
-    const firstname = document.getElementById("firstname").value;
-    const lastname = document.getElementById("lastname").value;
-    const userdatas = {
-      firstname: firstname,
-      lastname: lastname,
-    };
-
-    const newInitials = `${userdatas.firstname[0]}${userdatas.lastname[0]}`;
-    const nameLastname = `${userdatas.firstname} ${userdatas.lastname}`;
-    const btnInitials = document.querySelector(".btn_after-register");
-    const textMyProfileInitials = document.querySelector(".name-lastname__initials");
-    const textMyProfileName = document.querySelector(".name-lastname__text");
-    btnInitials.textContent = newInitials;
-    textMyProfileInitials.textContent = newInitials;
-    textMyProfileName.textContent = nameLastname;
-    cardNumberElement.textContent;
-
-    const profileAuth = document.querySelector(".btn_after-register");
-    profileAuth.addEventListener("click", () => {
-      withAuth.classList.toggle("open");
-    });
-  }
-});
-
 // вход в личный кабинет
-function login(e) {
-  event.preventDefault();
+function login() {
 
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  const emailLog = document.querySelector("email-log").value;
+  const passwordLog = document.querySelector("password-log").value;
   const result = document.getElementById("result");
 
-  let user = localStorage.getItem(email);
+  let user = localStorage.getItem(emailLog);
   let data = JSON.parse(user);
 
   if (data === null) {
     result.innerHTML = "Wrong Email";
   } else if (
     data !== null &&
-    email === data.email &&
-    password === data.password
+    emailLog === data.emailLog &&
+    passwordLog === data.passwordLog
   ) {
     result.innerHTML = "You logged in";
-    localStorage.setItem(data.email, JSON.stringify(data));
+    localStorage.setItem(data.emailLog, JSON.stringify(data));
 
     // для закрытия поп-ап окна:
     const popUpLogin = document.querySelector(".pop-up__login");
