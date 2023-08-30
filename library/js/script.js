@@ -427,6 +427,35 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+// добавляем инициалы, имя/фамилию, номер карты пользователя
+function userDatas() {
+  const firstname = document.querySelector(".firstname").value;
+  const lastname = document.querySelector(".lastname").value;
+
+  const newInitials = `${firstname[0]}${lastname[0]}`;
+  const nameLastname = `${firstname} ${lastname}`;
+  const btnInitials = document.querySelector(".btn_after-register");
+  const textMyProfileInitials = document.querySelector(".name-lastname__initials");
+  const textMyProfileName = document.querySelector(".name-lastname__text");
+  btnInitials.textContent = newInitials;
+  btnInitials.title = nameLastname;
+  textMyProfileInitials.textContent = newInitials;
+  textMyProfileName.textContent = nameLastname;
+  cardNumberElement.textContent;
+
+  const popUpRegister = document.querySelector(".pop-up__register");
+  popUpRegister.remove();
+  noAuth.remove();
+
+  const profileAuth = document.querySelector(".btn_after-register");
+  profile.classList.add("hidden");
+  profileAuth.classList.remove("hidden");
+
+   profileAuth.addEventListener("click", () => {
+    withAuth.classList.toggle("open");
+  });
+}
+
 // регистрация нового пользователя
 function signup() {
 
@@ -453,28 +482,7 @@ function signup() {
 
   localStorage.setItem("users", JSON.stringify(users));
 
-  const popUpRegister = document.querySelector(".pop-up__register");
-  popUpRegister.remove();
-  noAuth.remove();
-
-  const profileAuth = document.querySelector(".btn_after-register");
-  profile.classList.add("hidden");
-  profileAuth.classList.remove("hidden");
-
-  // меняем иконку профиля на инициалы пользователя
-  const newInitials = `${firstname[0]}${lastname[0]}`;
-  const nameLastname = `${firstname} ${lastname}`;
-  const btnInitials = document.querySelector(".btn_after-register");
-  const textMyProfileInitials = document.querySelector(".name-lastname__initials");
-  const textMyProfileName = document.querySelector(".name-lastname__text");
-  btnInitials.textContent = newInitials;
-  btnInitials.title = nameLastname;
-  textMyProfileInitials.textContent = newInitials;
-  textMyProfileName.textContent = nameLastname;
-
-  profileAuth.addEventListener("click", () => {
-    withAuth.classList.toggle("open");
-  });
+  userDatas();
 }
 
 // вход в личный кабинет
