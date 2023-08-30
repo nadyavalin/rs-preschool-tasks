@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Profile menu
-// скрытие Profile menu при клике вне
-// до авторизации
+// Hide Profile menu when mouse click out of this menu
+// Before registration or authorization
 const profile = document.querySelector(".profile__icon");
 const noAuth = document.querySelector(".profile__no-auth_active");
 const profileBlock = document.querySelector(".profile-block");
@@ -41,6 +41,7 @@ document.body.addEventListener("click", (event) => {
     !event.target.classList.contains("profile-block") &&
     !event.target.closest(".profile__icon") &&
     !event.target.closest(".profile__no-auth_active") &&
+    !event.target.closest(".header__burger-btn") &&
     noAuth.classList.contains("open")
   ) {
     profile.classList.remove("open");
@@ -50,19 +51,19 @@ document.body.addEventListener("click", (event) => {
 
 const withAuth = document.querySelector(".profile__with-auth_active");
 
-// после авторизации
+// After registration or authorization
 document.body.addEventListener("click", (event) => {
   if (
     !event.target.classList.contains("profile-block") &&
     !event.target.closest(".btn_after-register") &&
     !event.target.closest(".profile__with-auth_active") &&
+    !event.target.closest(".header__burger-btn") &&
     withAuth.classList.contains("open")
   ) {
     profile.classList.remove("open");
     withAuth.classList.remove("open");
   }
 });
-
 
 // Next block
 // Slider in About block
@@ -259,22 +260,11 @@ btnAutumn.addEventListener("click", () => {
 });
 */
 
-// открывает меню профиля со списком Log In, Register
+// Open Profile menu with the list - Log In / Register
 profile.addEventListener("click", function () {
   setTimeout(() => {
     noAuth.classList.toggle("open");
   }, 0);
-});
-
-// при открытом бургер-меню меню профиля должно открываться, при нажатии на Register открываться форма регистрации
-// а меню профиля должно закрываться, при этом бургер-меню все время открыто
-document.addEventListener("DOMContentLoaded", function () {
-  const profileList = document.querySelector(".profile__no-auth_active");
-  const registerForm = document.querySelector(".pop-up__register_content");
-  const burgerMenuBtn = document.querySelector(".header__burger-btn");
-  const burgerMenu = document.querySelector(".nav");
-
-  // здесь должен быть код
 });
 
 // PopUp Register
@@ -401,16 +391,67 @@ btnLoginFromRegister.addEventListener("click", () => {
 });
 */
 
-// cохраняем данные в LocalStorage
-// храним данные пользователя
-// регистрация нового пользователя
-function signup(e) {
-  event.preventDefault();
+/* НАЧАЛО ФОРМУЛ регистрации и логирования пользователя */
 
-  const firstname = document.getElementById("firstname").value;
-  const lastname = document.getElementById("lastname").value;
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+// если пользователь зарегистрировался или залогинился он должен оставаться там до нажатия на Log Out
+// cохраняем данные пользователя в LocalStorage
+window.addEventListener("DOMContentLoaded", function () {
+  const user = JSON.parse(localStorage.getItem("user"))
+  saveUserState(user);
+
+  /* код не работает, возможно не нужен
+  // Привязка функции signup() к кнопке регистрации
+  btnRegister.addEventListener("click", signup);
+
+  // Привязка функции login() к кнопке входа
+  btnLogin.addEventListener("click", login);
+  */
+});
+
+// храним данные пользователя в LocalStorage
+function saveUserState(user) {
+  localStorage.setItem("user", JSON.stringify(user));
+
+  if (user) {
+    userDatas();
+  }
+}
+
+// добавляем инициалы, имя/фамилию, номер карты пользователя
+function userDatas() {
+  const firstname = document.querySelector(".firstname").value;
+  const lastname = document.querySelector(".lastname").value;
+
+  const newInitials = `${firstname[0]}${lastname[0]}`;
+  const nameLastname = `${firstname} ${lastname}`;
+  const btnInitials = document.querySelector(".btn_after-register");
+  const textMyProfileInitials = document.querySelector(".name-lastname__initials");
+  const textMyProfileName = document.querySelector(".name-lastname__text");
+  btnInitials.textContent = newInitials;
+  btnInitials.title = nameLastname;
+  textMyProfileInitials.textContent = newInitials;
+  textMyProfileName.textContent = nameLastname;
+
+  const popUpRegister = document.querySelector(".pop-up__register");
+  popUpRegister.remove();
+  noAuth.remove();
+
+  const profileAuth = document.querySelector(".btn_after-register");
+  profile.classList.add("hidden");
+  profileAuth.classList.remove("hidden");
+
+   profileAuth.addEventListener("click", () => {
+    withAuth.classList.toggle("open");
+  });
+}
+
+// регистрация нового пользователя
+function signup() {
+
+  const firstname = document.querySelector(".firstname").value;
+  const lastname = document.querySelector(".lastname").value;
+  const email = document.querySelector(".email").value;
+  const password = document.querySelector(".password").value;
 
   const user = {
     firstname: firstname,
@@ -418,6 +459,7 @@ function signup(e) {
     email: email,
     password: password,
   };
+  saveUserState(user);
 
   let users = localStorage.getItem("users");
 
@@ -430,110 +472,29 @@ function signup(e) {
 
   localStorage.setItem("users", JSON.stringify(users));
 
-  const popUpRegister = document.querySelector(".pop-up__register");
-  popUpRegister.remove();
-  noAuth.remove();
-
-  const profileAuth = document.querySelector(".btn_after-register");
-  profile.classList.add("hidden");
-  profileAuth.classList.remove("hidden");
-
-  // меняем иконку профиля на инициалы пользователя
-  const newInitials = `${firstname[0]}${lastname[0]}`;
-  const nameLastname = `${firstname} ${lastname}`;
-  const btnInitials = document.querySelector(".btn_after-register");
-  const textMyProfileInitials = document.querySelector(".name-lastname__initials");
-  const textMyProfileName = document.querySelector(".name-lastname__text");
-  btnInitials.textContent = newInitials;
-  btnInitials.title = nameLastname;
-  textMyProfileInitials.textContent = newInitials;
-  textMyProfileName.textContent = nameLastname;
-
-  profileAuth.addEventListener("click", () => {
-    withAuth.classList.toggle("open");
-  });
+  userDatas();
 }
 
-// Log out
-// не работает
-const logOutBtn = document.querySelector(".btn__logout");
-logOutBtn.addEventListener("click", function () {
-  withAuth.style.display = "none";
-  noAuth.style.display = "flex";
-  btnInitials.style.display = "none";
-  profile.classList.remove("hidden");
-});
-
-/*
-
-  if (json !== 0) {
-    profile.addEventListener("click", function () {
-      setTimeout(() => {
-        withAuth.classList.toggle("open");
-      }, 0);
-    });
-  }
-    */
-
-/*
-  const replaceIconProfile = document.querySelector(".profile__icon");
-  if (json !== 0) {
-    replaceIconProfile.innerHTML = "<p>NS</p>";
-  }
-  */
-
-// не работает
-window.addEventListener("DOMContentLoaded", function () {
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  if (user === true) {
-    popUpRegister.style.display = "none";
-    noAuth.style.display = "none";
-    withAuth.style.display = "flex";
-
-    const firstname = document.getElementById("firstname").value;
-    const lastname = document.getElementById("lastname").value;
-    const userdatas = {
-      firstname: firstname,
-      lastname: lastname,
-    };
-
-    const newInitials = `${userdatas.firstname[0]}${userdatas.lastname[0]}`;
-    const nameLastname = `${userdatas.firstname} ${userdatas.lastname}`;
-    const btnInitials = document.querySelector(".btn_after-register");
-    const textMyProfileInitials = document.querySelector(".name-lastname__initials");
-    const textMyProfileName = document.querySelector(".name-lastname__text");
-    btnInitials.textContent = newInitials;
-    textMyProfileInitials.textContent = newInitials;
-    textMyProfileName.textContent = nameLastname;
-
-    const profileAuth = document.querySelector(".btn_after-register");
-    profileAuth.addEventListener("click", () => {
-      withAuth.classList.toggle("open");
-    });
-  }
-});
-
 // вход в личный кабинет
-function login(e) {
-  event.preventDefault();
+function login() {
 
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  const emailLog = document.querySelector("email-log").value;
+  const passwordLog = document.querySelector("password-log").value;
   const result = document.getElementById("result");
+  saveUserState(user);
 
-  let user = localStorage.getItem(email);
+  let user = localStorage.getItem(emailLog);
   let data = JSON.parse(user);
 
   if (data === null) {
     result.innerHTML = "Wrong Email";
   } else if (
     data !== null &&
-    email === data.email &&
-    password === data.password
+    emailLog === data.emailLog &&
+    passwordLog === data.passwordLog
   ) {
     result.innerHTML = "You logged in";
-    localStorage.setItem(data.email, JSON.stringify(data));
+    localStorage.setItem(data.emailLog, JSON.stringify(data));
 
     // для закрытия поп-ап окна:
     const popUpLogin = document.querySelector(".pop-up__login");
@@ -542,6 +503,17 @@ function login(e) {
     result.innerHTML = "Wrong password";
   }
 }
+
+// Log out
+// не работает
+const logOutBtn = document.querySelector(".btn__logout");
+logOutBtn.addEventListener("click", function () {
+  withAuth.style.display = "none";
+  noAuth.style.display = "flex";
+  btnInitials.style.display = "none"; // нет доступа к переменной
+  profile.classList.remove("hidden");
+});
+/* КОНЕЦ ФОРМУЛ регистрации и логирования пользователя */
 
 // Card Number
 function generateRandomString(length) {
@@ -558,8 +530,10 @@ function generateRandomString(length) {
 }
 // генерируем случайную строку
 const randomString = generateRandomString(9);
-const cardNumberElement = document.querySelector(".card-number");
-cardNumberElement.textContent = randomString;
+const cardNumberProfileMenu = document.querySelector(".card-number__profile-menu");
+const cardNumberMyProfile = document.querySelector(".card-number__my-profile");
+cardNumberProfileMenu.textContent = randomString;
+cardNumberMyProfile.textContent = randomString;
 
 // копирование в буфер обмена
 function copyCodeToClipboard(button) {
