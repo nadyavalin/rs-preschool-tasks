@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Profile menu
-// скрытие Profile menu при клике вне
-// до авторизации
+// Hide Profile menu when mouse click out of this menu
+// Before registration or authorization
 const profile = document.querySelector(".profile__icon");
 const noAuth = document.querySelector(".profile__no-auth_active");
 const profileBlock = document.querySelector(".profile-block");
@@ -50,7 +50,7 @@ document.body.addEventListener("click", (event) => {
 
 const withAuth = document.querySelector(".profile__with-auth_active");
 
-// после авторизации
+// After registration or authorization
 document.body.addEventListener("click", (event) => {
   if (
     !event.target.classList.contains("profile-block") &&
@@ -259,22 +259,11 @@ btnAutumn.addEventListener("click", () => {
 });
 */
 
-// открывает меню профиля со списком Log In, Register
+// Open Profile menu with the list - Log In / Register
 profile.addEventListener("click", function () {
   setTimeout(() => {
     noAuth.classList.toggle("open");
   }, 0);
-});
-
-// при открытом бургер-меню меню профиля должно открываться, при нажатии на Register открываться форма регистрации
-// а меню профиля должно закрываться, при этом бургер-меню все время открыто
-document.addEventListener("DOMContentLoaded", function () {
-  const profileList = document.querySelector(".profile__no-auth_active");
-  const registerForm = document.querySelector(".pop-up__register_content");
-  const burgerMenuBtn = document.querySelector(".header__burger-btn");
-  const burgerMenu = document.querySelector(".nav");
-
-  // здесь должен быть код
 });
 
 // PopUp Register
@@ -454,34 +443,7 @@ function signup(e) {
   });
 }
 
-// Log out
-// не работает
-const logOutBtn = document.querySelector(".btn__logout");
-logOutBtn.addEventListener("click", function () {
-  withAuth.style.display = "none";
-  noAuth.style.display = "flex";
-  btnInitials.style.display = "none";
-  profile.classList.remove("hidden");
-});
-
-/*
-
-  if (json !== 0) {
-    profile.addEventListener("click", function () {
-      setTimeout(() => {
-        withAuth.classList.toggle("open");
-      }, 0);
-    });
-  }
-    */
-
-/*
-  const replaceIconProfile = document.querySelector(".profile__icon");
-  if (json !== 0) {
-    replaceIconProfile.innerHTML = "<p>NS</p>";
-  }
-  */
-
+// если пользователь зарегистрировался или залогинился он должен оставаться там до нажатия на Log Out
 // не работает
 window.addEventListener("DOMContentLoaded", function () {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -542,6 +504,16 @@ function login(e) {
     result.innerHTML = "Wrong password";
   }
 }
+
+// Log out
+// не работает
+const logOutBtn = document.querySelector(".btn__logout");
+logOutBtn.addEventListener("click", function () {
+  withAuth.style.display = "none";
+  noAuth.style.display = "flex";
+  btnInitials.style.display = "none";
+  profile.classList.remove("hidden");
+});
 
 // Card Number
 function generateRandomString(length) {
