@@ -29,13 +29,55 @@ function addListenersForBurgerMenu() {
   });
 }
 
+// Global constants
+// Slider in About block
+const images = document.querySelectorAll(".image");
+const imagesLine = document.querySelector(".images-line");
+const paginationDots = document.querySelectorAll(".pagination-dot");
+const arrowPrev = document.querySelector(".arrow-button_prev");
+const arrowNext = document.querySelector(".arrow-button_next");
+
+// Profile menu
+const profile = document.querySelector(".profile__icon");
+const profileAuth = document.querySelector(".btn_after-register");
+const noAuth = document.querySelector(".profile__no-auth_active");
+const withAuth = document.querySelector(".profile__with-auth_active");
+
+// PopUp Register
+const btnRegister = document.querySelector(".btn__register");
+const btnRegisterGetCardBlock = document.querySelector(
+  ".get-card__button_register"
+);
+const popUpRegister = document.querySelector(".pop-up__register");
+const popUpCloseBtnRegister = document.querySelector(".close-popup__register");
+
+// PopUp Log in
+const btnLogin = document.querySelector(".btn__login");
+const btnLoginGetCardBlock = document.querySelector(".get-card__button_login");
+const popUpLogin = document.querySelector(".pop-up__login");
+const popUpCloseBtnLogin = document.querySelector(".close-popup__login");
+
+// PopUp My profile
+const btnMyProfile = document.querySelector(".btn__myprofile");
+const popUpMyProfile = document.querySelector(".pop-up__my-profile");
+const popUpCloseBtnMyProfile = document.querySelector(
+  ".close-popup__my-profile"
+);
+
+// Log out
+const logOutBtn = document.querySelector(".btn__logout");
+
+// PopUp Buy
+const btnBuy = document.querySelectorAll(".book-card__button");
+const popUpBuyCard = document.querySelector(".pop-up__buy-card");
+const popUpCloseBtnBuyCard = document.querySelector(".close-popup__buy-card");
+
+// Иконка профиля после регистрации
+const btnInitials = document.querySelector(".btn_after-register");
+
 // Profile menu
 // Hide Profile menu when mouse click out of this menu
 // Before registration or authorization
-const profile = document.querySelector(".profile__icon");
-const noAuth = document.querySelector(".profile__no-auth_active");
-const profileAuth = document.querySelector(".btn_after-register");
-
 document.body.addEventListener("click", (event) => {
   if (
     !event.target.classList.contains("profile-block") &&
@@ -48,8 +90,6 @@ document.body.addEventListener("click", (event) => {
     noAuth.classList.remove("open");
   }
 });
-
-const withAuth = document.querySelector(".profile__with-auth_active");
 
 // After registration or authorization
 document.body.addEventListener("click", (event) => {
@@ -65,16 +105,10 @@ document.body.addEventListener("click", (event) => {
   }
 });
 
-// Next block
 // Slider in About block
 let offset = 0;
 let activeImageIndex = 0;
 let imageWidth = window.innerWidth > 768 ? 475 : 450;
-const images = document.querySelectorAll(".image");
-const imagesLine = document.querySelector(".images-line");
-const paginationDots = document.querySelectorAll(".pagination-dot");
-const arrowPrev = document.querySelector(".arrow-button_prev");
-const arrowNext = document.querySelector(".arrow-button_next");
 
 // Slider desktop pagination update
 function updatePaginationDots() {
@@ -134,7 +168,6 @@ window.addEventListener("resize", () => {
   }
 });
 
-// Next block
 // Slider in Favorites block
 const fadeIn = (element, timeout, display) => {
   element.style.opacity = 0;
@@ -272,19 +305,12 @@ profile.addEventListener("click", () => {
 });
 
 // PopUp Register
-const btnRegister = document.querySelector(".btn__register");
-const popUpRegister = document.querySelector(".pop-up__register");
-const popUpCloseBtnRegister = document.querySelector(".close-popup__register");
-
 // при нажатии на кнопку Register в меню профиля открывается и закрывается окно регистрации
 btnRegister.addEventListener("click", () => {
   popUpRegister.classList.toggle("hidden");
 });
 
 // при нажатии на кнопку Sing Up в разделе Get Card открывается и закрывается окно регистрации
-const btnRegisterGetCardBlock = document.querySelector(
-  ".get-card__button_register"
-);
 btnRegisterGetCardBlock.addEventListener("click", () => {
   popUpRegister.classList.toggle("hidden");
 });
@@ -302,11 +328,6 @@ popUpCloseBtnRegister.addEventListener("click", () => {
 });
 
 // PopUp Log in
-const btnLogin = document.querySelector(".btn__login");
-const btnLoginGetCardBlock = document.querySelector(".get-card__button_login");
-const popUpLogin = document.querySelector(".pop-up__login");
-const popUpCloseBtnLogin = document.querySelector(".close-popup__login");
-
 // при нажатии на кнопку Log In в меню профиля открывается и закрывается окно входа в профиль
 btnLogin.addEventListener("click", () => {
   popUpLogin.classList.toggle("hidden");
@@ -330,12 +351,6 @@ popUpLogin.addEventListener("click", (event) => {
 });
 
 // PopUp My profile
-const btnMyProfile = document.querySelector(".btn__myprofile");
-const popUpMyProfile = document.querySelector(".pop-up__my-profile");
-const popUpCloseBtnMyProfile = document.querySelector(
-  ".close-popup__my-profile"
-);
-
 // при нажатии на кнопку My profile открывается окно My profile
 btnMyProfile.addEventListener("click", () => {
   popUpMyProfile.classList.toggle("hidden");
@@ -354,10 +369,6 @@ popUpCloseBtnMyProfile.addEventListener("click", () => {
 });
 
 // PopUp Buy
-const btnBuy = document.querySelectorAll(".book-card__button");
-const popUpBuyCard = document.querySelector(".pop-up__buy-card");
-const popUpCloseBtnBuyCard = document.querySelector(".close-popup__buy-card");
-
 // при нажатии на кнопку Buy открывается окно Buy a Library Card
 btnBuy.forEach((button) => {
   button.addEventListener("click", () => {
@@ -396,8 +407,6 @@ btnLoginFromRegister.addEventListener("click", () => {
 */
 
 /* НАЧАЛО ФОРМУЛ регистрации и логирования пользователя */
-const btnInitials = document.querySelector(".btn_after-register");
-
 // добавляем инициалы, имя/фамилию, номер карты пользователя
 function setUserInfo(firstname, lastname) {
   const newInitials = `${firstname[0]}${lastname[0]}`;
@@ -458,7 +467,6 @@ function signup() {
   }
 
   setItemToLocalStorage("users", users);
-
   setUserInfo(firstname, lastname);
 }
 
@@ -484,8 +492,6 @@ function login() {
 }
 
 // Log out
-// не работает
-const logOutBtn = document.querySelector(".btn__logout");
 logOutBtn.addEventListener("click", () => {
   localStorage.removeItem("user");
   withAuth.style.display = "none";
@@ -546,12 +552,10 @@ function copyCodeToClipboard() {
 
   showNotification("Card number copied to clipboard!"); // Показываем уведомление
 }
-
-const cardNumberCopyButton = document.querySelector(
-  ".card-number__copy-button"
-);
+const cardNumberCopyButton = document.querySelector(".card-number__copy-button");
 cardNumberCopyButton.addEventListener("click", copyCodeToClipboard);
 
+// DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
   addListenersForBurgerMenu();
 

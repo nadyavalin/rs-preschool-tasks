@@ -227,6 +227,10 @@ h1 {
     align-items: center;
 }
 
+.card-number__profile-menu {
+    font-size: 13px;
+}
+
 .profile__line {
     width: 40px;
     height: 1px;
