@@ -407,6 +407,7 @@ btnLoginFromRegister.addEventListener("click", () => {
 */
 
 /* НАЧАЛО ФОРМУЛ регистрации и логирования пользователя */
+
 // добавляем инициалы, имя/фамилию, номер карты пользователя
 function setUserInfo(firstname, lastname) {
   const newInitials = `${firstname[0]}${lastname[0]}`;
@@ -443,7 +444,8 @@ function saveUserState(user) {
   }
 }
 
-// регистрация нового пользователя
+// Sing Up / Registration
+/*
 function signup() {
   const firstname = document.querySelector(".firstname").value;
   const lastname = document.querySelector(".lastname").value;
@@ -469,27 +471,50 @@ function signup() {
   setItemToLocalStorage("users", users);
   setUserInfo(firstname, lastname);
 }
+*/
+const formSingUp = document.querySelector(".form-register");
+formSingUp.addEventListener("submit", function() {
+  const firstname = document.querySelector(".firstname").value;
+  const lastname = document.querySelector(".lastname").value;
+  const email = document.querySelector(".email").value;
+  const password = document.querySelector(".password").value;
+  const user = {
+    firstname,
+    lastname,
+    email,
+    password,
+  };
+  saveUserState(user);
 
-// вход в личный кабинет
-function login() {
+  let users = getItemFromLocalStorage("users");
+
+  if (users) {
+    users.push(user);
+  } else {
+    users = [user];
+  }
+
+  setItemToLocalStorage("users", users);
+  setUserInfo(firstname, lastname);
+})
+
+// Log in
+const formLogin = document.querySelector(".form-login");
+
+formLogin.addEventListener("submit", function(event) {
   const emailLog = document.querySelector(".email-log").value;
   const passwordLog = document.querySelector(".password-log").value;
-  const result = document.querySelector(".result");
   const users = getItemFromLocalStorage("users");
-  const user = users.find(
-    (item) => item.email === emailLog && item.password === passwordLog
-  );
+  const user = users.find((item) => item.email === emailLog && item.password === passwordLog);
 
   if (!user) {
-    result.innerHTML = "Wrong Email or Password";
+    event.preventDefault();
+    alert("Wrong Email or Password");
   } else {
-    result.innerHTML = "You logged in";
-    setItemToLocalStorage("user", user);
-
-    // для закрытия поп-ап окна:
-    popUpLogin.style.display = "none";
+   setItemToLocalStorage("user", user);
+   popUpLogin.style.display = "none";
   }
-}
+});
 
 // Log out
 logOutBtn.addEventListener("click", () => {
