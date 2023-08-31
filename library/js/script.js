@@ -41,7 +41,8 @@ const arrowNext = document.querySelector(".arrow-button_next");
 const profile = document.querySelector(".profile__icon");
 const profileAuth = document.querySelector(".btn_after-register");
 const noAuth = document.querySelector(".profile__no-auth_active");
-const withAuth = document.querySelector(".profile__with-auth_active");
+const withAuth = document.querySelector(".profile__with-auth");
+const withAuthCode = document.querySelector(".profile__with-auth_active");
 
 // PopUp Register
 const btnRegister = document.querySelector(".btn__register");
@@ -64,6 +65,10 @@ const popUpCloseBtnMyProfile = document.querySelector(
   ".close-popup__my-profile"
 );
 
+// Card Number
+const cardNumberProfileMenu = document.querySelector(".card-number__profile-menu");
+const cardNumberMyProfile = document.querySelector(".card-number__my-profile");
+
 // Log out
 const logOutBtn = document.querySelector(".btn__logout");
 
@@ -72,8 +77,9 @@ const btnBuy = document.querySelectorAll(".book-card__button");
 const popUpBuyCard = document.querySelector(".pop-up__buy-card");
 const popUpCloseBtnBuyCard = document.querySelector(".close-popup__buy-card");
 
-// Иконка профиля после регистрации
-const btnInitials = document.querySelector(".btn_after-register");
+// My profile
+const textMyProfileInitials = document.querySelector(".name-lastname__initials");
+const textMyProfileName = document.querySelector(".name-lastname__text");
 
 // Profile menu
 // Hide Profile menu when mouse click out of this menu
@@ -86,7 +92,7 @@ document.body.addEventListener("click", (event) => {
     !event.target.closest(".header__burger-btn") &&
     noAuth.classList.contains("open")
   ) {
-    profile.classList.remove("open");
+    profile.classList.add("open");
     noAuth.classList.remove("open");
   }
 });
@@ -96,7 +102,7 @@ document.body.addEventListener("click", (event) => {
   if (
     !event.target.classList.contains("profile-block") &&
     !event.target.closest(".btn_after-register") &&
-    !event.target.closest(".profile__with-auth_active") &&
+    !event.target.closest(".profile__with-auth") &&
     !event.target.closest(".header__burger-btn") &&
     withAuth.classList.contains("open")
   ) {
@@ -408,21 +414,32 @@ btnLoginFromRegister.addEventListener("click", () => {
 
 /* НАЧАЛО ФОРМУЛ регистрации и логирования пользователя */
 
-// добавляем инициалы, имя/фамилию, номер карты пользователя
-function setUserInfo(firstname, lastname) {
-  const newInitials = `${firstname[0]}${lastname[0]}`;
-  const nameLastname = `${firstname} ${lastname}`;
-  const textMyProfileInitials = document.querySelector(
-    ".name-lastname__initials"
-  );
-  const textMyProfileName = document.querySelector(".name-lastname__text");
-  btnInitials.textContent = newInitials;
-  btnInitials.title = nameLastname;
+// Card Number
+function generateRandomString() {
+  let result = "";
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const digits = "0123456789";
+
+  result += characters.charAt(Math.floor(Math.random() * characters.length)); // первая буква
+
+  for (let i = 0; i < 8; i += 1) {
+    result += digits.charAt(Math.floor(Math.random() * digits.length)); // цифры
+  }
+  return result;
+}
+const randomString = generateRandomString();
+const cardNumber = randomString;
+
+// добавляем инициалы, имя/фамилию
+function setUserInfo(firstName, lastName) {
+  const newInitials = `${firstName[0]}${lastName[0]}`;
+  const nameLastName = `${firstName} ${lastName}`;
+  profileAuth.textContent = newInitials;
+  profileAuth.title = nameLastName;
   textMyProfileInitials.textContent = newInitials;
-  textMyProfileName.textContent = nameLastname;
+  textMyProfileName.textContent = nameLastName;
 
-  popUpRegister.remove();
-
+  popUpRegister.classList.add("hidden");
   profile.classList.add("hidden");
   profileAuth.classList.remove("hidden");
 }
@@ -440,26 +457,28 @@ function saveUserState(user) {
   setItemToLocalStorage("user", user);
 
   if (user) {
-    setUserInfo(user.firstname, user.lastname);
+    setUserInfo(user.firstName, user.lastName, user.cardNumber);
   }
 }
 
 // Sing Up / Registration
 function signup(event) {
-  const firstname = document.querySelector(".firstname").value;
-  const lastname = document.querySelector(".lastname").value;
+  const firstName = document.querySelector(".firstname").value;
+  const lastName = document.querySelector(".lastname").value;
   const email = document.querySelector(".email").value;
   const password = document.querySelector(".password").value;
+  cardNumberProfileMenu.textContent = randomString;
+  cardNumberMyProfile.textContent = randomString;
   event.preventDefault();
 
   const user = {
-    firstname,
-    lastname,
+    firstName,
+    lastName,
     email,
     password,
+    cardNumber,
   };
   saveUserState(user);
-
   let users = getItemFromLocalStorage("users");
 
   if (users) {
@@ -469,28 +488,49 @@ function signup(event) {
   }
 
   setItemToLocalStorage("users", users);
-  setUserInfo(firstname, lastname);
+  setUserInfo(firstName, lastName, cardNumber);
+  popUpRegister.classList.add("hidden");
 }
 
 const formSingUp = document.querySelector(".form-register");
 formSingUp.addEventListener("submit", signup);
 
+// сообщение о том, что логин и пароль введены не верно
+function showNotificationLog(message) {
+  const result = document.createElement("div");
+  result.innerText = message;
+  result.classList.add("result");
+
+  document.body.appendChild(result);
+
+  setTimeout(() => {
+    document.body.removeChild(result);
+  }, 3000);
+}
+
 // Log in
 function login(event) {
   const emailLog = document.querySelector(".email-log").value;
   const passwordLog = document.querySelector(".password-log").value;
-  const result = document.querySelector(".result");
   const users = getItemFromLocalStorage("users");
-  const user = users.find((item) => item.email === emailLog && item.password === passwordLog);
+  const user = users.find(
+    (item) =>
+      item.email === emailLog &&
+      item.password === passwordLog &&
+      item.cardNumber === cardNumber
+  );
   event.preventDefault();
 
   if (!user) {
-    result.innerHTML = "Wrong Email or Password";
+    showNotificationLog("Wrong Email or Password");
   } else {
-  setItemToLocalStorage("user", user);
-  saveUserState(user);
-  popUpLogin.style.display = "none";
-  btnLogin.addEventListener("click", popUpLogin); // не работает
+    setItemToLocalStorage("user", user);
+    saveUserState(user);
+    popUpLogin.classList.add("hidden");
+    popUpRegister.classList.add("hidden");
+    profileAuth.classList.remove("hidden");
+    withAuthCode.classList.remove("hidden"); // вроде не нужно
+    withAuthCode.classList.remove("open"); // вроде не нужно
   }
 }
 const formLogin = document.querySelector(".form-login");
@@ -499,39 +539,19 @@ formLogin.addEventListener("submit", login);
 // Log out
 logOutBtn.addEventListener("click", () => {
   localStorage.removeItem("user");
-  withAuth.style.display = "none";
-  noAuth.style.display = "flex";
-  btnInitials.style.display = "none"; // нет доступа к переменной
+  withAuth.classList.add("hidden");
+  withAuth.classList.remove("open");
+  noAuth.classList.remove("hidden");
+  noAuth.classList.remove("open");
+  profileAuth.classList.add("hidden");
   profile.classList.remove("hidden");
 });
 /* КОНЕЦ ФОРМУЛ регистрации и логирования пользователя */
 
-// Card Number
-function generateRandomString(length) {
-  let result = "";
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const digits = "0123456789";
-
-  result += characters.charAt(Math.floor(Math.random() * characters.length)); // первая буква
-
-  for (let i = 0; i < length - 1; i += 1) {
-    result += digits.charAt(Math.floor(Math.random() * digits.length)); // цифры
-  }
-  return result;
-}
-// генерируем случайную строку
-const randomString = generateRandomString(9);
-const cardNumberProfileMenu = document.querySelector(
-  ".card-number__profile-menu"
-);
-const cardNumberMyProfile = document.querySelector(".card-number__my-profile");
-cardNumberProfileMenu.textContent = randomString;
-cardNumberMyProfile.textContent = randomString;
-
-// сообщение о том, что код скопирован в буфер обмена
+// сообщение о том, что Card Number скопирован в буфер обмена
 function showNotification(message) {
   const notification = document.createElement("div"); // cоздаем элемент для уведомления
-  notification.innerText = message; // eстанавливаем текст уведомления
+  notification.innerText = message; // устанавливаем текст уведомления
   notification.classList.add("notification"); // добавляем класс для стилизации уведомления
 
   document.body.appendChild(notification); // добавляем уведомление на страницу
@@ -557,7 +577,9 @@ function copyCodeToClipboard() {
 
   showNotification("Card number copied to clipboard!"); // Показываем уведомление
 }
-const cardNumberCopyButton = document.querySelector(".card-number__copy-button");
+const cardNumberCopyButton = document.querySelector(
+  ".card-number__copy-button"
+);
 cardNumberCopyButton.addEventListener("click", copyCodeToClipboard);
 
 // DOMContentLoaded
@@ -566,6 +588,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const user = getItemFromLocalStorage("user");
   if (user) {
-    setUserInfo(user.firstname, user.lastname);
+    setUserInfo(user.firstName, user.lastName);
   }
 });

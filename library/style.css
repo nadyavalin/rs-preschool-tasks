@@ -160,7 +160,7 @@ h1 {
     z-index: 4;
     visibility: visible;
     background-color: transparent;
-    border: 0;
+    border: none;
     margin-top: 5px;
 }
 
@@ -177,12 +177,13 @@ h1 {
     color: #BB945F;
     background-color: #FFFFFF;
     border-radius: 20px;
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     margin-right: -70px;
     visibility: visible;
     cursor: pointer;
     z-index: 15;
+    border: none;
 }
 
 .btn_after-register .hidden {
@@ -248,7 +249,7 @@ h1 {
 }
 
 .btn__login, .btn__register, .btn__myprofile, .btn__logout {
-    border: 0;
+    border: none;
     cursor: pointer;
     font-size: 15px;
     font-weight: 400;
@@ -302,6 +303,10 @@ h1 {
     left: 0;
     background-color: rgba(30, 30, 30, 0.6);
     z-index: 9999;
+}
+
+.pop-up__register .hidden {
+    visibility: hidden;
 }
 
 .pop-up__register_content {
@@ -415,7 +420,7 @@ h6.pop-up__text {
     font-weight: 700;
     letter-spacing: 1px;
     text-decoration-line: underline;
-    border: 0;
+    border: none;
     background-color: transparent;
     cursor: pointer;
 }
@@ -488,7 +493,7 @@ h6.pop-up__text {
 }
 
 .name-lastname__text {
-    line-height: 20px;
+    line-height: 25px;
     text-transform: capitalize;
 }
 
@@ -504,7 +509,7 @@ h6.pop-up__text {
 }
 
 .card-number__copy-button {
-    border: 0;
+    border: none;
     background-color: #FFFFFF;
     cursor: pointer;
 }
@@ -520,6 +525,20 @@ h6.pop-up__text {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     z-index: 10001;
   }
+
+
+.result {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f1f1f1;
+    color: red;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 10001;
+}
 
 h5.my-profile__title {
     font-family: 'Forum';
@@ -638,9 +657,8 @@ h5.my-profile__title {
 
 .buy-card__main {
     display: flex;
-    margin: 40px 30px 40px 40px;
+    margin: 30px 40px 30px 35px;
     gap: 40px;
-
 }
 
 .buy-card__main_form {
@@ -691,6 +709,10 @@ h5.buy-card__title {
     border: 1px solid #BB945F;
 }
 
+.buy-card__form-item_gap {
+    margin-top: 10px;
+}
+
 .exp-code_two-field {
     display: flex;
     gap: 10px;
@@ -721,6 +743,8 @@ h5.buy-card__title {
     top: 16px;
     right: 14px;
     cursor: pointer;
+    margin-top: 7px;
+    margin-right: 3px;
 }
 
 .main {
@@ -945,7 +969,7 @@ h2 {
 .season-block {
     display: flex;
     gap: 82px;
-    border: 0;
+    border: none;
     margin-top: -3px;
     margin-bottom: -5px;
 }
