@@ -493,7 +493,7 @@ h6.pop-up__text {
 }
 
 .name-lastname__text {
-    line-height: 20px;
+    line-height: 25px;
     text-transform: capitalize;
 }
 
@@ -657,9 +657,8 @@ h5.my-profile__title {
 
 .buy-card__main {
     display: flex;
-    margin: 40px 30px 40px 40px;
+    margin: 30px 40px 30px 35px;
     gap: 40px;
-
 }
 
 .buy-card__main_form {
@@ -710,6 +709,10 @@ h5.buy-card__title {
     border: 1px solid #BB945F;
 }
 
+.buy-card__form-item_gap {
+    margin-top: 10px;
+}
+
 .exp-code_two-field {
     display: flex;
     gap: 10px;
@@ -740,6 +743,8 @@ h5.buy-card__title {
     top: 16px;
     right: 14px;
     cursor: pointer;
+    margin-top: 7px;
+    margin-right: 3px;
 }
 
 .main {

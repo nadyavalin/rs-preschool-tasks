@@ -406,17 +406,17 @@ btnLoginFromRegister.addEventListener("click", () => {
 /* НАЧАЛО ФОРМУЛ регистрации и логирования пользователя */
 
 // добавляем инициалы, имя/фамилию, номер карты пользователя
-function setUserInfo(firstname, lastname) {
-  const newInitials = `${firstname[0]}${lastname[0]}`;
-  const nameLastname = `${firstname} ${lastname}`;
+function setUserInfo(firstName, lastName) {
+  const newInitials = `${firstName[0]}${lastName[0]}`;
+  const nameLastName = `${firstName} ${lastName}`;
   const textMyProfileInitials = document.querySelector(
     ".name-lastname__initials"
   );
   const textMyProfileName = document.querySelector(".name-lastname__text");
   profileAuth.textContent = newInitials;
-  profileAuth.title = nameLastname;
+  profileAuth.title = nameLastName;
   textMyProfileInitials.textContent = newInitials;
-  textMyProfileName.textContent = nameLastname;
+  textMyProfileName.textContent = nameLastName;
 
   popUpRegister.classList.add("hidden");
 
@@ -437,47 +437,44 @@ function saveUserState(user) {
   setItemToLocalStorage("user", user);
 
   if (user) {
-    setUserInfo(user.firstname, user.lastname);
+    setUserInfo(user.firstName, user.lastName);
   }
 }
 
 // Card Number
-function generateRandomString(length) {
+function generateRandomString() {
   let result = "";
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const digits = "0123456789";
 
   result += characters.charAt(Math.floor(Math.random() * characters.length)); // первая буква
 
-  for (let i = 0; i < length - 1; i += 1) {
+  for (let i = 0; i < 8; i += 1) {
     result += digits.charAt(Math.floor(Math.random() * digits.length)); // цифры
   }
   return result;
 }
-// генерируем случайную строку
-const randomString = generateRandomString(9);
-const cardNumberProfileMenu = document.querySelector(
-  ".card-number__profile-menu"
-);
-const cardNumberMyProfile = document.querySelector(".card-number__my-profile");
-cardNumberProfileMenu.textContent = randomString;
-cardNumberMyProfile.textContent = randomString;
+const randomString = generateRandomString();
 
 // Sing Up / Registration
 function signup(event) {
-  const firstname = document.querySelector(".firstname").value;
-  const lastname = document.querySelector(".lastname").value;
+  const firstName = document.querySelector(".firstname").value;
+  const lastName = document.querySelector(".lastname").value;
   const email = document.querySelector(".email").value;
   const password = document.querySelector(".password").value;
-  const cardnumber = randomString;
+  const cardNumber = randomString;
+  const cardNumberProfileMenu = document.querySelector(".card-number__profile-menu");
+  const cardNumberMyProfile = document.querySelector(".card-number__my-profile");
+  cardNumberProfileMenu.textContent = randomString;
+  cardNumberMyProfile.textContent = randomString;
   event.preventDefault();
 
   const user = {
-    firstname,
-    lastname,
+    firstName,
+    lastName,
     email,
     password,
-    cardnumber,
+    cardNumber,
   };
   saveUserState(user);
 
@@ -490,7 +487,7 @@ function signup(event) {
   }
 
   setItemToLocalStorage("users", users);
-  setUserInfo(firstname, lastname);
+  setUserInfo(firstName, lastName);
   popUpRegister.classList.add("hidden");
 }
 
@@ -585,6 +582,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const user = getItemFromLocalStorage("user");
   if (user) {
-    setUserInfo(user.firstname, user.lastname);
+    setUserInfo(user.firstName, user.lastName);
   }
 });
