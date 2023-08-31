@@ -1,10 +1,10 @@
 // Burger-menu
-document.addEventListener("DOMContentLoaded", function () {
+function addListenersForBurgerMenu() {
   const header = document.querySelector(".header");
 
   document
     .querySelector(".header__burger-btn")
-    .addEventListener("click", function () {
+    .addEventListener("click", () => {
       setTimeout(() => {
         header.classList.toggle("open");
       }, 0);
@@ -27,15 +27,57 @@ document.addEventListener("DOMContentLoaded", function () {
       header.classList.remove("open");
     }
   });
-});
+}
+
+// Global constants
+// Slider in About block
+const images = document.querySelectorAll(".image");
+const imagesLine = document.querySelector(".images-line");
+const paginationDots = document.querySelectorAll(".pagination-dot");
+const arrowPrev = document.querySelector(".arrow-button_prev");
+const arrowNext = document.querySelector(".arrow-button_next");
+
+// Profile menu
+const profile = document.querySelector(".profile__icon");
+const profileAuth = document.querySelector(".btn_after-register");
+const noAuth = document.querySelector(".profile__no-auth_active");
+const withAuth = document.querySelector(".profile__with-auth_active");
+
+// PopUp Register
+const btnRegister = document.querySelector(".btn__register");
+const btnRegisterGetCardBlock = document.querySelector(
+  ".get-card__button_register"
+);
+const popUpRegister = document.querySelector(".pop-up__register");
+const popUpCloseBtnRegister = document.querySelector(".close-popup__register");
+
+// PopUp Log in
+const btnLogin = document.querySelector(".btn__login");
+const btnLoginGetCardBlock = document.querySelector(".get-card__button_login");
+const popUpLogin = document.querySelector(".pop-up__login");
+const popUpCloseBtnLogin = document.querySelector(".close-popup__login");
+
+// PopUp My profile
+const btnMyProfile = document.querySelector(".btn__myprofile");
+const popUpMyProfile = document.querySelector(".pop-up__my-profile");
+const popUpCloseBtnMyProfile = document.querySelector(
+  ".close-popup__my-profile"
+);
+
+// Log out
+const logOutBtn = document.querySelector(".btn__logout");
+
+// PopUp Buy
+const btnBuy = document.querySelectorAll(".book-card__button");
+const popUpBuyCard = document.querySelector(".pop-up__buy-card");
+const popUpCloseBtnBuyCard = document.querySelector(".close-popup__buy-card");
+
+// Иконка профиля после регистрации
+const btnInitials = document.querySelector(".btn_after-register");
 
 // Profile menu
 // Hide Profile menu when mouse click out of this menu
 // Before registration or authorization
-const profile = document.querySelector(".profile__icon");
-const noAuth = document.querySelector(".profile__no-auth_active");
-const profileBlock = document.querySelector(".profile-block");
-
 document.body.addEventListener("click", (event) => {
   if (
     !event.target.classList.contains("profile-block") &&
@@ -48,8 +90,6 @@ document.body.addEventListener("click", (event) => {
     noAuth.classList.remove("open");
   }
 });
-
-const withAuth = document.querySelector(".profile__with-auth_active");
 
 // After registration or authorization
 document.body.addEventListener("click", (event) => {
@@ -65,42 +105,10 @@ document.body.addEventListener("click", (event) => {
   }
 });
 
-// Next block
 // Slider in About block
 let offset = 0;
 let activeImageIndex = 0;
 let imageWidth = window.innerWidth > 768 ? 475 : 450;
-const images = document.querySelectorAll(".image");
-const imagesLine = document.querySelector(".images-line");
-const paginationDots = document.querySelectorAll(".pagination-dot");
-const arrowPrev = document.querySelector(".arrow-button_prev");
-const arrowNext = document.querySelector(".arrow-button_next");
-
-// Switch slider
-function switchSlide(newOffset) {
-  offset = newOffset;
-  imagesLine.style.left = -offset + "px";
-  activeImageIndex = newOffset / imageWidth;
-  updatePaginationDots();
-  updateArrows();
-}
-
-// Slider desktop pagination
-paginationDots.forEach((dot, index) => {
-  dot.addEventListener("click", function () {
-    switchSlide(index * imageWidth);
-  });
-});
-
-// Slider arrows for Prev
-arrowPrev.addEventListener("click", function () {
-  switchSlide(offset - imageWidth);
-});
-
-// Slider arrows for Next
-arrowNext.addEventListener("click", function () {
-  switchSlide(offset + imageWidth);
-});
 
 // Slider desktop pagination update
 function updatePaginationDots() {
@@ -125,8 +133,34 @@ function updateArrows() {
   }
 }
 
+// Switch slider
+function switchSlide(newOffset) {
+  offset = newOffset;
+  imagesLine.style.left = `${-offset}px`;
+  activeImageIndex = newOffset / imageWidth;
+  updatePaginationDots();
+  updateArrows();
+}
+
+// Slider desktop pagination
+paginationDots.forEach((dot, index) => {
+  dot.addEventListener("click", () => {
+    switchSlide(index * imageWidth);
+  });
+});
+
+// Slider arrows for Prev
+arrowPrev.addEventListener("click", () => {
+  switchSlide(offset - imageWidth);
+});
+
+// Slider arrows for Next
+arrowNext.addEventListener("click", () => {
+  switchSlide(offset + imageWidth);
+});
+
 // Slider adaptation
-window.addEventListener("resize", function () {
+window.addEventListener("resize", () => {
   if (window.innerWidth > 768) {
     imageWidth = 475;
   } else {
@@ -134,7 +168,6 @@ window.addEventListener("resize", function () {
   }
 });
 
-// Next block
 // Slider in Favorites block
 const fadeIn = (element, timeout, display) => {
   element.style.opacity = 0;
@@ -260,27 +293,24 @@ btnAutumn.addEventListener("click", () => {
 });
 */
 
+profileAuth.addEventListener("click", () => {
+  withAuth.classList.toggle("open");
+});
+
 // Open Profile menu with the list - Log In / Register
-profile.addEventListener("click", function () {
+profile.addEventListener("click", () => {
   setTimeout(() => {
     noAuth.classList.toggle("open");
   }, 0);
 });
 
 // PopUp Register
-const btnRegister = document.querySelector(".btn__register");
-const popUpRegister = document.querySelector(".pop-up__register");
-const popUpCloseBtnRegister = document.querySelector(".close-popup__register");
-
 // при нажатии на кнопку Register в меню профиля открывается и закрывается окно регистрации
 btnRegister.addEventListener("click", () => {
   popUpRegister.classList.toggle("hidden");
 });
 
 // при нажатии на кнопку Sing Up в разделе Get Card открывается и закрывается окно регистрации
-const btnRegisterGetCardBlock = document.querySelector(
-  ".get-card__button_register"
-);
 btnRegisterGetCardBlock.addEventListener("click", () => {
   popUpRegister.classList.toggle("hidden");
 });
@@ -298,11 +328,6 @@ popUpCloseBtnRegister.addEventListener("click", () => {
 });
 
 // PopUp Log in
-const btnLogin = document.querySelector(".btn__login");
-const btnLoginGetCardBlock = document.querySelector(".get-card__button_login");
-const popUpLogin = document.querySelector(".pop-up__login");
-const popUpCloseBtnLogin = document.querySelector(".close-popup__login");
-
 // при нажатии на кнопку Log In в меню профиля открывается и закрывается окно входа в профиль
 btnLogin.addEventListener("click", () => {
   popUpLogin.classList.toggle("hidden");
@@ -326,12 +351,6 @@ popUpLogin.addEventListener("click", (event) => {
 });
 
 // PopUp My profile
-const btnMyProfile = document.querySelector(".btn__myprofile");
-const popUpMyProfile = document.querySelector(".pop-up__my-profile");
-const popUpCloseBtnMyProfile = document.querySelector(
-  ".close-popup__my-profile"
-);
-
 // при нажатии на кнопку My profile открывается окно My profile
 btnMyProfile.addEventListener("click", () => {
   popUpMyProfile.classList.toggle("hidden");
@@ -350,10 +369,6 @@ popUpCloseBtnMyProfile.addEventListener("click", () => {
 });
 
 // PopUp Buy
-const btnBuy = document.querySelectorAll(".book-card__button");
-const popUpBuyCard = document.querySelector(".pop-up__buy-card");
-const popUpCloseBtnBuyCard = document.querySelector(".close-popup__buy-card");
-
 // при нажатии на кнопку Buy открывается окно Buy a Library Card
 btnBuy.forEach((button) => {
   button.addEventListener("click", () => {
@@ -393,121 +408,97 @@ btnLoginFromRegister.addEventListener("click", () => {
 
 /* НАЧАЛО ФОРМУЛ регистрации и логирования пользователя */
 
-// если пользователь зарегистрировался или залогинился он должен оставаться там до нажатия на Log Out
-// cохраняем данные пользователя в LocalStorage
-window.addEventListener("DOMContentLoaded", function () {
-  const user = JSON.parse(localStorage.getItem("user"))
-  saveUserState(user);
-
-  /* код не работает, возможно не нужен
-  // Привязка функции signup() к кнопке регистрации
-  btnRegister.addEventListener("click", signup);
-
-  // Привязка функции login() к кнопке входа
-  btnLogin.addEventListener("click", login);
-  */
-});
-
-// храним данные пользователя в LocalStorage
-function saveUserState(user) {
-  localStorage.setItem("user", JSON.stringify(user));
-
-  if (user) {
-    userDatas();
-  }
-}
-
 // добавляем инициалы, имя/фамилию, номер карты пользователя
-function userDatas() {
-  const firstname = document.querySelector(".firstname").value;
-  const lastname = document.querySelector(".lastname").value;
-
+function setUserInfo(firstname, lastname) {
   const newInitials = `${firstname[0]}${lastname[0]}`;
   const nameLastname = `${firstname} ${lastname}`;
-  const btnInitials = document.querySelector(".btn_after-register");
-  const textMyProfileInitials = document.querySelector(".name-lastname__initials");
+  const textMyProfileInitials = document.querySelector(
+    ".name-lastname__initials"
+  );
   const textMyProfileName = document.querySelector(".name-lastname__text");
   btnInitials.textContent = newInitials;
   btnInitials.title = nameLastname;
   textMyProfileInitials.textContent = newInitials;
   textMyProfileName.textContent = nameLastname;
 
-  const popUpRegister = document.querySelector(".pop-up__register");
   popUpRegister.remove();
-  noAuth.remove();
 
-  const profileAuth = document.querySelector(".btn_after-register");
   profile.classList.add("hidden");
   profileAuth.classList.remove("hidden");
-
-   profileAuth.addEventListener("click", () => {
-    withAuth.classList.toggle("open");
-  });
 }
 
-// регистрация нового пользователя
-function signup() {
+function setItemToLocalStorage(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
 
+function getItemFromLocalStorage(key) {
+  return JSON.parse(localStorage.getItem(key));
+}
+
+// храним данные пользователя в LocalStorage
+function saveUserState(user) {
+  setItemToLocalStorage("user", user);
+
+  if (user) {
+    setUserInfo(user.firstname, user.lastname);
+  }
+}
+
+// Sing Up / Registration
+function signup(event) {
   const firstname = document.querySelector(".firstname").value;
   const lastname = document.querySelector(".lastname").value;
   const email = document.querySelector(".email").value;
   const password = document.querySelector(".password").value;
+  event.preventDefault();
 
   const user = {
-    firstname: firstname,
-    lastname: lastname,
-    email: email,
-    password: password,
+    firstname,
+    lastname,
+    email,
+    password,
   };
   saveUserState(user);
 
-  let users = localStorage.getItem("users");
+  let users = getItemFromLocalStorage("users");
 
   if (users) {
-    users = JSON.parse(users);
     users.push(user);
   } else {
     users = [user];
   }
 
-  localStorage.setItem("users", JSON.stringify(users));
-
-  userDatas();
+  setItemToLocalStorage("users", users);
+  setUserInfo(firstname, lastname);
 }
 
-// вход в личный кабинет
-function login() {
+const formSingUp = document.querySelector(".form-register");
+formSingUp.addEventListener("submit", signup);
 
-  const emailLog = document.querySelector("email-log").value;
-  const passwordLog = document.querySelector("password-log").value;
-  const result = document.getElementById("result");
-  saveUserState(user);
+// Log in
+function login(event) {
+  const emailLog = document.querySelector(".email-log").value;
+  const passwordLog = document.querySelector(".password-log").value;
+  const result = document.querySelector(".result");
+  const users = getItemFromLocalStorage("users");
+  const user = users.find((item) => item.email === emailLog && item.password === passwordLog);
+  event.preventDefault();
 
-  let user = localStorage.getItem(emailLog);
-  let data = JSON.parse(user);
-
-  if (data === null) {
-    result.innerHTML = "Wrong Email";
-  } else if (
-    data !== null &&
-    emailLog === data.emailLog &&
-    passwordLog === data.passwordLog
-  ) {
-    result.innerHTML = "You logged in";
-    localStorage.setItem(data.emailLog, JSON.stringify(data));
-
-    // для закрытия поп-ап окна:
-    const popUpLogin = document.querySelector(".pop-up__login");
-    popUpLogin.style.display = "none";
+  if (!user) {
+    result.innerHTML = "Wrong Email or Password";
   } else {
-    result.innerHTML = "Wrong password";
+  setItemToLocalStorage("user", user);
+  saveUserState(user);
+  popUpLogin.style.display = "none";
+  btnLogin.addEventListener("click", popUpLogin); // не работает
   }
 }
+const formLogin = document.querySelector(".form-login");
+formLogin.addEventListener("submit", login);
 
 // Log out
-// не работает
-const logOutBtn = document.querySelector(".btn__logout");
-logOutBtn.addEventListener("click", function () {
+logOutBtn.addEventListener("click", () => {
+  localStorage.removeItem("user");
   withAuth.style.display = "none";
   noAuth.style.display = "flex";
   btnInitials.style.display = "none"; // нет доступа к переменной
@@ -523,22 +514,38 @@ function generateRandomString(length) {
 
   result += characters.charAt(Math.floor(Math.random() * characters.length)); // первая буква
 
-  for (let i = 0; i < length - 1; i++) {
+  for (let i = 0; i < length - 1; i += 1) {
     result += digits.charAt(Math.floor(Math.random() * digits.length)); // цифры
   }
   return result;
 }
 // генерируем случайную строку
 const randomString = generateRandomString(9);
-const cardNumberProfileMenu = document.querySelector(".card-number__profile-menu");
+const cardNumberProfileMenu = document.querySelector(
+  ".card-number__profile-menu"
+);
 const cardNumberMyProfile = document.querySelector(".card-number__my-profile");
 cardNumberProfileMenu.textContent = randomString;
 cardNumberMyProfile.textContent = randomString;
 
+// сообщение о том, что код скопирован в буфер обмена
+function showNotification(message) {
+  const notification = document.createElement("div"); // cоздаем элемент для уведомления
+  notification.innerText = message; // eстанавливаем текст уведомления
+  notification.classList.add("notification"); // добавляем класс для стилизации уведомления
+
+  document.body.appendChild(notification); // добавляем уведомление на страницу
+
+  setTimeout(() => {
+    document.body.removeChild(notification); // удаляем уведомление через 3 секунды
+  }, 3000);
+}
+
 // копирование в буфер обмена
-function copyCodeToClipboard(button) {
-  const text = button.previousElementSibling.textContent; // получаем текст элемента рядом с кнопкой
-  let tempInput = document.createElement("input"); // создаем временный элемент input
+function copyCodeToClipboard() {
+  const cardCode = document.querySelector(".card-number");
+  const text = cardCode.textContent; // получаем текст элемента рядом с кнопкой
+  const tempInput = document.createElement("input"); // создаем временный элемент input
 
   document.body.appendChild(tempInput); // добавляем временный элемент input на страницу
   tempInput.value = text; // устанавливаем значение временного элемента input равным тексту
@@ -550,16 +557,15 @@ function copyCodeToClipboard(button) {
 
   showNotification("Card number copied to clipboard!"); // Показываем уведомление
 }
+const cardNumberCopyButton = document.querySelector(".card-number__copy-button");
+cardNumberCopyButton.addEventListener("click", copyCodeToClipboard);
 
-// сообщение о том, что код скопирован в буфер обмена
-function showNotification(message) {
-  const notification = document.createElement("div"); // cоздаем элемент для уведомления
-  notification.innerText = message; // eстанавливаем текст уведомления
-  notification.classList.add("notification"); // добавляем класс для стилизации уведомления
+// DOMContentLoaded
+document.addEventListener("DOMContentLoaded", () => {
+  addListenersForBurgerMenu();
 
-  document.body.appendChild(notification); // добавляем уведомление на страницу
-
-  setTimeout(function () {
-    document.body.removeChild(notification); // удаляем уведомление через 3 секунды
-  }, 3000);
-}
+  const user = getItemFromLocalStorage("user");
+  if (user) {
+    setUserInfo(user.firstname, user.lastname);
+  }
+});
