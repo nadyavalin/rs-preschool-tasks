@@ -31,7 +31,7 @@
                 </nav>
                 <div class="profile__gap">
                     <button class="btn_after-register hidden" title=""></button>
-                    <img src="./assets/svg/icon_profile.svg" alt="Profile" class="profile__icon">
+                    <button class="profile__icon"><img src="./assets/svg/icon_profile.svg" alt="Profile"></button>
                     <button class="header__burger-btn">
                         <span></span><span></span><span></span>
                     </button>
@@ -69,25 +69,24 @@
                 <div class="pop-up__register_content">
                     <div class="close-popup__register"><img src="./assets/svg/close_popup.svg"></div>
                     <h6 class="pop-up__text">Register</h6>
-                    <form onsubmit="signup()" class="form-register">
+                    <form class="form-register">
                         <div class="form-register__item">
                             <label for="firstname">Frist name</label>
-                            <input type="text" class="firstname" id="firstname" placeholder="name" required>
+                            <input type="text" class="firstname" placeholder="name" required>
                         </div>
                         <div class="form-register__item">
                             <label for="lastname">Last name</label>
-                            <input type="text" class="lastname" id="lastname" placeholder="last name" required>
+                            <input type="text" class="lastname" placeholder="last name" required>
                         </div>
                         <div class="form-register__item">
                             <label for="email">E-mail</label>
-                            <input type="email" class="email" id="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" placeholder="email@email.com" required
-                                title="Email address must include @ and .">
+                            <input type="email" class="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                                placeholder="email@email.com" required title="Email address must include @ and .">
                         </div>
                         <div class="form-register__item">
                             <label for="password">Password</label>
-                            <input type="password" class="password" id="password" placeholder="12345678"
-                                pattern="^\S{8,}$" maxlength="8" required
-                                title="Password length must be at least 8 characters">
+                            <input type="password" class="password" placeholder="12345678" pattern="^\S{8,}$"
+                                maxlength="8" required title="Password length must be at least 8 characters">
                         </div>
                         <button type="submit" class="form__btn">Sign Up</button>
                         <div class="have-account">
@@ -101,23 +100,24 @@
                 <div class="pop-up__login_content">
                     <div class="close-popup__login"><img src="./assets/svg/close_popup.svg"></div>
                     <h6 class="pop-up__text">Login</h6>
-                    <form onsubmit="login()" class="form-login">
+                    <form class="form-login">
                         <div class="form-login__item">
                             <label for="email">E-mail or readers card</label>
-                            <input type="email" name="email" class="email-log" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" placeholder="email@email.com" required title="Email address must include @ and .">
+                            <input type="email" name="email" class="email-log" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                                placeholder="email@email.com" required title="Email address must include @ and .">
                         </div>
                         <div class="form-login__item">
                             <label for="password">Password</label>
-                            <input type="password" name="password" class="password-log" pattern="^\S{8,}$" maxlength="8" placeholder="12345678" required
-                                title="Password length must beat least 8 characters">
+                            <input type="password" name="password" class="password-log" pattern="^\S{8,}$" maxlength="8"
+                                placeholder="12345678" required title="Password length must beat least 8 characters">
                         </div>
                         <button class="form__btn">Log In</button>
                         <div class="have-account">
                             <p class="have-account__text">Don’t have an account?</p>
                             <button class="have-account__register">Register</button>
-                            <div clss="result"></div>
+                            <span class="result"></span>
                         </div>
-                    </form>
+                        </form>
                 </div>
             </div>
             <div class="pop-up__my-profile hidden">
@@ -160,7 +160,8 @@
                         <div class="user__card-number">
                             <p>Card number:</p>
                             <span class="card-number card-number__my-profile"></span>
-                            <button class="card-number__button" onclick="copyCodeToClipboard(this)"><img src="./assets/svg/copy.svg" alt="copy"></button>
+                            <button class="card-number__copy-button"><img src="./assets/svg/copy.svg"
+                                    alt="copy"></button>
                         </div>
                     </div>
                 </div>

@@ -159,6 +159,9 @@ h1 {
     transition: 0.5s ease;
     z-index: 4;
     visibility: visible;
+    background-color: transparent;
+    border: 0;
+    margin-top: 5px;
 }
 
 .profile__icon .hidden {
@@ -222,6 +225,10 @@ h1 {
     padding-bottom: 5px;
     display: flex;
     align-items: center;
+}
+
+.card-number__profile-menu {
+    font-size: 13px;
 }
 
 .profile__line {
@@ -496,7 +503,7 @@ h6.pop-up__text {
     line-height: 20px;
 }
 
-.card-number__button {
+.card-number__copy-button {
     border: 0;
     background-color: #FFFFFF;
     cursor: pointer;
