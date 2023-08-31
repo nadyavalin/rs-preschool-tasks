@@ -526,6 +526,20 @@ h6.pop-up__text {
     z-index: 10001;
   }
 
+
+.result {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f1f1f1;
+    color: red;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 10001;
+}
+
 h5.my-profile__title {
     font-family: 'Forum';
     font-size: 40px;

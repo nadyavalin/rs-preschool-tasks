@@ -472,23 +472,37 @@ function signup(event) {
 const formSingUp = document.querySelector(".form-register");
 formSingUp.addEventListener("submit", signup);
 
+// сообщение о том, что логин и пароль введены не верно
+function showNotificationLog(message) {
+  const result = document.createElement("div");
+  result.innerText = message;
+  result.classList.add("result");
+
+  document.body.appendChild(result);
+
+  setTimeout(() => {
+    document.body.removeChild(result);
+  }, 3000);
+}
+
 // Log in
 function login(event) {
   const emailLog = document.querySelector(".email-log").value;
   const passwordLog = document.querySelector(".password-log").value;
-  const result = document.querySelector(".result");
   const users = getItemFromLocalStorage("users");
-  const user = users.find((item) => item.email === emailLog && item.password === passwordLog);
+  const user = users.find(
+    (item) => item.email === emailLog && item.password === passwordLog
+  );
   event.preventDefault();
 
   if (!user) {
-    result.innerHTML = "Wrong Email or Password";
+    showNotificationLog("Wrong Email or Password");
   } else {
-  setItemToLocalStorage("user", user);
-  saveUserState(user);
-  popUpLogin.classList.add("hidden");
-  popUpRegister.classList.add("hidden");
-  profileAuth.classList.remove("hidden");
+    setItemToLocalStorage("user", user);
+    saveUserState(user);
+    popUpLogin.classList.add("hidden");
+    popUpRegister.classList.add("hidden");
+    profileAuth.classList.remove("hidden");
   }
 }
 const formLogin = document.querySelector(".form-login");
@@ -531,7 +545,7 @@ cardNumberMyProfile.textContent = randomString;
 // сообщение о том, что код скопирован в буфер обмена
 function showNotification(message) {
   const notification = document.createElement("div"); // cоздаем элемент для уведомления
-  notification.innerText = message; // eстанавливаем текст уведомления
+  notification.innerText = message; // устанавливаем текст уведомления
   notification.classList.add("notification"); // добавляем класс для стилизации уведомления
 
   document.body.appendChild(notification); // добавляем уведомление на страницу
@@ -557,7 +571,9 @@ function copyCodeToClipboard() {
 
   showNotification("Card number copied to clipboard!"); // Показываем уведомление
 }
-const cardNumberCopyButton = document.querySelector(".card-number__copy-button");
+const cardNumberCopyButton = document.querySelector(
+  ".card-number__copy-button"
+);
 cardNumberCopyButton.addEventListener("click", copyCodeToClipboard);
 
 // DOMContentLoaded
