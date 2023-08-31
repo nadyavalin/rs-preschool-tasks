@@ -41,7 +41,7 @@ const arrowNext = document.querySelector(".arrow-button_next");
 const profile = document.querySelector(".profile__icon");
 const profileAuth = document.querySelector(".btn_after-register");
 const noAuth = document.querySelector(".profile__no-auth_active");
-const withAuth = document.querySelector(".profile__with-auth_active");
+const withAuth = document.querySelector(".profile__with-auth");
 
 // PopUp Register
 const btnRegister = document.querySelector(".btn__register");
@@ -72,9 +72,6 @@ const btnBuy = document.querySelectorAll(".book-card__button");
 const popUpBuyCard = document.querySelector(".pop-up__buy-card");
 const popUpCloseBtnBuyCard = document.querySelector(".close-popup__buy-card");
 
-// Иконка профиля после регистрации
-const btnInitials = document.querySelector(".btn_after-register");
-
 // Profile menu
 // Hide Profile menu when mouse click out of this menu
 // Before registration or authorization
@@ -86,7 +83,7 @@ document.body.addEventListener("click", (event) => {
     !event.target.closest(".header__burger-btn") &&
     noAuth.classList.contains("open")
   ) {
-    profile.classList.remove("open");
+    profile.classList.add("open");
     noAuth.classList.remove("open");
   }
 });
@@ -96,7 +93,7 @@ document.body.addEventListener("click", (event) => {
   if (
     !event.target.classList.contains("profile-block") &&
     !event.target.closest(".btn_after-register") &&
-    !event.target.closest(".profile__with-auth_active") &&
+    !event.target.closest(".profile__with-auth") &&
     !event.target.closest(".header__burger-btn") &&
     withAuth.classList.contains("open")
   ) {
@@ -416,12 +413,12 @@ function setUserInfo(firstname, lastname) {
     ".name-lastname__initials"
   );
   const textMyProfileName = document.querySelector(".name-lastname__text");
-  btnInitials.textContent = newInitials;
-  btnInitials.title = nameLastname;
+  profileAuth.textContent = newInitials;
+  profileAuth.title = nameLastname;
   textMyProfileInitials.textContent = newInitials;
   textMyProfileName.textContent = nameLastname;
 
-  popUpRegister.remove();
+  popUpRegister.classList.remove("hidden");
 
   profile.classList.add("hidden");
   profileAuth.classList.remove("hidden");
@@ -459,7 +456,6 @@ function signup(event) {
     password,
   };
   saveUserState(user);
-
   let users = getItemFromLocalStorage("users");
 
   if (users) {
@@ -470,6 +466,7 @@ function signup(event) {
 
   setItemToLocalStorage("users", users);
   setUserInfo(firstname, lastname);
+  popUpRegister.classList.add("hidden");
 }
 
 const formSingUp = document.querySelector(".form-register");
@@ -489,8 +486,9 @@ function login(event) {
   } else {
   setItemToLocalStorage("user", user);
   saveUserState(user);
-  popUpLogin.style.display = "none";
-  btnLogin.addEventListener("click", popUpLogin); // не работает
+  popUpLogin.classList.add("hidden");
+  popUpRegister.classList.add("hidden");
+  profileAuth.classList.remove("hidden");
   }
 }
 const formLogin = document.querySelector(".form-login");
@@ -499,9 +497,11 @@ formLogin.addEventListener("submit", login);
 // Log out
 logOutBtn.addEventListener("click", () => {
   localStorage.removeItem("user");
-  withAuth.style.display = "none";
-  noAuth.style.display = "flex";
-  btnInitials.style.display = "none"; // нет доступа к переменной
+  withAuth.classList.add("hidden");
+  withAuth.classList.remove("open");
+  noAuth.classList.remove("hidden");
+  noAuth.classList.remove("open");
+  profileAuth.classList.add("hidden");
   profile.classList.remove("hidden");
 });
 /* КОНЕЦ ФОРМУЛ регистрации и логирования пользователя */

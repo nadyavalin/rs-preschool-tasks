@@ -160,7 +160,7 @@ h1 {
     z-index: 4;
     visibility: visible;
     background-color: transparent;
-    border: 0;
+    border: none;
     margin-top: 5px;
 }
 
@@ -177,12 +177,13 @@ h1 {
     color: #BB945F;
     background-color: #FFFFFF;
     border-radius: 20px;
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     margin-right: -70px;
     visibility: visible;
     cursor: pointer;
     z-index: 15;
+    border: none;
 }
 
 .btn_after-register .hidden {
@@ -248,7 +249,7 @@ h1 {
 }
 
 .btn__login, .btn__register, .btn__myprofile, .btn__logout {
-    border: 0;
+    border: none;
     cursor: pointer;
     font-size: 15px;
     font-weight: 400;
@@ -302,6 +303,10 @@ h1 {
     left: 0;
     background-color: rgba(30, 30, 30, 0.6);
     z-index: 9999;
+}
+
+.pop-up__register .hidden {
+    visibility: hidden;
 }
 
 .pop-up__register_content {
@@ -415,7 +420,7 @@ h6.pop-up__text {
     font-weight: 700;
     letter-spacing: 1px;
     text-decoration-line: underline;
-    border: 0;
+    border: none;
     background-color: transparent;
     cursor: pointer;
 }
@@ -504,7 +509,7 @@ h6.pop-up__text {
 }
 
 .card-number__copy-button {
-    border: 0;
+    border: none;
     background-color: #FFFFFF;
     cursor: pointer;
 }
@@ -945,7 +950,7 @@ h2 {
 .season-block {
     display: flex;
     gap: 82px;
-    border: 0;
+    border: none;
     margin-top: -3px;
     margin-bottom: -5px;
 }
