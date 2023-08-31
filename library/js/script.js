@@ -445,12 +445,12 @@ function saveUserState(user) {
 }
 
 // Sing Up / Registration
-/*
-function signup() {
+function signup(event) {
   const firstname = document.querySelector(".firstname").value;
   const lastname = document.querySelector(".lastname").value;
   const email = document.querySelector(".email").value;
   const password = document.querySelector(".password").value;
+  event.preventDefault();
 
   const user = {
     firstname,
@@ -471,50 +471,30 @@ function signup() {
   setItemToLocalStorage("users", users);
   setUserInfo(firstname, lastname);
 }
-*/
+
 const formSingUp = document.querySelector(".form-register");
-formSingUp.addEventListener("submit", function() {
-  const firstname = document.querySelector(".firstname").value;
-  const lastname = document.querySelector(".lastname").value;
-  const email = document.querySelector(".email").value;
-  const password = document.querySelector(".password").value;
-  const user = {
-    firstname,
-    lastname,
-    email,
-    password,
-  };
-  saveUserState(user);
-
-  let users = getItemFromLocalStorage("users");
-
-  if (users) {
-    users.push(user);
-  } else {
-    users = [user];
-  }
-
-  setItemToLocalStorage("users", users);
-  setUserInfo(firstname, lastname);
-})
+formSingUp.addEventListener("submit", signup);
 
 // Log in
-const formLogin = document.querySelector(".form-login");
-
-formLogin.addEventListener("submit", function(event) {
+function login(event) {
   const emailLog = document.querySelector(".email-log").value;
   const passwordLog = document.querySelector(".password-log").value;
+  const result = document.querySelector(".result");
   const users = getItemFromLocalStorage("users");
   const user = users.find((item) => item.email === emailLog && item.password === passwordLog);
+  event.preventDefault();
 
   if (!user) {
-    event.preventDefault();
-    alert("Wrong Email or Password");
+    result.innerHTML = "Wrong Email or Password";
   } else {
-   setItemToLocalStorage("user", user);
-   popUpLogin.style.display = "none";
+  setItemToLocalStorage("user", user);
+  saveUserState(user);
+  popUpLogin.style.display = "none";
+  btnLogin.addEventListener("click", popUpLogin); // не работает
   }
-});
+}
+const formLogin = document.querySelector(".form-login");
+formLogin.addEventListener("submit", login);
 
 // Log out
 logOutBtn.addEventListener("click", () => {
