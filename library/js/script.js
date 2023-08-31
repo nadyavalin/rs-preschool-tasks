@@ -418,7 +418,7 @@ function setUserInfo(firstname, lastname) {
   textMyProfileInitials.textContent = newInitials;
   textMyProfileName.textContent = nameLastname;
 
-  popUpRegister.classList.remove("hidden");
+  popUpRegister.classList.add("hidden");
 
   profile.classList.add("hidden");
   profileAuth.classList.remove("hidden");
@@ -441,12 +441,35 @@ function saveUserState(user) {
   }
 }
 
+// Card Number
+function generateRandomString(length) {
+  let result = "";
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const digits = "0123456789";
+
+  result += characters.charAt(Math.floor(Math.random() * characters.length)); // первая буква
+
+  for (let i = 0; i < length - 1; i += 1) {
+    result += digits.charAt(Math.floor(Math.random() * digits.length)); // цифры
+  }
+  return result;
+}
+// генерируем случайную строку
+const randomString = generateRandomString(9);
+const cardNumberProfileMenu = document.querySelector(
+  ".card-number__profile-menu"
+);
+const cardNumberMyProfile = document.querySelector(".card-number__my-profile");
+cardNumberProfileMenu.textContent = randomString;
+cardNumberMyProfile.textContent = randomString;
+
 // Sing Up / Registration
 function signup(event) {
   const firstname = document.querySelector(".firstname").value;
   const lastname = document.querySelector(".lastname").value;
   const email = document.querySelector(".email").value;
   const password = document.querySelector(".password").value;
+  const cardnumber = randomString;
   event.preventDefault();
 
   const user = {
@@ -454,8 +477,10 @@ function signup(event) {
     lastname,
     email,
     password,
+    cardnumber,
   };
   saveUserState(user);
+
   let users = getItemFromLocalStorage("users");
 
   if (users) {
@@ -520,29 +545,7 @@ logOutBtn.addEventListener("click", () => {
 });
 /* КОНЕЦ ФОРМУЛ регистрации и логирования пользователя */
 
-// Card Number
-function generateRandomString(length) {
-  let result = "";
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const digits = "0123456789";
-
-  result += characters.charAt(Math.floor(Math.random() * characters.length)); // первая буква
-
-  for (let i = 0; i < length - 1; i += 1) {
-    result += digits.charAt(Math.floor(Math.random() * digits.length)); // цифры
-  }
-  return result;
-}
-// генерируем случайную строку
-const randomString = generateRandomString(9);
-const cardNumberProfileMenu = document.querySelector(
-  ".card-number__profile-menu"
-);
-const cardNumberMyProfile = document.querySelector(".card-number__my-profile");
-cardNumberProfileMenu.textContent = randomString;
-cardNumberMyProfile.textContent = randomString;
-
-// сообщение о том, что код скопирован в буфер обмена
+// сообщение о том, что Card Number скопирован в буфер обмена
 function showNotification(message) {
   const notification = document.createElement("div"); // cоздаем элемент для уведомления
   notification.innerText = message; // устанавливаем текст уведомления
