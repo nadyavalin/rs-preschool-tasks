@@ -507,6 +507,7 @@ function showNotificationLog(message) {
   }, 3000);
 }
 
+// передеелать, сбрасывается после обновления браузера
 function buyCard() {
   btnBuy.forEach((button) => {
     button.addEventListener("click", () => {
