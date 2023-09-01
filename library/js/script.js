@@ -375,10 +375,10 @@ popUpCloseBtnMyProfile.addEventListener("click", () => {
 });
 
 // PopUp Buy
-// при нажатии на кнопку Buy открывается окно Buy a Library Card
+// при нажатии на кнопку Buy открывается или окно Login окно или Buy a Library Card
 btnBuy.forEach((button) => {
   button.addEventListener("click", () => {
-    popUpBuyCard.classList.toggle("hidden");
+    popUpLogin.classList.toggle("hidden");
   });
 });
 
@@ -507,6 +507,15 @@ function showNotificationLog(message) {
   }, 3000);
 }
 
+function buyCard() {
+  btnBuy.forEach((button) => {
+    button.addEventListener("click", () => {
+      popUpBuyCard.classList.toggle("hidden");
+      popUpLogin.classList.add("hidden");
+    });
+  });
+}
+
 // Log in
 function login(event) {
   const login = document.querySelector(".login").value;
@@ -524,6 +533,7 @@ function login(event) {
   } else {
     setItemToLocalStorage("user", user);
     saveUserState(user);
+    buyCard();
     popUpLogin.classList.add("hidden");
     popUpRegister.classList.add("hidden");
     profileAuth.classList.remove("hidden");
@@ -579,6 +589,126 @@ const cardNumberCopyButton = document.querySelector(
   ".card-number__copy-button"
 );
 cardNumberCopyButton.addEventListener("click", copyCodeToClipboard);
+
+
+// Форма Register, доступность кнопки
+// Получить инпуты
+const firstNameInput = document.querySelector(".firstname");
+const lastNameInput = document.querySelector(".lastname");
+const emailInput = document.querySelector(".email");
+const passwordInput = document.querySelector(".password");
+
+// Получить кнопку
+const signupButton = document.querySelector(".form__btn_signup");
+
+// Функция для проверки заполненности всех полей ввода
+function checkSingUpInputs() {
+  const firstNameValue = firstNameInput.value.trim();
+  const lastNameValue = lastNameInput.value.trim();
+  const emailValue = emailInput.value.trim();
+  const passwordValue = passwordInput.value.trim();
+
+  return (
+    firstNameValue !== "" &&
+    lastNameValue !== "" &&
+    emailValue !== "" &&
+    passwordValue !== ""
+  );
+}
+
+// Функция для обновления состояния кнопки
+function updateButtonSingUpState() {
+  const isValid = checkSingUpInputs();
+  signupButton.disabled = !isValid;
+  signupButton.classList.toggle("disabled", !isValid);
+}
+
+// Слушать события изменения в полях ввода
+firstNameInput.addEventListener("input", updateButtonSingUpState);
+lastNameInput.addEventListener("input", updateButtonSingUpState);
+emailInput.addEventListener("input", updateButtonSingUpState);
+passwordInput.addEventListener("input", updateButtonSingUpState);
+
+
+// Форма Log in, доступность кнопки
+// Получить инпуты
+const loginInput = document.querySelector(".login");
+const passwordLogInput = document.querySelector(".password-log");
+
+// Получить кнопку
+const loginButton = document.querySelector(".form__btn_login");
+
+// Функция для проверки заполненности всех полей ввода
+function checkLoginInputs() {
+  const loginValue = loginInput.value.trim();
+  const passwordLogValue = passwordLogInput.value.trim();
+
+  return (
+    loginValue !== "" &&
+    passwordLogValue !== ""
+  );
+}
+
+// Функция для обновления состояния кнопки
+function updateButtonLoginState() {
+  const isValid = checkLoginInputs();
+  loginButton.disabled = !isValid;
+  loginButton.classList.toggle("disabled", !isValid);
+}
+
+// Слушать события изменения в полях ввода
+loginInput.addEventListener("input", updateButtonLoginState);
+passwordLogInput.addEventListener("input", updateButtonLoginState);
+
+// Форма BUY A LIBRARY CARD, доступность кнопки
+// Получить инпуты
+const bankCardNumberInput = document.querySelector(".bank-card-number");
+const expirationCodeInput1 = document.querySelector(".expiration-code-1");
+const expirationCodeInput2 = document.querySelector(".expiration-code-2");
+const cvcInput = document.querySelector(".cvc");
+const cardholderNameInput = document.querySelector(".cardholder-name");
+const postalCodeInput = document.querySelector(".postal-code");
+const cityTownInput = document.querySelector(".city-town");
+
+// Получить кнопку
+const buyCardButton = document.querySelector(".buy-card__button");
+
+// Функция для проверки заполненности всех полей ввода
+function checkBuyCardInputs() {
+  const bankCardNumberValue = bankCardNumberInput.value.trim();
+  const expirationCodeValue1 = expirationCodeInput1.value.trim();
+  const expirationCodeValue2 = expirationCodeInput2.value.trim();
+  const cvcValue = cvcInput.value.trim();
+  const cardholderNameValue = cardholderNameInput.value.trim();
+  const postalCodeValue = postalCodeInput.value.trim();
+  const cityTownValue = cityTownInput.value.trim();
+
+  return (
+    bankCardNumberValue !== "" &&
+    expirationCodeValue1 !== "" &&
+    expirationCodeValue2 !== "" &&
+    cvcValue !== "" &&
+    cardholderNameValue !== "" &&
+    postalCodeValue !== "" &&
+    cityTownValue !== ""
+  );
+}
+
+// Функция для обновления состояния кнопки
+function updateBuyCardState() {
+  const isValid = checkBuyCardInputs();
+  buyCardButton.disabled = !isValid;
+  buyCardButton.classList.toggle("disabled", !isValid);
+}
+
+// Слушать события изменения в полях ввода
+bankCardNumberInput.addEventListener("input", updateBuyCardState);
+expirationCodeInput1.addEventListener("input", updateBuyCardState);
+expirationCodeInput2.addEventListener("input", updateBuyCardState);
+cvcInput.addEventListener("input", updateBuyCardState);
+cardholderNameInput.addEventListener("input", updateBuyCardState);
+postalCodeInput.addEventListener("input", updateBuyCardState);
+cityTownInput.addEventListener("input", updateBuyCardState);
 
 // DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {

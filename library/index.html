@@ -72,11 +72,11 @@
                     <form class="form-register">
                         <div class="form-register__item">
                             <label for="firstname">Frist name</label>
-                            <input type="text" class="firstname" placeholder="name" required>
+                            <input type="text" class="firstname" placeholder="Name" required>
                         </div>
                         <div class="form-register__item">
                             <label for="lastname">Last name</label>
-                            <input type="text" class="lastname" placeholder="last name" required>
+                            <input type="text" class="lastname" placeholder="Last name" required>
                         </div>
                         <div class="form-register__item">
                             <label for="email">E-mail</label>
@@ -88,7 +88,7 @@
                             <input type="password" class="password" placeholder="12345678" pattern="^\S{8,}$"
                                 maxlength="8" required title="Password length must be at least 8 characters">
                         </div>
-                        <button type="submit" class="form__btn">Sign Up</button>
+                        <button type="submit" class="form__btn form__btn_signup disabled">Sign Up</button>
                         <div class="have-account">
                             <p class="have-account__text">Already have an account?</p>
                             <button class="have-account__login">Login</button>
@@ -110,7 +110,7 @@
                             <input type="password" name="password" class="password-log" pattern="^\S{8,}$" maxlength="8"
                                 placeholder="12345678" required title="Password length must beat least 8 characters">
                         </div>
-                        <button class="form__btn">Log In</button>
+                        <button class="form__btn form__btn_login disabled">Log In</button>
                         <div class="have-account">
                             <p class="have-account__text">Don’t have an account?</p>
                             <button class="have-account__register">Register</button>
@@ -175,33 +175,33 @@
                             <form class="buy-card__form">
                                 <div class="buy-card__form-item">
                                     <label for="bank-card-number">Bank card number</label>
-                                    <input type="text" name="bank-card-number" placeholder="" required>
+                                    <input type="text" name="bank-card-number" class="bank-card-number" placeholder="" required>
                                 </div>
                                 <div class="buy-card__form-item">
                                     <label for="expiration-code">Expiration code</label>
                                     <div class="exp-code_two-field">
-                                        <input type="text" name="expiration-code" placeholder="" required>
-                                        <input type="text" name="expiration-code" placeholder="" required>
+                                        <input type="text" name="expiration-code" class='expiration-code-1' placeholder="" required>
+                                        <input type="text" name="expiration-code" class='expiration-code-2' placeholder="" required>
                                     </div>
                                 </div>
                                 <div class="buy-card__form-item-cvc">
                                     <label for="cvc">CVC</label>
-                                    <input type="text" name="cvc" placeholder="" required>
+                                    <input type="text" name="cvc" class="cvc" placeholder="" required>
                                 </div>
                                 <div class="buy-card__form-item buy-card__form-item_gap">
                                     <label for="holder-name">Cardholder name</label>
-                                    <input type="text" name="holder-name" placeholder="" required>
+                                    <input type="text" name="holder-name" class="cardholder-name" placeholder="" required>
                                 </div>
                                 <div class="buy-card__form-item">
                                     <label for="postal-code">Postal code</label>
-                                    <input type="text" name="postal-code" placeholder="" required>
+                                    <input type="text" name="postal-code" class="postal-code" placeholder="" required>
                                 </div>
                                 <div class="buy-card__form-item">
                                     <label for="city-town">City / Town</label>
-                                    <input type="text" name="city-town" placeholder="" required>
+                                    <input type="text" name="city-town" class="city-town" placeholder="" required>
                                 </div>
                                 <div class="buy-card__button-block">
-                                    <button class="buy-card__button" style="margin-top: 10px">Buy</button>
+                                    <button class="buy-card__button disabled" style="margin-top: 10px">Buy</button>
                                     <p class>$ 25.00</p>
                                 </div>
                             </form>
@@ -308,8 +308,7 @@
                             <h5 class="book-card__author">By Rachel Harrison</h5>
                             <p class="book-card__description">Are your Halloween movies of choice The Witches of
                                 Eastwick and Practical Magic? Look no further than here - where a woman recovering from
-                                a breakup
-                                moves to a quaint town in upstate New York and befriends a beautiful witch.</p>
+                                a breakup moves to a quaint town in upstate New York and befriends a beautiful witch.</p>
                             <button class="book-card__button">Buy</button>
                             <img class="book-card__image" src="./assets/img/book_2_cackle.jpg" alt="Cackle">
                         </article>
@@ -322,8 +321,7 @@
                             <h5 class="book-card__author">By Erich Auerbach</h5>
                             <p class="book-card__description">Auerbach's engaging book places the 'Comedy' within the
                                 tradition of epic, tragedy, and philosophy in general, arguing for Dante's uniqueness as
-                                one
-                                who raised the individual and his drama of soul into something of divine
+                                one who raised the individual and his drama of soul into something of divine
                                 significance—an inspired introduction to Dante's main themes.</p>
                             <button class="book-card__button">Buy</button>
                             <img class="book-card__image" src="./assets/img/book_3_dante.jpg"

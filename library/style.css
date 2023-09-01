@@ -404,6 +404,24 @@ h6.pop-up__text {
     cursor: pointer;
 }
 
+.form__btn_signup.disabled {
+    color: #BB945F;
+    border: 1px solid #BB945F;
+    pointer-events: none;
+}
+
+.form__btn_login.disabled {
+    color: #BB945F;
+    border: 1px solid #BB945F;
+    pointer-events: none;
+}
+
+.buy-card__button.disabled {
+    color: #BB945F;
+    border: 1px solid #BB945F;
+    pointer-events: none;
+}
+
 .have-account {
     display: flex;
     gap: 10px;
