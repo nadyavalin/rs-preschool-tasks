@@ -415,7 +415,7 @@ btnLoginFromRegister.addEventListener("click", () => {
 /* НАЧАЛО ФОРМУЛ регистрации и логирования пользователя */
 
 // Card Number
-function generateRandomString() {
+function generateCardNumber() {
   let result = "";
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const digits = "0123456789";
@@ -427,8 +427,6 @@ function generateRandomString() {
   }
   return result;
 }
-const randomString = generateRandomString();
-const cardNumber = randomString;
 
 // добавляем инициалы, имя/фамилию
 function setUserInfo(firstName, lastName) {
@@ -467,8 +465,9 @@ function signup(event) {
   const lastName = document.querySelector(".lastname").value;
   const email = document.querySelector(".email").value;
   const password = document.querySelector(".password").value;
-  cardNumberProfileMenu.textContent = randomString;
-  cardNumberMyProfile.textContent = randomString;
+  const cardNumber = generateCardNumber();
+  cardNumberProfileMenu.textContent = cardNumber;
+  cardNumberMyProfile.textContent = cardNumber;
   event.preventDefault();
 
   const user = {
@@ -512,12 +511,12 @@ function showNotificationLog(message) {
 function login(event) {
   const emailLog = document.querySelector(".email-log").value;
   const passwordLog = document.querySelector(".password-log").value;
+  const cardNumberLog = document.querySelector(".card-number-log").value;
   const users = getItemFromLocalStorage("users");
   const user = users.find(
     (item) =>
       item.email === emailLog &&
-      item.password === passwordLog &&
-      item.cardNumber === cardNumber
+      item.password === passwordLog
   );
   event.preventDefault();
 
@@ -531,6 +530,11 @@ function login(event) {
     profileAuth.classList.remove("hidden");
     withAuthCode.classList.remove("hidden"); // вроде не нужно
     withAuthCode.classList.remove("open"); // вроде не нужно
+  }
+
+  if(user && item.cardNumber === cardNumberLog) {
+    cardNumberProfileMenu.textContent = cardNumberLog;
+    cardNumberMyProfile.textContent = cardNumberLog;
   }
 }
 const formLogin = document.querySelector(".form-login");
