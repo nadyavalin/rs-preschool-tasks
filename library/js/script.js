@@ -429,9 +429,11 @@ function generateCardNumber() {
 }
 
 // добавляем инициалы, имя/фамилию
-function setUserInfo(firstName, lastName) {
+function setUserInfo(firstName, lastName, cardNumber) {
   const newInitials = `${firstName[0]}${lastName[0]}`;
   const nameLastName = `${firstName} ${lastName}`;
+  cardNumberProfileMenu.textContent = cardNumber;
+  cardNumberMyProfile.textContent = cardNumber;
   profileAuth.textContent = newInitials;
   profileAuth.title = nameLastName;
   textMyProfileInitials.textContent = newInitials;
@@ -466,8 +468,6 @@ function signup(event) {
   const email = document.querySelector(".email").value;
   const password = document.querySelector(".password").value;
   const cardNumber = generateCardNumber();
-  cardNumberProfileMenu.textContent = cardNumber;
-  cardNumberMyProfile.textContent = cardNumber;
   event.preventDefault();
 
   const user = {
@@ -511,7 +511,6 @@ function showNotificationLog(message) {
 function login(event) {
   const emailLog = document.querySelector(".email-log").value;
   const passwordLog = document.querySelector(".password-log").value;
-  const cardNumberLog = document.querySelector(".card-number-log").value;
   const users = getItemFromLocalStorage("users");
   const user = users.find(
     (item) =>
@@ -530,11 +529,6 @@ function login(event) {
     profileAuth.classList.remove("hidden");
     withAuthCode.classList.remove("hidden"); // вроде не нужно
     withAuthCode.classList.remove("open"); // вроде не нужно
-  }
-
-  if(user && item.cardNumber === cardNumberLog) {
-    cardNumberProfileMenu.textContent = cardNumberLog;
-    cardNumberMyProfile.textContent = cardNumberLog;
   }
 }
 const formLogin = document.querySelector(".form-login");
@@ -592,6 +586,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const user = getItemFromLocalStorage("user");
   if (user) {
-    setUserInfo(user.firstName, user.lastName);
+    setUserInfo(user.firstName, user.lastName, user.cardNumber);
   }
 });
