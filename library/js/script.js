@@ -509,12 +509,12 @@ function showNotificationLog(message) {
 
 // Log in
 function login(event) {
-  const emailLog = document.querySelector(".email-log").value;
+  const login = document.querySelector(".login").value;
   const passwordLog = document.querySelector(".password-log").value;
   const users = getItemFromLocalStorage("users");
   const user = users.find(
     (item) =>
-      item.email === emailLog &&
+      (item.email === login || item.cardNumber === login) &&
       item.password === passwordLog
   );
   event.preventDefault();
@@ -527,8 +527,8 @@ function login(event) {
     popUpLogin.classList.add("hidden");
     popUpRegister.classList.add("hidden");
     profileAuth.classList.remove("hidden");
-    withAuthCode.classList.remove("hidden"); // вроде не нужно
-    withAuthCode.classList.remove("open"); // вроде не нужно
+    withAuthCode.classList.remove("hidden");
+    withAuthCode.classList.remove("open");
   }
 }
 const formLogin = document.querySelector(".form-login");
