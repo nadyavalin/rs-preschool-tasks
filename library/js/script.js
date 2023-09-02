@@ -714,6 +714,18 @@ cardholderNameInput.addEventListener("input", updateBuyCardState);
 postalCodeInput.addEventListener("input", updateBuyCardState);
 cityTownInput.addEventListener("input", updateBuyCardState);
 
+// Counter of visits // пока считает только обновление браузера
+let visitCounter = parseInt(localStorage.getItem("visitCounter"), 10) || 0;
+visitCounter += 1;
+localStorage.setItem("visitCounter", visitCounter);
+
+const visitCounterElement = document.querySelector(".visit-counter");
+function formatCounterValue(value) {
+return value.toString().padStart(2, "0");
+}
+visitCounterElement.textContent = formatCounterValue(visitCounter);
+// переделать
+
 // DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
   addListenersForBurgerMenu();
