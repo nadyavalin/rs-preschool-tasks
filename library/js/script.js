@@ -66,7 +66,9 @@ const popUpCloseBtnMyProfile = document.querySelector(
 );
 
 // Card Number
-const cardNumberProfileMenu = document.querySelector(".card-number__profile-menu");
+const cardNumberProfileMenu = document.querySelector(
+  ".card-number__profile-menu"
+);
 const cardNumberMyProfile = document.querySelector(".card-number__my-profile");
 
 // Log out
@@ -78,7 +80,9 @@ const popUpBuyCard = document.querySelector(".pop-up__buy-card");
 const popUpCloseBtnBuyCard = document.querySelector(".close-popup__buy-card");
 
 // My profile
-const textMyProfileInitials = document.querySelector(".name-lastname__initials");
+const textMyProfileInitials = document.querySelector(
+  ".name-lastname__initials"
+);
 const textMyProfileName = document.querySelector(".name-lastname__text");
 
 // Profile menu
@@ -507,24 +511,29 @@ function showNotificationLog(message) {
   }, 3000);
 }
 
-// передеелать, сбрасывается после обновления браузера
-function buyCard() {
-  btnBuy.forEach((button) => {
-    button.addEventListener("click", () => {
-      popUpBuyCard.classList.toggle("hidden");
+btnBuy.forEach((button) => {
+  button.addEventListener("click", () => {
+    const user = getItemFromLocalStorage("user");
+    if (user) {
+      // Пользователь залогинен, открыть поп-ап "Buy a card"
+      popUpBuyCard.classList.remove("hidden");
       popUpLogin.classList.add("hidden");
-    });
+    } else {
+      // Пользователь не залогинен, открыть поп-ап "Login"
+      popUpBuyCard.classList.add("hidden");
+      popUpLogin.classList.remove("hidden");
+    }
   });
-}
+});
 
 // Log in
 function login(event) {
-  const login = document.querySelector(".login").value;
+  const loginLog = document.querySelector(".login").value;
   const passwordLog = document.querySelector(".password-log").value;
   const users = getItemFromLocalStorage("users");
   const user = users.find(
     (item) =>
-      (item.email === login || item.cardNumber === login) &&
+      (item.email === loginLog || item.cardNumber === loginLog) &&
       item.password === passwordLog
   );
   event.preventDefault();
@@ -534,7 +543,6 @@ function login(event) {
   } else {
     setItemToLocalStorage("user", user);
     saveUserState(user);
-    buyCard();
     popUpLogin.classList.add("hidden");
     popUpRegister.classList.add("hidden");
     profileAuth.classList.remove("hidden");
@@ -591,7 +599,6 @@ const cardNumberCopyButton = document.querySelector(
 );
 cardNumberCopyButton.addEventListener("click", copyCodeToClipboard);
 
-
 // Форма Register, доступность кнопки
 // Получить инпуты
 const firstNameInput = document.querySelector(".firstname");
@@ -630,7 +637,6 @@ lastNameInput.addEventListener("input", updateButtonSingUpState);
 emailInput.addEventListener("input", updateButtonSingUpState);
 passwordInput.addEventListener("input", updateButtonSingUpState);
 
-
 // Форма Log in, доступность кнопки
 // Получить инпуты
 const loginInput = document.querySelector(".login");
@@ -644,10 +650,7 @@ function checkLoginInputs() {
   const loginValue = loginInput.value.trim();
   const passwordLogValue = passwordLogInput.value.trim();
 
-  return (
-    loginValue !== "" &&
-    passwordLogValue !== ""
-  );
+  return loginValue !== "" && passwordLogValue !== "";
 }
 
 // Функция для обновления состояния кнопки
