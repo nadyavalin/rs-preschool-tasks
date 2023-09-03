@@ -658,14 +658,14 @@
                 <div class="find-get-card">
                     <div class="find-card-block">
                         <span class="find-card__title">Find your Library card</span>
-                        <form action="#" method="get" class="form">
+                        <form action="#" class="form">
                             <div class="form__field">
                                 <h4 class="form__title">Brooklyn Public Library</h4>
-                                <label><input type="text" pattern="[A-Za-zА-Яа-яЁё]{3,}" class="form__input" name="name"
+                                <label><input type="text" pattern="[A-Za-zА-Яа-яЁё]{3,}" class="form__input_name" name="name"
                                         placeholder="Reader's name" required></label>
-                                <label><input type="text" pattern="[0-9]{1,4}-[0-9]{1,4}" maxlength="9"
-                                        class="form__input form__input_margin" name="card_number"
-                                        placeholder="Card number" required title="XXXX-XXXX"></label>
+                                <label><input type="text" pattern="[A-Z]\d{8}" maxlength="9"
+                                        class="form__input_card-number form__input_margin" name="card_number"
+                                        placeholder="Card number" required  title="X00000000"></label>
                             </div>
                             <button class="form__button">Check the card</button>
                         </form>

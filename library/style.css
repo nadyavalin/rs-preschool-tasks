@@ -598,14 +598,14 @@ h5.my-profile__title {
 }
 
 .own-books {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 .own-books__title {
     color: #0C0C0E;
     font-size: 25px;
     line-height: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 27px;
 }
 
 .own-books ul {
@@ -616,7 +616,8 @@ h5.my-profile__title {
 }
 
 .own-books-list {
-    height: 50px;
+    height: 60px;
+    width: 350px;
     overflow-y: auto;
 }
 
@@ -1409,7 +1410,7 @@ h4.form__title {
     margin-top: -2px;
 }
 
-.form__input {
+.form__input_name, .form__input_card-number {
     width: 520px;
     height: 66px;
     border-radius: 10px;

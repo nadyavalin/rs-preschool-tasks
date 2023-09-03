@@ -746,7 +746,6 @@ btnBuy.forEach((button) => {
     button.disabled = true;
 
     ownBooksCount +=1;
-
     ownBooksCounter.textContent = ownBooksCount;
 
     const bookTitle = button.parentNode.querySelector("h4").textContent;
@@ -763,6 +762,16 @@ buyForm.addEventListener("submit", (event) => {
   popUpBuyCard.remove();
 });
 
+const nameInput = document.querySelector('.form__input_name');
+const cardNumberInput = document.querySelector('.form__input_card-number');
+function fillUserData() {
+  const user = getItemFromLocalStorage("user");
+
+  // Заполнение данных в форме
+  nameInput.value = `${user.firstName} ${user.lastName}`;
+  cardNumberInput.value = user.cardNumber;
+}
+
 // DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
   addListenersForBurgerMenu();
@@ -770,5 +779,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const user = getItemFromLocalStorage("user");
   if (user) {
     setUserInfo(user.firstName, user.lastName, user.cardNumber);
+    fillUserData();
   }
 });
