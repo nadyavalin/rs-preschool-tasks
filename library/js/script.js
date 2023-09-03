@@ -624,7 +624,7 @@ function checkSingUpInputs() {
   );
 }
 
-// Функция для обновления состояния кнопки
+// Функция для обновления состояния кнопки Sing Up
 function updateButtonSingUpState() {
   const isValid = checkSingUpInputs();
   signupButton.disabled = !isValid;
@@ -653,7 +653,7 @@ function checkLoginInputs() {
   return loginValue !== "" && passwordLogValue !== "";
 }
 
-// Функция для обновления состояния кнопки
+// Функция для обновления состояния кнопки Log In
 function updateButtonLoginState() {
   const isValid = checkLoginInputs();
   loginButton.disabled = !isValid;
@@ -698,7 +698,7 @@ function checkBuyCardInputs() {
   );
 }
 
-// Функция для обновления состояния кнопки
+// Функция для обновления состояния кнопки Buy Card
 function updateBuyCardState() {
   const isValid = checkBuyCardInputs();
   buyCardButton.disabled = !isValid;
@@ -714,7 +714,7 @@ cardholderNameInput.addEventListener("input", updateBuyCardState);
 postalCodeInput.addEventListener("input", updateBuyCardState);
 cityTownInput.addEventListener("input", updateBuyCardState);
 
-// Counter of visits // пока считает только обновление браузера
+// Counter of visits // пока считает только регистрация и обновления браузера
 let visitCounter = parseInt(localStorage.getItem("visitCounter"), 10) || 0;
 visitCounter += 1;
 localStorage.setItem("visitCounter", visitCounter);
@@ -725,6 +725,43 @@ return value.toString().padStart(2, "0");
 }
 visitCounterElement.textContent = formatCounterValue(visitCounter);
 // переделать
+
+// Books Counter
+const ownBooksCounter = document.querySelector(".own-books-counter");
+const ownBooksList = document.querySelector(".own-books-list");
+const buyForm = document.querySelector(".buy-card__form");
+
+let ownBooksCount = 0;
+
+// Обработчик события для кнопок Buy
+btnBuy.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (ownBooksCount >= 16 || button.classList.contains("book-card__button_own")) {
+      return;
+    }
+
+    button.classList.remove("book-card__button");
+    button.classList.add("book-card__button_own");
+    button.textContent = "Own";
+    button.disabled = true;
+
+    ownBooksCount +=1;
+
+    ownBooksCounter.textContent = ownBooksCount;
+
+    const bookTitle = button.parentNode.querySelector("h4").textContent;
+    const bookAuthor = button.parentNode.querySelector(".book-card__author").textContent;
+    const listItem = document.createElement("li");
+    listItem.textContent = `${bookTitle}, ${bookAuthor}`;
+    ownBooksList.appendChild(listItem);
+  });
+});
+
+// Форма покупки книги - исчезает после первой покупки
+buyForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  popUpBuyCard.remove();
+});
 
 // DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
