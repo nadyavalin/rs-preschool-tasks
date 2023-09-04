@@ -84,6 +84,10 @@ const textMyProfileName = document.querySelector(".name-lastname__text");
 // Counter
 const visitCounter = document.querySelector(".visit-counter");
 
+// форма Digital Library Cards
+const nameInput = document.querySelector('.form__input_name');
+const cardNumberInput = document.querySelector('.form__input_card-number');
+
 // Profile menu
 // Hide Profile menu when mouse click out of this menu
 // Before registration or authorization
@@ -442,6 +446,9 @@ function setUserInfo(firstName, lastName, cardNumber) {
   textMyProfileInitials.textContent = newInitials;
   textMyProfileName.textContent = nameLastName;
 
+  nameInput.value = `${firstName} ${lastName}`;
+  cardNumberInput.value = cardNumber;
+
   popUpRegister.classList.add("hidden");
   profile.classList.add("hidden");
   profileAuth.classList.remove("hidden");
@@ -458,6 +465,10 @@ function getItemFromLocalStorage(key) {
 // храним данные пользователя в LocalStorage
 function saveUserState(user) {
   setItemToLocalStorage("user", user);
+
+  if (user) {
+    setUserInfo(user.firstName, user.lastName, user.cardNumber);
+  }
 }
 
 // Sing Up / Registration
@@ -540,7 +551,6 @@ function login(event) {
   } else {
     user.visits += 1;
     visitCounter.textContent = user.visits;
-    setItemToLocalStorage("user", user);
     saveUserState(user);
     popUpLogin.classList.add("hidden");
     popUpRegister.classList.add("hidden");
@@ -748,16 +758,6 @@ buyForm.addEventListener("submit", (event) => {
   event.preventDefault();
   popUpBuyCard.remove();
 });
-
-// форма Digital Library Cards
-// работает только после обновления браузера!!!
-const nameInput = document.querySelector('.form__input_name');
-const cardNumberInput = document.querySelector('.form__input_card-number');
-function fillUserData() {
-  const user = getItemFromLocalStorage("user");
-  nameInput.value = `${user.firstName} ${user.lastName}`;
-  cardNumberInput.value = user.cardNumber;
-}
 
 // DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
