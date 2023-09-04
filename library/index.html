@@ -85,8 +85,7 @@
                         </div>
                         <div class="form-register__item">
                             <label for="password">Password</label>
-                            <input type="password" class="password" placeholder="12345678" pattern="^\S{8,}$"
-                                maxlength="8" required title="Password length must be at least 8 characters">
+                            <input type="password" class="password" placeholder="12345678" pattern="^\S{8,}$" minlength="8" required title="Password length must be at least 8 characters">
                         </div>
                         <button type="submit" class="form__btn form__btn_signup disabled">Sign Up</button>
                         <div class="have-account">
@@ -108,7 +107,7 @@
                         </div>
                         <div class="form-login__item">
                             <label for="password">Password</label>
-                            <input type="password" name="password" class="password-log" pattern="^\S{8,}$" maxlength="8"
+                            <input type="password" name="password" class="password-log" pattern="^\S{8,}$" minlength="8"
                                 placeholder="12345678" required title="Password length must be at least 8 characters">
                         </div>
                         <button type="submit" class="form__btn form__btn_login disabled">Log In</button>
@@ -175,21 +174,21 @@
                                 <div class="buy-card__form-item">
                                     <label for="bank-card-number">Bank card number</label>
                                     <input type="text" name="bank-card-number" class="bank-card-number"
-                                        pattern="\d{4}(?:\s?\d{4}){3}" placeholder="XXXX XXXX XXXX XXXX" title="There must be 16 figures" required>
+                                        pattern="^\d{4}(?:\s?\d{4}){3}$" placeholder="XXXX XXXX XXXX XXXX" title="There must be 16 figures" maxlength="19">
                                 </div>
                                 <div class="buy-card__form-item">
                                     <label for="expiration-code">Expiration code</label>
                                     <div class="exp-code_two-field">
                                         <input type="text" name="expiration-code" class="expiration-code-1"
-                                            pattern="\d{2}" placeholder="XX" title="There must be 2 figures" required>
+                                            pattern="\d{2}" placeholder="XX" title="There must be 2 figures" maxlength="2" required>
                                         <input type="text" name="expiration-code" class="expiration-code-2"
-                                            pattern="\d{2}" placeholder="XX" title="There must be 2 figures" required>
+                                            pattern="\d{2}" placeholder="XX" title="There must be 2 figures" maxlength="2" required>
                                     </div>
                                 </div>
                                 <div class="buy-card__form-item-cvc">
                                     <label for="cvc">CVC</label>
                                     <input type="text" name="cvc" class="cvc" pattern="\d{3}" title="There must be 3 figures" placeholder="XXX"
-                                        required>
+                                    maxlength="3" required>
                                 </div>
                                 <div class="buy-card__form-item buy-card__form-item_gap">
                                     <label for="holder-name">Cardholder name</label>
@@ -198,7 +197,7 @@
                                 </div>
                                 <div class="buy-card__form-item">
                                     <label for="postal-code">Postal code</label>
-                                    <input type="text" name="postal-code" class="postal-code" placeholder="XXXXXX"
+                                    <input type="text" name="postal-code" class="postal-code" pattern="[0-9]{6}" maxlength="6" placeholder="XXXXXX"
                                         required>
                                 </div>
                                 <div class="buy-card__form-item">

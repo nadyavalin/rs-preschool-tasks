@@ -61,9 +61,7 @@ const popUpCloseBtnLogin = document.querySelector(".close-popup__login");
 // PopUp My profile
 const btnMyProfile = document.querySelector(".btn__myprofile");
 const popUpMyProfile = document.querySelector(".pop-up__my-profile");
-const popUpCloseBtnMyProfile = document.querySelector(
-  ".close-popup__my-profile"
-);
+const popUpCloseBtnMyProfile = document.querySelector(".close-popup__my-profile");
 
 // Card Number
 const cardNumberProfileMenu = document.querySelector(
@@ -80,10 +78,11 @@ const popUpBuyCard = document.querySelector(".pop-up__buy-card");
 const popUpCloseBtnBuyCard = document.querySelector(".close-popup__buy-card");
 
 // My profile
-const textMyProfileInitials = document.querySelector(
-  ".name-lastname__initials"
-);
+const textMyProfileInitials = document.querySelector(".name-lastname__initials");
 const textMyProfileName = document.querySelector(".name-lastname__text");
+
+// Counter
+const visitCounter = document.querySelector(".visit-counter");
 
 // Profile menu
 // Hide Profile menu when mouse click out of this menu
@@ -476,10 +475,10 @@ function signup(event) {
     email,
     password,
     cardNumber,
+    visits: 1,
   };
   saveUserState(user);
   let users = getItemFromLocalStorage("users");
-
   if (users) {
     users.push(user);
   } else {
@@ -489,6 +488,8 @@ function signup(event) {
   setItemToLocalStorage("users", users);
   setUserInfo(firstName, lastName, cardNumber);
   popUpRegister.classList.add("hidden");
+
+  visitCounter.textContent = user.visits;
 }
 
 const formSingUp = document.querySelector(".form-register");
@@ -537,6 +538,8 @@ function login(event) {
   if (!user) {
     showNotificationLog("Wrong Email or Password");
   } else {
+    user.visits += 1;
+    visitCounter.textContent = user.visits;
     setItemToLocalStorage("user", user);
     saveUserState(user);
     popUpLogin.classList.add("hidden");
@@ -709,33 +712,6 @@ cvcInput.addEventListener("input", updateBuyCardState);
 cardholderNameInput.addEventListener("input", updateBuyCardState);
 postalCodeInput.addEventListener("input", updateBuyCardState);
 cityTownInput.addEventListener("input", updateBuyCardState);
-
-/*
-// счетчик считает только обновления браузера
-let visitCounter = parseInt(localStorage.getItem("visitCounter"), 10) || 0;
-visitCounter += 1;
-localStorage.setItem("visitCounter", visitCounter);
-
-const visitCounterElement = document.querySelector(".visit-counter");
-function formatCounterValue(value) {
-return value.toString().padStart(2, "0");
-}
-visitCounterElement.textContent = formatCounterValue(visitCounter);
-*/
-
-// Counter of visits by method of clicking on Log in button in Login Form
-// не работает / не работает / не работает / не работает / не работает / не работает /
-const buttonLoginForm = document.querySelector(".form__btn");
-const visitCounterElement = document.querySelector(".visit-counter");
-
-function clickCounter(event) {
-  event.preventDefault();
-  let visitCounter = parseInt(visitCounterElement.textContent);
-  visitCounterElement.textContent = visitCounter + 1;
-}
-
-buttonLoginForm.addEventListener('click', clickCounter);
-// не работает / не работает / не работает / не работает / не работает / не работает /
 
 // Books Counter
 const ownBooksCounter = document.querySelector(".own-books-counter");
