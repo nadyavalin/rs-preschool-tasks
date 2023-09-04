@@ -46,9 +46,7 @@ const withAuthCode = document.querySelector(".profile__with-auth_active");
 
 // PopUp Register
 const btnRegister = document.querySelector(".btn__register");
-const btnRegisterGetCardBlock = document.querySelector(
-  ".get-card__button_register"
-);
+const btnRegisterGetCardBlock = document.querySelector(".get-card__button_register");
 const popUpRegister = document.querySelector(".pop-up__register");
 const popUpCloseBtnRegister = document.querySelector(".close-popup__register");
 
@@ -60,6 +58,7 @@ const popUpCloseBtnLogin = document.querySelector(".close-popup__login");
 
 // PopUp My profile
 const btnMyProfile = document.querySelector(".btn__myprofile");
+const btnProfileDigitalCard = document.querySelector('.get-card__button_profile');
 const popUpMyProfile = document.querySelector(".pop-up__my-profile");
 const popUpCloseBtnMyProfile = document.querySelector(".close-popup__my-profile");
 
@@ -83,6 +82,10 @@ const textMyProfileName = document.querySelector(".name-lastname__text");
 
 // Counter
 const visitCounter = document.querySelector(".visit-counter");
+
+// форма Digital Library Cards
+const nameInput = document.querySelector(".form__input_name");
+const cardNumberInput = document.querySelector(".form__input_card-number");
 
 // Profile menu
 // Hide Profile menu when mouse click out of this menu
@@ -271,37 +274,6 @@ btnAutumn.addEventListener("click", () => {
   }
 });
 
-// код тоже работает, но не на всех переключениях
-/*
-btnWinter.addEventListener("click", () => {
-  fadeOut(bookCardsSummer, 700);
-  fadeOut(bookCardsAutumn, 700);
-  fadeOut(bookCardsSpring, 700);
-  fadeIn(bookCardsWinter, 700, "flex");
-});
-
-btnSpring.addEventListener("click", () => {
-  fadeOut(bookCardsWinter, 700);
-  fadeOut(bookCardsSummer, 700);
-  fadeOut(bookCardsAutumn, 700);
-  fadeIn(bookCardsSpring, 700, "flex");
-});
-
-btnSummer.addEventListener("click", () => {
-  fadeOut(bookCardsSpring, 700);
-  fadeOut(bookCardsWinter, 700);
-  fadeOut(bookCardsAutumn, 700);
-  fadeIn(bookCardsSummer, 700, "flex");
-});
-
-btnAutumn.addEventListener("click", () => {
-  fadeOut(bookCardsWinter, 700);
-  fadeOut(bookCardsSpring, 700);
-  fadeOut(bookCardsSummer, 700);
-  fadeIn(bookCardsAutumn, 700, "flex");
-});
-*/
-
 profileAuth.addEventListener("click", () => {
   withAuth.classList.toggle("open");
 });
@@ -360,8 +332,11 @@ popUpLogin.addEventListener("click", (event) => {
 });
 
 // PopUp My profile
-// при нажатии на кнопку My profile открывается окно My profile
+// при нажатии на кнопку My profile и Profile открывается окно My profile
 btnMyProfile.addEventListener("click", () => {
+  popUpMyProfile.classList.toggle("hidden");
+});
+btnProfileDigitalCard.addEventListener("click", () => {
   popUpMyProfile.classList.toggle("hidden");
 });
 
@@ -377,14 +352,6 @@ popUpCloseBtnMyProfile.addEventListener("click", () => {
   popUpMyProfile.classList.toggle("hidden");
 });
 
-// PopUp Buy
-// при нажатии на кнопку Buy открывается или окно Login окно или Buy a Library Card
-btnBuy.forEach((button) => {
-  button.addEventListener("click", () => {
-    popUpLogin.classList.toggle("hidden");
-  });
-});
-
 // закрывается окно Buy a Library Card при нажатии вне окна
 popUpBuyCard.addEventListener("click", (event) => {
   if (event.target.classList.contains("pop-up__buy-card")) {
@@ -396,24 +363,6 @@ popUpBuyCard.addEventListener("click", (event) => {
 popUpCloseBtnBuyCard.addEventListener("click", () => {
   popUpBuyCard.classList.toggle("hidden");
 });
-
-// сделать код плавного открытия попап окна
-
-// в формах регистрации и залогирования тоже есть ссылки Register и Login
-// открытие окна регистрации и окна входа в личный кабинет при нажатии на соответствующие ссылки
-// не работает
-/*
-const btnRegisterFromLogin = doucment.querySelector(".have-account__register");
-const btnLoginFromRegister = document.querySelector(".have-account__login");
-
-btnRegisterFromLogin.addEventListener("click", () => {
-  popUpRegister.classList.toggle("hidden");
-});
-
-btnLoginFromRegister.addEventListener("click", () => {
-  popUpLogin.classList.toggle("hidden");
-});
-*/
 
 /* НАЧАЛО ФОРМУЛ регистрации и логирования пользователя */
 
@@ -442,6 +391,9 @@ function setUserInfo(firstName, lastName, cardNumber) {
   textMyProfileInitials.textContent = newInitials;
   textMyProfileName.textContent = nameLastName;
 
+  nameInput.value = `${firstName} ${lastName}`;
+  cardNumberInput.value = cardNumber;
+
   popUpRegister.classList.add("hidden");
   profile.classList.add("hidden");
   profileAuth.classList.remove("hidden");
@@ -458,6 +410,23 @@ function getItemFromLocalStorage(key) {
 // храним данные пользователя в LocalStorage
 function saveUserState(user) {
   setItemToLocalStorage("user", user);
+
+  if (user) {
+    setUserInfo(user.firstName, user.lastName, user.cardNumber);
+  }
+}
+
+// блок Digital Library Cards
+const titleDigitalCard = document.querySelector(".find-card__title");
+const titleGetCard = document.querySelector(".get-card__title");
+const textGetCard = document.querySelector(".get-card__description");
+const textGetCardAuth = document.querySelector(".get-card__description_auth");
+const btnFormDigitalCard = document.querySelector(".form__button");
+const userCounts = document.querySelector(".user__counts_small");
+
+function replaceTitles() {
+  titleDigitalCard.textContent = titleDigitalCard.textContent.replace("Find your Library card", "Your Library card");
+  titleGetCard.textContent = titleGetCard.textContent.replace("Get a reader card", "Visit your profile");
 }
 
 // Sing Up / Registration
@@ -490,6 +459,15 @@ function signup(event) {
   popUpRegister.classList.add("hidden");
 
   visitCounter.textContent = user.visits;
+
+  btnFormDigitalCard.classList.add("hidden"); // исчезает после обновления браузера
+  userCounts.classList.remove("hidden"); // исчезает после обновления браузера
+  replaceTitles(); // исчезает после обновления браузера
+  textGetCard.classList.add("hidden"); // исчезает после обновления браузера
+  textGetCardAuth.classList.remove("hidden"); // исчезает после обновления браузера
+  btnRegisterGetCardBlock.classList.add("hidden"); // исчезает после обновления браузера
+  btnLoginGetCardBlock.classList.add("hidden"); // исчезает после обновления браузера
+  btnProfileDigitalCard.classList.remove("hidden"); // исчезает после обновления браузера
 }
 
 const formSingUp = document.querySelector(".form-register");
@@ -508,20 +486,6 @@ function showNotificationLog(message) {
   }, 3000);
 }
 
-btnBuy.forEach((button) => {
-  button.addEventListener("click", () => {
-    const user = getItemFromLocalStorage("user");
-    if (user) {
-      // Пользователь залогинен, открыть поп-ап "Buy a card"
-      popUpBuyCard.classList.remove("hidden");
-      popUpLogin.classList.add("hidden");
-    } else {
-      // Пользователь не залогинен, открыть поп-ап "Login"
-      popUpBuyCard.classList.add("hidden");
-      popUpLogin.classList.remove("hidden");
-    }
-  });
-});
 
 // Log in
 function login(event) {
@@ -540,13 +504,21 @@ function login(event) {
   } else {
     user.visits += 1;
     visitCounter.textContent = user.visits;
-    setItemToLocalStorage("user", user);
     saveUserState(user);
     popUpLogin.classList.add("hidden");
     popUpRegister.classList.add("hidden");
     profileAuth.classList.remove("hidden");
     withAuthCode.classList.remove("hidden");
     withAuthCode.classList.remove("open");
+
+    btnFormDigitalCard.classList.add("hidden"); // исчезает после обновления браузера
+    userCounts.classList.remove("hidden"); // исчезает после обновления браузера
+    replaceTitles(); // исчезает после обновления браузера
+    textGetCard.classList.add("hidden"); // исчезает после обновления браузера
+    textGetCardAuth.classList.remove("hidden"); // исчезает после обновления браузера
+    btnRegisterGetCardBlock.classList.add("hidden"); // исчезает после обновления браузера
+    btnLoginGetCardBlock.classList.add("hidden"); // исчезает после обновления браузера
+    btnProfileDigitalCard.classList.remove("hidden"); // исчезает после обновления браузера
   }
 }
 const formLogin = document.querySelector(".form-login");
@@ -723,23 +695,41 @@ let ownBooksCount = 0;
 // Обработчик события для кнопок Buy
 btnBuy.forEach((button) => {
   button.addEventListener("click", () => {
-    if (ownBooksCount >= 16 || button.classList.contains("book-card__button_own")) {
+    if (
+      ownBooksCount >= 16 ||
+      button.classList.contains("book-card__button_own")
+    ) {
       return;
     }
 
-    button.classList.remove("book-card__button");
     button.classList.add("book-card__button_own");
     button.textContent = "Own";
     button.disabled = true;
 
-    ownBooksCount +=1;
+    ownBooksCount += 1;
     ownBooksCounter.textContent = ownBooksCount;
 
     const bookTitle = button.parentNode.querySelector("h4").textContent;
-    const bookAuthor = button.parentNode.querySelector(".book-card__author").textContent;
+    const bookAuthor =
+      button.parentNode.querySelector(".book-card__author").textContent;
     const listItem = document.createElement("li");
     listItem.textContent = `${bookTitle}, ${bookAuthor}`;
     ownBooksList.appendChild(listItem);
+  });
+});
+
+btnBuy.forEach((button) => {
+  button.addEventListener("click", () => {
+    const user = getItemFromLocalStorage("user");
+    if (user) {
+      // Пользователь залогинен, открыть поп-ап "Buy a card"
+      popUpBuyCard.classList.remove("hidden");
+      popUpLogin.classList.add("hidden");
+    } else {
+      // Пользователь не залогинен, открыть поп-ап "Login"
+      popUpBuyCard.classList.add("hidden");
+      popUpLogin.classList.remove("hidden");
+    }
   });
 });
 
@@ -749,15 +739,17 @@ buyForm.addEventListener("submit", (event) => {
   popUpBuyCard.remove();
 });
 
-// форма Digital Library Cards
-// работает только после обновления браузера!!!
-const nameInput = document.querySelector('.form__input_name');
-const cardNumberInput = document.querySelector('.form__input_card-number');
-function fillUserData() {
-  const user = getItemFromLocalStorage("user");
-  nameInput.value = `${user.firstName} ${user.lastName}`;
-  cardNumberInput.value = user.cardNumber;
+// меняем бейджи и кнопки в разделе Digital Library Cards
+// они получились крупнее, поэтому код не подходит, но полезный
+/*
+const btnFormDigitalCard = document.querySelector(".form__button");
+const userCounts = document.querySelector(".user__counts");
+
+function replaceBlocks() {
+  const replacementBlock = userCounts.cloneNode(true);
+  btnFormDigitalCard.replaceWith(replacementBlock);
 }
+*/
 
 // DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
@@ -766,6 +758,5 @@ document.addEventListener("DOMContentLoaded", () => {
   const user = getItemFromLocalStorage("user");
   if (user) {
     setUserInfo(user.firstName, user.lastName, user.cardNumber);
-    fillUserData();
   }
 });
