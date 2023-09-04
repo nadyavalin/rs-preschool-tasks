@@ -459,10 +459,6 @@ function getItemFromLocalStorage(key) {
 // храним данные пользователя в LocalStorage
 function saveUserState(user) {
   setItemToLocalStorage("user", user);
-
-  if (user) {
-    setUserInfo(user.firstName, user.lastName, user.cardNumber);
-  }
 }
 
 // Sing Up / Registration
@@ -714,7 +710,8 @@ cardholderNameInput.addEventListener("input", updateBuyCardState);
 postalCodeInput.addEventListener("input", updateBuyCardState);
 cityTownInput.addEventListener("input", updateBuyCardState);
 
-// Counter of visits // пока считает только регистрация и обновления браузера
+/*
+// счетчик считает только обновления браузера
 let visitCounter = parseInt(localStorage.getItem("visitCounter"), 10) || 0;
 visitCounter += 1;
 localStorage.setItem("visitCounter", visitCounter);
@@ -724,7 +721,21 @@ function formatCounterValue(value) {
 return value.toString().padStart(2, "0");
 }
 visitCounterElement.textContent = formatCounterValue(visitCounter);
-// переделать
+*/
+
+// Counter of visits by method of clicking on Log in button in Login Form
+// не работает / не работает / не работает / не работает / не работает / не работает /
+const buttonLoginForm = document.querySelector(".form__btn");
+const visitCounterElement = document.querySelector(".visit-counter");
+
+function clickCounter(event) {
+  event.preventDefault();
+  let visitCounter = parseInt(visitCounterElement.textContent);
+  visitCounterElement.textContent = visitCounter + 1;
+}
+
+buttonLoginForm.addEventListener('click', clickCounter);
+// не работает / не работает / не работает / не работает / не работает / не работает /
 
 // Books Counter
 const ownBooksCounter = document.querySelector(".own-books-counter");
@@ -762,12 +773,12 @@ buyForm.addEventListener("submit", (event) => {
   popUpBuyCard.remove();
 });
 
+// форма Digital Library Cards
+// работает только после обновления браузера!!!
 const nameInput = document.querySelector('.form__input_name');
 const cardNumberInput = document.querySelector('.form__input_card-number');
 function fillUserData() {
   const user = getItemFromLocalStorage("user");
-
-  // Заполнение данных в форме
   nameInput.value = `${user.firstName} ${user.lastName}`;
   cardNumberInput.value = user.cardNumber;
 }
