@@ -46,9 +46,7 @@ const withAuthCode = document.querySelector(".profile__with-auth_active");
 
 // PopUp Register
 const btnRegister = document.querySelector(".btn__register");
-const btnRegisterGetCardBlock = document.querySelector(
-  ".get-card__button_register"
-);
+const btnRegisterGetCardBlock = document.querySelector(".get-card__button_register");
 const popUpRegister = document.querySelector(".pop-up__register");
 const popUpCloseBtnRegister = document.querySelector(".close-popup__register");
 
@@ -60,10 +58,9 @@ const popUpCloseBtnLogin = document.querySelector(".close-popup__login");
 
 // PopUp My profile
 const btnMyProfile = document.querySelector(".btn__myprofile");
+const btnProfileDigitalCard = document.querySelector('.get-card__button_profile');
 const popUpMyProfile = document.querySelector(".pop-up__my-profile");
-const popUpCloseBtnMyProfile = document.querySelector(
-  ".close-popup__my-profile"
-);
+const popUpCloseBtnMyProfile = document.querySelector(".close-popup__my-profile");
 
 // Card Number
 const cardNumberProfileMenu = document.querySelector(
@@ -80,9 +77,7 @@ const popUpBuyCard = document.querySelector(".pop-up__buy-card");
 const popUpCloseBtnBuyCard = document.querySelector(".close-popup__buy-card");
 
 // My profile
-const textMyProfileInitials = document.querySelector(
-  ".name-lastname__initials"
-);
+const textMyProfileInitials = document.querySelector(".name-lastname__initials");
 const textMyProfileName = document.querySelector(".name-lastname__text");
 
 // Counter
@@ -337,8 +332,11 @@ popUpLogin.addEventListener("click", (event) => {
 });
 
 // PopUp My profile
-// при нажатии на кнопку My profile открывается окно My profile
+// при нажатии на кнопку My profile и Profile открывается окно My profile
 btnMyProfile.addEventListener("click", () => {
+  popUpMyProfile.classList.toggle("hidden");
+});
+btnProfileDigitalCard.addEventListener("click", () => {
   popUpMyProfile.classList.toggle("hidden");
 });
 
@@ -418,6 +416,19 @@ function saveUserState(user) {
   }
 }
 
+// блок Digital Library Cards
+const titleDigitalCard = document.querySelector(".find-card__title");
+const titleGetCard = document.querySelector(".get-card__title");
+const textGetCard = document.querySelector(".get-card__description");
+const textGetCardAuth = document.querySelector(".get-card__description_auth");
+const btnFormDigitalCard = document.querySelector(".form__button");
+const userCounts = document.querySelector(".user__counts_small");
+
+function replaceTitles() {
+  titleDigitalCard.textContent = titleDigitalCard.textContent.replace("Find your Library card", "Your Library card");
+  titleGetCard.textContent = titleGetCard.textContent.replace("Get a reader card", "Visit your profile");
+}
+
 // Sing Up / Registration
 function signup(event) {
   const firstName = document.querySelector(".firstname").value;
@@ -448,6 +459,15 @@ function signup(event) {
   popUpRegister.classList.add("hidden");
 
   visitCounter.textContent = user.visits;
+
+  btnFormDigitalCard.classList.add("hidden"); // исчезает после обновления браузера
+  userCounts.classList.remove("hidden"); // исчезает после обновления браузера
+  replaceTitles(); // исчезает после обновления браузера
+  textGetCard.classList.add("hidden"); // исчезает после обновления браузера
+  textGetCardAuth.classList.remove("hidden"); // исчезает после обновления браузера
+  btnRegisterGetCardBlock.classList.add("hidden"); // исчезает после обновления браузера
+  btnLoginGetCardBlock.classList.add("hidden"); // исчезает после обновления браузера
+  btnProfileDigitalCard.classList.remove("hidden"); // исчезает после обновления браузера
 }
 
 const formSingUp = document.querySelector(".form-register");
@@ -465,6 +485,7 @@ function showNotificationLog(message) {
     document.body.removeChild(result);
   }, 3000);
 }
+
 
 // Log in
 function login(event) {
@@ -489,6 +510,15 @@ function login(event) {
     profileAuth.classList.remove("hidden");
     withAuthCode.classList.remove("hidden");
     withAuthCode.classList.remove("open");
+
+    btnFormDigitalCard.classList.add("hidden"); // исчезает после обновления браузера
+    userCounts.classList.remove("hidden"); // исчезает после обновления браузера
+    replaceTitles(); // исчезает после обновления браузера
+    textGetCard.classList.add("hidden"); // исчезает после обновления браузера
+    textGetCardAuth.classList.remove("hidden"); // исчезает после обновления браузера
+    btnRegisterGetCardBlock.classList.add("hidden"); // исчезает после обновления браузера
+    btnLoginGetCardBlock.classList.add("hidden"); // исчезает после обновления браузера
+    btnProfileDigitalCard.classList.remove("hidden"); // исчезает после обновления браузера
   }
 }
 const formLogin = document.querySelector(".form-login");
@@ -708,6 +738,18 @@ buyForm.addEventListener("submit", (event) => {
   event.preventDefault();
   popUpBuyCard.remove();
 });
+
+// меняем бейджи и кнопки в разделе Digital Library Cards
+// они получились крупнее, поэтому код не подходит, но полезный
+/*
+const btnFormDigitalCard = document.querySelector(".form__button");
+const userCounts = document.querySelector(".user__counts");
+
+function replaceBlocks() {
+  const replacementBlock = userCounts.cloneNode(true);
+  btnFormDigitalCard.replaceWith(replacementBlock);
+}
+*/
 
 // DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {

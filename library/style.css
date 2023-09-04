@@ -577,6 +577,13 @@ h5.my-profile__title {
     margin-bottom: 20px;
 }
 
+.user__counts_small {
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+    margin-top: -48px;
+}
+
 .user__count_item {
     display: flex;
     flex-direction: column;
@@ -585,13 +592,28 @@ h5.my-profile__title {
     gap: 10px;
 }
 
+.user__count_item-small {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+}
+
 .user__count_item p {
     line-height: 20px;
     letter-spacing: 0.4px;
     text-transform: capitalize;
 }
 
-.user__count_item span {
+.user__count_item-small p {
+    font-size: 10px;
+    line-height: 20px;
+    letter-spacing: 0.2px;
+    text-transform: capitalize;
+}
+
+.user__count_item span, .user__count_item-small span {
     font-size: 10px;
     line-height: 20px;
     letter-spacing: 0.2px;
@@ -1473,7 +1495,7 @@ h4.get-card__title {
     text-align: right;
 }
 
-.get-card__description {
+.get-card__description, .get-card__description_auth {
     text-align: right;
     font-family: 'Inter';
     font-weight: 400;
@@ -1481,7 +1503,23 @@ h4.get-card__title {
     letter-spacing: 0.4px;
 }
 
+.get-card__description_auth {
+    margin-top: -160px;
+}
+
 .get-card__buttons {
+    display: flex;
+    flex-direction: column;
+} 
+
+.get-card__buttons_two {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-top: -25px;
+}
+
+.get-card__buttons_one {
     display: flex;
     justify-content: flex-end;
     gap: 20px;
