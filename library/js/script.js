@@ -66,7 +66,9 @@ const popUpCloseBtnMyProfile = document.querySelector(
 );
 
 // Card Number
-const cardNumberProfileMenu = document.querySelector(".card-number__profile-menu");
+const cardNumberProfileMenu = document.querySelector(
+  ".card-number__profile-menu"
+);
 const cardNumberMyProfile = document.querySelector(".card-number__my-profile");
 
 // Log out
@@ -78,7 +80,9 @@ const popUpBuyCard = document.querySelector(".pop-up__buy-card");
 const popUpCloseBtnBuyCard = document.querySelector(".close-popup__buy-card");
 
 // My profile
-const textMyProfileInitials = document.querySelector(".name-lastname__initials");
+const textMyProfileInitials = document.querySelector(
+  ".name-lastname__initials"
+);
 const textMyProfileName = document.querySelector(".name-lastname__text");
 
 // Profile menu
@@ -375,10 +379,10 @@ popUpCloseBtnMyProfile.addEventListener("click", () => {
 });
 
 // PopUp Buy
-// при нажатии на кнопку Buy открывается окно Buy a Library Card
+// при нажатии на кнопку Buy открывается или окно Login окно или Buy a Library Card
 btnBuy.forEach((button) => {
   button.addEventListener("click", () => {
-    popUpBuyCard.classList.toggle("hidden");
+    popUpLogin.classList.toggle("hidden");
   });
 });
 
@@ -429,9 +433,11 @@ function generateCardNumber() {
 }
 
 // добавляем инициалы, имя/фамилию
-function setUserInfo(firstName, lastName) {
+function setUserInfo(firstName, lastName, cardNumber) {
   const newInitials = `${firstName[0]}${lastName[0]}`;
   const nameLastName = `${firstName} ${lastName}`;
+  cardNumberProfileMenu.textContent = cardNumber;
+  cardNumberMyProfile.textContent = cardNumber;
   profileAuth.textContent = newInitials;
   profileAuth.title = nameLastName;
   textMyProfileInitials.textContent = newInitials;
@@ -453,10 +459,6 @@ function getItemFromLocalStorage(key) {
 // храним данные пользователя в LocalStorage
 function saveUserState(user) {
   setItemToLocalStorage("user", user);
-
-  if (user) {
-    setUserInfo(user.firstName, user.lastName, user.cardNumber);
-  }
 }
 
 // Sing Up / Registration
@@ -466,8 +468,6 @@ function signup(event) {
   const email = document.querySelector(".email").value;
   const password = document.querySelector(".password").value;
   const cardNumber = generateCardNumber();
-  cardNumberProfileMenu.textContent = cardNumber;
-  cardNumberMyProfile.textContent = cardNumber;
   event.preventDefault();
 
   const user = {
@@ -507,15 +507,29 @@ function showNotificationLog(message) {
   }, 3000);
 }
 
+btnBuy.forEach((button) => {
+  button.addEventListener("click", () => {
+    const user = getItemFromLocalStorage("user");
+    if (user) {
+      // Пользователь залогинен, открыть поп-ап "Buy a card"
+      popUpBuyCard.classList.remove("hidden");
+      popUpLogin.classList.add("hidden");
+    } else {
+      // Пользователь не залогинен, открыть поп-ап "Login"
+      popUpBuyCard.classList.add("hidden");
+      popUpLogin.classList.remove("hidden");
+    }
+  });
+});
+
 // Log in
 function login(event) {
-  const emailLog = document.querySelector(".email-log").value;
+  const loginLog = document.querySelector(".login").value;
   const passwordLog = document.querySelector(".password-log").value;
-  const cardNumberLog = document.querySelector(".card-number-log").value;
   const users = getItemFromLocalStorage("users");
   const user = users.find(
     (item) =>
-      item.email === emailLog &&
+      (item.email === loginLog || item.cardNumber === loginLog) &&
       item.password === passwordLog
   );
   event.preventDefault();
@@ -528,13 +542,8 @@ function login(event) {
     popUpLogin.classList.add("hidden");
     popUpRegister.classList.add("hidden");
     profileAuth.classList.remove("hidden");
-    withAuthCode.classList.remove("hidden"); // вроде не нужно
-    withAuthCode.classList.remove("open"); // вроде не нужно
-  }
-
-  if(user && item.cardNumber === cardNumberLog) {
-    cardNumberProfileMenu.textContent = cardNumberLog;
-    cardNumberMyProfile.textContent = cardNumberLog;
+    withAuthCode.classList.remove("hidden");
+    withAuthCode.classList.remove("open");
   }
 }
 const formLogin = document.querySelector(".form-login");
@@ -586,12 +595,201 @@ const cardNumberCopyButton = document.querySelector(
 );
 cardNumberCopyButton.addEventListener("click", copyCodeToClipboard);
 
+// Форма Register, доступность кнопки
+// Получить инпуты
+const firstNameInput = document.querySelector(".firstname");
+const lastNameInput = document.querySelector(".lastname");
+const emailInput = document.querySelector(".email");
+const passwordInput = document.querySelector(".password");
+
+// Получить кнопку
+const signupButton = document.querySelector(".form__btn_signup");
+
+// Функция для проверки заполненности всех полей ввода
+function checkSingUpInputs() {
+  const firstNameValue = firstNameInput.value.trim();
+  const lastNameValue = lastNameInput.value.trim();
+  const emailValue = emailInput.value.trim();
+  const passwordValue = passwordInput.value.trim();
+
+  return (
+    firstNameValue !== "" &&
+    lastNameValue !== "" &&
+    emailValue !== "" &&
+    passwordValue !== ""
+  );
+}
+
+// Функция для обновления состояния кнопки Sing Up
+function updateButtonSingUpState() {
+  const isValid = checkSingUpInputs();
+  signupButton.disabled = !isValid;
+  signupButton.classList.toggle("disabled", !isValid);
+}
+
+// Слушать события изменения в полях ввода
+firstNameInput.addEventListener("input", updateButtonSingUpState);
+lastNameInput.addEventListener("input", updateButtonSingUpState);
+emailInput.addEventListener("input", updateButtonSingUpState);
+passwordInput.addEventListener("input", updateButtonSingUpState);
+
+// Форма Log in, доступность кнопки
+// Получить инпуты
+const loginInput = document.querySelector(".login");
+const passwordLogInput = document.querySelector(".password-log");
+
+// Получить кнопку
+const loginButton = document.querySelector(".form__btn_login");
+
+// Функция для проверки заполненности всех полей ввода
+function checkLoginInputs() {
+  const loginValue = loginInput.value.trim();
+  const passwordLogValue = passwordLogInput.value.trim();
+
+  return loginValue !== "" && passwordLogValue !== "";
+}
+
+// Функция для обновления состояния кнопки Log In
+function updateButtonLoginState() {
+  const isValid = checkLoginInputs();
+  loginButton.disabled = !isValid;
+  loginButton.classList.toggle("disabled", !isValid);
+}
+
+// Слушать события изменения в полях ввода
+loginInput.addEventListener("input", updateButtonLoginState);
+passwordLogInput.addEventListener("input", updateButtonLoginState);
+
+// Форма BUY A LIBRARY CARD, доступность кнопки
+// Получить инпуты
+const bankCardNumberInput = document.querySelector(".bank-card-number");
+const expirationCodeInput1 = document.querySelector(".expiration-code-1");
+const expirationCodeInput2 = document.querySelector(".expiration-code-2");
+const cvcInput = document.querySelector(".cvc");
+const cardholderNameInput = document.querySelector(".cardholder-name");
+const postalCodeInput = document.querySelector(".postal-code");
+const cityTownInput = document.querySelector(".city-town");
+
+// Получить кнопку
+const buyCardButton = document.querySelector(".buy-card__button");
+
+// Функция для проверки заполненности всех полей ввода
+function checkBuyCardInputs() {
+  const bankCardNumberValue = bankCardNumberInput.value.trim();
+  const expirationCodeValue1 = expirationCodeInput1.value.trim();
+  const expirationCodeValue2 = expirationCodeInput2.value.trim();
+  const cvcValue = cvcInput.value.trim();
+  const cardholderNameValue = cardholderNameInput.value.trim();
+  const postalCodeValue = postalCodeInput.value.trim();
+  const cityTownValue = cityTownInput.value.trim();
+
+  return (
+    bankCardNumberValue !== "" &&
+    expirationCodeValue1 !== "" &&
+    expirationCodeValue2 !== "" &&
+    cvcValue !== "" &&
+    cardholderNameValue !== "" &&
+    postalCodeValue !== "" &&
+    cityTownValue !== ""
+  );
+}
+
+// Функция для обновления состояния кнопки Buy Card
+function updateBuyCardState() {
+  const isValid = checkBuyCardInputs();
+  buyCardButton.disabled = !isValid;
+  buyCardButton.classList.toggle("disabled", !isValid);
+}
+
+// Слушать события изменения в полях ввода
+bankCardNumberInput.addEventListener("input", updateBuyCardState);
+expirationCodeInput1.addEventListener("input", updateBuyCardState);
+expirationCodeInput2.addEventListener("input", updateBuyCardState);
+cvcInput.addEventListener("input", updateBuyCardState);
+cardholderNameInput.addEventListener("input", updateBuyCardState);
+postalCodeInput.addEventListener("input", updateBuyCardState);
+cityTownInput.addEventListener("input", updateBuyCardState);
+
+/*
+// счетчик считает только обновления браузера
+let visitCounter = parseInt(localStorage.getItem("visitCounter"), 10) || 0;
+visitCounter += 1;
+localStorage.setItem("visitCounter", visitCounter);
+
+const visitCounterElement = document.querySelector(".visit-counter");
+function formatCounterValue(value) {
+return value.toString().padStart(2, "0");
+}
+visitCounterElement.textContent = formatCounterValue(visitCounter);
+*/
+
+// Counter of visits by method of clicking on Log in button in Login Form
+// не работает / не работает / не работает / не работает / не работает / не работает /
+const buttonLoginForm = document.querySelector(".form__btn");
+const visitCounterElement = document.querySelector(".visit-counter");
+
+function clickCounter(event) {
+  event.preventDefault();
+  let visitCounter = parseInt(visitCounterElement.textContent);
+  visitCounterElement.textContent = visitCounter + 1;
+}
+
+buttonLoginForm.addEventListener('click', clickCounter);
+// не работает / не работает / не работает / не работает / не работает / не работает /
+
+// Books Counter
+const ownBooksCounter = document.querySelector(".own-books-counter");
+const ownBooksList = document.querySelector(".own-books-list");
+const buyForm = document.querySelector(".buy-card__form");
+
+let ownBooksCount = 0;
+
+// Обработчик события для кнопок Buy
+btnBuy.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (ownBooksCount >= 16 || button.classList.contains("book-card__button_own")) {
+      return;
+    }
+
+    button.classList.remove("book-card__button");
+    button.classList.add("book-card__button_own");
+    button.textContent = "Own";
+    button.disabled = true;
+
+    ownBooksCount +=1;
+    ownBooksCounter.textContent = ownBooksCount;
+
+    const bookTitle = button.parentNode.querySelector("h4").textContent;
+    const bookAuthor = button.parentNode.querySelector(".book-card__author").textContent;
+    const listItem = document.createElement("li");
+    listItem.textContent = `${bookTitle}, ${bookAuthor}`;
+    ownBooksList.appendChild(listItem);
+  });
+});
+
+// Форма покупки книги - исчезает после первой покупки
+buyForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  popUpBuyCard.remove();
+});
+
+// форма Digital Library Cards
+// работает только после обновления браузера!!!
+const nameInput = document.querySelector('.form__input_name');
+const cardNumberInput = document.querySelector('.form__input_card-number');
+function fillUserData() {
+  const user = getItemFromLocalStorage("user");
+  nameInput.value = `${user.firstName} ${user.lastName}`;
+  cardNumberInput.value = user.cardNumber;
+}
+
 // DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
   addListenersForBurgerMenu();
 
   const user = getItemFromLocalStorage("user");
   if (user) {
-    setUserInfo(user.firstName, user.lastName);
+    setUserInfo(user.firstName, user.lastName, user.cardNumber);
+    fillUserData();
   }
 });

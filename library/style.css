@@ -404,6 +404,24 @@ h6.pop-up__text {
     cursor: pointer;
 }
 
+.form__btn_signup.disabled {
+    color: #BB945F;
+    border: 1px solid #BB945F;
+    pointer-events: none;
+}
+
+.form__btn_login.disabled {
+    color: #BB945F;
+    border: 1px solid #BB945F;
+    pointer-events: none;
+}
+
+.buy-card__button.disabled {
+    color: #BB945F;
+    border: 1px solid #BB945F;
+    pointer-events: none;
+}
+
 .have-account {
     display: flex;
     gap: 10px;
@@ -579,28 +597,37 @@ h5.my-profile__title {
     letter-spacing: 0.2px;
 }
 
-.user__books {
-    margin-bottom: 40px;
-}
-
-.user__books_title {
-    color: #0C0C0E;
-    font-size: 25px;
-    line-height: 20px;
+.own-books {
     margin-bottom: 30px;
 }
 
-.user__books ul {
+.own-books__title {
+    color: #0C0C0E;
+    font-size: 25px;
+    line-height: 20px;
+    margin-bottom: 27px;
+}
+
+.own-books ul {
     list-style: disc;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.user__books ul li {
+.own-books-list {
+    height: 60px;
+    width: 350px;
+    overflow-y: auto;
+}
+
+.own-books ul li {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
     line-height: 20px;
     letter-spacing: 2px;
-    text-transform: capitalize;
+    text-transform: capitalize;;
     margin-left: 30px;
 }
 
@@ -1140,6 +1167,13 @@ h5.book-card__author {
 }
 
 .book-card__button_own {
+    width: 75px;
+    height: 30px;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1px;
+    margin-top: auto;
     color: #BB945F;
     border: 1px solid #BB945F;
     pointer-events: none;
@@ -1376,7 +1410,7 @@ h4.form__title {
     margin-top: -2px;
 }
 
-.form__input {
+.form__input_name, .form__input_card-number {
     width: 520px;
     height: 66px;
     border-radius: 10px;
