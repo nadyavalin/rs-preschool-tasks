@@ -61,7 +61,9 @@ const popUpCloseBtnLogin = document.querySelector(".close-popup__login");
 // PopUp My profile
 const btnMyProfile = document.querySelector(".btn__myprofile");
 const popUpMyProfile = document.querySelector(".pop-up__my-profile");
-const popUpCloseBtnMyProfile = document.querySelector(".close-popup__my-profile");
+const popUpCloseBtnMyProfile = document.querySelector(
+  ".close-popup__my-profile"
+);
 
 // Card Number
 const cardNumberProfileMenu = document.querySelector(
@@ -78,15 +80,17 @@ const popUpBuyCard = document.querySelector(".pop-up__buy-card");
 const popUpCloseBtnBuyCard = document.querySelector(".close-popup__buy-card");
 
 // My profile
-const textMyProfileInitials = document.querySelector(".name-lastname__initials");
+const textMyProfileInitials = document.querySelector(
+  ".name-lastname__initials"
+);
 const textMyProfileName = document.querySelector(".name-lastname__text");
 
 // Counter
 const visitCounter = document.querySelector(".visit-counter");
 
 // форма Digital Library Cards
-const nameInput = document.querySelector('.form__input_name');
-const cardNumberInput = document.querySelector('.form__input_card-number');
+const nameInput = document.querySelector(".form__input_name");
+const cardNumberInput = document.querySelector(".form__input_card-number");
 
 // Profile menu
 // Hide Profile menu when mouse click out of this menu
@@ -275,37 +279,6 @@ btnAutumn.addEventListener("click", () => {
   }
 });
 
-// код тоже работает, но не на всех переключениях
-/*
-btnWinter.addEventListener("click", () => {
-  fadeOut(bookCardsSummer, 700);
-  fadeOut(bookCardsAutumn, 700);
-  fadeOut(bookCardsSpring, 700);
-  fadeIn(bookCardsWinter, 700, "flex");
-});
-
-btnSpring.addEventListener("click", () => {
-  fadeOut(bookCardsWinter, 700);
-  fadeOut(bookCardsSummer, 700);
-  fadeOut(bookCardsAutumn, 700);
-  fadeIn(bookCardsSpring, 700, "flex");
-});
-
-btnSummer.addEventListener("click", () => {
-  fadeOut(bookCardsSpring, 700);
-  fadeOut(bookCardsWinter, 700);
-  fadeOut(bookCardsAutumn, 700);
-  fadeIn(bookCardsSummer, 700, "flex");
-});
-
-btnAutumn.addEventListener("click", () => {
-  fadeOut(bookCardsWinter, 700);
-  fadeOut(bookCardsSpring, 700);
-  fadeOut(bookCardsSummer, 700);
-  fadeIn(bookCardsAutumn, 700, "flex");
-});
-*/
-
 profileAuth.addEventListener("click", () => {
   withAuth.classList.toggle("open");
 });
@@ -381,14 +354,6 @@ popUpCloseBtnMyProfile.addEventListener("click", () => {
   popUpMyProfile.classList.toggle("hidden");
 });
 
-// PopUp Buy
-// при нажатии на кнопку Buy открывается или окно Login окно или Buy a Library Card
-btnBuy.forEach((button) => {
-  button.addEventListener("click", () => {
-    popUpLogin.classList.toggle("hidden");
-  });
-});
-
 // закрывается окно Buy a Library Card при нажатии вне окна
 popUpBuyCard.addEventListener("click", (event) => {
   if (event.target.classList.contains("pop-up__buy-card")) {
@@ -400,24 +365,6 @@ popUpBuyCard.addEventListener("click", (event) => {
 popUpCloseBtnBuyCard.addEventListener("click", () => {
   popUpBuyCard.classList.toggle("hidden");
 });
-
-// сделать код плавного открытия попап окна
-
-// в формах регистрации и залогирования тоже есть ссылки Register и Login
-// открытие окна регистрации и окна входа в личный кабинет при нажатии на соответствующие ссылки
-// не работает
-/*
-const btnRegisterFromLogin = doucment.querySelector(".have-account__register");
-const btnLoginFromRegister = document.querySelector(".have-account__login");
-
-btnRegisterFromLogin.addEventListener("click", () => {
-  popUpRegister.classList.toggle("hidden");
-});
-
-btnLoginFromRegister.addEventListener("click", () => {
-  popUpLogin.classList.toggle("hidden");
-});
-*/
 
 /* НАЧАЛО ФОРМУЛ регистрации и логирования пользователя */
 
@@ -518,21 +465,6 @@ function showNotificationLog(message) {
     document.body.removeChild(result);
   }, 3000);
 }
-
-btnBuy.forEach((button) => {
-  button.addEventListener("click", () => {
-    const user = getItemFromLocalStorage("user");
-    if (user) {
-      // Пользователь залогинен, открыть поп-ап "Buy a card"
-      popUpBuyCard.classList.remove("hidden");
-      popUpLogin.classList.add("hidden");
-    } else {
-      // Пользователь не залогинен, открыть поп-ап "Login"
-      popUpBuyCard.classList.add("hidden");
-      popUpLogin.classList.remove("hidden");
-    }
-  });
-});
 
 // Log in
 function login(event) {
@@ -733,23 +665,41 @@ let ownBooksCount = 0;
 // Обработчик события для кнопок Buy
 btnBuy.forEach((button) => {
   button.addEventListener("click", () => {
-    if (ownBooksCount >= 16 || button.classList.contains("book-card__button_own")) {
+    if (
+      ownBooksCount >= 16 ||
+      button.classList.contains("book-card__button_own")
+    ) {
       return;
     }
 
-    button.classList.remove("book-card__button");
     button.classList.add("book-card__button_own");
     button.textContent = "Own";
     button.disabled = true;
 
-    ownBooksCount +=1;
+    ownBooksCount += 1;
     ownBooksCounter.textContent = ownBooksCount;
 
     const bookTitle = button.parentNode.querySelector("h4").textContent;
-    const bookAuthor = button.parentNode.querySelector(".book-card__author").textContent;
+    const bookAuthor =
+      button.parentNode.querySelector(".book-card__author").textContent;
     const listItem = document.createElement("li");
     listItem.textContent = `${bookTitle}, ${bookAuthor}`;
     ownBooksList.appendChild(listItem);
+  });
+});
+
+btnBuy.forEach((button) => {
+  button.addEventListener("click", () => {
+    const user = getItemFromLocalStorage("user");
+    if (user) {
+      // Пользователь залогинен, открыть поп-ап "Buy a card"
+      popUpBuyCard.classList.remove("hidden");
+      popUpLogin.classList.add("hidden");
+    } else {
+      // Пользователь не залогинен, открыть поп-ап "Login"
+      popUpBuyCard.classList.add("hidden");
+      popUpLogin.classList.remove("hidden");
+    }
   });
 });
 
@@ -766,6 +716,5 @@ document.addEventListener("DOMContentLoaded", () => {
   const user = getItemFromLocalStorage("user");
   if (user) {
     setUserInfo(user.firstName, user.lastName, user.cardNumber);
-    fillUserData();
   }
 });
