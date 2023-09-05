@@ -785,6 +785,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const user = getItemFromLocalStorage("user");
   if (user) {
     setUserInfo(user.firstName, user.lastName, user.cardNumber);
-    updateVisitsCounter();
+    visitCounter.textContent = user.visits;
   }
 });
