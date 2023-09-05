@@ -486,6 +486,19 @@ function showNotificationLog(message) {
   }, 3000);
 }
 
+// Visit Counter
+function updateVisitsCounter() {
+  const users = getItemFromLocalStorage("users")
+  const user = getItemFromLocalStorage("user");
+  const updatedUsers = users.map((item) => {
+    if (item === user) {
+      item.visits =+ 1;
+    } else item;
+  });
+  console.log(updatedUsers);
+  updateVisitsCounter.textContent = user.visits;
+  setItemToLocalStorage("users", users);
+}
 
 // Log in
 function login(event) {
@@ -502,15 +515,13 @@ function login(event) {
   if (!user) {
     showNotificationLog("Wrong Email or Password");
   } else {
-    user.visits += 1;
-    visitCounter.textContent = user.visits;
     saveUserState(user);
     popUpLogin.classList.add("hidden");
     popUpRegister.classList.add("hidden");
     profileAuth.classList.remove("hidden");
     withAuthCode.classList.remove("hidden");
     withAuthCode.classList.remove("open");
-
+    updateVisitsCounter(user);
     btnFormDigitalCard.classList.add("hidden"); // исчезает после обновления браузера
     userCounts.classList.remove("hidden"); // исчезает после обновления браузера
     replaceTitles(); // исчезает после обновления браузера
@@ -757,6 +768,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const user = getItemFromLocalStorage("user");
   if (user) {
-    setUserInfo(user.firstName, user.lastName, user.cardNumber);
+    setUserInfo(user.firstName, user.lastName, user.cardNumber, user.visits);
   }
 });
