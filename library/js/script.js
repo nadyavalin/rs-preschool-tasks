@@ -46,7 +46,9 @@ const withAuthCode = document.querySelector(".profile__with-auth_active");
 
 // PopUp Register
 const btnRegister = document.querySelector(".btn__register");
-const btnRegisterGetCardBlock = document.querySelector(".get-card__button_register");
+const btnRegisterGetCardBlock = document.querySelector(
+  ".get-card__button_register"
+);
 const popUpRegister = document.querySelector(".pop-up__register");
 const popUpCloseBtnRegister = document.querySelector(".close-popup__register");
 
@@ -58,9 +60,13 @@ const popUpCloseBtnLogin = document.querySelector(".close-popup__login");
 
 // PopUp My profile
 const btnMyProfile = document.querySelector(".btn__myprofile");
-const btnProfileDigitalCard = document.querySelector('.get-card__button_profile');
+const btnProfileDigitalCard = document.querySelector(
+  ".get-card__button_profile"
+);
 const popUpMyProfile = document.querySelector(".pop-up__my-profile");
-const popUpCloseBtnMyProfile = document.querySelector(".close-popup__my-profile");
+const popUpCloseBtnMyProfile = document.querySelector(
+  ".close-popup__my-profile"
+);
 
 // Card Number
 const cardNumberProfileMenu = document.querySelector(
@@ -77,7 +83,9 @@ const popUpBuyCard = document.querySelector(".pop-up__buy-card");
 const popUpCloseBtnBuyCard = document.querySelector(".close-popup__buy-card");
 
 // My profile
-const textMyProfileInitials = document.querySelector(".name-lastname__initials");
+const textMyProfileInitials = document.querySelector(
+  ".name-lastname__initials"
+);
 const textMyProfileName = document.querySelector(".name-lastname__text");
 
 // Counter
@@ -425,8 +433,14 @@ const btnFormDigitalCard = document.querySelector(".form__button");
 const userCounts = document.querySelector(".user__counts_small");
 
 function replaceTitles() {
-  titleDigitalCard.textContent = titleDigitalCard.textContent.replace("Find your Library card", "Your Library card");
-  titleGetCard.textContent = titleGetCard.textContent.replace("Get a reader card", "Visit your profile");
+  titleDigitalCard.textContent = titleDigitalCard.textContent.replace(
+    "Find your Library card",
+    "Your Library card"
+  );
+  titleGetCard.textContent = titleGetCard.textContent.replace(
+    "Get a reader card",
+    "Visit your profile"
+  );
 }
 
 // Sing Up / Registration
@@ -488,16 +502,18 @@ function showNotificationLog(message) {
 
 // Visit Counter
 function updateVisitsCounter() {
-  const users = getItemFromLocalStorage("users")
-  const user = getItemFromLocalStorage("user");
-  const updatedUsers = users.map((item) => {
-    if (item === user) {
-      item.visits =+ 1;
-    } else item;
+  const users = getItemFromLocalStorage("users");
+  const currentUser = getItemFromLocalStorage("user");
+  const updatedUsers = users.map((user) => {
+    if (user.cardNumber === currentUser.cardNumber) {
+      user.visits += 1;
+    }
+    return user;
   });
-  console.log(updatedUsers);
-  updateVisitsCounter.textContent = user.visits;
-  setItemToLocalStorage("users", users);
+  currentUser.visits += 1;
+  visitCounter.textContent = currentUser.visits;
+  setItemToLocalStorage("user", currentUser);
+  setItemToLocalStorage("users", updatedUsers);
 }
 
 // Log in
@@ -516,12 +532,13 @@ function login(event) {
     showNotificationLog("Wrong Email or Password");
   } else {
     saveUserState(user);
+    updateVisitsCounter();
     popUpLogin.classList.add("hidden");
     popUpRegister.classList.add("hidden");
     profileAuth.classList.remove("hidden");
     withAuthCode.classList.remove("hidden");
     withAuthCode.classList.remove("open");
-    updateVisitsCounter(user);
+
     btnFormDigitalCard.classList.add("hidden"); // исчезает после обновления браузера
     userCounts.classList.remove("hidden"); // исчезает после обновления браузера
     replaceTitles(); // исчезает после обновления браузера
@@ -721,8 +738,7 @@ btnBuy.forEach((button) => {
     ownBooksCounter.textContent = ownBooksCount;
 
     const bookTitle = button.parentNode.querySelector("h4").textContent;
-    const bookAuthor =
-      button.parentNode.querySelector(".book-card__author").textContent;
+    const bookAuthor = button.parentNode.querySelector(".book-card__author").textContent;
     const listItem = document.createElement("li");
     listItem.textContent = `${bookTitle}, ${bookAuthor}`;
     ownBooksList.appendChild(listItem);
@@ -768,6 +784,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const user = getItemFromLocalStorage("user");
   if (user) {
-    setUserInfo(user.firstName, user.lastName, user.cardNumber, user.visits);
+    setUserInfo(user.firstName, user.lastName, user.cardNumber);
+    updateVisitsCounter();
   }
 });
