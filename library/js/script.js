@@ -778,6 +778,12 @@ function replaceBlocks() {
 }
 */
 
+function updateMaxlength(input) {
+  const value = input.value.replace(/ /g, ''); // Удалить все пробелы из введенного значения
+  const maxLength = (value.length === 16) ? 16 : 19; // Установить значение maxLength в зависимости от длины значения
+  input.maxLength = maxLength;
+}
+
 // DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
   addListenersForBurgerMenu();
