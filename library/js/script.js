@@ -713,6 +713,7 @@ cardholderNameInput.addEventListener("input", updateBuyCardState);
 postalCodeInput.addEventListener("input", updateBuyCardState);
 cityTownInput.addEventListener("input", updateBuyCardState);
 
+
 // Books Counter
 const ownBooksCounter = document.querySelector(".own-books-counter");
 const ownBooksList = document.querySelector(".own-books-list");
@@ -766,8 +767,10 @@ buyForm.addEventListener("submit", (event) => {
   popUpBuyCard.remove();
 });
 
+
 // меняем бейджи и кнопки в разделе Digital Library Cards
 // они получились крупнее, поэтому код не подходит, но полезный
+
 /*
 const btnFormDigitalCard = document.querySelector(".form__button");
 const userCounts = document.querySelector(".user__counts");
@@ -780,9 +783,15 @@ function replaceBlocks() {
 
 function updateMaxlength(input) {
   const value = input.value.replace(/ /g, ''); // Удалить все пробелы из введенного значения
-  const maxLength = (value.length === 16) ? 16 : 19; // Установить значение maxLength в зависимости от длины значения
+  const maxLength = (value.length <= 19) ? 19 : 16; // Установить значение maxLength в зависимости от длины значения
+
   input.maxLength = maxLength;
+
+  if (value.length > 16) {
+    input.value = value.substring(0, 16);
+  }
 }
+
 
 // DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
