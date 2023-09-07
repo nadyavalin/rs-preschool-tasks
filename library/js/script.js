@@ -459,6 +459,7 @@ function signup(event) {
     password,
     cardNumber,
     visits: 1,
+    books: [],
   };
   saveUserState(user);
   let users = getItemFromLocalStorage("users");
@@ -515,6 +516,77 @@ function updateVisitsCounter() {
   setItemToLocalStorage("user", currentUser);
   setItemToLocalStorage("users", updatedUsers);
 }
+
+// Books Counter
+const ownBooksCounter = document.querySelector(".own-books-counter");
+const ownBooksList = document.querySelector(".own-books-list");
+const buyForm = document.querySelector(".buy-card__form");
+
+function addBooksToList() {
+  const currentUser = getItemFromLocalStorage("user");
+  currentUser.books.forEach(addBookToListElement);
+}
+
+function addBookToListElement(book) {
+  const listItem = document.createElement("li");
+  listItem.textContent = `${book.title}, ${book.author}`;
+  ownBooksList.appendChild(listItem);
+}
+
+function updateBooks(book) {
+  const users = getItemFromLocalStorage("users");
+  const currentBuyer = getItemFromLocalStorage("user");
+  const updatedBoughtBooks = users.map((user) => {
+    if (user.cardNumber === currentBuyer.cardNumber) {
+      user.books.push(book);
+    }
+    return user;
+  });
+  currentBuyer.books.push(book);
+  ownBooksCounter.textContent = currentBuyer.books.length;
+  setItemToLocalStorage("user", currentBuyer);
+  setItemToLocalStorage("users", updatedBoughtBooks);
+}
+
+// Обработчик события для кнопок Buy
+btnBuy.forEach((button) => {
+  button.addEventListener("click", () => {
+    const currentBuyer = getItemFromLocalStorage("user");
+    if (currentBuyer.books.length >= 16 || button.classList.contains("book-card__button_own")) {
+      return;
+    }
+    button.classList.add("book-card__button_own");
+    button.textContent = "Own";
+    button.disabled = true;
+
+    ownBooksCounter.textContent = currentBuyer.books.length;
+    const bookTitle = button.parentNode.querySelector("h4").textContent;
+    const bookAuthor = button.parentNode.querySelector(".book-card__author").textContent;
+    addBookToListElement({ title: bookTitle, author: bookAuthor });
+    updateBooks({ title: bookTitle, author: bookAuthor });
+  });
+});
+
+btnBuy.forEach((button) => {
+  button.addEventListener("click", () => {
+    const user = getItemFromLocalStorage("user");
+    if (user) {
+      // Пользователь залогинен, открыть поп-ап "Buy a card"
+      popUpBuyCard.classList.remove("hidden");
+      popUpLogin.classList.add("hidden");
+    } else {
+      // Пользователь не залогинен, открыть поп-ап "Login"
+      popUpBuyCard.classList.add("hidden");
+      popUpLogin.classList.remove("hidden");
+    }
+  });
+});
+
+// Форма покупки книги - исчезает после первой покупки
+buyForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  popUpBuyCard.remove();
+});
 
 // Log in
 function login(event) {
@@ -713,61 +785,6 @@ cardholderNameInput.addEventListener("input", updateBuyCardState);
 postalCodeInput.addEventListener("input", updateBuyCardState);
 cityTownInput.addEventListener("input", updateBuyCardState);
 
-
-// Books Counter
-const ownBooksCounter = document.querySelector(".own-books-counter");
-const ownBooksList = document.querySelector(".own-books-list");
-const buyForm = document.querySelector(".buy-card__form");
-
-let ownBooksCount = 0;
-
-// Обработчик события для кнопок Buy
-btnBuy.forEach((button) => {
-  button.addEventListener("click", () => {
-    if (
-      ownBooksCount >= 16 ||
-      button.classList.contains("book-card__button_own")
-    ) {
-      return;
-    }
-
-    button.classList.add("book-card__button_own");
-    button.textContent = "Own";
-    button.disabled = true;
-
-    ownBooksCount += 1;
-    ownBooksCounter.textContent = ownBooksCount;
-
-    const bookTitle = button.parentNode.querySelector("h4").textContent;
-    const bookAuthor = button.parentNode.querySelector(".book-card__author").textContent;
-    const listItem = document.createElement("li");
-    listItem.textContent = `${bookTitle}, ${bookAuthor}`;
-    ownBooksList.appendChild(listItem);
-  });
-});
-
-btnBuy.forEach((button) => {
-  button.addEventListener("click", () => {
-    const user = getItemFromLocalStorage("user");
-    if (user) {
-      // Пользователь залогинен, открыть поп-ап "Buy a card"
-      popUpBuyCard.classList.remove("hidden");
-      popUpLogin.classList.add("hidden");
-    } else {
-      // Пользователь не залогинен, открыть поп-ап "Login"
-      popUpBuyCard.classList.add("hidden");
-      popUpLogin.classList.remove("hidden");
-    }
-  });
-});
-
-// Форма покупки книги - исчезает после первой покупки
-buyForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  popUpBuyCard.remove();
-});
-
-
 // меняем бейджи и кнопки в разделе Digital Library Cards
 // они получились крупнее, поэтому код не подходит, но полезный
 
@@ -792,7 +809,6 @@ function updateMaxlength(input) {
   }
 }
 
-
 // DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
   addListenersForBurgerMenu();
@@ -801,5 +817,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (user) {
     setUserInfo(user.firstName, user.lastName, user.cardNumber);
     visitCounter.textContent = user.visits;
+    ownBooksCounter.textContent = user.books.length;
+    addBooksToList();
   }
 });
