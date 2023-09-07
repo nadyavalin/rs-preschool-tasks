@@ -550,27 +550,18 @@ function updateBooks(book) {
 
 // Обработчик события для кнопок Buy
 btnBuy.forEach((button) => {
-  button.addEventListener("click", () => {
-    const currentBuyer = getItemFromLocalStorage("user");
-    if (currentBuyer.books.length >= 16 || button.classList.contains("book-card__button_own")) {
-      return;
-    }
+  const currentBuyer = getItemFromLocalStorage("user");
+  const title = button.parentNode.querySelector("h4").textContent;
+  const author = button.parentNode.querySelector(".book-card__author").textContent;
+  if (currentBuyer.books.some(book => book.title === title && book.author === author)) {
     button.classList.add("book-card__button_own");
     button.textContent = "Own";
     button.disabled = true;
+    console.log("событие");
+  }
 
-    ownBooksCounter.textContent = currentBuyer.books.length;
-    const bookTitle = button.parentNode.querySelector("h4").textContent;
-    const bookAuthor = button.parentNode.querySelector(".book-card__author").textContent;
-    addBookToListElement({ title: bookTitle, author: bookAuthor });
-    updateBooks({ title: bookTitle, author: bookAuthor });
-  });
-});
-
-btnBuy.forEach((button) => {
   button.addEventListener("click", () => {
-    const user = getItemFromLocalStorage("user");
-    if (user) {
+    if (currentBuyer) {
       // Пользователь залогинен, открыть поп-ап "Buy a card"
       popUpBuyCard.classList.remove("hidden");
       popUpLogin.classList.add("hidden");
@@ -579,6 +570,15 @@ btnBuy.forEach((button) => {
       popUpBuyCard.classList.add("hidden");
       popUpLogin.classList.remove("hidden");
     }
+
+    if (currentBuyer.books.length >= 16 || button.classList.contains("book-card__button_own")) {
+      return;
+    }
+    ownBooksCounter.textContent = currentBuyer.books.length;
+    const bookTitle = button.parentNode.querySelector("h4").textContent;
+    const bookAuthor = button.parentNode.querySelector(".book-card__author").textContent;
+    addBookToListElement({ title: bookTitle, author: bookAuthor });
+    updateBooks({ title: bookTitle, author: bookAuthor });
   });
 });
 
@@ -700,6 +700,7 @@ function updateButtonSingUpState() {
   const isValid = checkSingUpInputs();
   signupButton.disabled = !isValid;
   signupButton.classList.toggle("disabled", !isValid);
+  console.log(!isValid);
 }
 
 // Слушать события изменения в полях ввода
