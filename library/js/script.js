@@ -518,19 +518,19 @@ function updateVisitsCounter() {
 }
 
 // Books Counter
-const ownBooksCounter = document.querySelector(".own-books-counter");
+const ownBooksCounter = document.querySelectorAll(".own-books-counter");
 const ownBooksList = document.querySelector(".own-books-list");
 const buyForm = document.querySelector(".buy-card__form");
-
-function addBooksToList() {
-  const currentUser = getItemFromLocalStorage("user");
-  currentUser.books.forEach(addBookToListElement);
-}
 
 function addBookToListElement(book) {
   const listItem = document.createElement("li");
   listItem.textContent = `${book.title}, ${book.author}`;
   ownBooksList.appendChild(listItem);
+}
+
+function addBooksToList() {
+  const currentUser = getItemFromLocalStorage("user");
+  currentUser.books.forEach(addBookToListElement);
 }
 
 function updateBooks(book) {
@@ -553,11 +553,11 @@ btnBuy.forEach((button) => {
   const currentBuyer = getItemFromLocalStorage("user");
   const title = button.parentNode.querySelector("h4").textContent;
   const author = button.parentNode.querySelector(".book-card__author").textContent;
-  if (currentBuyer.books.some(book => book.title === title && book.author === author)) {
+
+  if (currentBuyer && currentBuyer.books.some((book) => book.title === title && book.author === author)) { 
     button.classList.add("book-card__button_own");
     button.textContent = "Own";
     button.disabled = true;
-    console.log("событие");
   }
 
   button.addEventListener("click", () => {
@@ -571,21 +571,24 @@ btnBuy.forEach((button) => {
       popUpLogin.classList.remove("hidden");
     }
 
-    if (currentBuyer.books.length >= 16 || button.classList.contains("book-card__button_own")) {
+    if (
+      currentBuyer && currentBuyer.books.length >= 16 ||
+      button.classList.contains("book-card__button_own")
+    ) {
       return;
     }
-    ownBooksCounter.textContent = currentBuyer.books.length;
+    ownBooksCounter.textContent = currentBuyer ? currentBuyer.books.length : 0;
     const bookTitle = button.parentNode.querySelector("h4").textContent;
     const bookAuthor = button.parentNode.querySelector(".book-card__author").textContent;
     addBookToListElement({ title: bookTitle, author: bookAuthor });
     updateBooks({ title: bookTitle, author: bookAuthor });
-  });
-});
 
-// Форма покупки книги - исчезает после первой покупки
-buyForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  popUpBuyCard.remove();
+    // Форма покупки книги - исчезает после первой покупки
+    buyForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      popUpBuyCard.remove();
+    });
+  });
 });
 
 // Log in
@@ -700,7 +703,6 @@ function updateButtonSingUpState() {
   const isValid = checkSingUpInputs();
   signupButton.disabled = !isValid;
   signupButton.classList.toggle("disabled", !isValid);
-  console.log(!isValid);
 }
 
 // Слушать события изменения в полях ввода
@@ -721,7 +723,6 @@ const loginButton = document.querySelector(".form__btn_login");
 function checkLoginInputs() {
   const loginValue = loginInput.value.trim();
   const passwordLogValue = passwordLogInput.value.trim();
-
   return loginValue !== "" && passwordLogValue !== "";
 }
 
@@ -800,8 +801,8 @@ function replaceBlocks() {
 */
 
 function updateMaxlength(input) {
-  const value = input.value.replace(/ /g, ''); // Удалить все пробелы из введенного значения
-  const maxLength = (value.length <= 19) ? 19 : 16; // Установить значение maxLength в зависимости от длины значения
+  const value = input.value.replace(/ /g, ""); // Удалить все пробелы из введенного значения
+  const maxLength = value.length <= 19 ? 19 : 16; // Установить значение maxLength в зависимости от длины значения
 
   input.maxLength = maxLength;
 
