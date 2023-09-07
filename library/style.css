@@ -1756,6 +1756,14 @@ h4.get-card__title {
     .get-card__description {
         text-align: center;
     }
+
+    .get-card__description_auth {
+        text-align: center;
+    }
+
+    .get-card__buttons_one {
+        justify-content: center;
+    }
 }
 
 /* 768 */
