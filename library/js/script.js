@@ -78,7 +78,7 @@ const cardNumberMyProfile = document.querySelector(".card-number__my-profile");
 const logOutBtn = document.querySelector(".btn__logout");
 
 // PopUp Buy
-const btnBuy = document.querySelectorAll(".book-card__button");
+const buyButtons = document.querySelectorAll(".book-card__button");
 const popUpBuyCard = document.querySelector(".pop-up__buy-card");
 const popUpCloseBtnBuyCard = document.querySelector(".close-popup__buy-card");
 
@@ -460,6 +460,7 @@ function signup(event) {
     cardNumber,
     visits: 1,
     books: [],
+    isLibraryCardBought: false,
   };
   saveUserState(user);
   let users = getItemFromLocalStorage("users");
@@ -518,7 +519,7 @@ function updateVisitsCounter() {
 }
 
 // Books Counter
-const ownBooksCounter = document.querySelectorAll(".own-books-counter");
+const ownBooksCounter = document.querySelector(".own-books-counter");
 const ownBooksList = document.querySelector(".own-books-list");
 const buyForm = document.querySelector(".buy-card__form");
 
@@ -548,27 +549,28 @@ function updateBooks(book) {
   setItemToLocalStorage("users", updatedBoughtBooks);
 }
 
+function changeButtonBuyState(button) {
+  button.classList.add("book-card__button_own");
+  button.textContent = "Own";
+  button.disabled = true;
+}
+
 // Обработчик события для кнопок Buy
-btnBuy.forEach((button) => {
-  const currentBuyer = getItemFromLocalStorage("user");
+buyButtons.forEach((button) => {
+  const user = getItemFromLocalStorage("user");
   const title = button.parentNode.querySelector("h4").textContent;
   const author = button.parentNode.querySelector(".book-card__author").textContent;
 
-  if (currentBuyer && currentBuyer.books.some((book) => book.title === title && book.author === author)) { 
-    button.classList.add("book-card__button_own");
-    button.textContent = "Own";
-    button.disabled = true;
+  if (user && user.books.some((book) => book.title === title && book.author === author)) {
+    changeButtonBuyState(button);
   }
 
   button.addEventListener("click", () => {
-    if (currentBuyer) {
-      // Пользователь залогинен, открыть поп-ап "Buy a card"
-      popUpBuyCard.classList.remove("hidden");
-      popUpLogin.classList.add("hidden");
-    } else {
-      // Пользователь не залогинен, открыть поп-ап "Login"
-      popUpBuyCard.classList.add("hidden");
+    const currentBuyer = getItemFromLocalStorage("user");
+    if (!currentBuyer) {
       popUpLogin.classList.remove("hidden");
+    } else if (!currentBuyer.isLibraryCardBought) {
+      popUpBuyCard.classList.remove("hidden");
     }
 
     if (
@@ -577,18 +579,23 @@ btnBuy.forEach((button) => {
     ) {
       return;
     }
-    ownBooksCounter.textContent = currentBuyer ? currentBuyer.books.length : 0;
     const bookTitle = button.parentNode.querySelector("h4").textContent;
     const bookAuthor = button.parentNode.querySelector(".book-card__author").textContent;
     addBookToListElement({ title: bookTitle, author: bookAuthor });
     updateBooks({ title: bookTitle, author: bookAuthor });
-
-    // Форма покупки книги - исчезает после первой покупки
-    buyForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      popUpBuyCard.remove();
-    });
+    changeButtonBuyState(button);
   });
+});
+
+// Форма покупки книги - исчезает после первой покупки
+buyForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const user = getItemFromLocalStorage("user");
+  if (user.isLibraryCardBought === false) {
+    user.isLibraryCardBought = true;
+    setItemToLocalStorage("user", user);
+  }
+  popUpBuyCard.remove();
 });
 
 // Log in
