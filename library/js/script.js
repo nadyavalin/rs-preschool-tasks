@@ -443,6 +443,17 @@ function replaceTitles() {
   );
 }
 
+function changeDigitalLibraryCardBlock() {
+  btnFormDigitalCard.classList.add("hidden");
+  userCounts.classList.remove("hidden");
+  replaceTitles();
+  textGetCard.classList.add("hidden");
+  textGetCardAuth.classList.remove("hidden");
+  btnRegisterGetCardBlock.classList.add("hidden");
+  btnLoginGetCardBlock.classList.add("hidden");
+  btnProfileDigitalCard.classList.remove("hidden");
+}
+
 // Sing Up / Registration
 function signup(event) {
   const firstName = document.querySelector(".firstname").value;
@@ -478,14 +489,7 @@ function signup(event) {
     element.textContent = user.visits;
   });
 
-  btnFormDigitalCard.classList.add("hidden"); // исчезает после обновления браузера
-  userCounts.classList.remove("hidden"); // исчезает после обновления браузера
-  replaceTitles(); // исчезает после обновления браузера
-  textGetCard.classList.add("hidden"); // исчезает после обновления браузера
-  textGetCardAuth.classList.remove("hidden"); // исчезает после обновления браузера
-  btnRegisterGetCardBlock.classList.add("hidden"); // исчезает после обновления браузера
-  btnLoginGetCardBlock.classList.add("hidden"); // исчезает после обновления браузера
-  btnProfileDigitalCard.classList.remove("hidden"); // исчезает после обновления браузера
+  changeDigitalLibraryCardBlock();
 }
 
 const formSingUp = document.querySelector(".form-register");
@@ -631,14 +635,7 @@ function login(event) {
     withAuthCode.classList.remove("hidden");
     withAuthCode.classList.remove("open");
 
-    btnFormDigitalCard.classList.add("hidden"); // исчезает после обновления браузера
-    userCounts.classList.remove("hidden"); // исчезает после обновления браузера
-    replaceTitles(); // исчезает после обновления браузера
-    textGetCard.classList.add("hidden"); // исчезает после обновления браузера
-    textGetCardAuth.classList.remove("hidden"); // исчезает после обновления браузера
-    btnRegisterGetCardBlock.classList.add("hidden"); // исчезает после обновления браузера
-    btnLoginGetCardBlock.classList.add("hidden"); // исчезает после обновления браузера
-    btnProfileDigitalCard.classList.remove("hidden"); // исчезает после обновления браузера
+    changeDigitalLibraryCardBlock();
   }
 }
 const formLogin = document.querySelector(".form-login");
@@ -845,5 +842,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     addBooksToList();
+    changeDigitalLibraryCardBlock();
   }
 });
