@@ -89,7 +89,7 @@ const textMyProfileInitials = document.querySelector(
 const textMyProfileName = document.querySelector(".name-lastname__text");
 
 // Counter
-const visitCounter = document.querySelector(".visit-counter");
+const visitCounter = document.querySelectorAll(".visit-counter");
 
 // форма Digital Library Cards
 const nameInput = document.querySelector(".form__input_name");
@@ -474,7 +474,9 @@ function signup(event) {
   setUserInfo(firstName, lastName, cardNumber);
   popUpRegister.classList.add("hidden");
 
-  visitCounter.textContent = user.visits;
+  visitCounter.forEach((element) => {
+    element.textContent = user.visits;
+  });
 
   btnFormDigitalCard.classList.add("hidden"); // исчезает после обновления браузера
   userCounts.classList.remove("hidden"); // исчезает после обновления браузера
@@ -513,13 +515,17 @@ function updateVisitsCounter() {
     return user;
   });
   currentUser.visits += 1;
-  visitCounter.textContent = currentUser.visits;
+
+  visitCounter.forEach((element) => {
+    element.textContent = currentUser.visits;
+  });
+
   setItemToLocalStorage("user", currentUser);
   setItemToLocalStorage("users", updatedUsers);
 }
 
 // Books Counter
-const ownBooksCounter = document.querySelector(".own-books-counter");
+const ownBooksCounter = document.querySelectorAll(".own-books-counter");
 const ownBooksList = document.querySelector(".own-books-list");
 const buyForm = document.querySelector(".buy-card__form");
 
@@ -544,7 +550,11 @@ function updateBooks(book) {
     return user;
   });
   currentBuyer.books.push(book);
-  ownBooksCounter.textContent = currentBuyer.books.length;
+
+  ownBooksCounter.forEach((element) => {
+    element.textContent = currentBuyer.books.length;
+  });
+
   setItemToLocalStorage("user", currentBuyer);
   setItemToLocalStorage("users", updatedBoughtBooks);
 }
@@ -825,8 +835,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const user = getItemFromLocalStorage("user");
   if (user) {
     setUserInfo(user.firstName, user.lastName, user.cardNumber);
-    visitCounter.textContent = user.visits;
-    ownBooksCounter.textContent = user.books.length;
+
+    visitCounter.forEach((element) => {
+      element.textContent = user.visits;
+    });
+
+    ownBooksCounter.forEach((element) => {
+      element.textContent = user.books.length;
+    });
+
     addBooksToList();
   }
 });
