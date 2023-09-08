@@ -480,8 +480,8 @@ function changeDigitalLibraryCardBlockBack() {
 // обработчик кнопки Check the card
 btnFormDigitalCard.addEventListener("click", (event) => {
   event.preventDefault();
-  const enteredName = document.querySelector(".form__input_name").value;
-  const enteredCardNumber = document.querySelector(".form__input_card-number").value;
+  const enteredName = document.querySelector(".form__input_name").value.trim();
+  const enteredCardNumber = document.querySelector(".form__input_card-number").value.trim();
   const usersArray = getItemFromLocalStorage("users");
   const foundUser = usersArray.find(({firstName, lastName, cardNumber}) =>
     (enteredName === firstName ||
