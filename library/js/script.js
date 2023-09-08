@@ -83,9 +83,7 @@ const popUpBuyCard = document.querySelector(".pop-up__buy-card");
 const popUpCloseBtnBuyCard = document.querySelector(".close-popup__buy-card");
 
 // My profile
-const textMyProfileInitials = document.querySelector(
-  ".name-lastname__initials"
-);
+const textMyProfileInitials = document.querySelector(".name-lastname__initials");
 const textMyProfileName = document.querySelector(".name-lastname__text");
 
 // Counter
@@ -399,6 +397,7 @@ function setUserInfo(firstName, lastName, cardNumber) {
   textMyProfileInitials.textContent = newInitials;
   textMyProfileName.textContent = nameLastName;
 
+  // инпуты в форме Digital Library Card
   nameInput.value = `${firstName} ${lastName}`;
   cardNumberInput.value = cardNumber;
 
@@ -430,7 +429,7 @@ const titleGetCard = document.querySelector(".get-card__title");
 const textGetCard = document.querySelector(".get-card__description");
 const textGetCardAuth = document.querySelector(".get-card__description_auth");
 const btnFormDigitalCard = document.querySelector(".form__button");
-const userCounts = document.querySelector(".user__counts_small");
+const userInfo = document.querySelector(".user__counts_small");
 
 function replaceTitles() {
   titleDigitalCard.textContent = titleDigitalCard.textContent.replace(
@@ -456,7 +455,7 @@ function replaceTitlesBack() {
 
 function changeDigitalLibraryCardBlock() {
   btnFormDigitalCard.classList.add("hidden");
-  userCounts.classList.remove("hidden");
+  userInfo.classList.remove("hidden");
   replaceTitles();
   textGetCard.classList.add("hidden");
   textGetCardAuth.classList.remove("hidden");
@@ -467,7 +466,7 @@ function changeDigitalLibraryCardBlock() {
 
 function changeDigitalLibraryCardBlockBack() {
   btnFormDigitalCard.classList.remove("hidden");
-  userCounts.classList.add("hidden");
+  userInfo.classList.add("hidden");
   replaceTitlesBack();
   textGetCard.classList.remove("hidden");
   textGetCardAuth.classList.add("hidden");
@@ -477,6 +476,31 @@ function changeDigitalLibraryCardBlockBack() {
   document.querySelector(".form__input_name").value = "";
   document.querySelector(".form__input_card-number").value = "";
 }
+
+// обработчик кнопки Check the card
+btnFormDigitalCard.addEventListener("click", (event) => {
+  event.preventDefault();
+  const enteredName = document.querySelector(".form__input_name").value;
+  const enteredCardNumber = document.querySelector(".form__input_card-number").value;
+  const usersArray = getItemFromLocalStorage("users");
+  const foundUser = usersArray.find(({firstName, lastName, cardNumber}) =>
+    (enteredName === firstName ||
+    enteredName === lastName ||
+    enteredName === `${firstName} ${lastName}` ||
+    enteredName === `${lastName} ${firstName}`) &&
+    enteredCardNumber === cardNumber);
+
+  if (foundUser) {
+    btnFormDigitalCard.classList.add("hidden");
+    userInfo.classList.remove("hidden");
+    setTimeout(() => {
+      userInfo.classList.add("hidden");
+      btnFormDigitalCard.classList.remove("hidden");
+      document.querySelector(".form__input_name").value = "";
+      document.querySelector(".form__input_card-number").value = "";
+    }, 10000);
+  }
+});
 
 // Sing Up / Registration
 function signup(event) {
