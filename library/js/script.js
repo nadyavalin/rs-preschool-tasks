@@ -443,6 +443,17 @@ function replaceTitles() {
   );
 }
 
+function replaceTitlesBack() {
+  titleDigitalCard.textContent = titleDigitalCard.textContent.replace(
+    "Your Library card",
+    "Find your Library card"
+  );
+  titleGetCard.textContent = titleGetCard.textContent.replace(
+    "Visit your profile",
+    "Get a reader card"
+  );
+}
+
 function changeDigitalLibraryCardBlock() {
   btnFormDigitalCard.classList.add("hidden");
   userCounts.classList.remove("hidden");
@@ -452,6 +463,19 @@ function changeDigitalLibraryCardBlock() {
   btnRegisterGetCardBlock.classList.add("hidden");
   btnLoginGetCardBlock.classList.add("hidden");
   btnProfileDigitalCard.classList.remove("hidden");
+}
+
+function changeDigitalLibraryCardBlockBack() {
+  btnFormDigitalCard.classList.remove("hidden");
+  userCounts.classList.add("hidden");
+  replaceTitlesBack();
+  textGetCard.classList.remove("hidden");
+  textGetCardAuth.classList.add("hidden");
+  btnRegisterGetCardBlock.classList.remove("hidden");
+  btnLoginGetCardBlock.classList.remove("hidden");
+  btnProfileDigitalCard.classList.add("hidden");
+  document.querySelector(".form__input_name").value = "";
+  document.querySelector(".form__input_card-number").value = "";
 }
 
 // Sing Up / Registration
@@ -650,6 +674,7 @@ logOutBtn.addEventListener("click", () => {
   noAuth.classList.remove("open");
   profileAuth.classList.add("hidden");
   profile.classList.remove("hidden");
+  changeDigitalLibraryCardBlockBack();
 });
 /* КОНЕЦ ФОРМУЛ регистрации и логирования пользователя */
 
@@ -800,19 +825,6 @@ cvcInput.addEventListener("input", updateBuyCardState);
 cardholderNameInput.addEventListener("input", updateBuyCardState);
 postalCodeInput.addEventListener("input", updateBuyCardState);
 cityTownInput.addEventListener("input", updateBuyCardState);
-
-// меняем бейджи и кнопки в разделе Digital Library Cards
-// они получились крупнее, поэтому код не подходит, но полезный
-
-/*
-const btnFormDigitalCard = document.querySelector(".form__button");
-const userCounts = document.querySelector(".user__counts");
-
-function replaceBlocks() {
-  const replacementBlock = userCounts.cloneNode(true);
-  btnFormDigitalCard.replaceWith(replacementBlock);
-}
-*/
 
 function updateMaxlength(input) {
   const value = input.value.replace(/ /g, ""); // Удалить все пробелы из введенного значения
