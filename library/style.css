@@ -1480,6 +1480,15 @@ h4.form__title {
     background-color: #BB945F;
 }
 
+.form__button_out {
+    transition: 0.5s all ease-in-out;
+    opacity: 100%;
+}
+
+.form__button_out:focus {
+    opacity: 0;
+}
+
 .get-card {
     width: 456px;
     display: flex;

@@ -483,9 +483,7 @@ function changeDigitalLibraryCardBlockBack() {
 btnFormDigitalCard.addEventListener("click", (event) => {
   event.preventDefault();
   const enteredName = document.querySelector(".form__input_name").value.trim();
-  const enteredCardNumber = document
-    .querySelector(".form__input_card-number")
-    .value.trim();
+  const enteredCardNumber = document.querySelector(".form__input_card-number").value.trim();
   const usersArray = getItemFromLocalStorage("users");
   const foundUser = usersArray.find(
     ({ firstName, lastName, cardNumber }) =>
@@ -497,13 +495,16 @@ btnFormDigitalCard.addEventListener("click", (event) => {
   );
 
   if (foundUser) {
+    btnFormDigitalCard.classList.add("form__button_out");
     btnFormDigitalCard.classList.add("hidden");
     userInfo.classList.remove("hidden");
     setTimeout(() => {
       userInfo.classList.add("hidden");
+
       btnFormDigitalCard.classList.remove("hidden");
       document.querySelector(".form__input_name").value = "";
       document.querySelector(".form__input_card-number").value = "";
+      btnFormDigitalCard.classList.remove("form__button_out");
     }, 10000);
   }
 });
