@@ -83,7 +83,9 @@ const popUpBuyCard = document.querySelector(".pop-up__buy-card");
 const popUpCloseBtnBuyCard = document.querySelector(".close-popup__buy-card");
 
 // My profile
-const textMyProfileInitials = document.querySelector(".name-lastname__initials");
+const textMyProfileInitials = document.querySelector(
+  ".name-lastname__initials"
+);
 const textMyProfileName = document.querySelector(".name-lastname__text");
 
 // Counter
@@ -481,14 +483,18 @@ function changeDigitalLibraryCardBlockBack() {
 btnFormDigitalCard.addEventListener("click", (event) => {
   event.preventDefault();
   const enteredName = document.querySelector(".form__input_name").value.trim();
-  const enteredCardNumber = document.querySelector(".form__input_card-number").value.trim();
+  const enteredCardNumber = document
+    .querySelector(".form__input_card-number")
+    .value.trim();
   const usersArray = getItemFromLocalStorage("users");
-  const foundUser = usersArray.find(({firstName, lastName, cardNumber}) =>
-    (enteredName === firstName ||
-    enteredName === lastName ||
-    enteredName === `${firstName} ${lastName}` ||
-    enteredName === `${lastName} ${firstName}`) &&
-    enteredCardNumber === cardNumber);
+  const foundUser = usersArray.find(
+    ({ firstName, lastName, cardNumber }) =>
+      (enteredName === firstName ||
+        enteredName === lastName ||
+        enteredName === `${firstName} ${lastName}` ||
+        enteredName === `${lastName} ${firstName}`) &&
+      enteredCardNumber === cardNumber
+  );
 
   if (foundUser) {
     btnFormDigitalCard.classList.add("hidden");
@@ -621,31 +627,39 @@ function changeButtonBuyState(button) {
 buyButtons.forEach((button) => {
   const user = getItemFromLocalStorage("user");
   const title = button.parentNode.querySelector("h4").textContent;
-  const author = button.parentNode.querySelector(".book-card__author").textContent;
+  const author =
+    button.parentNode.querySelector(".book-card__author").textContent;
 
-  if (user && user.books.some((book) => book.title === title && book.author === author)) {
+  if (
+    user &&
+    user.books.some((book) => book.title === title && book.author === author)
+  ) {
     changeButtonBuyState(button);
   }
 
   button.addEventListener("click", () => {
     const currentBuyer = getItemFromLocalStorage("user");
+    if (
+      (currentBuyer && currentBuyer.books.length >= 16) ||
+      button.classList.contains("book-card__button_own")
+    ) {
+      return;
+    }
+
     if (!currentBuyer) {
       popUpLogin.classList.remove("hidden");
     } else if (!currentBuyer.isLibraryCardBought) {
       popUpBuyCard.classList.remove("hidden");
     }
 
-    if (
-      currentBuyer && currentBuyer.books.length >= 16 ||
-      button.classList.contains("book-card__button_own")
-    ) {
-      return;
-    }
     const bookTitle = button.parentNode.querySelector("h4").textContent;
     const bookAuthor = button.parentNode.querySelector(".book-card__author").textContent;
-    addBookToListElement({ title: bookTitle, author: bookAuthor });
-    updateBooks({ title: bookTitle, author: bookAuthor });
-    changeButtonBuyState(button);
+
+    if (currentBuyer.isLibraryCardBought === true) {
+      addBookToListElement({ title: bookTitle, author: bookAuthor });
+      updateBooks({ title: bookTitle, author: bookAuthor });
+      changeButtonBuyState(button);
+    }
   });
 });
 
