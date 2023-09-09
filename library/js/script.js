@@ -98,6 +98,7 @@ const cardNumberInput = document.querySelector(".form__input_card-number");
 // Profile menu
 // Hide Profile menu when mouse click out of this menu
 // Before registration or authorization
+
 document.body.addEventListener("click", (event) => {
   if (
     !event.target.classList.contains("profile-block") &&
@@ -297,6 +298,9 @@ profile.addEventListener("click", () => {
 // при нажатии на кнопку Register в меню профиля открывается и закрывается окно регистрации
 btnRegister.addEventListener("click", () => {
   popUpRegister.classList.toggle("hidden");
+  setTimeout(() => {
+    noAuth.classList.remove("open");
+  }, 500);
 });
 
 // при нажатии на кнопку Sing Up в разделе Get Card открывается и закрывается окно регистрации
@@ -320,6 +324,9 @@ popUpCloseBtnRegister.addEventListener("click", () => {
 // при нажатии на кнопку Log In в меню профиля открывается и закрывается окно входа в профиль
 btnLogin.addEventListener("click", () => {
   popUpLogin.classList.toggle("hidden");
+  setTimeout(() => {
+    noAuth.classList.remove("open");
+  }, 500);
 });
 
 // при нажатии на кнопку Log In в разделе Get Card открывается и закрывается окно входа в профиль
@@ -343,7 +350,11 @@ popUpLogin.addEventListener("click", (event) => {
 // при нажатии на кнопку My profile и Profile открывается окно My profile
 btnMyProfile.addEventListener("click", () => {
   popUpMyProfile.classList.toggle("hidden");
+  setTimeout(() => {
+    withAuth.classList.remove("open");
+  }, 500);
 });
+
 btnProfileDigitalCard.addEventListener("click", () => {
   popUpMyProfile.classList.toggle("hidden");
 });
@@ -866,7 +877,7 @@ postalCodeInput.addEventListener("input", updateBuyCardState);
 cityTownInput.addEventListener("input", updateBuyCardState);
 
 function updateMaxlength(input) {
-  const value = input.value.replace(/ /g, ""); // Удалить все пробелы из введенного значения
+  const value = input.value.replace(/ /g, "").trim(); // Удалить все пробелы из введенного значения
   const maxLength = value.length <= 19 ? 19 : 16; // Установить значение maxLength в зависимости от длины значения
 
   input.maxLength = maxLength;
