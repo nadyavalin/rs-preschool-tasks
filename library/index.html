@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,13 +11,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Forum&family=Inter&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Brooklyn Public Library</title>
-
-    <script src="js/script.js"></script>
 </head>
+
 <body>
     <div class="container">
         <header class="header">
-            <a href="#"><h1 class="logo">Brooklyn Public Library</h1></a>
+            <a href="#">
+                <h1 class="logo">Brooklyn Public Library</h1>
+            </a>
             <div class="profile__gap">
                 <nav class="nav" id="menu">
                     <ul class="nav-menu__items">
@@ -28,13 +30,33 @@
                     </ul>
                 </nav>
                 <div class="profile__gap">
-                    <img src="./assets/svg/icon_profile.svg" alt="Profile" class="profile__icon">
+                    <button class="btn_after-register hidden" title=""></button>
+                    <button class="profile__icon"><img src="./assets/svg/icon_profile.svg" alt="Profile"></button>
                     <button class="header__burger-btn">
                         <span></span><span></span><span></span>
                     </button>
                 </div>
             </div>
         </header>
+        <div class="profile-block">
+            <div class="profile__no-auth profile__no-auth_active">
+                <p class="profile__head">Profile</p>
+                <hr class="profile__line">
+                <div class="profile__btns">
+                    <button class="btn__login">Log In</button>
+                    <button class="btn__register">Register</button>
+                </div>
+            </div>
+
+            <div class="profile__with-auth profile__with-auth_active">
+                <p class="profile__head card-number__profile-menu">Profile</p>
+                <hr class="profile__line">
+                <div class="profile__btns">
+                    <button class="btn__myprofile">My profile</button>
+                    <button class="btn__logout">Log Out</button>
+                </div>
+            </div>
+        </div>
         <section class="welcome">
             <div class="shadow"></div>
             <div class="welcome-block">
@@ -42,38 +64,206 @@
             </div>
         </section>
         <main class="main">
+            <!-- ПОП АП ОКНА начало -->
+            <div class="pop-up__register hidden">
+                <div class="pop-up__register_content">
+                    <div class="close-popup__register"><img src="./assets/svg/close_popup.svg"></div>
+                    <h6 class="pop-up__text">Register</h6>
+                    <form class="form-register">
+                        <div class="form-register__item">
+                            <label for="firstname">Frist name</label>
+                            <input type="text" class="firstname" placeholder="Name" required>
+                        </div>
+                        <div class="form-register__item">
+                            <label for="lastname">Last name</label>
+                            <input type="text" class="lastname" placeholder="Last name" required>
+                        </div>
+                        <div class="form-register__item">
+                            <label for="email">E-mail</label>
+                            <input type="email" class="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                                placeholder="email@email.com" required title="Email address must include @ and .">
+                        </div>
+                        <div class="form-register__item">
+                            <label for="password">Password</label>
+                            <input type="password" class="password" placeholder="12345678" pattern="^\S{8,}$"
+                                minlength="8" required title="Password length must be at least 8 characters">
+                        </div>
+                        <button type="submit" class="form__btn form__btn_signup disabled">Sign Up</button>
+                        <div class="have-account">
+                            <p class="have-account__text">Already have an account?</p>
+                            <button type="submit" class="have-account__login">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="pop-up__login hidden">
+                <div class="pop-up__login_content">
+                    <div class="close-popup__login"><img src="./assets/svg/close_popup.svg"></div>
+                    <h6 class="pop-up__text">Login</h6>
+                    <form class="form-login">
+                        <div class="form-login__item">
+                            <label for="login">E-mail or readers card</label>
+                            <input type="login" name="login" class="login" placeholder="email@email.com"
+                                title="You can write your Email or you Card Number">
+                        </div>
+                        <div class="form-login__item">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" class="password-log" pattern="^\S{8,}$" minlength="8"
+                                placeholder="12345678" required title="Password length must be at least 8 characters">
+                        </div>
+                        <button type="submit" class="form__btn form__btn_login disabled">Log In</button>
+                        <div class="have-account">
+                            <p class="have-account__text">Don’t have an account?</p>
+                            <button class="have-account__register">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="pop-up__my-profile hidden">
+                <div class="pop-up__my-profile_content">
+                    <div class="my-profile_black">
+                        <div class="initials">
+                            <p class="name-lastname__initials"></p>
+                        </div>
+                        <div class="name-lastname">
+                            <p class="name-lastname__text"></p>
+                        </div>
+                    </div>
+                    <div class="my-profile_white">
+                        <div class="close-popup__my-profile"><img src="./assets/svg/close_popup.svg"></div>
+                        <h5 class="my-profile__title">My profile</h5>
+                        <div class="user__counts">
+                            <div class="user__count_item">
+                                <p>Visits</p>
+                                <img src="./assets/svg/visits.svg" alt="Visits">
+                                <span class="visit-counter">0</span>
+                            </div>
+                            <div class="user__count_item">
+                                <p>Bonuses</p>
+                                <img src="./assets/svg/bonuses.svg" alt="Bonuses">
+                                <span>1240</span>
+                            </div>
+                            <div class="user__count_item">
+                                <p>Books</p>
+                                <img src="./assets/svg/books.svg" alt="Books">
+                                <span class="own-books-counter">0</span>
+                            </div>
+                        </div>
+                        <div class="own-books">
+                            <p class="own-books__title">Rented books</p>
+                            <ul class="own-books-list">
+                            </ul>
+                        </div>
+                        <div class="user__card-number">
+                            <p>Card number:</p>
+                            <span class="card-number card-number__my-profile"></span>
+                            <button class="card-number__copy-button"><img src="./assets/svg/copy.svg"
+                                    alt="copy"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pop-up__buy-card hidden">
+                <div class="pop-up__buy-card_content">
+                    <div class="buy-card__content_top">
+                        <div class="close-popup__buy-card"><img src="./assets/svg/close_popup_white.svg"></div>
+                        <h5 class="buy-card__title">Buy a library card</h5>
+                    </div>
+                    <div class="buy-card__main">
+                        <div class="buy-card__main_form">
+                            <form class="buy-card__form">
+                                <div class="buy-card__form-item">
+                                    <label for="bank-card-number">Bank card number</label>
+                                    <input type="text" name="bank-card-number" class="bank-card-number"
+                                        pattern="^\d{4}( ?:?\d{4}){3}$" placeholder="XXXX XXXX XXXX XXXX"
+                                        title="There must be 16 figures" oninput="updateMaxlength(this)">
+                                </div>
+                                <div class="buy-card__form-item">
+                                    <label for="expiration-code">Expiration code</label>
+                                    <div class="exp-code_two-field">
+                                        <input type="text" name="expiration-code" class="expiration-code-1"
+                                            pattern="\d{2}" placeholder="XX" title="There must be 2 figures"
+                                            maxlength="2" required>
+                                        <input type="text" name="expiration-code" class="expiration-code-2"
+                                            pattern="\d{2}" placeholder="XX" title="There must be 2 figures"
+                                            maxlength="2" required>
+                                    </div>
+                                </div>
+                                <div class="buy-card__form-item-cvc">
+                                    <label for="cvc">CVC</label>
+                                    <input type="text" name="cvc" class="cvc" pattern="\d{3}"
+                                        title="There must be 3 figures" placeholder="XXX" maxlength="3" required>
+                                </div>
+                                <div class="buy-card__form-item buy-card__form-item_gap">
+                                    <label for="holder-name">Cardholder name</label>
+                                    <input type="text" name="holder-name" class="cardholder-name"
+                                        placeholder="Cardholder name" required>
+                                </div>
+                                <div class="buy-card__form-item">
+                                    <label for="postal-code">Postal code</label>
+                                    <input type="text" name="postal-code" class="postal-code" pattern="[0-9]{6}"
+                                        maxlength="6" placeholder="XXXXXX" required>
+                                </div>
+                                <div class="buy-card__form-item">
+                                    <label for="city-town">City / Town</label>
+                                    <input type="text" name="city-town" class="city-town"
+                                        placeholder="Your city or town" required>
+                                </div>
+                                <div class="buy-card__button-block">
+                                    <button type="submit" class="buy-card__button disabled" style="margin-top: 10px">Buy</button>
+                                    <p class>$ 25.00</p>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="buy-card__main_text">
+                            <p>If you are live, work, attend school, or pay property taxes in New York State, you can
+                                get a $25 digital library card right now using this online form. Visitors to New York
+                                State can also use this form to apply for a temporary card.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ПОП АП ОКНА конец -->
+
             <section class="about" id="about">
                 <div class="title-line">
                     <h2>About</h2>
                     <hr class="line">
                 </div>
-                <p class="about-text-block">The Brooklyn Library is a free workspace, a large number of books and a cozy coffee shop inside</p>
-                <div class="gallery">
-                    <div class="images">
-                        <div class="arrow-button_block"><button class="arrow-button"><img src="./assets/svg/arrow_left.svg" alt="Left arrow" class="arrow"></button></div>
-                        <img src="./assets/img/image_1.jpg" alt="A woman in the library" class="image_size">
-                        <img src="./assets/img/image_2.jpg" alt="Sculptures" class="image_tablet-hidden image_size">
-                        <img src="./assets/img/image_3.jpg" alt="Book shelves" class="image_tablet-hidden image_size">
-                        <img src="./assets/img/image_4.jpg" alt="Book shelves" class="image_desktop-hidden">
-                        <img src="./assets/img/image_5.jpg" alt="Book shelves" class="image_desktop-hidden">
-                        <div class="arrow-button_block"><button class="arrow-button arrow-button_right"><img src="./assets/svg/arrow_right.svg" alt="Right arrow" class="arrow"></button></div>
+                <p class="about-text-block">The Brooklyn Library is a free workspace, a large number of books and a cozy
+                    coffee shop inside</p>
+                <div class="container-with-arrows">
+                    <div class="arrow-button_block"><button class="arrow-button arrow-button_prev arrow-button_stop"">
+                            <img src=" ./assets/svg/arrow_left.svg" alt="Left arrow" class="arrow"></button>
                     </div>
-                    <div class="pagination">
-                        <div class="pagination-block">
-                            <div class="circle circle__mobile circle__mobile_checked"></div>
+                    <div class="container-with-dots">
+                        <div class="images-line">
+                            <img src="./assets/img/image_1.jpg" alt="A woman in the library" class="image">
+                            <img src="./assets/img/image_2.jpg" alt="Sculptures" class="image">
+                            <img src="./assets/img/image_3.jpg" alt="Book shelves" class="image">
+                            <img src="./assets/img/image_4.jpg" alt="Book shelves" class="image">
+                            <img src="./assets/img/image_5.jpg" alt="Book shelves" class="image">
                         </div>
                         <div class="pagination-block">
-                            <div class="circle circle_checked"></div>
+                            <div class="pagination-dot pagination-dot__tablet pagination-dot_checked">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="pagination-dot pagination-dot__tablet">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="pagination-dot pagination-dot__tablet">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="pagination-dot pagination-dot__tablet pagination-dot__tablet_hidden">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="pagination-dot pagination-dot__tablet pagination-dot__tablet_hidden">
+                                <div class="circle"></div>
+                            </div>
                         </div>
-                        <div class="pagination-block">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="pagination-block">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="pagination-block">
-                            <div class="circle circle__mobile"></div>
-                        </div>
+                    </div>
+                    <div class="arrow-button_block"><button class="arrow-button arrow-button_next">
+                            <img src="./assets/svg/arrow_right.svg" alt="Right arrow" class="arrow"></button>
                     </div>
                 </div>
             </section>
@@ -83,247 +273,306 @@
                     <hr class="line">
                 </div>
                 <p class="favorites-block__text">Pick favorites of season</p>
-                <div class="favorites-block">
-                    <fieldset class="season-block">
-                        <div class="season-block__item">
-                            <input type="radio" id="winter" name="topic" value="winter" class="season-block__item-input" checked>
-                            <label for="winter" class="season-block__item-label season-block__item-label_checked">Winter</label>
-                        </div>
-                        <div class="season-block__item">
-                            <input type="radio" id="spring" name="topic" value="spring" class="season-block__item-input">
-                            <label for="spring" class="season-block__item-label">Spring</label>
-                        </div>
-                        <div class="season-block__item">
-                            <input type="radio" id="summer" name="topic" value="summer" class="season-block__item-input">
-                            <label for="summer" class="season-block__item-label">Summer</label>
-                        </div>
-                        <div class="season-block__item">
-                            <input type="radio" id="autumn" name="topic" value="autumn" class="season-block__item-input">
-                            <label for="autumn" class="season-block__item-label">Autumn</label>
-                        </div>
-                    </fieldset>
+                <div class="season-block">
+                    <div class="season-block__item season-block__item_winter season-block__item_checked">
+                        <input type="radio" id="winter" name="topic" value="winter" class="season-block__item-input"
+                            checked>
+                        <label for="winter" data-path="winter" class="season-block__item-label season-block__item-label_checked">Winter</label>
+                    </div>
+                    <div class="season-block__item season-block__item_spring season-block__item_checked">
+                        <input type="radio" id="spring" name="topic" value="spring" class="season-block__item-input">
+                        <label for="spring" data-path="spring" class="season-block__item-label">Spring</label>
+                    </div>
+                    <div class="season-block__item season-block__item_summer season-block__item_checked">
+                        <input type="radio" id="summer" name="topic" value="summer" class="season-block__item-input">
+                        <label for="summer" data-path="summer" class="season-block__item-label season-block__item_checked">Summer</label>
+                    </div>
+                    <div class="season-block__item season-block__item_autumn">
+                        <input type="radio" id="autumn" name="topic" value="autumn" class="season-block__item-input">
+                        <label for="autumn" data-path="autumn" class="season-block__item-label">Autumn</label>
+                    </div>
                 </div>
-                <ul class="book-cards">
-                    <li class="book-card">
-                        <article class="book-card__content">
-                            <h3>Staff Picks</h3>
-                            <hr class="book-card__line">
-                            <h4 class="book-card__title">The book eaters</h4>
-                            <h5 class="book-card__author">By Sunyi Dean</h5>
-                            <p class="book-card__description">An Unusual Sci-Fi Story About A Book Eater Woman Who Tries
-                                Desperately To Save Her Dangerous Mind-Eater Son From Tradition And Certain Death.
-                                Complete With Dysfunctional Family Values, Light Sapphic Romance, And A Strong,
-                                Complex Protagonist. Not For The Faint Of Heart.</p>
-                            <button class="book-card__button">Buy</button>
-                            <img class="book-card__image" src="./assets/img/book_1_the_book_eaters.jpg" alt="The book eaters">
-                        </article>
-                    </li>
-                    <li class="book-card">
-                        <article class="book-card__content">
-                            <h3>Staff Picks</h3>
-                            <hr class="book-card__line">
-                            <h4 class="book-card__title">Cackle</h4>
-                            <h5 class="book-card__author">By Rachel Harrison</h5>
-                            <p class="book-card__description">Are your Halloween movies of choice The Witches of Eastwick and
-                                Practical Magic? Look no further than here - where a woman recovering from a breakup moves to a
-                                quaint town in upstate New York and befriends a beautiful witch.</p>
-                            <button class="book-card__button">Buy</button>
-                            <img class="book-card__image" src="./assets/img/book_2_cackle.jpg" alt="Cackle">
-                        </article>
-                    </li>
-                    <li class="book-card">
-                        <article class="book-card__content">
-                            <h3>Staff Picks</h3>
-                            <hr class="book-card__line">
-                            <h4 class="book-card__title">Dante: Poet of the Secular World</h4>
-                            <h5 class="book-card__author">By Erich Auerbach</h5>
-                            <p class="book-card__description">Auerbach's engaging book places the 'Comedy' within the tradition
-                                of epic, tragedy, and philosophy in general, arguing for Dante's uniqueness as one
-                                who raised the individual and his drama of soul into something of divine
-                                significance—an inspired introduction to Dante's main themes.</p>
-                            <button class="book-card__button">Buy</button>
-                            <img class="book-card__image" src="./assets/img/book_3_dante.jpg" alt="Dante: Poet of the Secular World">
-                        </article>
-                    </li>
-                    <li class="book-card">
-                        <article class="book-card__content">
-                            <h3>Staff Picks</h3>
-                            <hr class="book-card__line">
-                            <h4 class="book-card__title">The Last Queen</h4>
-                            <h5 class="book-card__author">By Clive Irving</h5>
-                            <p class="book-card__description">A timely and revelatory new biography of Queen Elizabeth (and her
-                                family) exploring how the Windsors have evolved and thrived as the modern world has
-                                changed around them.</p>
-                            <button class="book-card__button book-card__button_own" disabled>Own</button>
-                            <img class="book-card__image" src="./assets/img/book_4_last_queen.jpg" alt="The Last Queen">
-                        </article>
-                    </li>
-                    <li class="book-card">
-                        <article class="book-card__content">
-                            <h3>Staff Picks</h3>
-                            <hr class="book-card__line">
-                            <h4 class="book-card__title">The Body</h4>
-                            <h5 class="book-card__author">By Stephen King</h5>
-                            <p class="book-card__description">Powerful novel that takes you back to a nostalgic time, exploring both
-                                the beauty and danger and loss of innocence that is youth.</p>
-                            <button class="book-card__button">Buy</button>
-                            <img class="book-card__image" src="./assets/img/book_5_stephen_king_the_body.jpg" alt="The Body">
-                        </article>
-                    </li>
-                    <li class="book-card">
-                        <article class="book-card__content">
-                            <h3>Staff Picks</h3>
-                            <hr class="book-card__line">
-                            <h4 class="book-card__title">Carry: A Memoir of Survival on Stolen Land</h4>
-                            <h5 class="book-card__author">By Toni Jenson</h5>
-                            <p class="book-card__description">This memoir about the author's relationship with gun violence feels
-                                both expansive and intimate, resulting in a lyrical indictment of the way things are.</p>
-                            <button class="book-card__button">Buy</button>
-                            <img class="book-card__image" src="./assets/img/book_6_carry.jpg"
-                                alt="Carry: A Memoir of Survival on Stolen Land">
-                        </article>
-                    </li>
-                    <li class="book-card">
-                        <article class="book-card__content">
-                            <h3>Staff Picks</h3>
-                            <hr class="book-card__line">
-                            <h4 class="book-card__title">Days of Distraction</h4>
-                            <h5 class="book-card__author">By Alexandra Chang</h5>
-                            <p class="book-card__description">A sardonic view of Silicon Valley culture, a meditation on race, and a
-                                journal of displacement and belonging, all in one form-defying package of spare prose.</p>
-                            <button class="book-card__button">Buy</button>
-                            <img class="book-card__image" src="./assets/img/book_7_days_of_distraction.jpg" alt="Days of Distraction">
-                        </article>
-                    </li>
-                    <li class="book-card">
-                        <article class="book-card__content">
-                            <h3>Staff Picks</h3>
-                            <hr class="book-card__line">
-                            <h4 class="book-card__title">Dominicana</h4>
-                            <h5 class="book-card__author">By Angie Cruz</h5>
-                            <p class="book-card__description">A fascinating story of a teenage girl who marries a man twice her age
-                                with the promise to bring her to America. Her marriage is an opportunity for her family to
-                                eventually immigrate. For fans of Isabel Allende and Julia Alvarez.</p>
-                            <button class="book-card__button">Buy</button>
-                            <img class="book-card__image" src="./assets/img/book_8_dominicana.jpg" alt="Dominicana">
-                        </article>
-                    </li>
-                    <li class="book-card">
-                        <article class="book-card__content">
-                            <h3>Staff Picks</h3>
-                            <hr class="book-card__line">
-                            <h4 class="book-card__title">Crude: A Memoir</h4>
-                            <h5 class="book-card__author">By Pablo Fajardo & Sophie Tardy-Joubert</h5>
-                            <p class="book-card__description">Drawing and color by Damien Roudeau | This book illustrates the
-                                struggles of a group of indigenous Ecuadoreans as they try to sue the ChevronTexaco company for
-                                damage their oil fields did to the Amazon and her people.</p>
-                            <button class="book-card__button">Buy</button>
-                            <img class="book-card__image" src="./assets/img/book_9_crude.jpg" alt="Crude: A Memoir">
-                        </article>
-                    </li>
-                    <li class="book-card">
-                        <article class="book-card__content">
-                            <h3>Staff Picks</h3>
-                            <hr class="book-card__line">
-                            <h4 class="book-card__title">Let My People Go Surfing</h4>
-                            <h5 class="book-card__author">By Yvon Chouinard</h5>
-                            <p class="book-card__description">Chouinard—climber, businessman, environmentalist—shares tales of
-                                courage and persistence from his experience of founding and leading Patagonia, Inc. Full title:
-                                Let My People Go Surfing: The Education of a Reluctant Businessman, Including 10 More Years of
-                                Business Unusual.</p>
-                            <button class="book-card__button">Buy</button>
-                            <img class="book-card__image" src="./assets/img/book_10_let_my_people_go_surfing.jpg"
-                                alt="Let My People Go Surfing">
-                        </article>
-                    </li>
-                    <li class="book-card">
-                        <article class="book-card__content">
-                            <h3>Staff Picks</h3>
-                            <hr class="book-card__line">
-                            <h4 class="book-card__title">The Octopus Museum: Poems</h4>
-                            <h5 class="book-card__author">By Brenda Shaughnessy</h5>
-                            <p class="book-card__description">This collection of bold and scathingly beautiful feminist poems
-                                imagines what comes after our current age of environmental destruction, racism, sexism, and
-                                divisive politics.</p>
-                            <button class="book-card__button">Buy</button>
-                            <img class="book-card__image" src="./assets/img/book_11_the_octopus_museum.jpg" alt="The Octopus Museum: Poems">
-                        </article>
-                    </li>
-                    <li class="book-card">
-                        <article class="book-card__content">
-                            <h3>Staff Picks</h3>
-                            <hr class="book-card__line">
-                            <h4 class="book-card__title">Shark Dialogues: A Novel</h4>
-                            <h5 class="book-card__author">By Kiana Davenport</h5>
-                            <p class="book-card__description">An epic saga of seven generations of one family encompasses the
-                                tumultuous history of Hawaii as a Hawaiian woman gathers her four granddaughters together in an
-                                erotic tale of villains and dreamers, queens and revolutionaries, lepers and healers.</p>
-                            <button class="book-card__button">Buy</button>
-                            <img class="book-card__image" src="./assets/img/book_12_shark_dialogues.jpg" alt="Shark Dialogues: A Novel">
-                        </article>
-                    </li>
-                    <li class="book-card">
-                        <article class="book-card__content">
-                            <h3>Staff Picks</h3>
-                            <hr class="book-card__line">
-                            <h4 class="book-card__title">Casual Conversation</h4>
-                            <h5 class="book-card__author">By Renia White</h5>
-                            <p class="book-card__description">White's impressive debut collection takes readers through and beyond
-                                the concepts of conversation and the casual - both what we say to each other and what we don't,
-                                examining the possibilities around how we construct and communicate identity.</p>
-                            <button class="book-card__button">Buy</button>
-                            <img class="book-card__image" src="./assets/img/book_13_casual_conversation.jpg" alt="Casual Conversation">
-                        </article>
-                    </li>
-                    <li class="book-card">
-                        <article class="book-card__content">
-                            <h3>Staff Picks</h3>
-                            <hr class="book-card__line">
-                            <h4 class="book-card__title">The Great Fire</h4>
-                            <h5 class="book-card__author">By Lou Ureneck</h5>
-                            <p class="book-card__description">The harrowing story of an ordinary American and a principled Naval
-                                officer who, horrified by the burning of Smyrna, led an extraordinary rescue effort that saved a
-                                quarter of a million refugees from the Armenian Genocide.</p>
-                            <button class="book-card__button">Buy</button>
-                            <img class="book-card__image" src="./assets/img/book_14_the_great_fire.jpg" alt="The Great Fire">
-                        </article>
-                    </li>
-                    <li class="book-card">
-                        <article class="book-card__content">
-                            <h3>Staff Picks</h3>
-                            <hr class="book-card__line">
-                            <h4 class="book-card__title">Rickey: The Life and Legend</h4>
-                            <h5 class="book-card__author">By Howard Bryant</h5>
-                            <p class="book-card__description">With the fall rolling around, one can't help but think of baseball's
-                                postseason coming up! And what better way to prepare for it than reading the biography of one of
-                                the game's all-time greatest performers, the Man of Steal, Rickey Henderson?</p>
-                            <button class="book-card__button">Buy</button>
-                            <img class="book-card__image" src="./assets/img/book_15_rickey.jpg" alt="Rickey: The Life and Legend">
-                        </article>
-                    </li>
-                    <li class="book-card">
-                        <article class="book-card__content">
-                            <h3>Staff Picks</h3>
-                            <hr class="book-card__line">
-                            <h4 class="book-card__title">Slug: And Other Stories</h4>
-                            <h5 class="book-card__author">By Megan Milks</h5>
-                            <p class="book-card__description">Exes Tegan and Sara find themselves chained together by hairballs of
-                                codependency. A father and child experience the shared trauma of giving birth to gods from their
-                                wounds.</p>
-                            <button class="book-card__button">Buy</button>
-                            <img class="book-card__image" src="./assets/img/book_16_slug.jpg" alt="Slug: And Other Stories">
-                        </article>
-                    </li>
-                </ul>
+                <div class="books-container">
+                    <ul class="book-cards">
+                        <li class="book-card book-card_active" data-target="winter">
+                            <article class="book-card__content">
+                                <h3>Staff Picks</h3>
+                                <hr class="book-card__line">
+                                <h4 class="book-card__title">The book eaters</h4>
+                                <h5 class="book-card__author">By Sunyi Dean</h5>
+                                <p class="book-card__description">An Unusual Sci-Fi Story About A Book Eater Woman Who
+                                    Tries
+                                    Desperately To Save Her Dangerous Mind-Eater Son From Tradition And Certain Death.
+                                    Complete With Dysfunctional Family Values, Light Sapphic Romance, And A Strong,
+                                    Complex Protagonist. Not For The Faint Of Heart.</p>
+                                <button class="book-card__button">Buy</button>
+                                <img class="book-card__image" src="./assets/img/book_1_the_book_eaters.jpg"
+                                    alt="The book eaters">
+                            </article>
+                        </li>
+                        <li class="book-card book-card_active" data-target="winter">
+                            <article class="book-card__content">
+                                <h3>Staff Picks</h3>
+                                <hr class="book-card__line">
+                                <h4 class="book-card__title">Cackle</h4>
+                                <h5 class="book-card__author">By Rachel Harrison</h5>
+                                <p class="book-card__description">Are your Halloween movies of choice The Witches of
+                                    Eastwick and Practical Magic? Look no further than here - where a woman recovering
+                                    from
+                                    a breakup moves to a quaint town in upstate New York and befriends a beautiful
+                                    witch.
+                                </p>
+                                <button class="book-card__button">Buy</button>
+                                <img class="book-card__image" src="./assets/img/book_2_cackle.jpg" alt="Cackle">
+                            </article>
+                        </li>
+                        <li class="book-card book-card_active" data-target="winter">
+                            <article class="book-card__content">
+                                <h3>Staff Picks</h3>
+                                <hr class="book-card__line">
+                                <h4 class="book-card__title">Dante: Poet of the Secular World</h4>
+                                <h5 class="book-card__author">By Erich Auerbach</h5>
+                                <p class="book-card__description">Auerbach's engaging book places the 'Comedy' within
+                                    the
+                                    tradition of epic, tragedy, and philosophy in general, arguing for Dante's
+                                    uniqueness as
+                                    one who raised the individual and his drama of soul into something of divine
+                                    significance—an inspired introduction to Dante's main themes.</p>
+                                <button class="book-card__button">Buy</button>
+                                <img class="book-card__image" src="./assets/img/book_3_dante.jpg"
+                                    alt="Dante: Poet of the Secular World">
+                            </article>
+                        </li>
+                        <li class="book-card book-card_active" data-target="winter">
+                            <article class="book-card__content">
+                                <h3>Staff Picks</h3>
+                                <hr class="book-card__line">
+                                <h4 class="book-card__title">The Last Queen</h4>
+                                <h5 class="book-card__author">By Clive Irving</h5>
+                                <p class="book-card__description">A timely and revelatory new biography of Queen
+                                    Elizabeth
+                                    (and her family) exploring how the Windsors have evolved and thrived as the modern
+                                    world
+                                    has
+                                    changed around them.</p>
+                                <button class="book-card__button">Buy</button>
+                                <img class="book-card__image" src="./assets/img/book_4_last_queen.jpg"
+                                    alt="The Last Queen">
+                            </article>
+                        </li>
+                        <li class="book-card" data-target="spring">
+                            <article class="book-card__content">
+                                <h3>Staff Picks</h3>
+                                <hr class="book-card__line">
+                                <h4 class="book-card__title">The Body</h4>
+                                <h5 class="book-card__author">By Stephen King</h5>
+                                <p class="book-card__description">Powerful novel that takes you back to a nostalgic
+                                    time,
+                                    exploring both the beauty and danger and loss of innocence that is youth.</p>
+                                <button class="book-card__button">Buy</button>
+                                <img class="book-card__image" src="./assets/img/book_5_stephen_king_the_body.jpg"
+                                    alt="The Body">
+                            </article>
+                        </li>
+                        <li class="book-card" data-target="spring">
+                            <article class="book-card__content">
+                                <h3>Staff Picks</h3>
+                                <hr class="book-card__line">
+                                <h4 class="book-card__title">Carry: A Memoir of Survival on Stolen Land</h4>
+                                <h5 class="book-card__author">By Toni Jenson</h5>
+                                <p class="book-card__description">This memoir about the author's relationship with gun
+                                    violence feels both expansive and intimate, resulting in a lyrical indictment of the
+                                    way
+                                    things are.
+                                </p>
+                                <button class="book-card__button">Buy</button>
+                                <img class="book-card__image" src="./assets/img/book_6_carry.jpg"
+                                    alt="Carry: A Memoir of Survival on Stolen Land">
+                            </article>
+                        </li>
+                        <li class="book-card" data-target="spring">
+                            <article class="book-card__content">
+                                <h3>Staff Picks</h3>
+                                <hr class="book-card__line">
+                                <h4 class="book-card__title">Days of Distraction</h4>
+                                <h5 class="book-card__author">By Alexandra Chang</h5>
+                                <p class="book-card__description">A sardonic view of Silicon Valley culture, a
+                                    meditation on
+                                    race, and a journal of displacement and belonging, all in one form-defying package
+                                    of
+                                    spare prose.
+                                </p>
+                                <button class="book-card__button">Buy</button>
+                                <img class="book-card__image" src="./assets/img/book_7_days_of_distraction.jpg"
+                                    alt="Days of Distraction">
+                            </article>
+                        </li>
+                        <li class="book-card" data-target="spring">
+                            <article class="book-card__content">
+                                <h3>Staff Picks</h3>
+                                <hr class="book-card__line">
+                                <h4 class="book-card__title">Dominicana</h4>
+                                <h5 class="book-card__author">By Angie Cruz</h5>
+                                <p class="book-card__description">A fascinating story of a teenage girl who marries a
+                                    man
+                                    twice her age with the promise to bring her to America. Her marriage is an
+                                    opportunity
+                                    for her family
+                                    to eventually immigrate. For fans of Isabel Allende and Julia Alvarez.</p>
+                                <button class="book-card__button">Buy</button>
+                                <img class="book-card__image" src="./assets/img/book_8_dominicana.jpg" alt="Dominicana">
+                            </article>
+                        </li>
+                        <li class="book-card" data-target="summer">
+                            <article class="book-card__content">
+                                <h3>Staff Picks</h3>
+                                <hr class="book-card__line">
+                                <h4 class="book-card__title">Crude: A Memoir</h4>
+                                <h5 class="book-card__author">By Pablo Fajardo & Sophie Tardy-Joubert</h5>
+                                <p class="book-card__description">Drawing and color by Damien Roudeau | This book
+                                    illustrates the struggles of a group of indigenous Ecuadoreans as they try to sue
+                                    the
+                                    ChevronTexaco
+                                    company for damage their oil fields did to the Amazon and her people.</p>
+                                <button class="book-card__button">Buy</button>
+                                <img class="book-card__image" src="./assets/img/book_9_crude.jpg" alt="Crude: A Memoir">
+                            </article>
+                        </li>
+                        <li class="book-card" data-target="summer">
+                            <article class="book-card__content">
+                                <h3>Staff Picks</h3>
+                                <hr class="book-card__line">
+                                <h4 class="book-card__title">Let My People Go Surfing</h4>
+                                <h5 class="book-card__author">By Yvon Chouinard</h5>
+                                <p class="book-card__description">Chouinard—climber, businessman,
+                                    environmentalist—shares
+                                    tales of courage and persistence from his experience of founding and leading
+                                    Patagonia,
+                                    Inc. Full
+                                    title: Let My People Go Surfing: The Education of a Reluctant Businessman, Including
+                                    10
+                                    More
+                                    Years of Business Unusual.</p>
+                                <button class="book-card__button">Buy</button>
+                                <img class="book-card__image" src="./assets/img/book_10_let_my_people_go_surfing.jpg"
+                                    alt="Let My People Go Surfing">
+                            </article>
+                        </li>
+                        <li class="book-card" data-target="summer">
+                            <article class="book-card__content">
+                                <h3>Staff Picks</h3>
+                                <hr class="book-card__line">
+                                <h4 class="book-card__title">The Octopus Museum: Poems</h4>
+                                <h5 class="book-card__author">By Brenda Shaughnessy</h5>
+                                <p class="book-card__description">This collection of bold and scathingly beautiful
+                                    feminist
+                                    poems imagines what comes after our current age of environmental destruction,
+                                    racism,
+                                    sexism,
+                                    and divisive politics.</p>
+                                <button class="book-card__button">Buy</button>
+                                <img class="book-card__image" src="./assets/img/book_11_the_octopus_museum.jpg"
+                                    alt="The Octopus Museum: Poems">
+                            </article>
+                        </li>
+                        <li class="book-card" data-target="summer">
+                            <article class="book-card__content">
+                                <h3>Staff Picks</h3>
+                                <hr class="book-card__line">
+                                <h4 class="book-card__title">Shark Dialogues: A Novel</h4>
+                                <h5 class="book-card__author">By Kiana Davenport</h5>
+                                <p class="book-card__description">An epic saga of seven generations of one family
+                                    encompasses the tumultuous history of Hawaii as a Hawaiian woman gathers her four
+                                    granddaughters
+                                    together in an erotic tale of villains and dreamers, queens and revolutionaries,
+                                    lepers
+                                    and healers.
+                                </p>
+                                <button class="book-card__button">Buy</button>
+                                <img class="book-card__image" src="./assets/img/book_12_shark_dialogues.jpg"
+                                    alt="Shark Dialogues: A Novel">
+                            </article>
+                        </li>
+                        <li class="book-card" data-target="autumn">
+                            <article class="book-card__content">
+                                <h3>Staff Picks</h3>
+                                <hr class="book-card__line">
+                                <h4 class="book-card__title">Casual Conversation</h4>
+                                <h5 class="book-card__author">By Renia White</h5>
+                                <p class="book-card__description">White's impressive debut collection takes readers
+                                    through
+                                    and beyond the concepts of conversation and the casual - both what we say to each
+                                    other
+                                    and what we
+                                    don't, examining the possibilities around how we construct and communicate identity.
+                                </p>
+                                <button class="book-card__button">Buy</button>
+                                <img class="book-card__image" src="./assets/img/book_13_casual_conversation.jpg"
+                                    alt="Casual Conversation">
+                            </article>
+                        </li>
+                        <li class="book-card" data-target="autumn">
+                            <article class="book-card__content">
+                                <h3>Staff Picks</h3>
+                                <hr class="book-card__line">
+                                <h4 class="book-card__title">The Great Fire</h4>
+                                <h5 class="book-card__author">By Lou Ureneck</h5>
+                                <p class="book-card__description">The harrowing story of an ordinary American and a
+                                    principled Naval officer who, horrified by the burning of Smyrna, led an
+                                    extraordinary
+                                    rescue effort that
+                                    saved a quarter of a million refugees from the Armenian Genocide.</p>
+                                <button class="book-card__button">Buy</button>
+                                <img class="book-card__image" src="./assets/img/book_14_the_great_fire.jpg"
+                                    alt="The Great Fire">
+                            </article>
+                        </li>
+                        <li class="book-card" data-target="autumn">
+                            <article class="book-card__content">
+                                <h3>Staff Picks</h3>
+                                <hr class="book-card__line">
+                                <h4 class="book-card__title">Rickey: The Life and Legend</h4>
+                                <h5 class="book-card__author">By Howard Bryant</h5>
+                                <p class="book-card__description">With the fall rolling around, one can't help but think
+                                    of
+                                    baseball's postseason coming up! And what better way to prepare for it than reading
+                                    the
+                                    biography
+                                    of one of the game's all-time greatest performers, the Man of Steal, Rickey
+                                    Henderson?
+                                </p>
+                                <button class="book-card__button">Buy</button>
+                                <img class="book-card__image" src="./assets/img/book_15_rickey.jpg"
+                                    alt="Rickey: The Life and Legend">
+                            </article>
+                        </li>
+                        <li class="book-card" data-target="autumn">
+                            <article class="book-card__content">
+                                <h3>Staff Picks</h3>
+                                <hr class="book-card__line">
+                                <h4 class="book-card__title">Slug: And Other Stories</h4>
+                                <h5 class="book-card__author">By Megan Milks</h5>
+                                <p class="book-card__description">Exes Tegan and Sara find themselves chained together
+                                    by
+                                    hairballs of codependency. A father and child experience the shared trauma of giving
+                                    birth to gods
+                                    from their wounds.</p>
+                                <button class="book-card__button">Buy</button>
+                                <img class="book-card__image" src="./assets/img/book_16_slug.jpg"
+                                    alt="Slug: And Other Stories">
+                            </article>
+                        </li>
+                    </ul>
+                </div>
             </section>
             <section class="coffee-shop" id="coffee-shop">
                 <div class="title-line">
                     <h2>Coffee Shop</h2>
                     <hr class="line">
                 </div>
-                <div class="coffee-shop__introduction">In our library, we have of cozy coffee shop, welcoming in customers
-                    with frothy cappuccinos and friendly conversation. You can get a favorite book and read in coffee shop. Our
-                    barista to cook you best coffee, and also you can try desserts from bakery.
+                <div class="coffee-shop__introduction">In our library, we have of cozy coffee shop, welcoming in
+                    customers with frothy cappuccinos and friendly conversation. You can get a favorite book and read in
+                    coffee shop. Our barista to cook you best coffee, and also you can try desserts from bakery.
                 </div>
                 <div class="coffee-shop__container">
                     <article class="coffee-shop-block">
@@ -407,13 +656,18 @@
                     <div class="contacts-block__items">
                         <p class="contacts-block__title">For all Library inquiries:</p>
                         <div class="contacts-block__phones">
-                            <p class="contacts-block__phone">Please call <a href="tel:6177302370" class="contacts-block__link">(617) 730-2370</a></p>
-                            <p class="contacts-block__phone">For TTY service, please call <a href="tel:6177302370" class="contacts-block__link">(617) 730-2370</a></p>
-                            <p class="contacts-block__phone">Putterham Library: <a href="tel:6177302385" class="contacts-block__link">(617) 730-2385</a></p>
+                            <p class="contacts-block__phone">Please call <a href="tel:6177302370"
+                                    class="contacts-block__link">(617) 730-2370</a></p>
+                            <p class="contacts-block__phone">For TTY service, please call <a href="tel:6177302370"
+                                    class="contacts-block__link">(617) 730-2370</a></p>
+                            <p class="contacts-block__phone">Putterham Library: <a href="tel:6177302385"
+                                    class="contacts-block__link">(617) 730-2385</a></p>
                         </div>
                         <div class="contacts-block__email">
                             <p class="contacts-block__title">Senior Staff</p>
-                            <p class="contacts-block__title contacts-block__title_director">Library Director: <a href="mailto:AmandaHirst@gmail.com" class="contacts-block__link contacts-block__link_director">Amanda Hirst</a></p>
+                            <p class="contacts-block__title contacts-block__title_director">Library Director: <a
+                                    href="mailto:AmandaHirst@gmail.com"
+                                    class="contacts-block__link contacts-block__link_director">Amanda Hirst</a></p>
                         </div>
                     </div>
                     <div class="map" id="map">
@@ -429,21 +683,49 @@
                 <div class="find-get-card">
                     <div class="find-card-block">
                         <span class="find-card__title">Find your Library card</span>
-                        <form action="#" method="get" class="form">
+                        <form action="#" class="form">
                             <div class="form__field">
                                 <h4 class="form__title">Brooklyn Public Library</h4>
-                                <label><input type="text" pattern="[A-Za-zА-Яа-яЁё]{3,}" class="form__input" name="name" placeholder="Reader's name" required></label>
-                                <label><input type="text" pattern="[0-9]{1,4}-[0-9]{1,4}" maxlength="9" class="form__input form__input_margin" name="card_number" placeholder="Card number" required title="XXXX-XXXX"></label>
+                                <label><input type="text" pattern="[A-Za-zА-Яа-яЁё]{3,}" class="form__input_name"
+                                        name="name" placeholder="Reader's name" required></label>
+                                <label><input type="text" pattern="[A-Z]\d{8}" maxlength="9"
+                                        class="form__input_card-number form__input_margin" name="card_number"
+                                        placeholder="Card number" required title="X00000000"></label>
                             </div>
-                            <button class="form__button">Check the card</button>
+                            <button type="submit" class="form__button">Check the card</button>
+                            <!-- Код на замену кнопке после Login -->
+                            <div class="user__counts_small hidden">
+                                <div class="user__count_item-small">
+                                    <p>Visits</p>
+                                    <img src="./assets/svg/visits.svg" alt="Visits">
+                                    <span class="visit-counter">0</span>
+                                </div>
+                                <div class="user__count_item-small">
+                                    <p>Bonuses</p>
+                                    <img src="./assets/svg/bonuses.svg" alt="Bonuses">
+                                    <span>1240</span>
+                                </div>
+                                <div class="user__count_item-small">
+                                    <p>Books</p>
+                                    <img src="./assets/svg/books.svg" alt="Books">
+                                    <span class="own-books-counter">0</span>
+                                </div>
+                            </div>
+                            <!-- Код на замену кнопке после Login -->
                         </form>
                     </div>
                     <div class="get-card">
                         <h4 class="get-card__title">Get a reader card</h4>
                         <p class="get-card__description">You will be able to see a reader card after logging into account or you can register a new account</p>
+                        <p class="get-card__description_auth hidden">With a digital library card you get free access to the Library’s wide array of digital resources including e-books, databases, educational resources, and more.</p>
                         <div class="get-card__buttons">
-                            <button class="get-card__button">Sing Up</button>
-                            <button class="get-card__button">Log in</button>
+                            <div class="get-card__buttons_two">
+                                <button class="get-card__button get-card__button_register">Sing Up</button>
+                                <button class="get-card__button get-card__button_login">Log in</button>
+                            </div>
+                            <div class="get-card__buttons_one">
+                                <button class="get-card__button get-card__button_profile hidden">Profile</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -454,9 +736,14 @@
                 <div class="footer-block__location">
                     <a href="#map" class="address">286 Cadman Plaza, New York, NY 11238, United States</a>
                     <ul class="socials">
-                        <li class="social-link social-link_twitter"><a href="https://hca.twimg.com/ru/using-twitter/create-twitter-account" target="_blank"><img src="./assets/svg/twitter.svg" alt="Twitter"></a></li>
-                        <li class="social-link social-link_instagram"><a href="https://www.instagram.com/nadyavalin/" target="_blank"><img src="./assets/svg/instagram.svg" alt="Instagram"></a></li>
-                        <li class="social-link social-link_facebook"><a href="https://www.facebook.com/nadezhda.tkachuk30?mibextid=ZbWKwL" target="_blank"><img src="./assets/svg/facebook.svg" alt="Facebook"></a></li>
+                        <li class="social-link social-link_twitter"><a
+                                href="https://hca.twimg.com/ru/using-twitter/create-twitter-account"
+                                target="_blank"><img src="./assets/svg/twitter.svg" alt="Twitter"></a></li>
+                        <li class="social-link social-link_instagram"><a href="https://www.instagram.com/nadyavalin/"
+                                target="_blank"><img src="./assets/svg/instagram.svg" alt="Instagram"></a></li>
+                        <li class="social-link social-link_facebook"><a
+                                href="https://www.facebook.com/nadezhda.tkachuk30?mibextid=ZbWKwL" target="_blank"><img
+                                    src="./assets/svg/facebook.svg" alt="Facebook"></a></li>
                     </ul>
                 </div>
                 <div class="schedule">
@@ -473,11 +760,14 @@
             <hr class="footer-block__hr">
             <div class="copyrights">
                 <p>2023</p>
-                <a href="https://rs.school/js-stage0/" target="_blank" class="copyrights_RSS">The Rolling Scopes School</a>
+                <a href="https://rs.school/js-stage0/" target="_blank" class="copyrights_RSS">The Rolling Scopes
+                    School</a>
                 <a href="https://github.com/nadyavalin" target="_blank">Nadezhda</a>
             </div>
         </footer>
     </div>
+    <script src="./js/script.js"></script>
     <script src="index.js"></script>
 </body>
+
 </html>
