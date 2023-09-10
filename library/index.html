@@ -175,8 +175,8 @@
                                 <div class="buy-card__form-item">
                                     <label for="bank-card-number">Bank card number</label>
                                     <input type="text" name="bank-card-number" class="bank-card-number"
-                                        pattern="^\d{4}(?:\s?\d{4}){3}$" placeholder="XXXX XXXX XXXX XXXX"
-                                        title="There must be 16 figures" maxlength="19">
+                                        pattern="^\d{4}( ?:?\d{4}){3}$" placeholder="XXXX XXXX XXXX XXXX"
+                                        title="There must be 16 figures" oninput="updateMaxlength(this)">
                                 </div>
                                 <div class="buy-card__form-item">
                                     <label for="expiration-code">Expiration code</label>
@@ -210,7 +210,7 @@
                                         placeholder="Your city or town" required>
                                 </div>
                                 <div class="buy-card__button-block">
-                                    <button class="buy-card__button disabled" style="margin-top: 10px">Buy</button>
+                                    <button type="submit" class="buy-card__button disabled" style="margin-top: 10px">Buy</button>
                                     <p class>$ 25.00</p>
                                 </div>
                             </form>
@@ -277,25 +277,24 @@
                     <div class="season-block__item season-block__item_winter season-block__item_checked">
                         <input type="radio" id="winter" name="topic" value="winter" class="season-block__item-input"
                             checked>
-                        <label for="winter"
-                            class="season-block__item-label season-block__item-label_checked">Winter</label>
+                        <label for="winter" data-season="winter" class="season-block__item-label season-block__item-label_checked">Winter</label>
                     </div>
                     <div class="season-block__item season-block__item_spring season-block__item_checked">
                         <input type="radio" id="spring" name="topic" value="spring" class="season-block__item-input">
-                        <label for="spring" class="season-block__item-label">Spring</label>
+                        <label for="spring" data-season="spring" class="season-block__item-label">Spring</label>
                     </div>
                     <div class="season-block__item season-block__item_summer season-block__item_checked">
                         <input type="radio" id="summer" name="topic" value="summer" class="season-block__item-input">
-                        <label for="summer" class="season-block__item-label season-block__item_checked">Summer</label>
+                        <label for="summer" data-season="summer" class="season-block__item-label season-block__item_checked">Summer</label>
                     </div>
                     <div class="season-block__item season-block__item_autumn">
                         <input type="radio" id="autumn" name="topic" value="autumn" class="season-block__item-input">
-                        <label for="autumn" class="season-block__item-label">Autumn</label>
+                        <label for="autumn" data-season="autumn" class="season-block__item-label">Autumn</label>
                     </div>
                 </div>
                 <div class="books-container">
-                    <ul class="book-cards book-cards__winter">
-                        <li class="book-card">
+                    <ul class="book-cards">
+                        <li class="book-card book-card_active" data-season="winter">
                             <article class="book-card__content">
                                 <h3>Staff Picks</h3>
                                 <hr class="book-card__line">
@@ -311,7 +310,7 @@
                                     alt="The book eaters">
                             </article>
                         </li>
-                        <li class="book-card">
+                        <li class="book-card book-card_active" data-season="winter">
                             <article class="book-card__content">
                                 <h3>Staff Picks</h3>
                                 <hr class="book-card__line">
@@ -327,7 +326,7 @@
                                 <img class="book-card__image" src="./assets/img/book_2_cackle.jpg" alt="Cackle">
                             </article>
                         </li>
-                        <li class="book-card">
+                        <li class="book-card book-card_active" data-season="winter">
                             <article class="book-card__content">
                                 <h3>Staff Picks</h3>
                                 <hr class="book-card__line">
@@ -344,7 +343,7 @@
                                     alt="Dante: Poet of the Secular World">
                             </article>
                         </li>
-                        <li class="book-card">
+                        <li class="book-card book-card_active" data-season="winter">
                             <article class="book-card__content">
                                 <h3>Staff Picks</h3>
                                 <hr class="book-card__line">
@@ -361,9 +360,7 @@
                                     alt="The Last Queen">
                             </article>
                         </li>
-                    </ul>
-                    <ul class="book-cards book-cards__spring">
-                        <li class="book-card">
+                        <li class="book-card" data-season="spring">
                             <article class="book-card__content">
                                 <h3>Staff Picks</h3>
                                 <hr class="book-card__line">
@@ -377,7 +374,7 @@
                                     alt="The Body">
                             </article>
                         </li>
-                        <li class="book-card">
+                        <li class="book-card" data-season="spring">
                             <article class="book-card__content">
                                 <h3>Staff Picks</h3>
                                 <hr class="book-card__line">
@@ -393,7 +390,7 @@
                                     alt="Carry: A Memoir of Survival on Stolen Land">
                             </article>
                         </li>
-                        <li class="book-card">
+                        <li class="book-card" data-season="spring">
                             <article class="book-card__content">
                                 <h3>Staff Picks</h3>
                                 <hr class="book-card__line">
@@ -410,7 +407,7 @@
                                     alt="Days of Distraction">
                             </article>
                         </li>
-                        <li class="book-card">
+                        <li class="book-card" data-season="spring">
                             <article class="book-card__content">
                                 <h3>Staff Picks</h3>
                                 <hr class="book-card__line">
@@ -426,9 +423,7 @@
                                 <img class="book-card__image" src="./assets/img/book_8_dominicana.jpg" alt="Dominicana">
                             </article>
                         </li>
-                    </ul>
-                    <ul class="book-cards book-cards__summer">
-                        <li class="book-card">
+                        <li class="book-card" data-season="summer">
                             <article class="book-card__content">
                                 <h3>Staff Picks</h3>
                                 <hr class="book-card__line">
@@ -443,7 +438,7 @@
                                 <img class="book-card__image" src="./assets/img/book_9_crude.jpg" alt="Crude: A Memoir">
                             </article>
                         </li>
-                        <li class="book-card">
+                        <li class="book-card" data-season="summer">
                             <article class="book-card__content">
                                 <h3>Staff Picks</h3>
                                 <hr class="book-card__line">
@@ -463,7 +458,7 @@
                                     alt="Let My People Go Surfing">
                             </article>
                         </li>
-                        <li class="book-card">
+                        <li class="book-card" data-season="summer">
                             <article class="book-card__content">
                                 <h3>Staff Picks</h3>
                                 <hr class="book-card__line">
@@ -480,7 +475,7 @@
                                     alt="The Octopus Museum: Poems">
                             </article>
                         </li>
-                        <li class="book-card">
+                        <li class="book-card" data-season="summer">
                             <article class="book-card__content">
                                 <h3>Staff Picks</h3>
                                 <hr class="book-card__line">
@@ -498,9 +493,7 @@
                                     alt="Shark Dialogues: A Novel">
                             </article>
                         </li>
-                    </ul>
-                    <ul class="book-cards book-cards__autumn">
-                        <li class="book-card">
+                        <li class="book-card" data-season="autumn">
                             <article class="book-card__content">
                                 <h3>Staff Picks</h3>
                                 <hr class="book-card__line">
@@ -518,7 +511,7 @@
                                     alt="Casual Conversation">
                             </article>
                         </li>
-                        <li class="book-card">
+                        <li class="book-card" data-season="autumn">
                             <article class="book-card__content">
                                 <h3>Staff Picks</h3>
                                 <hr class="book-card__line">
@@ -534,7 +527,7 @@
                                     alt="The Great Fire">
                             </article>
                         </li>
-                        <li class="book-card">
+                        <li class="book-card" data-season="autumn">
                             <article class="book-card__content">
                                 <h3>Staff Picks</h3>
                                 <hr class="book-card__line">
@@ -553,7 +546,7 @@
                                     alt="Rickey: The Life and Legend">
                             </article>
                         </li>
-                        <li class="book-card">
+                        <li class="book-card" data-season="autumn">
                             <article class="book-card__content">
                                 <h3>Staff Picks</h3>
                                 <hr class="book-card__line">
@@ -699,7 +692,7 @@
                                         class="form__input_card-number form__input_margin" name="card_number"
                                         placeholder="Card number" required title="X00000000"></label>
                             </div>
-                            <button class="form__button">Check the card</button>
+                            <button type="submit" class="form__button">Check the card</button>
                             <!-- Код на замену кнопке после Login -->
                             <div class="user__counts_small hidden">
                                 <div class="user__count_item-small">
