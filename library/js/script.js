@@ -46,7 +46,9 @@ const withAuthCode = document.querySelector(".profile__with-auth_active");
 
 // PopUp Register
 const btnRegister = document.querySelector(".btn__register");
-const btnRegisterGetCardBlock = document.querySelector(".get-card__button_register");
+const btnRegisterGetCardBlock = document.querySelector(
+  ".get-card__button_register"
+);
 const popUpRegister = document.querySelector(".pop-up__register");
 const popUpCloseBtnRegister = document.querySelector(".close-popup__register");
 
@@ -58,9 +60,13 @@ const popUpCloseBtnLogin = document.querySelector(".close-popup__login");
 
 // PopUp My profile
 const btnMyProfile = document.querySelector(".btn__myprofile");
-const btnProfileDigitalCard = document.querySelector('.get-card__button_profile');
+const btnProfileDigitalCard = document.querySelector(
+  ".get-card__button_profile"
+);
 const popUpMyProfile = document.querySelector(".pop-up__my-profile");
-const popUpCloseBtnMyProfile = document.querySelector(".close-popup__my-profile");
+const popUpCloseBtnMyProfile = document.querySelector(
+  ".close-popup__my-profile"
+);
 
 // Card Number
 const cardNumberProfileMenu = document.querySelector(
@@ -72,16 +78,18 @@ const cardNumberMyProfile = document.querySelector(".card-number__my-profile");
 const logOutBtn = document.querySelector(".btn__logout");
 
 // PopUp Buy
-const btnBuy = document.querySelectorAll(".book-card__button");
+const buyButtons = document.querySelectorAll(".book-card__button");
 const popUpBuyCard = document.querySelector(".pop-up__buy-card");
 const popUpCloseBtnBuyCard = document.querySelector(".close-popup__buy-card");
 
 // My profile
-const textMyProfileInitials = document.querySelector(".name-lastname__initials");
+const textMyProfileInitials = document.querySelector(
+  ".name-lastname__initials"
+);
 const textMyProfileName = document.querySelector(".name-lastname__text");
 
 // Counter
-const visitCounter = document.querySelector(".visit-counter");
+const visitCounter = document.querySelectorAll(".visit-counter");
 
 // форма Digital Library Cards
 const nameInput = document.querySelector(".form__input_name");
@@ -90,6 +98,7 @@ const cardNumberInput = document.querySelector(".form__input_card-number");
 // Profile menu
 // Hide Profile menu when mouse click out of this menu
 // Before registration or authorization
+
 document.body.addEventListener("click", (event) => {
   if (
     !event.target.classList.contains("profile-block") &&
@@ -181,97 +190,26 @@ window.addEventListener("resize", () => {
 });
 
 // Slider in Favorites block
-const fadeIn = (element, timeout, display) => {
-  element.style.opacity = 0;
-  element.style.display = display || "block";
-  element.style.transition = `opacity ${timeout}ms`;
-  setTimeout(() => {
-    element.style.opacity = 1;
-  }, 700);
-};
+const checkBocksButton = document.querySelectorAll(".season-block__item-label");
+const bookCard = document.querySelectorAll(".book-card");
 
-const fadeOut = (element, timeout) => {
-  element.style.opacity = 1;
-  element.style.transition = `opacity ${timeout}ms`;
-  element.style.opacity = 0;
-  setTimeout(() => {
-    element.style.display = "none";
-  }, timeout);
-};
+checkBocksButton.forEach((elem) => {
+  elem.addEventListener("click", (e) => {
+    const { season } = e.currentTarget.dataset;
 
-const btnWinter = document.querySelector(".season-block__item_winter");
-const btnSpring = document.querySelector(".season-block__item_spring");
-const btnSummer = document.querySelector(".season-block__item_summer");
-const btnAutumn = document.querySelector(".season-block__item_autumn");
+    checkBocksButton.forEach((btn) => {
+      btn.classList.remove("season-block__item-label_active");
+    });
+    e.currentTarget.classList.add("season-block__item-label_active");
 
-const bookCardsWinter = document.querySelector(".book-cards__winter");
-const bookCardsSpring = document.querySelector(".book-cards__spring");
-const bookCardsSummer = document.querySelector(".book-cards__summer");
-const bookCardsAutumn = document.querySelector(".book-cards__autumn");
-
-// попытка сделать выбранные радио-кнопки неактивными при наведении
-/*
-btnWinter.addEventListener("hover", (e) => {
-  if (radio === checked) {
-    btnWinter.classList.remove("season-block__item");
-  } else return;
-});
-*/
-
-let flagWinter = false;
-
-btnWinter.addEventListener("click", () => {
-  if (flagWinter) {
-    fadeOut(bookCardsSummer, 700);
-    fadeOut(bookCardsAutumn, 700);
-    fadeOut(bookCardsSpring, 700);
-    flagWinter = false;
-  } else {
-    fadeIn(bookCardsWinter, 700, "flex");
-    flagWinter = true;
-  }
-});
-
-let flagSpring = false;
-
-btnSpring.addEventListener("click", () => {
-  if (flagSpring) {
-    fadeOut(bookCardsWinter, 700);
-    fadeOut(bookCardsSummer, 700);
-    fadeOut(bookCardsAutumn, 700);
-    flagSpring = false;
-  } else {
-    fadeIn(bookCardsSpring, 700, "flex");
-    flagSpring = true;
-  }
-});
-
-let flagSummer = false;
-
-btnSummer.addEventListener("click", () => {
-  if (flagSummer) {
-    fadeOut(bookCardsSpring, 700);
-    fadeOut(bookCardsWinter, 700);
-    fadeOut(bookCardsAutumn, 700);
-    flagSummer = false;
-  } else {
-    fadeIn(bookCardsSummer, 700, "flex");
-    flagSummer = true;
-  }
-});
-
-let flagAutumn = false;
-
-btnAutumn.addEventListener("click", () => {
-  if (flagAutumn) {
-    fadeOut(bookCardsWinter, 700);
-    fadeOut(bookCardsSpring, 700);
-    fadeOut(bookCardsSummer, 700);
-    flagAutumn = false;
-  } else {
-    fadeIn(bookCardsAutumn, 700, "flex");
-    flagAutumn = true;
-  }
+    bookCard.forEach((el) => {
+      if (el.dataset.season === season) {
+        el.classList.add("book-card_active");
+      } else {
+        el.classList.remove("book-card_active");
+      }
+    });
+  });
 });
 
 profileAuth.addEventListener("click", () => {
@@ -289,6 +227,9 @@ profile.addEventListener("click", () => {
 // при нажатии на кнопку Register в меню профиля открывается и закрывается окно регистрации
 btnRegister.addEventListener("click", () => {
   popUpRegister.classList.toggle("hidden");
+  setTimeout(() => {
+    noAuth.classList.remove("open");
+  }, 500);
 });
 
 // при нажатии на кнопку Sing Up в разделе Get Card открывается и закрывается окно регистрации
@@ -312,6 +253,9 @@ popUpCloseBtnRegister.addEventListener("click", () => {
 // при нажатии на кнопку Log In в меню профиля открывается и закрывается окно входа в профиль
 btnLogin.addEventListener("click", () => {
   popUpLogin.classList.toggle("hidden");
+  setTimeout(() => {
+    noAuth.classList.remove("open");
+  }, 500);
 });
 
 // при нажатии на кнопку Log In в разделе Get Card открывается и закрывается окно входа в профиль
@@ -335,7 +279,11 @@ popUpLogin.addEventListener("click", (event) => {
 // при нажатии на кнопку My profile и Profile открывается окно My profile
 btnMyProfile.addEventListener("click", () => {
   popUpMyProfile.classList.toggle("hidden");
+  setTimeout(() => {
+    withAuth.classList.remove("open");
+  }, 500);
 });
+
 btnProfileDigitalCard.addEventListener("click", () => {
   popUpMyProfile.classList.toggle("hidden");
 });
@@ -391,6 +339,7 @@ function setUserInfo(firstName, lastName, cardNumber) {
   textMyProfileInitials.textContent = newInitials;
   textMyProfileName.textContent = nameLastName;
 
+  // инпуты в форме Digital Library Card
   nameInput.value = `${firstName} ${lastName}`;
   cardNumberInput.value = cardNumber;
 
@@ -422,12 +371,83 @@ const titleGetCard = document.querySelector(".get-card__title");
 const textGetCard = document.querySelector(".get-card__description");
 const textGetCardAuth = document.querySelector(".get-card__description_auth");
 const btnFormDigitalCard = document.querySelector(".form__button");
-const userCounts = document.querySelector(".user__counts_small");
+const userInfo = document.querySelector(".user__counts_small");
 
 function replaceTitles() {
-  titleDigitalCard.textContent = titleDigitalCard.textContent.replace("Find your Library card", "Your Library card");
-  titleGetCard.textContent = titleGetCard.textContent.replace("Get a reader card", "Visit your profile");
+  titleDigitalCard.textContent = titleDigitalCard.textContent.replace(
+    "Find your Library card",
+    "Your Library card"
+  );
+  titleGetCard.textContent = titleGetCard.textContent.replace(
+    "Get a reader card",
+    "Visit your profile"
+  );
 }
+
+function replaceTitlesBack() {
+  titleDigitalCard.textContent = titleDigitalCard.textContent.replace(
+    "Your Library card",
+    "Find your Library card"
+  );
+  titleGetCard.textContent = titleGetCard.textContent.replace(
+    "Visit your profile",
+    "Get a reader card"
+  );
+}
+
+function changeDigitalLibraryCardBlock() {
+  btnFormDigitalCard.classList.add("hidden");
+  userInfo.classList.remove("hidden");
+  replaceTitles();
+  textGetCard.classList.add("hidden");
+  textGetCardAuth.classList.remove("hidden");
+  btnRegisterGetCardBlock.classList.add("hidden");
+  btnLoginGetCardBlock.classList.add("hidden");
+  btnProfileDigitalCard.classList.remove("hidden");
+}
+
+function changeDigitalLibraryCardBlockBack() {
+  btnFormDigitalCard.classList.remove("hidden");
+  userInfo.classList.add("hidden");
+  replaceTitlesBack();
+  textGetCard.classList.remove("hidden");
+  textGetCardAuth.classList.add("hidden");
+  btnRegisterGetCardBlock.classList.remove("hidden");
+  btnLoginGetCardBlock.classList.remove("hidden");
+  btnProfileDigitalCard.classList.add("hidden");
+  document.querySelector(".form__input_name").value = "";
+  document.querySelector(".form__input_card-number").value = "";
+}
+
+// обработчик кнопки Check the card
+btnFormDigitalCard.addEventListener("click", (event) => {
+  event.preventDefault();
+  const enteredName = document.querySelector(".form__input_name").value.trim();
+  const enteredCardNumber = document.querySelector(".form__input_card-number").value.trim();
+  const usersArray = getItemFromLocalStorage("users");
+  const foundUser = usersArray.find(
+    ({ firstName, lastName, cardNumber }) =>
+      (enteredName === firstName ||
+        enteredName === lastName ||
+        enteredName === `${firstName} ${lastName}` ||
+        enteredName === `${lastName} ${firstName}`) &&
+      enteredCardNumber === cardNumber
+  );
+
+  if (foundUser) {
+    btnFormDigitalCard.classList.add("form__button_out");
+    btnFormDigitalCard.classList.add("hidden");
+    userInfo.classList.remove("hidden");
+    setTimeout(() => {
+      userInfo.classList.add("hidden");
+
+      btnFormDigitalCard.classList.remove("hidden");
+      document.querySelector(".form__input_name").value = "";
+      document.querySelector(".form__input_card-number").value = "";
+      btnFormDigitalCard.classList.remove("form__button_out");
+    }, 10000);
+  }
+});
 
 // Sing Up / Registration
 function signup(event) {
@@ -445,6 +465,8 @@ function signup(event) {
     password,
     cardNumber,
     visits: 1,
+    books: [],
+    isLibraryCardBought: false,
   };
   saveUserState(user);
   let users = getItemFromLocalStorage("users");
@@ -458,16 +480,11 @@ function signup(event) {
   setUserInfo(firstName, lastName, cardNumber);
   popUpRegister.classList.add("hidden");
 
-  visitCounter.textContent = user.visits;
+  visitCounter.forEach((element) => {
+    element.textContent = user.visits;
+  });
 
-  btnFormDigitalCard.classList.add("hidden"); // исчезает после обновления браузера
-  userCounts.classList.remove("hidden"); // исчезает после обновления браузера
-  replaceTitles(); // исчезает после обновления браузера
-  textGetCard.classList.add("hidden"); // исчезает после обновления браузера
-  textGetCardAuth.classList.remove("hidden"); // исчезает после обновления браузера
-  btnRegisterGetCardBlock.classList.add("hidden"); // исчезает после обновления браузера
-  btnLoginGetCardBlock.classList.add("hidden"); // исчезает после обновления браузера
-  btnProfileDigitalCard.classList.remove("hidden"); // исчезает после обновления браузера
+  changeDigitalLibraryCardBlock();
 }
 
 const formSingUp = document.querySelector(".form-register");
@@ -486,6 +503,117 @@ function showNotificationLog(message) {
   }, 3000);
 }
 
+// Visit Counter
+function updateVisitsCounter() {
+  const users = getItemFromLocalStorage("users");
+  const currentUser = getItemFromLocalStorage("user");
+  const updatedUsers = users.map((user) => {
+    if (user.cardNumber === currentUser.cardNumber) {
+      user.visits += 1;
+    }
+    return user;
+  });
+  currentUser.visits += 1;
+
+  visitCounter.forEach((element) => {
+    element.textContent = currentUser.visits;
+  });
+
+  setItemToLocalStorage("user", currentUser);
+  setItemToLocalStorage("users", updatedUsers);
+}
+
+// Books Counter
+const ownBooksCounter = document.querySelectorAll(".own-books-counter");
+const ownBooksList = document.querySelector(".own-books-list");
+const buyForm = document.querySelector(".buy-card__form");
+
+function addBookToListElement(book) {
+  const listItem = document.createElement("li");
+  listItem.textContent = `${book.title}, ${book.author}`;
+  ownBooksList.appendChild(listItem);
+}
+
+function addBooksToList() {
+  const currentUser = getItemFromLocalStorage("user");
+  currentUser.books.forEach(addBookToListElement);
+}
+
+function updateBooks(book) {
+  const users = getItemFromLocalStorage("users");
+  const currentBuyer = getItemFromLocalStorage("user");
+  const updatedBoughtBooks = users.map((user) => {
+    if (user.cardNumber === currentBuyer.cardNumber) {
+      user.books.push(book);
+    }
+    return user;
+  });
+  currentBuyer.books.push(book);
+
+  ownBooksCounter.forEach((element) => {
+    element.textContent = currentBuyer.books.length;
+  });
+
+  setItemToLocalStorage("user", currentBuyer);
+  setItemToLocalStorage("users", updatedBoughtBooks);
+}
+
+function changeButtonBuyState(button) {
+  button.classList.add("book-card__button_own");
+  button.textContent = "Own";
+  button.disabled = true;
+}
+
+// Обработчик события для кнопок Buy
+buyButtons.forEach((button) => {
+  const user = getItemFromLocalStorage("user");
+  const title = button.parentNode.querySelector("h4").textContent;
+  const author =
+    button.parentNode.querySelector(".book-card__author").textContent;
+
+  if (
+    user &&
+    user.books.some((book) => book.title === title && book.author === author)
+  ) {
+    changeButtonBuyState(button);
+  }
+
+  button.addEventListener("click", () => {
+    const currentBuyer = getItemFromLocalStorage("user");
+    if (
+      (currentBuyer && currentBuyer.books.length >= 16) ||
+      button.classList.contains("book-card__button_own")
+    ) {
+      return;
+    }
+
+    if (!currentBuyer) {
+      popUpLogin.classList.remove("hidden");
+    } else if (!currentBuyer.isLibraryCardBought) {
+      popUpBuyCard.classList.remove("hidden");
+    }
+
+    const bookTitle = button.parentNode.querySelector("h4").textContent;
+    const bookAuthor = button.parentNode.querySelector(".book-card__author").textContent;
+
+    if (currentBuyer.isLibraryCardBought === true) {
+      addBookToListElement({ title: bookTitle, author: bookAuthor });
+      updateBooks({ title: bookTitle, author: bookAuthor });
+      changeButtonBuyState(button);
+    }
+  });
+});
+
+// Форма покупки книги - исчезает после первой покупки
+buyForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const user = getItemFromLocalStorage("user");
+  if (user.isLibraryCardBought === false) {
+    user.isLibraryCardBought = true;
+    setItemToLocalStorage("user", user);
+  }
+  popUpBuyCard.remove();
+});
 
 // Log in
 function login(event) {
@@ -502,23 +630,15 @@ function login(event) {
   if (!user) {
     showNotificationLog("Wrong Email or Password");
   } else {
-    user.visits += 1;
-    visitCounter.textContent = user.visits;
     saveUserState(user);
+    updateVisitsCounter();
     popUpLogin.classList.add("hidden");
     popUpRegister.classList.add("hidden");
     profileAuth.classList.remove("hidden");
     withAuthCode.classList.remove("hidden");
     withAuthCode.classList.remove("open");
 
-    btnFormDigitalCard.classList.add("hidden"); // исчезает после обновления браузера
-    userCounts.classList.remove("hidden"); // исчезает после обновления браузера
-    replaceTitles(); // исчезает после обновления браузера
-    textGetCard.classList.add("hidden"); // исчезает после обновления браузера
-    textGetCardAuth.classList.remove("hidden"); // исчезает после обновления браузера
-    btnRegisterGetCardBlock.classList.add("hidden"); // исчезает после обновления браузера
-    btnLoginGetCardBlock.classList.add("hidden"); // исчезает после обновления браузера
-    btnProfileDigitalCard.classList.remove("hidden"); // исчезает после обновления браузера
+    changeDigitalLibraryCardBlock();
   }
 }
 const formLogin = document.querySelector(".form-login");
@@ -533,6 +653,7 @@ logOutBtn.addEventListener("click", () => {
   noAuth.classList.remove("open");
   profileAuth.classList.add("hidden");
   profile.classList.remove("hidden");
+  changeDigitalLibraryCardBlockBack();
 });
 /* КОНЕЦ ФОРМУЛ регистрации и логирования пользователя */
 
@@ -620,7 +741,6 @@ const loginButton = document.querySelector(".form__btn_login");
 function checkLoginInputs() {
   const loginValue = loginInput.value.trim();
   const passwordLogValue = passwordLogInput.value.trim();
-
   return loginValue !== "" && passwordLogValue !== "";
 }
 
@@ -685,71 +805,16 @@ cardholderNameInput.addEventListener("input", updateBuyCardState);
 postalCodeInput.addEventListener("input", updateBuyCardState);
 cityTownInput.addEventListener("input", updateBuyCardState);
 
-// Books Counter
-const ownBooksCounter = document.querySelector(".own-books-counter");
-const ownBooksList = document.querySelector(".own-books-list");
-const buyForm = document.querySelector(".buy-card__form");
+function updateMaxlength(input) {
+  const value = input.value.replace(/ /g, "").trim(); // Удалить все пробелы из введенного значения
+  const maxLength = value.length <= 19 ? 19 : 16; // Установить значение maxLength в зависимости от длины значения
 
-let ownBooksCount = 0;
+  input.maxLength = maxLength;
 
-// Обработчик события для кнопок Buy
-btnBuy.forEach((button) => {
-  button.addEventListener("click", () => {
-    if (
-      ownBooksCount >= 16 ||
-      button.classList.contains("book-card__button_own")
-    ) {
-      return;
-    }
-
-    button.classList.add("book-card__button_own");
-    button.textContent = "Own";
-    button.disabled = true;
-
-    ownBooksCount += 1;
-    ownBooksCounter.textContent = ownBooksCount;
-
-    const bookTitle = button.parentNode.querySelector("h4").textContent;
-    const bookAuthor =
-      button.parentNode.querySelector(".book-card__author").textContent;
-    const listItem = document.createElement("li");
-    listItem.textContent = `${bookTitle}, ${bookAuthor}`;
-    ownBooksList.appendChild(listItem);
-  });
-});
-
-btnBuy.forEach((button) => {
-  button.addEventListener("click", () => {
-    const user = getItemFromLocalStorage("user");
-    if (user) {
-      // Пользователь залогинен, открыть поп-ап "Buy a card"
-      popUpBuyCard.classList.remove("hidden");
-      popUpLogin.classList.add("hidden");
-    } else {
-      // Пользователь не залогинен, открыть поп-ап "Login"
-      popUpBuyCard.classList.add("hidden");
-      popUpLogin.classList.remove("hidden");
-    }
-  });
-});
-
-// Форма покупки книги - исчезает после первой покупки
-buyForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  popUpBuyCard.remove();
-});
-
-// меняем бейджи и кнопки в разделе Digital Library Cards
-// они получились крупнее, поэтому код не подходит, но полезный
-/*
-const btnFormDigitalCard = document.querySelector(".form__button");
-const userCounts = document.querySelector(".user__counts");
-
-function replaceBlocks() {
-  const replacementBlock = userCounts.cloneNode(true);
-  btnFormDigitalCard.replaceWith(replacementBlock);
+  if (value.length > 16) {
+    input.value = value.substring(0, 16);
+  }
 }
-*/
 
 // DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
@@ -758,5 +823,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const user = getItemFromLocalStorage("user");
   if (user) {
     setUserInfo(user.firstName, user.lastName, user.cardNumber);
+
+    visitCounter.forEach((element) => {
+      element.textContent = user.visits;
+    });
+
+    ownBooksCounter.forEach((element) => {
+      element.textContent = user.books.length;
+    });
+
+    addBooksToList();
+    changeDigitalLibraryCardBlock();
   }
 });
