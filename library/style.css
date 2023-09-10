@@ -984,6 +984,12 @@ h2 {
     gap: 40px;
     position: relative;
 }
+.books-container {
+    position: relative;
+    max-width: 100%;
+    height: fit-content; /* Используйте fit-content для динамической высоты блока */
+    overflow: hidden;
+}
 
 .season-block {
     display: flex;
@@ -1019,6 +1025,13 @@ h2 {
 	background: url(./assets/svg/radio_unchecked.svg) 0 0 no-repeat;
 }
 
+.season-block__item-label_active {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+}
+
 /* Checked */
 .season-block input[type=radio]:checked + label::before {
 	background: url(./assets/svg/radio_checked.svg) 0 0 no-repeat;
@@ -1046,6 +1059,10 @@ h2 {
     transition: text-shadow 0.5s ease;
 }
 
+.season-block__item-label:active {
+    opacity: 0.8;
+  }
+
 .season-block__item-label::before {
     padding: 5px;
 }
@@ -1062,10 +1079,24 @@ h2 {
 .book-card {
     border: 1px solid #000000;
     display: flex;
-    width: 550px;
+    max-width: 550px;
     height: 556px;
     margin-right: 40px;
+
+    position: absolute;
+    top: -100%;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 1s ease-in-out;
 }
+
+.book-card_active {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    transition: all 1s ease-in-out;
+  }
 
 .book-cards__spring, .book-cards__summer, .book-cards__autumn {
     display: none; /* невидимые карточки */

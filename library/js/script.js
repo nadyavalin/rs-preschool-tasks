@@ -190,97 +190,38 @@ window.addEventListener("resize", () => {
 });
 
 // Slider in Favorites block
-const fadeIn = (element, timeout, display) => {
-  element.style.opacity = 0;
-  element.style.display = display || "block";
-  element.style.transition = `opacity ${timeout}ms`;
-  setTimeout(() => {
-    element.style.opacity = 1;
-  }, 700);
-};
+const checkBocksButton = document.querySelectorAll(".season-block__item-label");
+const bookCard = document.querySelectorAll(".book-card");
 
-const fadeOut = (element, timeout) => {
-  element.style.opacity = 1;
-  element.style.transition = `opacity ${timeout}ms`;
-  element.style.opacity = 0;
-  setTimeout(() => {
-    element.style.display = "none";
-  }, timeout);
-};
+checkBocksButton.forEach((elem) => {
+  elem.addEventListener("click", (e) => {
+    const { path } = e.currentTarget.dataset;
 
-const btnWinter = document.querySelector(".season-block__item_winter");
-const btnSpring = document.querySelector(".season-block__item_spring");
-const btnSummer = document.querySelector(".season-block__item_summer");
-const btnAutumn = document.querySelector(".season-block__item_autumn");
+    checkBocksButton.forEach((btn) => {
+      btn.classList.remove("season-block__item-label_active");
+    });
+    e.currentTarget.classList.add("season-block__item-label_active");
 
-const bookCardsWinter = document.querySelector(".book-cards__winter");
-const bookCardsSpring = document.querySelector(".book-cards__spring");
-const bookCardsSummer = document.querySelector(".book-cards__summer");
-const bookCardsAutumn = document.querySelector(".book-cards__autumn");
+    bookCard.forEach((el) => {
+      el.classList.remove("book-card_active");
+    });
 
-// попытка сделать выбранные радио-кнопки неактивными при наведении
-/*
-btnWinter.addEventListener("hover", (e) => {
-  if (radio === checked) {
-    btnWinter.classList.remove("season-block__item");
-  } else return;
-});
-*/
+    document.querySelectorAll(`[data-target="${path}"]`).forEach((item) => {
+      item.classList.add("book-card_active");
+      setTimeout(() => {
+        item.style.opacity = "1";
+        item.style.transition = "opacity 1s";
+      }, 10);
+    });
 
-let flagWinter = false;
-
-btnWinter.addEventListener("click", () => {
-  if (flagWinter) {
-    fadeOut(bookCardsSummer, 700);
-    fadeOut(bookCardsAutumn, 700);
-    fadeOut(bookCardsSpring, 700);
-    flagWinter = false;
-  } else {
-    fadeIn(bookCardsWinter, 700, "flex");
-    flagWinter = true;
-  }
-});
-
-let flagSpring = false;
-
-btnSpring.addEventListener("click", () => {
-  if (flagSpring) {
-    fadeOut(bookCardsWinter, 700);
-    fadeOut(bookCardsSummer, 700);
-    fadeOut(bookCardsAutumn, 700);
-    flagSpring = false;
-  } else {
-    fadeIn(bookCardsSpring, 700, "flex");
-    flagSpring = true;
-  }
-});
-
-let flagSummer = false;
-
-btnSummer.addEventListener("click", () => {
-  if (flagSummer) {
-    fadeOut(bookCardsSpring, 700);
-    fadeOut(bookCardsWinter, 700);
-    fadeOut(bookCardsAutumn, 700);
-    flagSummer = false;
-  } else {
-    fadeIn(bookCardsSummer, 700, "flex");
-    flagSummer = true;
-  }
-});
-
-let flagAutumn = false;
-
-btnAutumn.addEventListener("click", () => {
-  if (flagAutumn) {
-    fadeOut(bookCardsWinter, 700);
-    fadeOut(bookCardsSpring, 700);
-    fadeOut(bookCardsSummer, 700);
-    flagAutumn = false;
-  } else {
-    fadeIn(bookCardsAutumn, 700, "flex");
-    flagAutumn = true;
-  }
+    document.querySelectorAll(`[data-target]:not([data-target="${path}"])`).forEach((item) => {
+      item.classList.remove("book-card_active");
+      setTimeout(() => {
+        item.style.opacity = "0";
+        item.style.transition = "opacity 1s";
+      }, 10);
+    });
+  });
 });
 
 profileAuth.addEventListener("click", () => {
