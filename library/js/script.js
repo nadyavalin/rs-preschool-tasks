@@ -195,7 +195,7 @@ const bookCard = document.querySelectorAll(".book-card");
 
 checkBocksButton.forEach((elem) => {
   elem.addEventListener("click", (e) => {
-    const { path } = e.currentTarget.dataset;
+    const { season } = e.currentTarget.dataset;
 
     checkBocksButton.forEach((btn) => {
       btn.classList.remove("season-block__item-label_active");
@@ -203,23 +203,11 @@ checkBocksButton.forEach((elem) => {
     e.currentTarget.classList.add("season-block__item-label_active");
 
     bookCard.forEach((el) => {
-      el.classList.remove("book-card_active");
-    });
-
-    document.querySelectorAll(`[data-target="${path}"]`).forEach((item) => {
-      item.classList.add("book-card_active");
-      setTimeout(() => {
-        item.style.opacity = "1";
-        item.style.transition = "opacity 1s";
-      }, 10);
-    });
-
-    document.querySelectorAll(`[data-target]:not([data-target="${path}"])`).forEach((item) => {
-      item.classList.remove("book-card_active");
-      setTimeout(() => {
-        item.style.opacity = "0";
-        item.style.transition = "opacity 1s";
-      }, 10);
+      if (el.dataset.season === season) {
+        el.classList.add("book-card_active");
+      } else {
+        el.classList.remove("book-card_active");
+      }
     });
   });
 });
