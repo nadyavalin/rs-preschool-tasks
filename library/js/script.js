@@ -19,7 +19,7 @@ function addListenersForBurgerMenu() {
   document.body.addEventListener("click", (event) => {
     if (
       !event.target.classList.contains("nav") &&
-      // !event.target.closest(".header__burger-btn") &&
+      !event.target.closest(".header__burger-btn") &&
       // !event.target.closest(".profile__icon") &&
       // !event.target.closest(".btn_after-register") &&
       header.classList.contains("open")
