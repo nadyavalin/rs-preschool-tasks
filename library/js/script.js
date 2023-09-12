@@ -19,9 +19,9 @@ function addListenersForBurgerMenu() {
   document.body.addEventListener("click", (event) => {
     if (
       !event.target.classList.contains("nav") &&
-      !event.target.closest(".header__burger-btn") &&
-      !event.target.closest(".profile__icon") &&
-      !event.target.closest(".btn_after-register") &&
+      // !event.target.closest(".header__burger-btn") &&
+      // !event.target.closest(".profile__icon") &&
+      // !event.target.closest(".btn_after-register") &&
       header.classList.contains("open")
     ) {
       header.classList.remove("open");
@@ -103,8 +103,8 @@ document.body.addEventListener("click", (event) => {
   if (
     !event.target.classList.contains("profile-block") &&
     !event.target.closest(".profile__icon") &&
-    !event.target.closest(".profile__no-auth_active") &&
-    !event.target.closest(".header__burger-btn") &&
+    // !event.target.closest(".profile__no-auth_active") &&
+    // !event.target.closest(".header__burger-btn") &&
     noAuth.classList.contains("open")
   ) {
     profile.classList.add("open");
@@ -117,8 +117,8 @@ document.body.addEventListener("click", (event) => {
   if (
     !event.target.classList.contains("profile-block") &&
     !event.target.closest(".btn_after-register") &&
-    !event.target.closest(".profile__with-auth") &&
-    !event.target.closest(".header__burger-btn") &&
+    // !event.target.closest(".profile__with-auth") &&
+    // !event.target.closest(".header__burger-btn") &&
     withAuth.classList.contains("open")
   ) {
     profile.classList.remove("open");
