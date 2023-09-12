@@ -30,10 +30,6 @@ a {
     transition: color 0.5s ease;
 }
 
-a:hover {
-    color: #8E8E8E;
-}
-
 .container {
     margin: 0 auto;
     max-width: 1440px;
@@ -64,10 +60,6 @@ h1 {
     color: #FFFFFF;
     cursor: pointer;
     transition: color 0.5s ease;
-}
-
-.logo:hover {
-    color: #8E8E8E;
 }
 
 .header__burger-btn {
@@ -148,12 +140,6 @@ h1 {
     transition: text-decoration-color 500ms, text-underline-offset 500ms;
 }
 
-.nav-menu__link:hover {
-    color: #8E8E8E;
-    text-decoration-color: #8E8E8E;
-    text-underline-offset: 0.4em;
-}
-
 .profile__icon {
     cursor: pointer;
     transition: 0.5s ease;
@@ -166,10 +152,6 @@ h1 {
 
 .profile__icon .hidden {
     visibility: hidden;
-}
-
-.profile__icon:hover {
-    opacity: 0.5;
 }
 
 .btn_after-register {
@@ -256,10 +238,6 @@ h1 {
     line-height: 20px;
     background-color: transparent;
     width: 100%;
-}
-
-.btn__login:hover, .btn__register:hover, .btn__myprofile:hover, .btn__logout:hover {
-    background-color: #DFDFDF;
 }
 
 .profile__no-auth_active {
@@ -396,12 +374,6 @@ h6.pop-up__text {
 
 .form__btn .hidden {
     visibility: hidden;
-}
-
-.form__btn:hover {
-    background-color: #BB945F;
-    border: 1px solid #BB945F;
-    cursor: pointer;
 }
 
 .form__btn_signup.disabled {
@@ -979,9 +951,7 @@ h2 {
     cursor: pointer;
 }
 
-.pagination-dot:hover {
-    opacity: 0.5;
-}
+
 
 .pagination-dot_checked {
     pointer-events: none;
@@ -1013,6 +983,12 @@ h2 {
     flex-direction: column;
     gap: 40px;
     position: relative;
+}
+.books-container {
+    position: relative;
+    max-width: 100%;
+    height: fit-content; /* Используйте fit-content для динамической высоты блока */
+    overflow: hidden;
 }
 
 .season-block {
@@ -1049,6 +1025,13 @@ h2 {
 	background: url(./assets/svg/radio_unchecked.svg) 0 0 no-repeat;
 }
 
+.season-block__item-label_active {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+}
+
 /* Checked */
 .season-block input[type=radio]:checked + label::before {
 	background: url(./assets/svg/radio_checked.svg) 0 0 no-repeat;
@@ -1076,12 +1059,12 @@ h2 {
     transition: text-shadow 0.5s ease;
 }
 
+.season-block__item-label:active {
+    opacity: 0.8;
+  }
+
 .season-block__item-label::before {
     padding: 5px;
-}
-
-.season-block__item-label:hover{
-    text-shadow: 2px 1px 1px #8E8E8E;
 }
 
 .book-cards {
@@ -1096,14 +1079,21 @@ h2 {
 .book-card {
     border: 1px solid #000000;
     display: flex;
-    width: 550px;
+    max-width: 550px;
     height: 556px;
     margin-right: 40px;
+
+    position: absolute;
+    top: -100%;
+    width: 100%;
+    opacity: 0;
+    transition: all 1s ease-in-out;
 }
 
-.book-cards__spring, .book-cards__summer, .book-cards__autumn {
-    display: none; /* невидимые карточки */
-}
+.book-card_active {
+    position: relative;
+    opacity: 1;
+  }
 
 .book-card__content {
     display: flex;
@@ -1183,14 +1173,10 @@ h5.book-card__author {
     transition: 0.5s ease;
 }
 
-.book-card__button:hover, .buy-card__button:hover {
-    background-color: #BB945F;
-    border: 1px solid #BB945F;
-}
-
 .book-card__button_own {
     color: #BB945F;
     border: 1px solid #BB945F;
+    background-color: transparent;
     pointer-events: none;
 }
 
@@ -1341,12 +1327,6 @@ h3.coffee-shop-block__title {
     text-transform: capitalize;
 }
 
-.contacts-block__link:hover {
-    color: #0C0C0E;
-    text-decoration-color: #000000;
-    text-underline-offset: 0.4em;
-}
-
 .contacts-block__link_director {
     font-weight: 700;
 }
@@ -1474,9 +1454,13 @@ h4.form__title {
     transition: 0.5s ease;
 }
 
-.form__button:hover {
-    border: 1px solid #BB945F;
-    background-color: #BB945F;
+.form__button_out {
+    transition: 0.5s all ease-in-out;
+    opacity: 100%;
+}
+
+.form__button_out:focus {
+    opacity: 0;
 }
 
 .get-card {
@@ -1540,11 +1524,6 @@ h4.get-card__title {
     transition: 0.5s ease;
 }
 
-.get-card__button:hover {
-    border: 1px solid #BB945F;
-    background-color: #BB945F;
-}
-
 .footer {
     background-color:#0C0C0E;
     height: 250px;
@@ -1571,10 +1550,6 @@ h4.get-card__title {
     margin-bottom: -2px;
 }
 
-.address:hover {
-    color: #8E8E8E;
-}
-
 .socials {
     display: flex;
     width: 102px;
@@ -1589,21 +1564,6 @@ h4.get-card__title {
     transition: background-color 0.5s ease;
     transition: border 0.5s ease;
     transition: border 0.5s ease;
-}
-
-.social-link_twitter:hover {
-    background-color: #1faee9;
-    border: 1px solid #FFFFFF;
-}
-
-.social-link_instagram:hover {
-    background-color: #E4405F;
-    border: 1px solid #FFFFFF;
-}
-
-.social-link_facebook:hover {
-    background-color: #3b5998;
-    border: 1px solid #FFFFFF;
 }
 
 .schedule {
@@ -1669,7 +1629,7 @@ h4.get-card__title {
 }
 
 /* 1024 */
-@media (max-width: 1024px) {
+@media only screen and (max-width: 1024px) {
     .header.open .nav {
         transform: translateX(-100%);
     }
@@ -1761,15 +1721,20 @@ h4.get-card__title {
 
     .get-card__description_auth {
         text-align: center;
+        margin-top: -160px;
     }
 
     .get-card__buttons_one {
         justify-content: center;
     }
+
+    .get-card__buttons_two {
+        margin-top: -25px;
+    }
 }
 
 /* 768 */
-@media (max-width: 768px) {
+@media only screen and (max-width: 768px) {
     .container-with-dots {
         width: 450px;
     }
@@ -1849,10 +1814,14 @@ h4.get-card__title {
     .copyrights_RSS {
         margin-left: 0;
     }
+
+    .get-card__description_auth {
+        margin-top: -125px;
+    }
 }
 
 /* 766 */
-@media (max-width: 766px) {
+@media only screen and (max-width: 766px) {
     .season-block {
         gap: 48px;
     }
@@ -1875,7 +1844,7 @@ h4.get-card__title {
 }
 
 /* 640 */
-@media (max-width: 640px) {
+@media only screen and (max-width: 640px) {
     .season-block {
         gap: 48px;
     }
@@ -1886,7 +1855,7 @@ h4.get-card__title {
 }
 
 /* 610 */
-@media (max-width: 610px) {
+@media only screen and (max-width: 610px) {
     .form {
         width: 100%;
     }
@@ -1902,4 +1871,98 @@ h4.get-card__title {
     h4.form__title {
         font-size: 25px;
     }
+
+    .get-card__description {
+        margin-bottom: -15px;
+    }
 }
+
+/* 545 */
+@media only screen and (max-width: 545px) {
+    .get-card__description_auth {
+        margin-top: -160px;
+    }
+
+    .get-card__description {
+        margin-bottom: -35px;
+    }
+}
+
+@media (hover: hover) {
+    a:hover {
+        color: #8E8E8E;
+    }
+
+    .logo:hover {
+        color: #8E8E8E;
+    }
+
+    .nav-menu__link:hover {
+        color: #8E8E8E;
+        text-decoration-color: #8E8E8E;
+        text-underline-offset: 0.4em;
+    }
+
+    .profile__icon:hover {
+        opacity: 0.5;
+    }
+    
+    .btn__login:hover, .btn__register:hover, .btn__myprofile:hover, .btn__logout:hover {
+        background-color: #DFDFDF;
+    }
+
+    .form__btn:hover {
+        background-color: #BB945F;
+        border: 1px solid #BB945F;
+        cursor: pointer;
+    }
+
+    .pagination-dot:hover {
+        opacity: 0.5;
+    }
+
+    .season-block__item-label:hover{
+        text-shadow: 2px 1px 1px #8E8E8E;
+    }
+
+    .book-card__button:hover, .buy-card__button:hover {
+        background-color: #BB945F;
+        border: 1px solid #BB945F;
+    }
+
+    .contacts-block__link:hover {
+        color: #0C0C0E;
+        text-decoration-color: #000000;
+        text-underline-offset: 0.4em;
+    }
+
+    .form__button:hover {
+        border: 1px solid #BB945F;
+        background-color: #BB945F;
+    }
+
+    .get-card__button:hover {
+        border: 1px solid #BB945F;
+        background-color: #BB945F;
+    }
+
+    .address:hover {
+        color: #8E8E8E;
+    }
+
+    .social-link_twitter:hover {
+        background-color: #1faee9;
+        border: 1px solid #FFFFFF;
+    }
+    
+    .social-link_instagram:hover {
+        background-color: #E4405F;
+        border: 1px solid #FFFFFF;
+    }
+    
+    .social-link_facebook:hover {
+        background-color: #3b5998;
+        border: 1px solid #FFFFFF;
+    }
+    
+  }

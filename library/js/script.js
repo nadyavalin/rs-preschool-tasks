@@ -83,7 +83,9 @@ const popUpBuyCard = document.querySelector(".pop-up__buy-card");
 const popUpCloseBtnBuyCard = document.querySelector(".close-popup__buy-card");
 
 // My profile
-const textMyProfileInitials = document.querySelector(".name-lastname__initials");
+const textMyProfileInitials = document.querySelector(
+  ".name-lastname__initials"
+);
 const textMyProfileName = document.querySelector(".name-lastname__text");
 
 // Counter
@@ -96,6 +98,7 @@ const cardNumberInput = document.querySelector(".form__input_card-number");
 // Profile menu
 // Hide Profile menu when mouse click out of this menu
 // Before registration or authorization
+
 document.body.addEventListener("click", (event) => {
   if (
     !event.target.classList.contains("profile-block") &&
@@ -187,97 +190,26 @@ window.addEventListener("resize", () => {
 });
 
 // Slider in Favorites block
-const fadeIn = (element, timeout, display) => {
-  element.style.opacity = 0;
-  element.style.display = display || "block";
-  element.style.transition = `opacity ${timeout}ms`;
-  setTimeout(() => {
-    element.style.opacity = 1;
-  }, 700);
-};
+const checkBocksButton = document.querySelectorAll(".season-block__item-label");
+const bookCard = document.querySelectorAll(".book-card");
 
-const fadeOut = (element, timeout) => {
-  element.style.opacity = 1;
-  element.style.transition = `opacity ${timeout}ms`;
-  element.style.opacity = 0;
-  setTimeout(() => {
-    element.style.display = "none";
-  }, timeout);
-};
+checkBocksButton.forEach((elem) => {
+  elem.addEventListener("click", (e) => {
+    const { season } = e.currentTarget.dataset;
 
-const btnWinter = document.querySelector(".season-block__item_winter");
-const btnSpring = document.querySelector(".season-block__item_spring");
-const btnSummer = document.querySelector(".season-block__item_summer");
-const btnAutumn = document.querySelector(".season-block__item_autumn");
+    checkBocksButton.forEach((btn) => {
+      btn.classList.remove("season-block__item-label_active");
+    });
+    e.currentTarget.classList.add("season-block__item-label_active");
 
-const bookCardsWinter = document.querySelector(".book-cards__winter");
-const bookCardsSpring = document.querySelector(".book-cards__spring");
-const bookCardsSummer = document.querySelector(".book-cards__summer");
-const bookCardsAutumn = document.querySelector(".book-cards__autumn");
-
-// попытка сделать выбранные радио-кнопки неактивными при наведении
-/*
-btnWinter.addEventListener("hover", (e) => {
-  if (radio === checked) {
-    btnWinter.classList.remove("season-block__item");
-  } else return;
-});
-*/
-
-let flagWinter = false;
-
-btnWinter.addEventListener("click", () => {
-  if (flagWinter) {
-    fadeOut(bookCardsSummer, 700);
-    fadeOut(bookCardsAutumn, 700);
-    fadeOut(bookCardsSpring, 700);
-    flagWinter = false;
-  } else {
-    fadeIn(bookCardsWinter, 700, "flex");
-    flagWinter = true;
-  }
-});
-
-let flagSpring = false;
-
-btnSpring.addEventListener("click", () => {
-  if (flagSpring) {
-    fadeOut(bookCardsWinter, 700);
-    fadeOut(bookCardsSummer, 700);
-    fadeOut(bookCardsAutumn, 700);
-    flagSpring = false;
-  } else {
-    fadeIn(bookCardsSpring, 700, "flex");
-    flagSpring = true;
-  }
-});
-
-let flagSummer = false;
-
-btnSummer.addEventListener("click", () => {
-  if (flagSummer) {
-    fadeOut(bookCardsSpring, 700);
-    fadeOut(bookCardsWinter, 700);
-    fadeOut(bookCardsAutumn, 700);
-    flagSummer = false;
-  } else {
-    fadeIn(bookCardsSummer, 700, "flex");
-    flagSummer = true;
-  }
-});
-
-let flagAutumn = false;
-
-btnAutumn.addEventListener("click", () => {
-  if (flagAutumn) {
-    fadeOut(bookCardsWinter, 700);
-    fadeOut(bookCardsSpring, 700);
-    fadeOut(bookCardsSummer, 700);
-    flagAutumn = false;
-  } else {
-    fadeIn(bookCardsAutumn, 700, "flex");
-    flagAutumn = true;
-  }
+    bookCard.forEach((el) => {
+      if (el.dataset.season === season) {
+        el.classList.add("book-card_active");
+      } else {
+        el.classList.remove("book-card_active");
+      }
+    });
+  });
 });
 
 profileAuth.addEventListener("click", () => {
@@ -295,6 +227,9 @@ profile.addEventListener("click", () => {
 // при нажатии на кнопку Register в меню профиля открывается и закрывается окно регистрации
 btnRegister.addEventListener("click", () => {
   popUpRegister.classList.toggle("hidden");
+  setTimeout(() => {
+    noAuth.classList.remove("open");
+  }, 500);
 });
 
 // при нажатии на кнопку Sing Up в разделе Get Card открывается и закрывается окно регистрации
@@ -318,6 +253,9 @@ popUpCloseBtnRegister.addEventListener("click", () => {
 // при нажатии на кнопку Log In в меню профиля открывается и закрывается окно входа в профиль
 btnLogin.addEventListener("click", () => {
   popUpLogin.classList.toggle("hidden");
+  setTimeout(() => {
+    noAuth.classList.remove("open");
+  }, 500);
 });
 
 // при нажатии на кнопку Log In в разделе Get Card открывается и закрывается окно входа в профиль
@@ -341,7 +279,11 @@ popUpLogin.addEventListener("click", (event) => {
 // при нажатии на кнопку My profile и Profile открывается окно My profile
 btnMyProfile.addEventListener("click", () => {
   popUpMyProfile.classList.toggle("hidden");
+  setTimeout(() => {
+    withAuth.classList.remove("open");
+  }, 500);
 });
+
 btnProfileDigitalCard.addEventListener("click", () => {
   popUpMyProfile.classList.toggle("hidden");
 });
@@ -483,21 +425,26 @@ btnFormDigitalCard.addEventListener("click", (event) => {
   const enteredName = document.querySelector(".form__input_name").value.trim();
   const enteredCardNumber = document.querySelector(".form__input_card-number").value.trim();
   const usersArray = getItemFromLocalStorage("users");
-  const foundUser = usersArray.find(({firstName, lastName, cardNumber}) =>
-    (enteredName === firstName ||
-    enteredName === lastName ||
-    enteredName === `${firstName} ${lastName}` ||
-    enteredName === `${lastName} ${firstName}`) &&
-    enteredCardNumber === cardNumber);
+  const foundUser = usersArray.find(
+    ({ firstName, lastName, cardNumber }) =>
+      (enteredName === firstName ||
+        enteredName === lastName ||
+        enteredName === `${firstName} ${lastName}` ||
+        enteredName === `${lastName} ${firstName}`) &&
+      enteredCardNumber === cardNumber
+  );
 
   if (foundUser) {
+    btnFormDigitalCard.classList.add("form__button_out");
     btnFormDigitalCard.classList.add("hidden");
     userInfo.classList.remove("hidden");
     setTimeout(() => {
       userInfo.classList.add("hidden");
+
       btnFormDigitalCard.classList.remove("hidden");
       document.querySelector(".form__input_name").value = "";
       document.querySelector(".form__input_card-number").value = "";
+      btnFormDigitalCard.classList.remove("form__button_out");
     }, 10000);
   }
 });
@@ -621,31 +568,39 @@ function changeButtonBuyState(button) {
 buyButtons.forEach((button) => {
   const user = getItemFromLocalStorage("user");
   const title = button.parentNode.querySelector("h4").textContent;
-  const author = button.parentNode.querySelector(".book-card__author").textContent;
+  const author =
+    button.parentNode.querySelector(".book-card__author").textContent;
 
-  if (user && user.books.some((book) => book.title === title && book.author === author)) {
+  if (
+    user &&
+    user.books.some((book) => book.title === title && book.author === author)
+  ) {
     changeButtonBuyState(button);
   }
 
   button.addEventListener("click", () => {
     const currentBuyer = getItemFromLocalStorage("user");
+    if (
+      (currentBuyer && currentBuyer.books.length >= 16) ||
+      button.classList.contains("book-card__button_own")
+    ) {
+      return;
+    }
+
     if (!currentBuyer) {
       popUpLogin.classList.remove("hidden");
     } else if (!currentBuyer.isLibraryCardBought) {
       popUpBuyCard.classList.remove("hidden");
     }
 
-    if (
-      currentBuyer && currentBuyer.books.length >= 16 ||
-      button.classList.contains("book-card__button_own")
-    ) {
-      return;
-    }
     const bookTitle = button.parentNode.querySelector("h4").textContent;
     const bookAuthor = button.parentNode.querySelector(".book-card__author").textContent;
-    addBookToListElement({ title: bookTitle, author: bookAuthor });
-    updateBooks({ title: bookTitle, author: bookAuthor });
-    changeButtonBuyState(button);
+
+    if (currentBuyer.isLibraryCardBought === true) {
+      addBookToListElement({ title: bookTitle, author: bookAuthor });
+      updateBooks({ title: bookTitle, author: bookAuthor });
+      changeButtonBuyState(button);
+    }
   });
 });
 
@@ -851,7 +806,7 @@ postalCodeInput.addEventListener("input", updateBuyCardState);
 cityTownInput.addEventListener("input", updateBuyCardState);
 
 function updateMaxlength(input) {
-  const value = input.value.replace(/ /g, ""); // Удалить все пробелы из введенного значения
+  const value = input.value.replace(/ /g, "").trim(); // Удалить все пробелы из введенного значения
   const maxLength = value.length <= 19 ? 19 : 16; // Установить значение maxLength в зависимости от длины значения
 
   input.maxLength = maxLength;
