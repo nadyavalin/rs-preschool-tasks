@@ -8,14 +8,22 @@
 </head>
 <body>
     <div class="player">
-        <img src="./assets/svg/play.svg" class="btn btn__play-pause">
-        <img src="./assets/svg/prev.svg" class="btn btn__prev">
-        <img src="./assets/svg/next.svg" class="btn btn__next">
-        <div class="singer"></div>
-        <div class="song"></div>
-        <div class="duration-time"></div>
-        <div class="current-time"></div>
-        <input type="range" id="bar" min="0" class="bar">
+        <div class="player__top">
+            <div class="singer">Bad Omens</div>
+            <div class="song-name">The Death of Peace of Mind</div>
+        </div>
+        <div class="player__bottom">
+            <div class="controls">
+                <img src="./assets/svg/prev.svg" class="btn btn__prev">
+                <img src="./assets/svg/play.svg" class="btn btn__play-pause">
+                <img src="./assets/svg/next.svg" class="btn btn__next">
+            </div>  
+            <div class="progress-bar"> 
+                <div class="duration-time">3:05</div>
+                <input type="range" id="bar" class="bar" min="0" max="100" value="50" name="range" step="1">
+                <div class="current-time">1:02</div>
+            </div> 
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
