@@ -1,97 +1,76 @@
-const songs = ["./assets/audio/Bad Omens - The Death of Peace of Mind.mp3",
-                "./assets/audio/Ethan Bortnick - Engravings.mp3",
-                "./assets/audio/Hensonn - Sahara.mp3"];
+const singers = ["Bad Omens",
+              "Ethan Bortnick",
+              "Hensonn"];
 
-const backgrounds = ["./assets/img/bad-omens-big.jpg",
-                    "./assets/img/engravings-big.jpg",
-                    "./assets/img/sahara-big.jpg"];
-                    
-const images = ["./assets/img/bad-omens-small.jpg",
-                    "./assets/img/engravings-small.jpg",
-                    "./assets/img/sahara-small.jpg"];
+const songs = ["The Death of Peace of Mind",
+              "Engravings",
+              "Sahara"];
 
-const imagePlayer = document.querySelector(".player");
+const backgrounds = ["url(./assets/img/bad-omens-big.jpg)",
+                    "url(./assets/img/engravings-big.jpg)",
+                    "url(./assets/img/sahara-big.jpg)"]
+
+const images = ["url(./assets/img/small/bad-omens-small.jpg)",
+                "url(./assets/img/small/engravings-small.jpg)",
+                "url(./assets/img/small/sahara-small.jpg"]
+
+const player = document.querySelector(".player");
+const singerName = document.querySelector(".singer-name");
+const songName = document.querySelector(".song-name");
+const audio = document.querySelector(".audio");
 
 const playBtn = document.querySelector(".btn__play-pause");
 const prevBtn = document.querySelector(".btn__prev");
 const nextBtn = document.querySelector(".btn__next");
 
-const songName = document.querySelector('.song-name');
-const singer = document.querySelector('.singer');
-
-const audio = new Audio();
-
-let isPlay = false;
-
-function playAudio() {
-  audio.src = "./assets/audio/Bad Omens - The Death of Peace of Mind.mp3";
-  audio.currentTime = 0;
-  if (!isPlay) {
-    audio.play();
-    isPlay = true;
-    playBtn.src = "./assets/svg/pause.svg";
-  } else {
-    audio.pause();
-    isPlay = false;
-    playBtn.classList.add("play");
-    playBtn.classList.remove("pause");
-    playBtn.src = "./assets/svg/play.svg";
-  }
-}
-
 let index = 0;
 
-function prevSong() {
-  audio.currentTime = 0;
-  if (index === 0) {
-    audio.src = songs[songs.length - 1];
-    index = songs.length - 1;
+function loadAudio(singer, song) {
+  singerName.innerHTML = singer;
+  songName.innerHTML = song;
+  audio.src = `assets/audio/${singer} - ${song}.mp3`;
+  player.style.backgroundImage = images[index];
+  document.body.style.backgroundImage = backgrounds[index];
+}
+loadAudio(singers[index], songs[index]);
+
+function playAudio() {
+  player.classList.add('play');
+  playBtn.src = "./assets/svg/pause.svg";
+  audio.play();
+}
+
+function pauseAudio() {
+  player.classList.remove('play');
+  playBtn.src = "./assets/svg/play.svg";
+  audio.pause();
+}
+
+playBtn.addEventListener("click", () => {
+  const isPlaying = player.classList.contains('play');
+  if (isPlaying) {
+    pauseAudio();
   } else {
-    audio.src = songs[index -=1];
-    index =-1;
+    playAudio();
   }
-
-  if (isPlay) {
-    audio.play();
-  }
-}
-
-function nextSong() {
-  audio.currentTime = 0;
-  if (index === songs.length - 1) {
-    [audio.src] = songs;
-    index = 0;
-  } else {
-    audio.src = songs[index +=1];
-    index =+ 1;
-  }
-
-  if (isPlay) {
-    audio.play();
-  }
-}
-
-function changeBackground() {
-  document.body.style.backgroundImage = `url(${backgrounds[index % backgrounds.length]})`;
-}
-
-// не работает
-function changeImagePlayer() {
-  imagePlayer.backgroundImage = `url(${images[index % images.length]})`;
-}
-
-playBtn.addEventListener("click", playAudio);
-
-prevBtn.addEventListener("click", () => {
-  index -= 1;
-  prevSong();
-  changeBackground();
-  changeImagePlayer();
 });
 
-nextBtn.addEventListener("click", () => {
+function nextAudio() {
   index += 1;
-  nextSong();
-  changeBackground();
-  changeImagePlayer();
-});
+  if (index > songs.length - 1) {
+    index = 0;
+  }
+  loadAudio(singers[index], songs[index]);
+  playAudio();
+}
+nextBtn.addEventListener("click", nextAudio);
+
+function prevAudio() {
+  index -= 1;
+  if (index < 0) {
+    index = songs.length - 1;
+  }
+  loadAudio(singers[index], songs[index]);
+  playAudio();
+}
+prevBtn.addEventListener("click", prevAudio);

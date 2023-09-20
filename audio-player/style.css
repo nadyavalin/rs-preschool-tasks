@@ -11,6 +11,7 @@ body {
     font-family: 'Verdana', sans-serif;
     color:#000000;
     font-size: 20px;
+    background-color: #000000;
     backdrop-filter: blur(20px) saturate(120%) contrast(200%);
     background-image: url("./assets/img/bad-omens-big.jpg");
     background-position: center;
