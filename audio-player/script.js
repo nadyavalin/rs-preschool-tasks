@@ -18,6 +18,7 @@ const player = document.querySelector(".player");
 const singerName = document.querySelector(".singer-name");
 const songName = document.querySelector(".song-name");
 const audio = document.querySelector(".audio");
+const bar = document.querySelector(".bar");
 
 const playBtn = document.querySelector(".btn__play-pause");
 const prevBtn = document.querySelector(".btn__prev");
@@ -74,3 +75,20 @@ function prevAudio() {
   playAudio();
 }
 prevBtn.addEventListener("click", prevAudio);
+
+function changeProgressBar(event) {
+  const {duration, currentTime} = event.srcElement;
+  const progressTime = (currentTime / duration) * 100;
+  bar.style.width = `${progressTime}%`;
+}
+audio.addEventListener("timeupdate", changeProgressBar);
+
+function setProgress(event) {
+  const widthBar = this.clientWidth;
+  const pressX = event.offsetX;
+  const duration = [audio.duration];
+  audio.currentTime = (pressX / widthBar) * duration;
+}
+bar.addEventListener("click", setProgress);
+
+audio.addEventListener('ended', nextAudio);
