@@ -10,6 +10,8 @@ const images = ["./assets/img/bad-omens-small.jpg",
                     "./assets/img/engravings-small.jpg",
                     "./assets/img/sahara-small.jpg"];
 
+const imagePlayer = document.querySelector(".player");
+
 const playBtn = document.querySelector(".btn__play-pause");
 const prevBtn = document.querySelector(".btn__prev");
 const nextBtn = document.querySelector(".btn__next");
@@ -45,8 +47,8 @@ function prevSong() {
     audio.src = songs[songs.length - 1];
     index = songs.length - 1;
   } else {
-    audio.src = songs[--index];
-    index--;
+    audio.src = songs[index -=1];
+    index =-1;
   }
 
   if (isPlay) {
@@ -57,11 +59,11 @@ function prevSong() {
 function nextSong() {
   audio.currentTime = 0;
   if (index === songs.length - 1) {
-    audio.src = songs[0];
+    [audio.src] = songs;
     index = 0;
   } else {
-    audio.src = songs[++index];
-    index++;
+    audio.src = songs[index +=1];
+    index =+ 1;
   }
 
   if (isPlay) {
@@ -70,17 +72,26 @@ function nextSong() {
 }
 
 function changeBackground() {
-  document.body.style.backgroundImage = url(`${backgrounds[index % backgrounds.length]}`);
+  document.body.style.backgroundImage = `url(${backgrounds[index % backgrounds.length]})`;
+}
+
+// не работает
+function changeImagePlayer() {
+  imagePlayer.backgroundImage = `url(${images[index % images.length]})`;
 }
 
 playBtn.addEventListener("click", playAudio);
 
 prevBtn.addEventListener("click", () => {
+  index -= 1;
   prevSong();
   changeBackground();
+  changeImagePlayer();
 });
 
 nextBtn.addEventListener("click", () => {
+  index += 1;
   nextSong();
   changeBackground();
+  changeImagePlayer();
 });
