@@ -4,11 +4,11 @@ const songs = ["./assets/audio/Bad Omens - The Death of Peace of Mind.mp3",
 
 const backgrounds = ["./assets/img/bad-omens-big.jpg",
                     "./assets/img/engravings-big.jpg",
-                    "./assets/img/sahara-big"];
+                    "./assets/img/sahara-big.jpg"];
                     
 const images = ["./assets/img/bad-omens-small.jpg",
                     "./assets/img/engravings-small.jpg",
-                    "./assets/img/sahara-small"];
+                    "./assets/img/sahara-small.jpg"];
 
 const playBtn = document.querySelector(".btn__play-pause");
 const prevBtn = document.querySelector(".btn__prev");
@@ -38,17 +38,6 @@ function playAudio() {
 }
 
 let index = 0;
-let currentIndex = 0;
-
-function changeBackgroundNext() {
-  document.body.style.backgroundImage = url(`${backgrounds[currentIndex % backgrounds.length]}`);
-  currentIndex++;
-}
-
-function changeBackgroundPrev() {
-  document.body.style.backgroundImage = url(`${backgrounds[currentIndex % backgrounds.length]}`);
-  currentIndex--;
-}
 
 function prevSong() {
   audio.currentTime = 0;
@@ -57,13 +46,12 @@ function prevSong() {
     index = songs.length - 1;
   } else {
     audio.src = songs[--index];
-    currentIndex--;
+    index--;
   }
 
   if (isPlay) {
     audio.play();
   }
-  changeBackgroundPrev();
 }
 
 function nextSong() {
@@ -73,15 +61,26 @@ function nextSong() {
     index = 0;
   } else {
     audio.src = songs[++index];
-    currentIndex++;
+    index++;
   }
 
   if (isPlay) {
     audio.play();
   }
-  changeBackgroundNext();
+}
+
+function changeBackground() {
+  document.body.style.backgroundImage = url(`${backgrounds[index % backgrounds.length]}`);
 }
 
 playBtn.addEventListener("click", playAudio);
-prevBtn.addEventListener("click", prevSong);
-nextBtn.addEventListener("click", nextSong);
+
+prevBtn.addEventListener("click", () => {
+  prevSong();
+  changeBackground();
+});
+
+nextBtn.addEventListener("click", () => {
+  nextSong();
+  changeBackground();
+});
