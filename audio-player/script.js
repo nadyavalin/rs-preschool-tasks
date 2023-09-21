@@ -50,16 +50,43 @@ function pauseAudio() {
   audio.pause();
 }
 
+const context = new AudioContext();
+const analyser = context.createAnalyser();
+const src = context.createMediaElementSource(audio);
+const array = new Uint8Array(analyser.frequencyBinCount);
+
+function getAverage() {
+  const sum = array.reduce((acc, value) => acc + value, 0);
+  return sum / array.length;
+}
+
+function loop() {
+  window.requestAnimationFrame(loop);
+  
+  analyser.getByteFrequencyData(array);
+  const average = getAverage(array);
+  const scale = 1 + average / 1000;
+  player.style.backgroundSize = `calc(100% * ${scale})`;
+}
+
+function preparation() {
+  src.connect(analyser);
+  analyser.connect(context.destination);
+  loop();
+}
+
 playBtn.addEventListener("click", () => {
   const isPlaying = player.classList.contains('play');
   if (isPlaying) {
     pauseAudio();
     player.style.transition = 'background-image 0.3s ease-out';
     player.style.backgroundImage = `${images[index]}`;
+    preparation();
   } else {
     playAudio();
     player.style.transition = 'background-image 0.3s ease-in';
     player.style.backgroundImage = `${images[index]}`;
+    preparation();
   }
 });
 
