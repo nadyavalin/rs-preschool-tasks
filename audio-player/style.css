@@ -24,9 +24,9 @@ body {
 .player {
     width: 500px;
     height: 500px;
-    background-image: url("./assets/img/bad-omens-small.png");
     background-position: center;
-    border: 1px solid #000000;
+    border: .5px solid #000000;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 }
 

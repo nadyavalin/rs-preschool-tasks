@@ -8,11 +8,11 @@ const songs = ["The Death of Peace of Mind",
 
 const backgrounds = ["url(./assets/img/bad-omens-big.jpg)",
                     "url(./assets/img/engravings-big.jpg)",
-                    "url(./assets/img/sahara-big.jpg)"]
+                    "url(./assets/img/sahara-big.jpg)"];
 
 const images = ["url(./assets/img/small/bad-omens-small.jpg)",
                 "url(./assets/img/small/engravings-small.jpg)",
-                "url(./assets/img/small/sahara-small.jpg"]
+                "url(./assets/img/small/sahara-small.jpg"];
 
 const player = document.querySelector(".player");
 const singerName = document.querySelector(".singer-name");
@@ -54,8 +54,12 @@ playBtn.addEventListener("click", () => {
   const isPlaying = player.classList.contains('play');
   if (isPlaying) {
     pauseAudio();
+    player.style.transition = 'background-image 0.3s ease-out';
+    player.style.backgroundImage = `${images[index]}`;
   } else {
     playAudio();
+    player.style.transition = 'background-image 0.3s ease-in';
+    player.style.backgroundImage = `${images[index]}`;
   }
 });
 
@@ -99,12 +103,30 @@ function changeProgressBar(event) {
 }
 audio.addEventListener("timeupdate", changeProgressBar);
 
+let isDragging = false;
+
 function setProgress(event) {
   const widthBar = this.clientWidth;
   const pressX = event.offsetX;
   const duration = [audio.duration];
-  audio.currentTime = (pressX / widthBar) * duration;
+  const findTime = (pressX / widthBar) * duration;
+  audio.currentTime = findTime;
 }
 progressContainer.addEventListener("click", setProgress);
 
 audio.addEventListener("ended", nextAudio);
+
+function startDragging() {
+  isDragging = true;
+  progressContainer.addEventListener("mousemove", setProgress);
+}
+
+function stopDragging() {
+  if(isDragging) {
+    isDragging = false;
+    progressContainer.removeEventListener("mousemove", setProgress);
+  }
+}
+
+progressContainer.addEventListener("mousedown", startDragging);
+window.addEventListener("mouseup", stopDragging);
