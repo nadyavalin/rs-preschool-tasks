@@ -7,27 +7,40 @@
     <title>Audio Player</title>
 </head>
 <body>
-    <div class="player">
-        <div class="player__top">
-            <div class="singer-name"></div>
-            <div class="song-name"></div>
-            <audio class="audio" src="./assets/audio/Bad Omens - The Death of Peace of Mind.mp3"></audio>
-        </div>
-        <div class="player__bottom">
-            <div class="controls">
-                <img src="./assets/svg/prev.svg" class="btn btn__prev">
-                <img src="./assets/svg/play.svg" class="btn btn__play-pause">
-                <img src="./assets/svg/next.svg" class="btn btn__next">
+    <header>
+    </header>
+    <main>
+        <div class="player">
+            <div class="player__top">
+                <div class="singer-name"></div>
+                <div class="song-name"></div>
+                <audio class="audio" src="./assets/audio/Bad Omens - The Death of Peace of Mind.mp3"></audio>
             </div>
-            <div class="progress__wrapper">
-                <div class="duration-time"></div>
-                <div class="progress__container">
-                    <div class="progress-bar"></div>
+            <div class="player__bottom">
+                <div class="controls">
+                    <img src="./assets/svg/prev.svg" class="btn btn__prev">
+                    <img src="./assets/svg/play.svg" class="btn btn__play-pause">
+                    <img src="./assets/svg/next.svg" class="btn btn__next">
                 </div>
-                <div class="current-time"></div>
+                <div class="progress__wrapper">
+                    <div class="duration-time"></div>
+                    <div class="progress__container">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <div class="current-time"></div>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
+    <footer class="footer">
+        <div class="footer__container">
+            <a href="https://github.com/nadyavalin" target="_blank" title="My GitHub">nadyavalin</a>
+            <a href="https://rs.school/js/" target="_blank" title="RS School / JS course">
+                <img src="https://rs.school/images/rs_school_js.svg" alt="RS School" class="rs-school">
+            </a>
+            <p>2023</p>
+        </div>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
