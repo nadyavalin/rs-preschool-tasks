@@ -1,18 +1,25 @@
-const singers = ["Bad Omens",
-              "Ethan Bortnick",
-              "Hensonn"];
+const songs = [
+  {
+    singer: "Bad Omens",
+    song: "The Death of Peace of Mind",
+    background: "url(./assets/img/bad-omens-big.jpg)",
+    image: "url(./assets/img/small/bad-omens-small.jpg)",
+  },
 
-const songs = ["The Death of Peace of Mind",
-              "Engravings",
-              "Sahara"];
+  {
+    singer: "Ethan Bortnick",
+    song: "Engravings",
+    background: "url(./assets/img/engravings-big.jpg",
+    image: "url(./assets/img/small/engravings-small.jpg)",
+  },
 
-const backgrounds = ["url(./assets/img/bad-omens-big.jpg)",
-                    "url(./assets/img/engravings-big.jpg)",
-                    "url(./assets/img/sahara-big.jpg)"];
-
-const images = ["url(./assets/img/small/bad-omens-small.jpg)",
-                "url(./assets/img/small/engravings-small.jpg)",
-                "url(./assets/img/small/sahara-small.jpg"];
+  {
+    singer: "Hensonn",
+    song: "Sahara",
+    background: "url(./assets/img/sahara-big.jpg)",
+    image: "url(./assets/img/small/sahara-small.jpg",
+  },
+];
 
 const player = document.querySelector(".player");
 const singerName = document.querySelector(".singer-name");
@@ -33,10 +40,10 @@ function loadAudio(singer, song) {
   singerName.innerHTML = singer;
   songName.innerHTML = song;
   audio.src = `assets/audio/${singer} - ${song}.mp3`;
-  player.style.backgroundImage = images[index];
-  document.body.style.backgroundImage = backgrounds[index];
+  player.style.backgroundImage = songs[index].image;
+  document.body.style.backgroundImage = songs[index].background;
 }
-loadAudio(singers[index], songs[index]);
+loadAudio(songs[index].singer, songs[index].song);
 
 function playAudio() {
   player.classList.add('play');
@@ -93,12 +100,12 @@ playBtn.addEventListener("click", () => {
   if (isPlaying) {
     pauseAudio();
     player.style.transition = 'background-image 0.3s ease-out';
-    player.style.backgroundImage = `${images[index]}`;
+    player.style.backgroundImage = `${songs[index].image}`;
     resumeAudioContext(); 
   } else {
     playAudio();
     player.style.transition = 'background-image 0.3s ease-in';
-    player.style.backgroundImage = `${images[index]}`;
+    player.style.backgroundImage = `${songs[index].image}`;
     resumeAudioContext(); 
   }
 });
@@ -108,7 +115,7 @@ function nextAudio() {
   if (index > songs.length - 1) {
     index = 0;
   }
-  loadAudio(singers[index], songs[index]);
+  loadAudio(songs[index].singer, songs[index].song);
   playAudio();
 }
 nextBtn.addEventListener("click", nextAudio);
@@ -118,7 +125,7 @@ function prevAudio() {
   if (index < 0) {
     index = songs.length - 1;
   }
-  loadAudio(singers[index], songs[index]);
+  loadAudio(songs[index].singer, songs[index].song);
   playAudio();
 }
 prevBtn.addEventListener("click", prevAudio);
