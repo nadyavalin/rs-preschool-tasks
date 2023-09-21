@@ -69,7 +69,6 @@ function getAverage() {
 
 function loop() {
   window.requestAnimationFrame(loop);
-  
   analyser.getByteFrequencyData(array);
   const average = getAverage(array);
   const scale = 1 + average / 1000;
