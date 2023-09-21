@@ -1,0 +1,162 @@
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Verdana', sans-serif;
+    color:#000000;
+    font-size: 20px;
+    background-color: #000000;
+    backdrop-filter: blur(20px) saturate(120%) contrast(100%);
+    background-image: url("./assets/img/bad-omens-big.jpg");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    color: #d9cbcb;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.5s ease;
+}
+
+p {
+    color: #d9cbcb;
+}
+
+a:hover {
+    color: #f62e2e;
+    transition: color .5s ease-in-out;
+}
+
+.player {
+    width: 500px;
+    height: 500px;
+    background-position: center;
+    border: .5px solid #000000;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.player__top {
+    height: 61%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: #ffffff;
+    font-size: 25px;
+    gap: 25px;
+    padding-top: 30px;
+}
+
+.player__bottom {
+    background: linear-gradient(180deg, #e50303 0%, #ca3200 0.01%, rgba(18, 18, 21, 0.10) 100%);
+    display: flex;
+    flex-direction: column;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 20px;
+    margin-bottom: 15px;
+}
+
+.progress__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.progress__container {
+    background-color: #000000;
+    border-radius: 5px;
+    width: 90%;
+    height: 8px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.progress-bar {
+    background-color: #ca3200;
+    border-radius: 5px;
+    height: 6px;
+    width: 0;
+    padding: 1px;
+}
+
+.duration-time, .current-time {
+    font-size: 14px;
+}
+
+.duration-time {
+    color: #df8787;
+    display: flex;
+    align-self: flex-end;
+    margin-right: 10px;
+}
+
+.current-time {
+    color: #e2d9d9;
+    display: flex;
+    align-self: flex-start;
+    margin-left: 10px;
+}
+
+.btn {
+    cursor: pointer;
+    border-style: none;
+
+    border-radius: 50px;
+    padding: 15px 15px 15px 15px;
+    opacity: 1;
+    transition: background-color .5s ease-in-out;
+    background-color: rgba(211, 211, 211, 0.5);
+    box-shadow: 10px 20px 20px 20px rgba(0, 0, 0, 0.2);;
+}
+
+.btn__play-pause {
+    width: 30px;
+    height: 30px;
+}
+
+.btn__prev, .btn__next {
+    width: 15px;
+    height: 15px;
+}
+
+.btn:hover {
+    background-color: rgba(243, 11, 11, 0.5);
+}
+
+.rs-school {
+    width: 100px;
+}
+  
+.footer {
+    width: 100vw;
+    margin-top: 100px;
+    position: absolute;
+    bottom: 0;
+}
+
+.footer__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+}
