@@ -75,18 +75,31 @@ function preparation() {
   loop();
 }
 
+let isAudioContextResumed = false;
+
+function resumeAudioContext() {
+  if (!isAudioContextResumed) {
+    context.resume().then(() => {
+      isAudioContextResumed = true;
+      preparation();
+    });
+  } else {
+    preparation();
+  }
+}
+
 playBtn.addEventListener("click", () => {
   const isPlaying = player.classList.contains('play');
   if (isPlaying) {
     pauseAudio();
     player.style.transition = 'background-image 0.3s ease-out';
     player.style.backgroundImage = `${images[index]}`;
-    preparation();
+    resumeAudioContext(); 
   } else {
     playAudio();
     player.style.transition = 'background-image 0.3s ease-in';
     player.style.backgroundImage = `${images[index]}`;
-    preparation();
+    resumeAudioContext(); 
   }
 });
 
@@ -157,3 +170,9 @@ function stopDragging() {
 
 progressContainer.addEventListener("mousedown", startDragging);
 window.addEventListener("mouseup", stopDragging);
+
+document.addEventListener("click", () => {
+  context.resume().then(() => {
+    console.log("Audio context resumed successfully");
+  });
+});
