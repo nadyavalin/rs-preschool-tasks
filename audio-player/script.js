@@ -18,7 +18,10 @@ const player = document.querySelector(".player");
 const singerName = document.querySelector(".singer-name");
 const songName = document.querySelector(".song-name");
 const audio = document.querySelector(".audio");
-const bar = document.querySelector(".bar");
+const progressContainer = document.querySelector(".progress__container");
+const progressBar = document.querySelector(".progress-bar");
+const durationTimeNumbers = document.querySelector(".duration-time");
+const currentTimeNumbers = document.querySelector(".current-time");
 
 const playBtn = document.querySelector(".btn__play-pause");
 const prevBtn = document.querySelector(".btn__prev");
@@ -79,7 +82,20 @@ prevBtn.addEventListener("click", prevAudio);
 function changeProgressBar(event) {
   const {duration, currentTime} = event.srcElement;
   const progressTime = (currentTime / duration) * 100;
-  bar.style.width = `${progressTime}%`;
+  progressBar.style.width = `${progressTime}%`;
+
+  if(Number.isNaN(duration)) {
+    durationTimeNumbers.textContent = "0:00";
+  } else {
+  const durationMinutes = Math.floor(duration / 60);
+  const durationSeconds = Math.floor(duration % 60);
+  const formatDuration = `${durationMinutes}:${durationSeconds.toString().padStart(2, "0")}`;
+  durationTimeNumbers.textContent = formatDuration;
+  }
+  const currentMinutes = Math.floor(currentTime / 60);
+  const currentSeconds = Math.floor(currentTime % 60);
+  const formatCurrentTime = `${currentMinutes}:${currentSeconds.toString().padStart(2, "0")}`;
+  currentTimeNumbers.textContent = formatCurrentTime;
 }
 audio.addEventListener("timeupdate", changeProgressBar);
 
@@ -89,6 +105,6 @@ function setProgress(event) {
   const duration = [audio.duration];
   audio.currentTime = (pressX / widthBar) * duration;
 }
-bar.addEventListener("click", setProgress);
+progressContainer.addEventListener("click", setProgress);
 
-audio.addEventListener('ended', nextAudio);
+audio.addEventListener("ended", nextAudio);
