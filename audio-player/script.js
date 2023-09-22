@@ -98,12 +98,12 @@ playBtn.addEventListener("click", () => {
   const isPlaying = player.classList.contains('play');
   if (isPlaying) {
     pauseAudio();
-    player.style.transition = 'background-image 0.3s ease-out';
+    player.style.transition = 'background-image 1s ease-out';
     player.style.backgroundImage = `${songs[index].image}`;
     resumeAudioContext(); 
   } else {
     playAudio();
-    player.style.transition = 'background-image 0.3s ease-in';
+    player.style.transition = 'background-image 1s ease-in';
     player.style.backgroundImage = `${songs[index].image}`;
     resumeAudioContext(); 
   }
