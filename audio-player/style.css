@@ -45,8 +45,8 @@ a:hover {
 }
 
 .player {
-    width: 500px;
-    height: 500px;
+    width: 478px;
+    height: 458px;
     background-image: url("./assets/img/small/bad-omens-small.jpg");
     background-position: center;
     border: .5px solid #000000;
@@ -68,6 +68,7 @@ a:hover {
 }
 
 .player__bottom {
+    height: 33%;
     background: linear-gradient(180deg, #e50303 0%, #ca3200 0.01%, rgba(18, 18, 21, 0.10) 100%);
     display: flex;
     flex-direction: column;
@@ -78,7 +79,6 @@ a:hover {
     justify-content: space-around;
     align-items: center;
     padding-top: 20px;
-    margin-bottom: 15px;
 }
 
 .progress__wrapper {
