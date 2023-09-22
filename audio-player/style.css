@@ -19,8 +19,13 @@ body {
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
+}
+
+main {
+    display: flex;
     justify-content: center;
     align-items: center;
+    flex-grow: 1
 }
 
 a {
@@ -144,13 +149,6 @@ a:hover {
 
 .rs-school {
     width: 100px;
-}
-  
-.footer {
-    width: 100vw;
-    margin-top: 100px;
-    position: absolute;
-    bottom: 0;
 }
 
 .footer__container {
