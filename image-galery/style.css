@@ -6,13 +6,13 @@
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
     font-family: 'Verdana', sans-serif;
-    background-color: #252525;
+    background: linear-gradient(to bottom, #252525, #303030);
     color:#ffffff;
     font-size: 20px;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 a {
@@ -31,8 +31,15 @@ h1 {
     color: #7099da;
 }
 
+h2 {
+    color: #7099da;
+    font-size: 16px;
+    font-weight: lighter;
+}
+
 .container {
-    width: 100%;
+    width: 95%;
+    margin: 20px;
 }
 
 header {
@@ -41,26 +48,67 @@ header {
     align-items: center;
     flex-wrap: wrap;
     min-height: 100px;
-    padding: 0 20px;
+}
+
+.number-input {
+    padding: 8px 8px;
+    font-size: 18px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    text-align: center;
+    border: none;
+    margin: 10px 0;
+    transition: all .3s ease-in-out;
+}
+
+.number-input:focus {
+    box-shadow: inset 0 0 10px #5757d8;
+}
+
+.error-msg {
+    color: #ff0000;
+    font-size: 12px;
+    margin: 10px;
+    display: none;
 }
 
 .search {
-    width: 500px;
+    position: relative;
+    width: 400px;
+    display: inline-flex;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 30px;
 }
 
-.search input {
+.search-icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    color: #000000;
+    cursor: pointer;
+    right: 5px;
+    transition: filter 0.3s ease-in-out;
+}
+
+.search-icon:hover path {
+    filter: drop-shadow(0 0 5px #5757d8);
+}
+
+.search-input {
     box-sizing: border-box;
     width: 100%;
     font-size: 20px;
     padding: 12px 12px;
+    border: none;
     border-radius: 50px;
     outline: none;
     transition: all .3s ease-in-out;
 }
   
-input:focus {
-    box-shadow: 0 0 5px #5757d8;
-    border: 5px solid #5757d8;
+.search-input:focus {
+    box-shadow: inset 0 0 20px #5757d8;
 }
 
 hr {
@@ -74,7 +122,24 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-grow: 1
+    flex-grow: 1;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.gallery img {
+    width: 400px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+
 }
 
 .footer {
