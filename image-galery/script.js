@@ -48,9 +48,11 @@ cross.addEventListener("click", () => {
 });
 
 search.addEventListener("click", getImages);
+
 document.querySelector(".search-input").addEventListener("keypress", e => {
     if (e.key === "Enter") {
         getImages();
     }
 });
-window.addEventListener("DomContentLoaded", getImages);
+
+window.addEventListener("load", getImages);
