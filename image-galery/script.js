@@ -1,80 +1,98 @@
-const search = document.querySelector(".search-icon");
-const cross = document.querySelector(".cross-icon");
+const searchIcon = document.querySelector(".search-icon");
+const crossIcon = document.querySelector(".cross-icon");
 const gallery = document.querySelector(".gallery");
 const errorMessage = document.querySelector(".error-msg");
 const searchInput = document.querySelector(".search-input");
-cross.style.display = "none";
+const numberInput = document.querySelector(".number-input");
 
+function showLoader() {
+  const loading = `<img src="./assets/svg/eclipse.svg">`;
+  gallery.innerHTML = loading;
+}
+
+function showError() {
+  errorMessage.style.display = "block";
+  errorMessage.innerText = "Error fetching images";
+}
+
+function hideLoader() {
+  const loadingElement = gallery.querySelector("img[src='./assets/svg/eclipse.svg']");
+  if (loadingElement) {
+    loadingElement.remove();
+  }
+}
 
 async function fetchImages(url) {
   try {
+    showLoader();
     const response = await fetch(url);
     const data = await response.json();
     return data.results || [];
   } catch (error) {
-    throw new Error("Error fetching images");
+    showError();
+    return [];
+  } finally {
+    hideLoader();
   }
 };
 
-function displayImages(images) {
-  let html = "";
-  images.forEach((img) => {
-    html += `<img src="${img.cover_photo.urls.small}" alt="image">`;
-  });
-  gallery.innerHTML = html;
+function renderImages(images) {
+  gallery.innerHTML = images.reduce((acc, img) =>
+  `${acc}<img src="${img.cover_photo.urls.small}" alt="image">`, "");
 };
 
-function validateNumberInput(numberValue) {
-  const check = numberValue >= 1 && numberValue <= 30;
-  return check;
-};
+numberInput.addEventListener("change", () => {
+  const numberValue = numberInput.value;
 
-async function getImages() {
-  const numberValue = document.querySelector(".number-input").value;
-  const searchValue = document.querySelector(".search-input").value;
-  const urlRandom = `https://api.unsplash.com/photos/random?count=${numberValue}&client_id=Zz_TyElPfeBZoBIZmFlizrKQ9pzbIvRnBQSiz9WXdgU`;
-
-  if (!validateNumberInput(numberValue)) {
+  if (numberValue > 30 || numberValue < 1) {
     errorMessage.style.display = "block";
     errorMessage.innerText = "Number should be between 1 and 30";
-    return;
-  }
-
-  let url = "";
-  if (searchValue.trim() === "") {
-    url = urlRandom;
   } else {
-    url = `https://api.unsplash.com/search/collections?per_page=${numberValue}&page=1&query=${searchValue}&client_id=Zz_TyElPfeBZoBIZmFlizrKQ9pzbIvRnBQSiz9WXdgU`;
-    cross.style.display = "block";
-  }
-
-  try {
-    const loading = `<img src="./assets/svg/eclipse.svg">`;
-    gallery.innerHTML = loading;
-  
-    const images = await fetchImages(url);
-    displayImages(images);
-
     errorMessage.style.display = "none";
-  } catch (error) {
-    errorMessage.style.display = "block";
-    errorMessage.innerText = error.message;
-  }
-};
-
-function clearSearchInput(){
-  cross.style.display = "none";
-  searchInput.value = "";
-};
-
-cross.addEventListener("click", clearSearchInput);
-
-search.addEventListener("click", getImages);
-
-document.querySelector(".search-input").addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    getImages();
   }
 });
 
-window.addEventListener("load", getImages);
+async function searchImages() {
+  const numberValue = numberInput.value;
+  const searchValue = searchInput.value;
+
+  let url = "";
+  if (searchValue.trim() !== "") {
+    url = `https://api.unsplash.com/search/collections?per_page=${numberValue}&page=1&query=${searchValue}&client_id=Zz_TyElPfeBZoBIZmFlizrKQ9pzbIvRnBQSiz9WXdgU`;
+    crossIcon.style.display = "block";
+  } else {
+    crossIcon.style.display = "none";
+  }
+
+  const images = await fetchImages(url);
+  renderImages(images);
+};
+
+function clearSearchInput(){
+  crossIcon.style.display = "none";
+  searchInput.value = "";
+};
+
+function onLoad() {
+  const numberValue = numberInput.value;
+  const urlRandom = `https://api.unsplash.com/photos/random?count=${numberValue}&client_id=Zz_TyElPfeBZoBIZmFlizrKQ9pzbIvRnBQSiz9WXdgU`;
+
+  fetchImages(urlRandom)
+    .then(images => renderImages(images))
+    .catch(error => {
+      errorMessage.style.display = "block";
+      errorMessage.innerText = error.message;
+    });
+}
+
+window.addEventListener("load", onLoad);
+
+crossIcon.addEventListener("click", clearSearchInput);
+
+searchIcon.addEventListener("click", searchImages);
+
+searchInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    searchImages();
+  }
+});
