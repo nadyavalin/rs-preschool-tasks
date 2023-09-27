@@ -85,16 +85,30 @@ header {
     position: absolute;
     width: 20px;
     height: 20px;
-    margin-right: 10px;
     color: #000000;
     cursor: pointer;
     right: 5px;
-    transition: filter 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out;
 }
 
-.search-icon:hover path {
-    filter: drop-shadow(0 0 5px #5757d8);
+.search-icon:hover {
+    color: #5757d8;
 }
+
+.cross-icon {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    scale: 1;
+}
+
+.cross-icon:hover {
+    scale: 1.2;
+}
+
 
 .search-input {
     box-sizing: border-box;

@@ -1,6 +1,9 @@
 const search = document.querySelector(".search-icon");
+const cross = document.querySelector(".cross-icon");
 const gallery = document.querySelector(".gallery");
 const errorMessage = document.querySelector(".error-msg");
+const searchInput = document.querySelector(".search-input");
+cross.style.display = "none";
 
 async function getImages() {
   const numberValue = document.querySelector(".number-input").value;
@@ -17,6 +20,7 @@ async function getImages() {
     url = urlRandom;
   } else {
     url = `https://api.unsplash.com/search/collections?per_page=${numberValue}&page=1&query=${searchValue}&client_id=Zz_TyElPfeBZoBIZmFlizrKQ9pzbIvRnBQSiz9WXdgU`;
+    cross.style.display = "block";
   }
 
   let imgs = "";
@@ -37,6 +41,11 @@ async function getImages() {
     errorMessage.innerText = "Error, try again later";
   }
 }
+
+cross.addEventListener("click", () => {
+  cross.style.display = "none";
+  searchInput.value = "";
+});
 
 search.addEventListener("click", getImages);
 document.querySelector(".search-input").addEventListener("keypress", e => {
