@@ -78,13 +78,8 @@ function clearSearchInput(){
 };
 
 async function onLoad() {
-  try {
-    const images = await fetchImages("https://api.unsplash.com/photos/random?count=30&client_id=Zz_TyElPfeBZoBIZmFlizrKQ9pzbIvRnBQSiz9WXdgU");
-    renderImages(images);
-  } catch (error) {
-    errorMessage.style.display = "block";
-    errorMessage.innerText = error.message;
-  }
+  const images = await fetchImages("https://api.unsplash.com/photos/random?count=30&client_id=Zz_TyElPfeBZoBIZmFlizrKQ9pzbIvRnBQSiz9WXdgU");
+  renderImages(images);
 }
 
 window.addEventListener("load", onLoad);
