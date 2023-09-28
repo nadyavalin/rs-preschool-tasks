@@ -152,7 +152,13 @@ hr {
     object-fit: cover;
     border-radius: 5px;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+    scale: 1.0;
+    cursor: pointer;
+    transition: scale .3s ease-in-out;
+}
 
+.gallery img:hover {
+   scale: 1.05; 
 }
 
 .footer {
