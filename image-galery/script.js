@@ -10,9 +10,13 @@ function showLoader() {
   gallery.innerHTML = loading;
 }
 
-function showError() {
+function showError(message) {
   errorMessage.style.display = "block";
-  errorMessage.innerText = "Error fetching images";
+  errorMessage.innerText = message;
+}
+
+function hideError() {
+  errorMessage.style.display = "none";
 }
 
 function hideLoader() {
@@ -26,11 +30,9 @@ async function fetchImages(url) {
   try {
     showLoader();
     const response = await fetch(url);
-    const data = await response.json();
-    return data.results || [];
+    return response.json();
   } catch (error) {
-    showError();
-    return [];
+    return showError(error);
   } finally {
     hideLoader();
   }
@@ -38,17 +40,25 @@ async function fetchImages(url) {
 
 function renderImages(images) {
   gallery.innerHTML = images.reduce((acc, img) =>
-  `${acc}<img src="${img.cover_photo.urls.small}" alt="image">`, "");
+  `${acc}<img src="${img.urls.small}" alt="image">`, "");
 };
 
 numberInput.addEventListener("change", () => {
   const numberValue = numberInput.value;
 
   if (numberValue > 30 || numberValue < 1) {
-    errorMessage.style.display = "block";
-    errorMessage.innerText = "Number should be between 1 and 30";
+    showError("Number should be between 1 and 30");
   } else {
-    errorMessage.style.display = "none";
+    hideError();
+  }
+});
+
+searchInput.addEventListener("change", () => {
+  const searchValue = searchInput.value;
+  if (searchValue !== "") {
+    crossIcon.style.display = "block";
+  } else {
+    crossIcon.style.display = "none";
   }
 });
 
@@ -56,33 +66,25 @@ async function searchImages() {
   const numberValue = numberInput.value;
   const searchValue = searchInput.value;
 
-  let url = "";
   if (searchValue.trim() !== "") {
-    url = `https://api.unsplash.com/search/collections?per_page=${numberValue}&page=1&query=${searchValue}&client_id=Zz_TyElPfeBZoBIZmFlizrKQ9pzbIvRnBQSiz9WXdgU`;
-    crossIcon.style.display = "block";
-  } else {
-    crossIcon.style.display = "none";
-  }
-
-  const images = await fetchImages(url);
-  renderImages(images);
-};
+    const images = await fetchImages(`https://api.unsplash.com/search/photos?per_page=${numberValue}&page=1&query=${searchValue}&client_id=Zz_TyElPfeBZoBIZmFlizrKQ9pzbIvRnBQSiz9WXdgU`);
+    renderImages(images.results);
+  };
+}
 
 function clearSearchInput(){
   crossIcon.style.display = "none";
   searchInput.value = "";
 };
 
-function onLoad() {
-  const numberValue = numberInput.value;
-  const urlRandom = `https://api.unsplash.com/photos/random?count=${numberValue}&client_id=Zz_TyElPfeBZoBIZmFlizrKQ9pzbIvRnBQSiz9WXdgU`;
-
-  fetchImages(urlRandom)
-    .then(images => renderImages(images))
-    .catch(error => {
-      errorMessage.style.display = "block";
-      errorMessage.innerText = error.message;
-    });
+async function onLoad() {
+  try {
+    const images = await fetchImages("https://api.unsplash.com/photos/random?count=30&client_id=Zz_TyElPfeBZoBIZmFlizrKQ9pzbIvRnBQSiz9WXdgU");
+    renderImages(images);
+  } catch (error) {
+    errorMessage.style.display = "block";
+    errorMessage.innerText = error.message;
+  }
 }
 
 window.addEventListener("load", onLoad);
