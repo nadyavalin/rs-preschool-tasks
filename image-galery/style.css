@@ -178,11 +178,8 @@ hr {
     display: none;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     position: fixed;
-    top: 0;
-    left: 0;
     background-color: rgba(30, 30, 30, 0.6);
     z-index: 9999;
 }
@@ -219,4 +216,10 @@ hr {
     color: #ffffff;
     font-weight: bold;
     font-size: 20px;
+    scale: 1.0;
+    transition: scale .3s ease-in-out;
+}
+
+.close-button:hover {
+    scale: 1.2;
 }
