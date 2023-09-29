@@ -1,56 +1,145 @@
-const search = document.querySelector(".search-icon");
-const cross = document.querySelector(".cross-icon");
+const searchIcon = document.querySelector(".search-icon");
+const crossIcon = document.querySelector(".cross-icon");
 const gallery = document.querySelector(".gallery");
 const errorMessage = document.querySelector(".error-msg");
 const searchInput = document.querySelector(".search-input");
-cross.style.display = "none";
+const numberInput = document.querySelector(".number-input");
 
-async function getImages() {
-  const numberValue = document.querySelector(".number-input").value;
-  const searchValue = document.querySelector(".search-input").value;
-  const urlRandom = `https://api.unsplash.com/photos/random?count=${numberValue}&client_id=Zz_TyElPfeBZoBIZmFlizrKQ9pzbIvRnBQSiz9WXdgU`;
-  if (numberValue > 30 || numberValue < 1) {
-    errorMessage.style.display = "block";
-    errorMessage.innerText = "Number should be between 1 and 30";
-    return;
-  }
+function showLoader() {
+  const loading = `<img src="./assets/svg/eclipse.svg">`;
+  gallery.innerHTML = loading;
+}
 
-  let url = "";
-  if (searchValue.trim() === "") {
-    url = urlRandom;
-  } else {
-    url = `https://api.unsplash.com/search/collections?per_page=${numberValue}&page=1&query=${searchValue}&client_id=Zz_TyElPfeBZoBIZmFlizrKQ9pzbIvRnBQSiz9WXdgU`;
-    cross.style.display = "block";
-  }
+function showError(message) {
+  errorMessage.style.display = "block";
+  errorMessage.innerText = message;
+}
 
-  let imgs = "";
-  try {
-    const loading = `<img src="./assets/svg/eclipse.svg">`;
-    gallery.innerHTML = loading;
-    const response = await fetch(url);
-    const data = await response.json();
-        if (data.results) {
-          data.results.forEach((img) => {
-            imgs += `<img src="${img.cover_photo.urls.small}" alt="image">`;
-          });
-          gallery.innerHTML = imgs;
-          errorMessage.style.display = "none";
-        }
-      } catch (error) {
-    errorMessage.style.display = "block";
-    errorMessage.innerText = "Error, try again later";
+function hideError() {
+  errorMessage.style.display = "none";
+}
+
+function hideLoader() {
+  const loadingElement = gallery.querySelector(
+    "img[src='./assets/svg/eclipse.svg']"
+  );
+  if (loadingElement) {
+    loadingElement.remove();
   }
 }
 
-cross.addEventListener("click", () => {
-  cross.style.display = "none";
-  searchInput.value = "";
+async function fetchImages(url) {
+  try {
+    showLoader();
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error ${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    return showError(error);
+  } finally {
+    hideLoader();
+  }
+}
+
+function renderImages(images) {
+  gallery.innerHTML = images.reduce(
+    (acc, img) =>
+      `${acc}<img src="${img.urls.small}" alt="image" class="popup-trigger" data-regular="${img.urls.regular}">`,
+    ""
+  );
+}
+
+numberInput.addEventListener("change", () => {
+  const numberValue = numberInput.value;
+
+  if (numberValue > 30 || numberValue < 1) {
+    showError("Number should be between 1 and 30");
+  } else {
+    hideError();
+  }
 });
 
-search.addEventListener("click", getImages);
-document.querySelector(".search-input").addEventListener("keypress", e => {
-    if (e.key === "Enter") {
-        getImages();
-    }
+searchInput.addEventListener("change", () => {
+  const searchValue = searchInput.value;
+  if (searchValue !== "") {
+    crossIcon.style.display = "block";
+  } else {
+    crossIcon.style.display = "none";
+  }
 });
-window.addEventListener("DomContentLoaded", getImages);
+
+async function searchImages() {
+  const numberValue = numberInput.value;
+  const searchValue = searchInput.value;
+
+  if (searchValue.trim() !== "") {
+    const images = await fetchImages(
+      `https://api.unsplash.com/search/photos?per_page=${numberValue}&page=1&query=${searchValue}&client_id=Zz_TyElPfeBZoBIZmFlizrKQ9pzbIvRnBQSiz9WXdgU`
+    );
+    renderImages(images.results);
+  }
+}
+
+function clearSearchInput() {
+  crossIcon.style.display = "none";
+  searchInput.value = "";
+}
+
+async function onLoad() {
+  const images = await fetchImages(
+    "https://api.unsplash.com/photos/random?count=30&client_id=Zz_TyElPfeBZoBIZmFlizrKQ9pzbIvRnBQSiz9WXdgU"
+  );
+  renderImages(images);
+}
+
+window.addEventListener("load", onLoad);
+
+crossIcon.addEventListener("click", clearSearchInput);
+
+searchIcon.addEventListener("click", searchImages);
+
+searchInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    searchImages();
+  }
+});
+
+numberInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    searchImages();
+  }
+});
+
+/* Pop up */
+const popUpContainer = document.querySelector(".popup-container");
+const popUpImage = document.querySelector(".popup img");
+const closeBtn = document.querySelector(".close-button");
+
+function showPopUp(image) {
+  popUpImage.src = image;
+  popUpContainer.style.display = "flex";
+}
+
+function hidePopUp() {
+  popUpContainer.style.display = "none";
+}
+
+gallery.addEventListener("click", (event) => {
+  const { target } = event;
+  if (target.classList.contains("popup-trigger")) {
+    showPopUp(target.dataset.regular);
+  }
+});
+
+closeBtn.addEventListener("click", (event) => {
+  if (!event.target.closest(".popup"));
+  hidePopUp();
+});
+
+document.body.addEventListener("click", (event) => {
+  if (event.target.classList.contains("popup-container")) {
+    hidePopUp();
+  }
+});
