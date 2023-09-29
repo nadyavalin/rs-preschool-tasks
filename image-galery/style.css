@@ -191,7 +191,7 @@ hr {
     transform: translate(-50%, -50%);
     z-index: 10000;
     max-width: 70%;
-    max-height: 750px;
+    height: 80%;
     background-color: #FFFFFF;
     padding: 23px 25px;
     border-radius: 20px;
@@ -203,7 +203,7 @@ hr {
     display: block;
     margin: 0 auto;
     max-width: 100%;
-    max-height: 700px;
+    height: 100%;
     border-radius: 20px;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
 }
