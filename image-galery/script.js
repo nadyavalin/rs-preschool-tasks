@@ -100,17 +100,13 @@ crossIcon.addEventListener("click", clearSearchInput);
 
 searchIcon.addEventListener("click", searchImages);
 
-searchInput.addEventListener("keypress", (e) => {
+function onKeyPress(e) {
   if (e.key === "Enter") {
     searchImages();
   }
-});
-
-numberInput.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    searchImages();
-  }
-});
+}
+searchInput.addEventListener("keypress", onKeyPress);
+numberInput.addEventListener("keypress", onKeyPress);
 
 /* Pop up */
 const popUpContainer = document.querySelector(".popup-container");
@@ -123,6 +119,7 @@ function showPopUp(image) {
 }
 
 function hidePopUp() {
+  popUpImage.src = "";
   popUpContainer.style.display = "none";
 }
 
@@ -133,10 +130,7 @@ gallery.addEventListener("click", (event) => {
   }
 });
 
-closeBtn.addEventListener("click", (event) => {
-  if (!event.target.closest(".popup"));
-  hidePopUp();
-});
+closeBtn.addEventListener("click", hidePopUp);
 
 document.body.addEventListener("click", (event) => {
   if (event.target.classList.contains("popup-container")) {
