@@ -1,8 +1,35 @@
 // eslint-disable-next-line import/extensions
 import Game from "./src/game.js";
+// eslint-disable-next-line import/extensions
+import View from "./src/view.js";
+
+const root = document.querySelector(".root");
 
 const game = new Game();
+const view = new View(root, 480, 640, 20, 10);
 
 window.game = game;
+window.view = view;
 
-console.log(game);
+document.addEventListener("keydown", event => {
+    switch (event.keyCode) {
+        case 37:  // Left arrow
+            game.moveFigureLeft();
+            view.render(game.getState());
+            break;
+        case 38: // Up arrow
+            game.rotateFigure();
+            view.render(game.getState());
+            break;
+        case 39: // Right arrow
+            game.moveFigureRight();
+            view.render(game.getState());
+            break;
+        case 40: // Down arrow
+            game.moveFigureDown();
+            view.render(game.getState());
+            break;
+            default:
+    }
+});
+view.render(game.getState());

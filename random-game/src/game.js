@@ -5,28 +5,7 @@ export default class Game {
 
   level = 0;
 
-  playfield = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  ];
+  playfield = this.createPlayfield();
 
   activeFigure = {
     x: 0,
@@ -38,6 +17,44 @@ export default class Game {
       [0, 0, 0],
     ],
   };
+
+  getState() {
+    const playfield = this.createPlayfield();
+    const { y: figureY, x: fitureX, blocks } = this.activeFigure;
+
+    for (let y = 0; y < this.playfield.length; y += 1) {
+      playfield[y] = [];
+
+      for (let x = 0; x < this.playfield[y].length; x += 1) {
+        playfield[y][x] = this.playfield[y][x];
+      }
+    }
+
+    for (let y = 0; y < blocks.length; y += 1) {
+      for (let x = 0; x < blocks[y].length; x += 1) {
+        if (blocks[y][x]) {
+          playfield[figureY + y][fitureX + x] =
+            blocks[y][x];
+        }
+      }
+    }
+
+    return {
+      playfield,
+    };
+  }
+
+  createPlayfield() {
+    const playfield = [];
+    for (let y = 0; y < 20; y += 1) {
+      playfield[y] = [];
+
+      for (let x = 0; x < 10; x += 1) {
+        playfield[y][x] = 0;
+      }
+    }
+    return playfield;
+  }
 
   moveFigureLeft() {
     this.activeFigure.x -= 1;
