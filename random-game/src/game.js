@@ -7,16 +7,9 @@ export default class Game {
 
   playfield = this.createPlayfield();
 
-  activeFigure = {
-    x: 0,
-    y: 0,
+  activeFigure = this.createFigure();
 
-    blocks: [
-      [0, 1, 0],
-      [1, 1, 1],
-      [0, 0, 0],
-    ],
-  };
+  nextFigure = this.createFigure();
 
   getState() {
     const playfield = this.createPlayfield();
@@ -33,8 +26,7 @@ export default class Game {
     for (let y = 0; y < blocks.length; y += 1) {
       for (let x = 0; x < blocks[y].length; x += 1) {
         if (blocks[y][x]) {
-          playfield[figureY + y][fitureX + x] =
-            blocks[y][x];
+          playfield[figureY + y][fitureX + x] = blocks[y][x];
         }
       }
     }
@@ -44,6 +36,7 @@ export default class Game {
     };
   }
 
+  // eslint-disable-next-line class-methods-use-this
   createPlayfield() {
     const playfield = [];
     for (let y = 0; y < 20; y += 1) {
@@ -54,6 +47,81 @@ export default class Game {
       }
     }
     return playfield;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  createFigure() {
+    const index = Math.floor(Math.random() * 7);
+    const type = 'IJLOSTZ'[index];
+    const figure = { };
+
+    switch (type) {
+      case 'I':
+        figure.blocks = [
+          [0,0,0,0],
+          [1,1,1,1],
+          [0,0,0,0],
+          [0,0,0,0],
+        ];
+        break;
+
+      case 'J':
+        figure.blocks = [
+          [0,0,0],
+          [2,2,2],
+          [0,0,2],
+        ];
+        break;
+
+      case 'L':
+        figure.blocks = [
+          [0,0,0],
+          [3,3,3],
+          [3,0,0],
+        ];
+        break;
+        
+      case 'O':
+        figure.blocks = [
+          [0,0,0,0],
+          [0,4,4,0],
+          [0,4,4,0],
+          [0,0,0,0],
+        ];
+        break;
+
+      case 'S':
+        figure.blocks = [
+          [0,0,0],
+          [0,5,5],
+          [5,5,0],
+        ];
+        break;
+
+      case 'T':
+        figure.blocks = [
+          [0,0,0],
+          [6,6,6],
+          [0,6,0],
+        ];
+        break;
+
+      case 'Z':
+        figure.blocks = [
+          [0,0,0],
+          [7,7,0],
+          [0,7,7],
+        ];
+        break;
+
+      default:
+        throw new Error('Uknown type of figure');
+    }
+
+    figure.x = Math.floor((10 - figure.blocks[0].length) / 2);
+    figure.y = -1;
+
+    return figure;
   }
 
   moveFigureLeft() {
@@ -75,6 +143,7 @@ export default class Game {
     if (this.hasCollision()) {
       this.activeFigure.y -= 1;
       this.lockFigure();
+      this.updateFigures();
     }
   }
 
@@ -137,5 +206,10 @@ export default class Game {
         }
       }
     }
+  }
+
+  updateFigures() {
+    this.activeFigure = this.nextFigure;
+    this.nextFigure = this.createFigure();
   }
 }
