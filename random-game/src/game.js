@@ -1,15 +1,24 @@
 export default class Game {
+  static points = {
+    '1': 40,
+    '2': 100,
+    '3': 300,
+    '4': 1200,
+  };
+
   score = 0;
 
   lines = 0;
-
-  level = 0;
 
   playfield = this.createPlayfield();
 
   activeFigure = this.createFigure();
 
   nextFigure = this.createFigure();
+
+  get level() {
+    return Math.floor(this.lines * 0.1);
+  }
 
   getState() {
     const playfield = this.createPlayfield();
@@ -32,6 +41,10 @@ export default class Game {
     }
 
     return {
+      score: this.score,
+      level: this.level,
+      lines: this.lines,
+      nextFigure: this.nextFigure,
       playfield,
     };
   }
@@ -52,70 +65,70 @@ export default class Game {
   // eslint-disable-next-line class-methods-use-this
   createFigure() {
     const index = Math.floor(Math.random() * 7);
-    const type = 'IJLOSTZ'[index];
-    const figure = { };
+    const type = "IJLOSTZ"[index];
+    const figure = {};
 
     switch (type) {
-      case 'I':
+      case "I":
         figure.blocks = [
-          [0,0,0,0],
-          [1,1,1,1],
-          [0,0,0,0],
-          [0,0,0,0],
+          [0, 0, 0, 0],
+          [1, 1, 1, 1],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
         ];
         break;
 
-      case 'J':
+      case "J":
         figure.blocks = [
-          [0,0,0],
-          [2,2,2],
-          [0,0,2],
+          [0, 0, 0],
+          [2, 2, 2],
+          [0, 0, 2],
         ];
         break;
 
-      case 'L':
+      case "L":
         figure.blocks = [
-          [0,0,0],
-          [3,3,3],
-          [3,0,0],
-        ];
-        break;
-        
-      case 'O':
-        figure.blocks = [
-          [0,0,0,0],
-          [0,4,4,0],
-          [0,4,4,0],
-          [0,0,0,0],
+          [0, 0, 0],
+          [3, 3, 3],
+          [3, 0, 0],
         ];
         break;
 
-      case 'S':
+      case "O":
         figure.blocks = [
-          [0,0,0],
-          [0,5,5],
-          [5,5,0],
+          [0, 0, 0, 0],
+          [0, 4, 4, 0],
+          [0, 4, 4, 0],
+          [0, 0, 0, 0],
         ];
         break;
 
-      case 'T':
+      case "S":
         figure.blocks = [
-          [0,0,0],
-          [6,6,6],
-          [0,6,0],
+          [0, 0, 0],
+          [0, 5, 5],
+          [5, 5, 0],
         ];
         break;
 
-      case 'Z':
+      case "T":
         figure.blocks = [
-          [0,0,0],
-          [7,7,0],
-          [0,7,7],
+          [0, 0, 0],
+          [6, 6, 6],
+          [0, 6, 0],
+        ];
+        break;
+
+      case "Z":
+        figure.blocks = [
+          [0, 0, 0],
+          [7, 7, 0],
+          [0, 7, 7],
         ];
         break;
 
       default:
-        throw new Error('Uknown type of figure');
+        throw new Error("Uknown type of figure");
     }
 
     figure.x = Math.floor((10 - figure.blocks[0].length) / 2);
@@ -143,6 +156,8 @@ export default class Game {
     if (this.hasCollision()) {
       this.activeFigure.y -= 1;
       this.lockFigure();
+      const clearedLines = this.clearLines();
+      this.updateScore(clearedLines);
       this.updateFigures();
     }
   }
@@ -205,6 +220,43 @@ export default class Game {
           this.playfield[figureY + y][fitureX + x] = blocks[y][x];
         }
       }
+    }
+  }
+
+  clearLines() {
+    const rows = 20;
+    const columns = 10;
+    let lines = [];
+
+    for (let y = rows - 1; y >= 0; y -= 1) {
+      let numberOfBlocks = 0;
+
+      for (let x = 0; x < columns; x += 1) {
+        if (this.playfield[y][x]) {
+          numberOfBlocks += 1;
+        }
+      }
+
+      if (numberOfBlocks === 0) {
+        break;
+      } else if (numberOfBlocks < columns) {
+        continue;
+      } else if (numberOfBlocks === columns) {
+        lines.unshift(y);
+      }
+    }
+
+    for (let index of lines) {
+      this.playfield.splice(index, 1);
+      this.playfield.unshift(new Array(columns).fill(0));
+    }
+    return lines.length;
+  }
+
+  updateScore(clearedLines) {
+    if (clearedLines > 0) {
+      this.score += Game.points[clearedLines] * (this.level + 1);
+      this.lines += clearedLines;
     }
   }
 
