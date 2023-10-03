@@ -49,7 +49,7 @@ export default class View {
 
   renderStartScreen() {
     this.context.fillStyle = "white";
-    this.context.font = '24px "Pixelify Sans"';
+    this.context.font = '24px "Rajdhani"';
     this.context.textAlign = "center";
     this.context.textBaseLine = "middle";
     this.context.fillText(
@@ -63,7 +63,7 @@ export default class View {
     this.context.fillStyle = "rgba(0, 0, 0, 0.75)";
     this.context.fillRect(0, 0, this.width, this.heigth);
     this.context.fillStyle = "white";
-    this.context.font = '24px "Pixelify Sans"';
+    this.context.font = '24px "Rajdhani"';
     this.context.textAlign = "center";
     this.context.textBaseLine = "middle";
     this.context.fillText(
@@ -76,7 +76,7 @@ export default class View {
   renderGameOverScreen({ score }) {
     this.clearScreen();
     this.context.fillStyle = "white";
-    this.context.font = '24px "Pixelify Sans"';
+    this.context.font = '24px "Rajdhani"';
     this.context.textAlign = "center";
     this.context.textBaseLine = "middle";
     this.context.fillText("GAME OVER", this.width / 2, this.heigth / 2 - 48);
@@ -116,12 +116,24 @@ export default class View {
     this.context.textAlign = "start";
     this.context.textBaseLine = "top";
     this.context.fillStyle = "white";
-    this.context.font = '24px "Pixelify Sans"';
+    this.context.font = '24px "Rajdhani"';
 
     this.context.fillText(`Score: ${score}`, this.panelX, this.panelY + 25);
     this.context.fillText(`Lines: ${lines}`, this.panelX, this.panelY + 50);
     this.context.fillText(`Level: ${level}`, this.panelX, this.panelY + 75);
     this.context.fillText("Next:", this.panelX, this.panelY + 120);
+    this.context.fillText("Right click", this.panelX, this.panelY + 200);
+    this.context.fillText("to...", this.panelX, this.panelY + 220);
+    this.context.fillText("ON/OFF MUSIC", this.panelX, this.panelY + 250);
+
+    this.context.canvas.addEventListener("click", () => {
+      const backgroundMusic = document.getElementById("background-music");
+      if (backgroundMusic.paused) {
+        backgroundMusic.play();
+      } else {
+        backgroundMusic.pause();
+      }
+    });
 
     nextFigure.blocks.forEach((row, y) =>
       row.forEach((block, x) => {
@@ -140,7 +152,7 @@ export default class View {
 
   renderBlock(x, y, width, height, color) {
     this.context.fillStyle = color;
-    this.context.strokeStyle = "black";
+    this.context.strokeStyle = "white";
     this.context.lineWidth = 2;
     this.context.fillRect(x, y, width, height);
     this.context.strokeRect(x, y, width, height);

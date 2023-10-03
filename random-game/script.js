@@ -14,3 +14,10 @@ const controller = new Controller(game, view);
 window.game = game;
 window.view = view;
 window.controller = controller;
+
+const backgroundMusic = document.getElementById("background-music");
+
+function playBackgroundMusic() {
+  backgroundMusic.play();
+}
+playBackgroundMusic();

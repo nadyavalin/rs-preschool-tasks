@@ -6,13 +6,25 @@
 }
 
 body {
-    font-family: 'Pixelify Sans', sans-serif;
-    background: linear-gradient(to bottom, #252525, #303030);
+    font-family: 'Rajdhani', sans-serif;
+    background: linear-gradient(to bottom, #230448, #4a50c3);
     min-width: 100vw;
     min-height: 100vh;
     color:#ffffff;
     font-size: 20px;
     overflow-x: hidden;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+}
+
+a:hover {
+    color: #acace0;
+    text-decoration: underline;
 }
 
 h1 {
@@ -23,10 +35,22 @@ h1 {
 header {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
 }
 
 .root canvas {
     display: block;
     margin: 0 auto;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.footer img {
+    width: 30%;
+    height: 30%;
 }
