@@ -71,6 +71,7 @@ export default class View {
     this.context.textBaseLine = 'middle';
     this.context.fillText('GAME OVER', this.width / 2, this.heigth / 2 - 48);
     this.context.fillText(`Score: ${score}`, this.width / 2, this.heigth / 2);
+    this.context.fillText(`Press Enter to Restart`, this.width / 2, this.heigth / 2 + 48);
   }
   
   clearScreen() {

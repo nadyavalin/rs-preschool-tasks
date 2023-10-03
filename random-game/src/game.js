@@ -1,20 +1,14 @@
 export default class Game {
   static points = {
-    '1': 40,
-    '2': 100,
-    '3': 300,
-    '4': 1200,
+    1: 40,
+    2: 100,
+    3: 300,
+    4: 1200,
   };
 
-  score = 0;
-
-  lines = 0;
-
-  playfield = this.createPlayfield();
-
-  activeFigure = this.createFigure();
-
-  nextFigure = this.createFigure();
+  constructor() {
+    this.reset();
+  }
 
   get level() {
     return Math.floor(this.lines * 0.1);
@@ -46,7 +40,17 @@ export default class Game {
       lines: this.lines,
       nextFigure: this.nextFigure,
       playfield,
+      isGameOver: this.topOut,
     };
+  }
+
+  reset() {
+    this.score = 0;
+    this.lines = 0;
+    this.topOut = false;
+    this.playfield = this.createPlayfield();
+    this.activeFigure = this.createFigure();
+    this.nextFigure = this.createFigure();
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -152,6 +156,8 @@ export default class Game {
   }
 
   moveFigureDown() {
+    if (this.topOut) return;
+
     this.activeFigure.y += 1;
     if (this.hasCollision()) {
       this.activeFigure.y -= 1;
@@ -159,6 +165,9 @@ export default class Game {
       const clearedLines = this.clearLines();
       this.updateScore(clearedLines);
       this.updateFigures();
+    }
+    if (this.hasCollision()) {
+      this.topOut = true;
     }
   }
 
