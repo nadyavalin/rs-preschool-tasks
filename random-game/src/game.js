@@ -18,21 +18,17 @@ export default class Game {
     const playfield = this.createPlayfield();
     const { y: figureY, x: fitureX, blocks } = this.activeFigure;
 
-    for (let y = 0; y < this.playfield.length; y += 1) {
-      playfield[y] = [];
+    this.playfield.forEach((row, y) => {
+      playfield[y] = row.map((cell) => cell);
+    });
 
-      for (let x = 0; x < this.playfield[y].length; x += 1) {
-        playfield[y][x] = this.playfield[y][x];
-      }
-    }
-
-    for (let y = 0; y < blocks.length; y += 1) {
-      for (let x = 0; x < blocks[y].length; x += 1) {
-        if (blocks[y][x]) {
-          playfield[figureY + y][fitureX + x] = blocks[y][x];
+    blocks.forEach((row, y) => {
+      row.forEach((block, x) => {
+        if (block) {
+          playfield[figureY + y][fitureX + x] = block;
         }
-      }
-    }
+      });
+    });
 
     return {
       score: this.score,
@@ -55,14 +51,7 @@ export default class Game {
 
   // eslint-disable-next-line class-methods-use-this
   createPlayfield() {
-    const playfield = [];
-    for (let y = 0; y < 20; y += 1) {
-      playfield[y] = [];
-
-      for (let x = 0; x < 10; x += 1) {
-        playfield[y][x] = 0;
-      }
-    }
+    const playfield = Array.from({ length: 20 }, () => Array(10).fill(0));
     return playfield;
   }
 
@@ -206,36 +195,32 @@ export default class Game {
   hasCollision() {
     const { y: figureY, x: fitureX, blocks } = this.activeFigure;
 
-    for (let y = 0; y < blocks.length; y += 1) {
-      for (let x = 0; x < blocks[y].length; x += 1) {
-        if (
-          blocks[y][x] &&
+    return blocks.some((row, y) =>
+      row.some(
+        (block, x) =>
+          block &&
           (this.playfield[figureY + y] === undefined ||
             this.playfield[figureY + y][fitureX + x] === undefined ||
             this.playfield[figureY + y][fitureX + x])
-        ) {
-          return true;
-        }
-      }
-    }
-    return false;
+      )
+    );
   }
 
   lockFigure() {
     const { y: figureY, x: fitureX, blocks } = this.activeFigure;
-    for (let y = 0; y < blocks.length; y += 1) {
-      for (let x = 0; x < blocks[y].length; x += 1) {
-        if (blocks[y][x]) {
-          this.playfield[figureY + y][fitureX + x] = blocks[y][x];
+    blocks.forEach((row, y) =>
+      row.forEach((block, x) => {
+        if (block) {
+          this.playfield[figureY + y][fitureX + x] = block;
         }
-      }
-    }
+      })
+    );
   }
 
   clearLines() {
     const rows = 20;
     const columns = 10;
-    let lines = [];
+    const lines = [];
 
     for (let y = rows - 1; y >= 0; y -= 1) {
       let numberOfBlocks = 0;
@@ -249,16 +234,18 @@ export default class Game {
       if (numberOfBlocks === 0) {
         break;
       } else if (numberOfBlocks < columns) {
+        // eslint-disable-next-line no-continue
         continue;
       } else if (numberOfBlocks === columns) {
         lines.unshift(y);
       }
     }
 
-    for (let index of lines) {
+    lines.forEach((index) => {
       this.playfield.splice(index, 1);
       this.playfield.unshift(new Array(columns).fill(0));
-    }
+    });
+
     return lines.length;
   }
 
