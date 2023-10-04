@@ -122,18 +122,6 @@ export default class View {
     this.context.fillText(`Lines: ${lines}`, this.panelX, this.panelY + 50);
     this.context.fillText(`Level: ${level}`, this.panelX, this.panelY + 75);
     this.context.fillText("Next:", this.panelX, this.panelY + 120);
-    this.context.fillText("Right click", this.panelX, this.panelY + 200);
-    this.context.fillText("to...", this.panelX, this.panelY + 220);
-    this.context.fillText("ON/OFF MUSIC", this.panelX, this.panelY + 250);
-
-    this.context.canvas.addEventListener("click", () => {
-      const backgroundMusic = document.getElementById("background-music");
-      if (backgroundMusic.paused) {
-        backgroundMusic.play();
-      } else {
-        backgroundMusic.pause();
-      }
-    });
 
     nextFigure.blocks.forEach((row, y) =>
       row.forEach((block, x) => {
