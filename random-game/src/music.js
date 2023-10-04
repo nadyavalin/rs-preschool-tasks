@@ -16,7 +16,6 @@ function pauseBackgroundMusic() {
 
 volumeOn.addEventListener("click", () => {
   pauseBackgroundMusic();
-
 });
 
 volumeOff.addEventListener("click", () => {
