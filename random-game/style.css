@@ -42,12 +42,31 @@ header {
     margin: 0 auto;
 }
 
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.volume {
+    position: absolute;
+    left: 50px;
+}
+
+.volume-on {
+    cursor: pointer;
+}
+
+.volume-off {
+    cursor: pointer;
+    display: none;
+}
+
 .footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    padding: 10px;
+    padding: 10px 30px 10px 30px;
 }
 
 .footer img {
