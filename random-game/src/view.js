@@ -67,7 +67,7 @@ export default class View {
     this.context.textAlign = "center";
     this.context.textBaseLine = "middle";
     this.context.fillText(
-      "Press ENTER to Resume",
+      "Press SPACE to Resume",
       this.width / 2,
       this.heigth / 2
     );
