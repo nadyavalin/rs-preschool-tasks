@@ -68,14 +68,21 @@ export default class Controller {
 
     switch (event.keyCode) {
       case 13: // ENTER
-      if (state.isGameOver) {
-        this.reset();
-      } else if (this.isPlaying) {
+        if (state.isGameOver) {
+          this.reset();
+        } else {
+          this.play();
+        }
+        break;
+
+      case 32: // SPACE
+        if (this.isPlaying) {
           this.pause();
         } else {
           this.play();
         }
         break;
+        
       case 37: // Left arrow
         this.game.moveFigureLeft();
         this.updateView();

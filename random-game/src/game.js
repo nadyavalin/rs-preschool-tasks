@@ -245,7 +245,6 @@ export default class Game {
       this.playfield.splice(index, 1);
       this.playfield.unshift(new Array(columns).fill(0));
     });
-
     return lines.length;
   }
 
@@ -261,3 +260,4 @@ export default class Game {
     this.nextFigure = this.createFigure();
   }
 }
+
