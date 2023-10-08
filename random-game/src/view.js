@@ -86,6 +86,8 @@ export default class View {
       this.width / 2,
       this.heigth / 2 + 48
     );
+
+    localStorage.setItem('score', score);
   }
 
   clearScreen() {
