@@ -9,7 +9,7 @@ export default class View {
     7: "red",
   };
 
-  constructor(el, width, heigth, rows, columns) {
+  constructor(el, width, heigth, rows, columns, score) {
     this.el = el;
     this.width = width;
     this.heigth = heigth;
@@ -39,6 +39,8 @@ export default class View {
     this.panelHeight = this.heigth;
 
     this.el.appendChild(this.canvas);
+
+    this.score = score;
   }
 
   renderMainScreen(state) {
@@ -87,8 +89,31 @@ export default class View {
       this.heigth / 2 + 48
     );
 
-    localStorage.setItem('score', score);
+    /* localStorage */
+
+    setItemToLocalStorage(key, value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    getItemFromLocalStorage(key) {
+      localStorage.JSON.parse(localStorage.getItem(key));
+    }
+
+    saveScore(score) {
+      this.setItemToLocalStorage('score', score);
+    }
+
+    addScore(score) {
+      let scores = this.getItemFromLocalStorage('score');
+        if (score !== 0) {
+          scores.push(score);
+        } else {
+          scores = [score];
+      }
+      this.setItemToLocalStorage('scores', scores);
+    }
   }
+    /* localStorage */
 
   clearScreen() {
     this.context.clearRect(0, 0, this.width, this.heigth);
