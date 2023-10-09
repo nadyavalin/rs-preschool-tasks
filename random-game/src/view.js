@@ -9,10 +9,20 @@ export default class View {
     7: "red",
   };
 
-  constructor(el, width, heigth, rows, columns) {
+  el;
+
+  width;
+
+  height;
+
+  rows;
+
+  columns;
+
+  constructor({ el, width, height, rows, columns }) {
     this.el = el;
     this.width = width;
-    this.heigth = heigth;
+    this.heigth = height;
 
     this.canvas = document.createElement("canvas");
     this.canvas.width = this.width;
@@ -148,15 +158,15 @@ export default class View {
 
   /* localStorage */
   setItemToLocalStorage(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+    this.localStorage.setItem(key, JSON.stringify(value));
   }
 
   getItemFromLocalStorage(key) {
-    return JSON.parse(localStorage.getItem(key));
+    return JSON.parse(this.localStorage.getItem(key));
   }
 
   addScore(score) {
-    let scores = this.getItemFromLocalStorage('score');
+    const scores = this.getItemFromLocalStorage('score');
     if (score !== 0) {
       scores.push(score);
     }
@@ -164,15 +174,15 @@ export default class View {
   }
 
   saveScore(score) {
-    let scores = this.getItemFromLocalStorage('scores') || [];
+    const scores = this.getItemFromLocalStorage('scores') || [];
     scores.push(score);
     this.setItemToLocalStorage('scores', scores);
   }
 
   renderScores() {
-    let scores = this.getItemFromLocalStorage('scores') || [];
+    const scores = this.getItemFromLocalStorage('scores') || [];
     scores.forEach((score, index) => {
-    console.log(Результат `${index + 1}: ${score}`);
+    console.log(`Результат ${index + 1}: ${score}`);
     });
   }
   /* localStorage */

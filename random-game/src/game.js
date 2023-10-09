@@ -6,6 +6,18 @@ export default class Game {
     4: 1200,
   };
 
+  score;
+
+  lines;
+
+  topOut;
+  
+  playfield;
+  
+  activeFigure;
+  
+  nextFigure;
+
   constructor() {
     this.reset();
   }
@@ -16,7 +28,7 @@ export default class Game {
 
   getState() {
     const playfield = this.createPlayfield();
-    const { y: figureY, x: fitureX, blocks } = this.activeFigure;
+    const { y: figureY, x: figureX, blocks } = this.activeFigure;
 
     this.playfield.forEach((row, y) => {
       playfield[y] = row.map((cell) => cell);
@@ -25,7 +37,7 @@ export default class Game {
     blocks.forEach((row, y) => {
       row.forEach((block, x) => {
         if (block) {
-          playfield[figureY + y][fitureX + x] = block;
+          playfield[figureY + y][figureX + x] = block;
         }
       });
     });
@@ -49,13 +61,11 @@ export default class Game {
     this.nextFigure = this.createFigure();
   }
 
-  // eslint-disable-next-line class-methods-use-this
   createPlayfield() {
     const playfield = Array.from({ length: 20 }, () => Array(10).fill(0));
     return playfield;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   createFigure() {
     const index = Math.floor(Math.random() * 7);
     const type = "IJLOSTZ"[index];
@@ -121,7 +131,7 @@ export default class Game {
         break;
 
       default:
-        throw new Error("Uknown type of figure");
+        throw new Error("Unknown type of figure");
     }
 
     figure.x = Math.floor((10 - figure.blocks[0].length) / 2);
@@ -231,13 +241,10 @@ export default class Game {
         }
       }
 
-      if (numberOfBlocks === 0) {
-        break;
-      } else if (numberOfBlocks < columns) {
-        // eslint-disable-next-line no-continue
-        continue;
-      } else if (numberOfBlocks === columns) {
+      if (numberOfBlocks === columns) {
         lines.unshift(y);
+      } else if (numberOfBlocks === 0) {
+        break;
       }
     }
 
