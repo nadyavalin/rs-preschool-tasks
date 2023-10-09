@@ -9,7 +9,7 @@ export default class View {
     7: "red",
   };
 
-  constructor(el, width, heigth, rows, columns, score) {
+  constructor(el, width, heigth, rows, columns) {
     this.el = el;
     this.width = width;
     this.heigth = heigth;
@@ -39,8 +39,6 @@ export default class View {
     this.panelHeight = this.heigth;
 
     this.el.appendChild(this.canvas);
-
-    this.score = score;
   }
 
   renderMainScreen(state) {
@@ -88,32 +86,7 @@ export default class View {
       this.width / 2,
       this.heigth / 2 + 48
     );
-
-    /* localStorage */
-
-    setItemToLocalStorage(key, value) {
-      localStorage.setItem(key, JSON.stringify(value));
-    }
-
-    getItemFromLocalStorage(key) {
-      localStorage.JSON.parse(localStorage.getItem(key));
-    }
-
-    saveScore(score) {
-      this.setItemToLocalStorage('score', score);
-    }
-
-    addScore(score) {
-      let scores = this.getItemFromLocalStorage('score');
-        if (score !== 0) {
-          scores.push(score);
-        } else {
-          scores = [score];
-      }
-      this.setItemToLocalStorage('scores', scores);
-    }
   }
-    /* localStorage */
 
   clearScreen() {
     this.context.clearRect(0, 0, this.width, this.heigth);
@@ -172,4 +145,35 @@ export default class View {
     this.context.fillRect(x, y, width, height);
     this.context.strokeRect(x, y, width, height);
   }
+
+  /* localStorage */
+  setItemToLocalStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  getItemFromLocalStorage(key) {
+    return JSON.parse(localStorage.getItem(key));
+  }
+
+  addScore(score) {
+    let scores = this.getItemFromLocalStorage('score');
+    if (score !== 0) {
+      scores.push(score);
+    }
+    this.setItemToLocalStorage('scores', scores);
+  }
+
+  saveScore(score) {
+    let scores = this.getItemFromLocalStorage('scores') || [];
+    scores.push(score);
+    this.setItemToLocalStorage('scores', scores);
+  }
+
+  renderScores() {
+    let scores = this.getItemFromLocalStorage('scores') || [];
+    scores.forEach((score, index) => {
+    console.log(Результат `${index + 1}: ${score}`);
+    });
+  }
+  /* localStorage */
 }
