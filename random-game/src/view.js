@@ -15,6 +15,26 @@ export default class View {
 
   height;
 
+  panelX;
+
+  panelY = 0;
+
+  context;
+
+  playFieldWidth;
+
+  playFieldHeight;
+
+  blockWidth;
+
+  blockHeight;
+
+  playFieldBorderWidth = 4;
+  
+  playFieldX = 4;
+
+  playFieldY = 4;
+
   constructor({ el, width, height, rows, columns }) {
     this.el = el;
     this.width = width;
@@ -26,20 +46,16 @@ export default class View {
 
     this.context = canvas.getContext("2d");
 
-    this.playFieldBorderWidth = 4;
-    this.playFieldX = this.playFieldBorderWidth;
-    this.playFieldY = this.playFieldBorderWidth;
     this.playFieldWidth = (this.width * 2) / 3;
     this.playFieldHeight = this.height;
     
-    const playFieldInnerWidth = this.playFieldWidth - this.playFieldBorderWidth * 2;
-    const playFieldInnerHeight = this.playFieldHeight - this.playFieldBorderWidth * 2;
+    const playFieldInnerWidth = this.playFieldWidth - 8;
+    const playFieldInnerHeight = this.playFieldHeight - 8;
 
     this.blockWidth = playFieldInnerWidth / columns;
     this.blockHeight = playFieldInnerHeight / rows;
 
     this.panelX = this.playFieldWidth + 10;
-    this.panelY = 0;
 
     this.el.appendChild(canvas);
   }
@@ -76,7 +92,7 @@ export default class View {
     );
   }
 
-  renderGameOverScreen({ score }) {
+  renderGameOverScreen({ score, level }) {
     this.clearScreen();
     this.context.fillStyle = "white";
     this.context.font = '24px "Rajdhani"';
@@ -84,10 +100,11 @@ export default class View {
     this.context.textBaseLine = "middle";
     this.context.fillText("GAME OVER", this.width / 2, this.height / 2 - 48);
     this.context.fillText(`Score: ${score}`, this.width / 2, this.height / 2);
+    this.context.fillText(`Level: ${level}`, this.width / 2, this.height / 2 + 48);
     this.context.fillText(
       `Press ENTER to Restart`,
       this.width / 2,
-      this.height / 2 + 48
+      this.height / 2 + 96
     );
   }
 
@@ -150,12 +167,14 @@ export default class View {
   }
 
   /* localStorage */
-  setItemToLocalStorage(key, value) {
-    this.localStorage.setItem(key, JSON.stringify(value));
+  static setItemToLocalStorage(key, value) {
+    console.log('Saving to localStorage:', key, value);
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
-  getItemFromLocalStorage(key) {
-    return JSON.parse(this.localStorage.getItem(key));
+  static getItemFromLocalStorage(key) {
+    console.log('Getting from localStorage:', key);
+    return JSON.parse(localStorage.getItem(key));
   }
 
   addScore(score) {
