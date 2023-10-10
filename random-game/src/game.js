@@ -1,3 +1,5 @@
+import { createPlayField, createFigure } from "./helpers.js";
+
 export default class Game {
   static points = {
     1: 40,
@@ -12,7 +14,7 @@ export default class Game {
 
   topOut;
   
-  playfield;
+  playField;
   
   activeFigure;
   
@@ -27,17 +29,17 @@ export default class Game {
   }
 
   getState() {
-    const playfield = this.createPlayfield();
+    const playField = createPlayField();
     const { y: figureY, x: figureX, blocks } = this.activeFigure;
 
-    this.playfield.forEach((row, y) => {
-      playfield[y] = row.map((cell) => cell);
+    this.playField.forEach((row, y) => {
+      playField[y] = row.map((cell) => cell);
     });
 
     blocks.forEach((row, y) => {
       row.forEach((block, x) => {
         if (block) {
-          playfield[figureY + y][figureX + x] = block;
+          playField[figureY + y][figureX + x] = block;
         }
       });
     });
@@ -47,7 +49,7 @@ export default class Game {
       level: this.level,
       lines: this.lines,
       nextFigure: this.nextFigure,
-      playfield,
+      playField,
       isGameOver: this.topOut,
     };
   }
@@ -56,88 +58,9 @@ export default class Game {
     this.score = 0;
     this.lines = 0;
     this.topOut = false;
-    this.playfield = this.createPlayfield();
-    this.activeFigure = this.createFigure();
-    this.nextFigure = this.createFigure();
-  }
-
-  createPlayfield() {
-    const playfield = Array.from({ length: 20 }, () => Array(10).fill(0));
-    return playfield;
-  }
-
-  createFigure() {
-    const index = Math.floor(Math.random() * 7);
-    const type = "IJLOSTZ"[index];
-    const figure = {};
-
-    switch (type) {
-      case "I":
-        figure.blocks = [
-          [0, 0, 0, 0],
-          [1, 1, 1, 1],
-          [0, 0, 0, 0],
-          [0, 0, 0, 0],
-        ];
-        break;
-
-      case "J":
-        figure.blocks = [
-          [0, 0, 0],
-          [2, 2, 2],
-          [0, 0, 2],
-        ];
-        break;
-
-      case "L":
-        figure.blocks = [
-          [0, 0, 0],
-          [3, 3, 3],
-          [3, 0, 0],
-        ];
-        break;
-
-      case "O":
-        figure.blocks = [
-          [0, 0, 0, 0],
-          [0, 4, 4, 0],
-          [0, 4, 4, 0],
-          [0, 0, 0, 0],
-        ];
-        break;
-
-      case "S":
-        figure.blocks = [
-          [0, 0, 0],
-          [0, 5, 5],
-          [5, 5, 0],
-        ];
-        break;
-
-      case "T":
-        figure.blocks = [
-          [0, 0, 0],
-          [6, 6, 6],
-          [0, 6, 0],
-        ];
-        break;
-
-      case "Z":
-        figure.blocks = [
-          [0, 0, 0],
-          [7, 7, 0],
-          [0, 7, 7],
-        ];
-        break;
-
-      default:
-        throw new Error("Unknown type of figure");
-    }
-
-    figure.x = Math.floor((10 - figure.blocks[0].length) / 2);
-    figure.y = -1;
-
-    return figure;
+    this.playField = createPlayField();
+    this.activeFigure = createFigure();
+    this.nextFigure = createFigure();
   }
 
   moveFigureLeft() {
@@ -209,9 +132,9 @@ export default class Game {
       row.some(
         (block, x) =>
           block &&
-          (this.playfield[figureY + y] === undefined ||
-            this.playfield[figureY + y][fitureX + x] === undefined ||
-            this.playfield[figureY + y][fitureX + x])
+          (this.playField[figureY + y] === undefined ||
+            this.playField[figureY + y][fitureX + x] === undefined ||
+            this.playField[figureY + y][fitureX + x])
       )
     );
   }
@@ -221,7 +144,7 @@ export default class Game {
     blocks.forEach((row, y) =>
       row.forEach((block, x) => {
         if (block) {
-          this.playfield[figureY + y][fitureX + x] = block;
+          this.playField[figureY + y][fitureX + x] = block;
         }
       })
     );
@@ -236,7 +159,7 @@ export default class Game {
       let numberOfBlocks = 0;
 
       for (let x = 0; x < columns; x += 1) {
-        if (this.playfield[y][x]) {
+        if (this.playField[y][x]) {
           numberOfBlocks += 1;
         }
       }
@@ -249,8 +172,8 @@ export default class Game {
     }
 
     lines.forEach((index) => {
-      this.playfield.splice(index, 1);
-      this.playfield.unshift(new Array(columns).fill(0));
+      this.playField.splice(index, 1);
+      this.playField.unshift(new Array(columns).fill(0));
     });
     return lines.length;
   }
@@ -264,7 +187,7 @@ export default class Game {
 
   updateFigures() {
     this.activeFigure = this.nextFigure;
-    this.nextFigure = this.createFigure();
+    this.nextFigure = createFigure();
   }
 }
 

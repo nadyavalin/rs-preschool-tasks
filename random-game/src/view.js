@@ -15,45 +15,38 @@ export default class View {
 
   height;
 
-  rows;
-
-  columns;
-
   constructor({ el, width, height, rows, columns }) {
     this.el = el;
     this.width = width;
-    this.heigth = height;
+    this.height = height;
 
-    this.canvas = document.createElement("canvas");
-    this.canvas.width = this.width;
-    this.canvas.height = this.heigth;
+    const canvas = document.createElement("canvas");
+    canvas.width = this.width;
+    canvas.height = this.height;
 
-    this.context = this.canvas.getContext("2d");
+    this.context = canvas.getContext("2d");
 
-    this.playfieldBorderWidth = 4;
-    this.playfieldX = this.playfieldBorderWidth;
-    this.playfieldY = this.playfieldBorderWidth;
-    this.playfieldWidth = (this.width * 2) / 3;
-    this.playfieldHeight = this.heigth;
-    this.playfieldInnerWidth =
-      this.playfieldWidth - this.playfieldBorderWidth * 2;
-    this.playfieldInnerHeight =
-      this.playfieldHeight - this.playfieldBorderWidth * 2;
+    this.playFieldBorderWidth = 4;
+    this.playFieldX = this.playFieldBorderWidth;
+    this.playFieldY = this.playFieldBorderWidth;
+    this.playFieldWidth = (this.width * 2) / 3;
+    this.playFieldHeight = this.height;
+    
+    const playFieldInnerWidth = this.playFieldWidth - this.playFieldBorderWidth * 2;
+    const playFieldInnerHeight = this.playFieldHeight - this.playFieldBorderWidth * 2;
 
-    this.blockWidth = this.playfieldInnerWidth / columns;
-    this.blockHeight = this.playfieldInnerHeight / rows;
+    this.blockWidth = playFieldInnerWidth / columns;
+    this.blockHeight = playFieldInnerHeight / rows;
 
-    this.panelX = this.playfieldWidth + 10;
+    this.panelX = this.playFieldWidth + 10;
     this.panelY = 0;
-    this.panelWidth = this.width / 3;
-    this.panelHeight = this.heigth;
 
-    this.el.appendChild(this.canvas);
+    this.el.appendChild(canvas);
   }
 
   renderMainScreen(state) {
     this.clearScreen();
-    this.renderPlayfield(state);
+    this.renderPlayField(state);
     this.renderPanel(state);
   }
 
@@ -65,21 +58,21 @@ export default class View {
     this.context.fillText(
       "Press ENTER to Start",
       this.width / 2,
-      this.heigth / 2
+      this.height / 2
     );
   }
 
   renderPauseScreen() {
     this.context.fillStyle = "rgba(0, 0, 0, 0.75)";
-    this.context.fillRect(0, 0, this.width, this.heigth);
+    this.context.fillRect(0, 0, this.width, this.height);
     this.context.fillStyle = "white";
     this.context.font = '24px "Rajdhani"';
     this.context.textAlign = "center";
     this.context.textBaseLine = "middle";
     this.context.fillText(
-      "Press SPACE or ENTER to Resume",
+      "Press SPACE to Resume",
       this.width / 2,
-      this.heigth / 2
+      this.height / 2
     );
   }
 
@@ -89,26 +82,26 @@ export default class View {
     this.context.font = '24px "Rajdhani"';
     this.context.textAlign = "center";
     this.context.textBaseLine = "middle";
-    this.context.fillText("GAME OVER", this.width / 2, this.heigth / 2 - 48);
-    this.context.fillText(`Score: ${score}`, this.width / 2, this.heigth / 2);
+    this.context.fillText("GAME OVER", this.width / 2, this.height / 2 - 48);
+    this.context.fillText(`Score: ${score}`, this.width / 2, this.height / 2);
     this.context.fillText(
       `Press ENTER to Restart`,
       this.width / 2,
-      this.heigth / 2 + 48
+      this.height / 2 + 48
     );
   }
 
   clearScreen() {
-    this.context.clearRect(0, 0, this.width, this.heigth);
+    this.context.clearRect(0, 0, this.width, this.height);
   }
 
-  renderPlayfield({ playfield }) {
-    playfield.forEach((line, y) =>
+  renderPlayField({ playField }) {
+    playField.forEach((line, y) =>
       line.forEach((block, x) => {
         if (block) {
           this.renderBlock(
-            this.playfieldX + x * this.blockWidth,
-            this.playfieldY + y * this.blockHeight,
+            this.playFieldX + x * this.blockWidth,
+            this.playFieldY + y * this.blockHeight,
             this.blockWidth,
             this.blockHeight,
             View.colors[block]
@@ -118,8 +111,8 @@ export default class View {
     );
 
     this.context.strokeStyle = "white";
-    this.context.lineWidth = this.playfieldBorderWidth;
-    this.context.strokeRect(0, 0, this.playfieldWidth, this.playfieldHeight);
+    this.context.lineWidth = this.playFieldBorderWidth;
+    this.context.strokeRect(0, 0, this.playFieldWidth, this.playFieldHeight);
   }
 
   renderPanel({ level, score, lines, nextFigure }) {
@@ -182,7 +175,7 @@ export default class View {
   renderScores() {
     const scores = this.getItemFromLocalStorage('scores') || [];
     scores.forEach((score, index) => {
-    console.log(`Результат ${index + 1}: ${score}`);
+    console.log(`Result ${index + 1}: ${score}`);
     });
   }
   /* localStorage */
