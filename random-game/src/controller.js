@@ -4,7 +4,7 @@ export default class Controller {
   view;
 
   isPlaying = false;
-  
+
   intervalID = null;
 
   constructor(game, view) {
@@ -70,44 +70,64 @@ export default class Controller {
   }
 
   handleKeyDown(event) {
-    const state = this.game.getState();
+    if (event.keyCode === 40) {
+      if (event.code === "ArrowRight" || event.code === "ArrowLeft") {
+        event.preventDefault();
+        this.processDownKeyPress();
+      } else {
+        this.processDownKeyPress();
+      }
+    } else {
+      const state = this.game.getState();
 
-    switch (event.keyCode) {
-      case 13: // ENTER
-        if (state.isGameOver) {
-          this.reset();
-        } else {
-          this.play();
-        }
-        break;
+      switch (event.keyCode) {
+        case 13: // ENTER
+          if (state.isGameOver) {
+            this.reset();
+          } else {
+            this.play();
+          }
+          break;
 
-      case 32: // SPACE
-        if (this.isPlaying) {
-          this.pause();
-        } else {
-          this.play();
-        }
-        break;
-        
-      case 37: // Left arrow
-        this.game.moveFigureLeft();
-        this.updateView();
-        break;
-      case 38: // Up arrow
-        this.game.rotateFigure();
-        this.updateView();
-        break;
-      case 39: // Right arrow
-        this.game.moveFigureRight();
-        this.updateView();
-        break;
-      case 40: // Down arrow
-        this.stopTimer();
-        this.game.moveFigureDown();
-        this.updateView();
-        break;
-      default:
+        case 32: // SPACE
+          if (this.isPlaying) {
+            this.pause();
+          } else {
+            this.play();
+          }
+          break;
+
+        case 37: // Left arrow
+          this.game.moveFigureLeft();
+          this.updateView();
+          break;
+        case 38: // Up arrow
+          this.game.rotateFigure();
+          this.updateView();
+          break;
+        case 39: // Right arrow
+          this.game.moveFigureRight();
+          this.updateView();
+          break;
+        case 40: // Down arrow
+          this.stopTimer();
+          this.game.moveFigureDown();
+          this.updateView();
+          break;
+        default:
+      }
     }
+  }
+
+  processDownKeyPress() {
+    if (!this.isPlaying) {
+      return;
+    }
+
+    this.stopTimer();
+    this.game.moveFigureDown();
+    this.updateView();
+    this.startTimer();
   }
 
   handleKeyUp(event) {
