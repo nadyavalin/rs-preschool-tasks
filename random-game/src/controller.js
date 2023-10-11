@@ -1,3 +1,5 @@
+import { saveScore } from "./helpers.js";
+
 export default class Controller {
   game;
 
@@ -43,6 +45,8 @@ export default class Controller {
     const state = this.game.getState();
     if (state.isGameOver) {
       this.view.renderGameOverScreen(state);
+      saveScore(state.score);
+      this.stopTimer();
     } else if (!this.isPlaying) {
       this.view.renderPauseScreen();
     } else {

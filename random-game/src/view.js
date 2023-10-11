@@ -1,4 +1,4 @@
-import { setItemToLocalStorage, getItemFromLocalStorage, saveScore, renderScores } from "./helpers.js";
+// import { renderScores, topScores } from "./helpers.js";
 
 export default class View {
   static colors = {
@@ -102,6 +102,8 @@ export default class View {
       this.width / 2,
       this.height / 2 + 96
     );
+    // renderScores();
+    // topScores();
   }
 
   clearScreen() {

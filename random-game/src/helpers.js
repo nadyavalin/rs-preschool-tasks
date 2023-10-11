@@ -78,25 +78,34 @@ export function createFigure() {
 }
 
 export function setItemToLocalStorage(key, value) {
-  console.log('Saving to localStorage:', key, value);
   localStorage.setItem(key, JSON.stringify(value));
 }
 
 export function getItemFromLocalStorage(key) {
-  console.log('Getting from localStorage:', key);
   return JSON.parse(localStorage.getItem(key));
 }
 
 export function saveScore(score) {
-  console.log('Saving score:', score);
   const scores = getItemFromLocalStorage('scores') || [];
   scores.push(score);
   setItemToLocalStorage('scores', scores);
 }
 
+/*
 export function renderScores() {
   const scores = getItemFromLocalStorage('scores') || [];
   scores.forEach((score, index) => {
-  console.log(`Result ${index + 1}: ${score}`);
+    console.log(`Result ${index + 1}: ${score}`);
   });
 }
+
+export function topScores() {
+  const scores = getItemFromLocalStorage('scores') || [];
+  const sortedScores = scores.sort((a, b) => b - a);
+  const topScoresList = sortedScores.slice(0, 10);
+  
+  topScoresList.forEach((score, index) => {
+    console.log(`Top ${index + 1}: ${score}`);
+  });
+}
+*/
