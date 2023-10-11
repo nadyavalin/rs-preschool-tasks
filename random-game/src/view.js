@@ -1,3 +1,5 @@
+import { setItemToLocalStorage, getItemFromLocalStorage, saveScore, renderScores } from "./helpers.js";
+
 export default class View {
   static colors = {
     1: "cyan",
@@ -29,12 +31,6 @@ export default class View {
 
   blockHeight;
 
-  playFieldBorderWidth = 4;
-  
-  playFieldX = 4;
-
-  playFieldY = 4;
-
   constructor({ el, width, height, rows, columns }) {
     this.el = el;
     this.width = width;
@@ -48,7 +44,7 @@ export default class View {
 
     this.playFieldWidth = (this.width * 2) / 3;
     this.playFieldHeight = this.height;
-    
+
     const playFieldInnerWidth = this.playFieldWidth - 8;
     const playFieldInnerHeight = this.playFieldHeight - 8;
 
@@ -117,8 +113,8 @@ export default class View {
       line.forEach((block, x) => {
         if (block) {
           this.renderBlock(
-            this.playFieldX + x * this.blockWidth,
-            this.playFieldY + y * this.blockHeight,
+            4 + x * this.blockWidth,
+            4 + y * this.blockHeight,
             this.blockWidth,
             this.blockHeight,
             View.colors[block]
@@ -128,7 +124,7 @@ export default class View {
     );
 
     this.context.strokeStyle = "white";
-    this.context.lineWidth = this.playFieldBorderWidth;
+    this.context.lineWidth = 4;
     this.context.strokeRect(0, 0, this.playFieldWidth, this.playFieldHeight);
   }
 
@@ -165,37 +161,4 @@ export default class View {
     this.context.fillRect(x, y, width, height);
     this.context.strokeRect(x, y, width, height);
   }
-
-  /* localStorage */
-  static setItemToLocalStorage(key, value) {
-    console.log('Saving to localStorage:', key, value);
-    localStorage.setItem(key, JSON.stringify(value));
-  }
-
-  static getItemFromLocalStorage(key) {
-    console.log('Getting from localStorage:', key);
-    return JSON.parse(localStorage.getItem(key));
-  }
-
-  addScore(score) {
-    const scores = this.getItemFromLocalStorage('score');
-    if (score !== 0) {
-      scores.push(score);
-    }
-    this.setItemToLocalStorage('scores', scores);
-  }
-
-  saveScore(score) {
-    const scores = this.getItemFromLocalStorage('scores') || [];
-    scores.push(score);
-    this.setItemToLocalStorage('scores', scores);
-  }
-
-  renderScores() {
-    const scores = this.getItemFromLocalStorage('scores') || [];
-    scores.forEach((score, index) => {
-    console.log(`Result ${index + 1}: ${score}`);
-    });
-  }
-  /* localStorage */
 }
