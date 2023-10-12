@@ -14,7 +14,6 @@ export default class Controller {
     this.view = view;
 
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
-    document.addEventListener("keyup", this.handleKeyUp.bind(this));
 
     this.view.renderStartScreen();
   }
@@ -74,52 +73,53 @@ export default class Controller {
   }
 
   handleKeyDown(event) {
-    if (event.keyCode === 40) {
-      if (event.code === "ArrowRight" || event.code === "ArrowLeft") {
-        event.preventDefault();
-        this.processDownKeyPress();
-      } else {
-        this.processDownKeyPress();
-      }
-    } else {
-      const state = this.game.getState();
+    const state = this.game.getState();
 
-      switch (event.keyCode) {
-        case 13: // ENTER
-          if (state.isGameOver) {
-            this.reset();
-          } else {
-            this.play();
-          }
-          break;
+    switch (event.key) {
+      case "Enter":
+        if (state.isGameOver) {
+          this.reset();
+        } else {
+          this.play();
+        }
+        break;
 
-        case 32: // SPACE
-          if (this.isPlaying) {
-            this.pause();
-          } else {
-            this.play();
-          }
-          break;
+      case " ":
+        if (this.isPlaying) {
+          this.pause();
+        } else {
+          this.play();
+        }
+        break;
 
-        case 37: // Left arrow
+      case "ArrowLeft":
+        if (!state.isGameOver) {
           this.game.moveFigureLeft();
           this.updateView();
-          break;
-        case 38: // Up arrow
+        }
+        break;
+
+      case "ArrowUp":
+        if (!state.isGameOver) {
           this.game.rotateFigure();
           this.updateView();
-          break;
-        case 39: // Right arrow
+        }
+        break;
+
+      case "ArrowRight":
+        if (!state.isGameOver) {
           this.game.moveFigureRight();
           this.updateView();
-          break;
-        case 40: // Down arrow
-          this.stopTimer();
+        }
+        break;
+
+      case "ArrowDown":
+        if (!state.isGameOver) {
           this.game.moveFigureDown();
           this.updateView();
-          break;
-        default:
-      }
+        }
+        break;
+      default:
     }
   }
 
@@ -132,14 +132,5 @@ export default class Controller {
     this.game.moveFigureDown();
     this.updateView();
     this.startTimer();
-  }
-
-  handleKeyUp(event) {
-    switch (event.keyCode) {
-      case 40: // Down arrow
-        this.startTimer();
-        break;
-      default:
-    }
   }
 }
