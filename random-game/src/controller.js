@@ -42,10 +42,12 @@ export default class Controller {
 
   updateView() {
     const state = this.game.getState();
+    const topScoreContainer = document.querySelector('.top-score__container');
     if (state.isGameOver) {
       this.view.renderGameOverScreen(state);
       saveScore(state.score);
       this.stopTimer();
+      topScoreContainer.style.display = "block";
     } else if (!this.isPlaying) {
       this.view.renderPauseScreen();
     } else {
@@ -74,13 +76,16 @@ export default class Controller {
 
   handleKeyDown(event) {
     const state = this.game.getState();
+    const topScoreContainer = document.querySelector('.top-score__container');
 
     switch (event.key) {
       case "Enter":
         if (state.isGameOver) {
           this.reset();
+          topScoreContainer.style.display = "none";
         } else {
           this.play();
+          topScoreContainer.style.display = "none";
         }
         break;
 

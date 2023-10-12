@@ -99,6 +99,11 @@ header {
     color: #808080;
 }
 
+.top-score__container {
+    position: absolute;
+    margin: 350px auto;
+}
+
 .footer {
     display: flex;
     justify-content: space-between;

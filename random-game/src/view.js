@@ -97,7 +97,7 @@ export default class View {
     this.context.fillText("GAME OVER", this.width / 2, this.height / 2 - 144);
     this.context.fillText(`Score: ${score} / Level: ${level}`, this.width / 2, this.height / 2 - 96);
     this.context.fillText("Press ENTER to Restart", this.width / 2, this.height / 2 - 48);
-    this.context.fillText("Top scores:", this.width / 2, this.height / 2 + 48);
+    this.context.fillText("Your previous best scores:", this.width / 2, this.height / 2 + 15);
     renderScores();
     topScores();
   }

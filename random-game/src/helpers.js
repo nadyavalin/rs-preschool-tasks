@@ -103,7 +103,12 @@ export function topScores() {
   const sortedScores = scores.sort((a, b) => b - a);
   const topScoresList = sortedScores.slice(0, 10);
 
+  const topScoreContainer = document.querySelector('.top-score__container');
+  topScoreContainer.innerHTML = '';
+  
   topScoresList.forEach((score, index) => {
-    console.log(`Top ${index + 1}: ${score}`);
+    const scoreElement = document.createElement('div');
+    scoreElement.textContent = `Top ${index + 1}: ${score}`;
+    topScoreContainer.appendChild(scoreElement);
   });
 }
