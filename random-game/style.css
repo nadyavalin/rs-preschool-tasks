@@ -37,6 +37,30 @@ header {
     justify-content: center;
 }
 
+.red {
+    color: #ff0000;
+}
+
+.green {
+    color: #00ff00;
+}
+
+.darkgreen {
+    color: #02af02;
+}
+
+.blue {
+    color: #0000ff;
+}
+
+.yellow {
+    color: #ffff00;
+}
+
+.purple {
+    color: #ee82ee;
+}
+
 .root canvas {
     display: block;
     margin: 0 auto;
@@ -73,6 +97,11 @@ header {
 
 .manual {
     color: #808080;
+}
+
+.top-score__container {
+    position: absolute;
+    margin: 350px auto;
 }
 
 .footer {

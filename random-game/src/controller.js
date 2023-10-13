@@ -1,12 +1,19 @@
+import { saveScoreToLocalStorage } from "./helpers.js";
+
 export default class Controller {
+  game;
+
+  view;
+
+  isPlaying = false;
+
+  intervalID = null;
+
   constructor(game, view) {
     this.game = game;
     this.view = view;
-    this.isPlaying = false;
-    this.intervalID = null;
 
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
-    document.addEventListener("keyup", this.handleKeyUp.bind(this));
 
     this.view.renderStartScreen();
   }
@@ -36,7 +43,9 @@ export default class Controller {
   updateView() {
     const state = this.game.getState();
     if (state.isGameOver) {
+      saveScoreToLocalStorage(state.score);
       this.view.renderGameOverScreen(state);
+      this.stopTimer();
     } else if (!this.isPlaying) {
       this.view.renderPauseScreen();
     } else {
@@ -66,8 +75,8 @@ export default class Controller {
   handleKeyDown(event) {
     const state = this.game.getState();
 
-    switch (event.keyCode) {
-      case 13: // ENTER
+    switch (event.key) {
+      case "Enter":
         if (state.isGameOver) {
           this.reset();
         } else {
@@ -75,39 +84,40 @@ export default class Controller {
         }
         break;
 
-      case 32: // SPACE
+      case " ":
         if (this.isPlaying) {
           this.pause();
         } else {
           this.play();
         }
         break;
-        
-      case 37: // Left arrow
-        this.game.moveFigureLeft();
-        this.updateView();
-        break;
-      case 38: // Up arrow
-        this.game.rotateFigure();
-        this.updateView();
-        break;
-      case 39: // Right arrow
-        this.game.moveFigureRight();
-        this.updateView();
-        break;
-      case 40: // Down arrow
-        this.stopTimer();
-        this.game.moveFigureDown();
-        this.updateView();
-        break;
-      default:
-    }
-  }
 
-  handleKeyUp(event) {
-    switch (event.keyCode) {
-      case 40: // Down arrow
-        this.startTimer();
+      case "ArrowLeft":
+        if (!state.isGameOver) {
+          this.game.moveFigureLeft();
+          this.updateView();
+        }
+        break;
+
+      case "ArrowUp":
+        if (!state.isGameOver) {
+          this.game.rotateFigure();
+          this.updateView();
+        }
+        break;
+
+      case "ArrowRight":
+        if (!state.isGameOver) {
+          this.game.moveFigureRight();
+          this.updateView();
+        }
+        break;
+
+      case "ArrowDown":
+        if (!state.isGameOver) {
+          this.game.moveFigureDown();
+          this.updateView();
+        }
         break;
       default:
     }

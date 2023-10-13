@@ -1,3 +1,5 @@
+import { getItemFromLocalStorage } from "./helpers.js";
+
 export default class View {
   static colors = {
     1: "cyan",
@@ -9,41 +11,54 @@ export default class View {
     7: "red",
   };
 
-  constructor(el, width, heigth, rows, columns) {
+  el;
+
+  width;
+
+  height;
+
+  panelX;
+
+  panelY = 0;
+
+  context;
+
+  playFieldWidth;
+
+  playFieldHeight;
+
+  blockWidth;
+
+  blockHeight;
+
+  constructor({ el, width, height, rows, columns }) {
     this.el = el;
     this.width = width;
-    this.heigth = heigth;
+    this.height = height;
 
-    this.canvas = document.createElement("canvas");
-    this.canvas.width = this.width;
-    this.canvas.height = this.heigth;
+    const canvas = document.createElement("canvas");
+    canvas.width = this.width;
+    canvas.height = this.height;
 
-    this.context = this.canvas.getContext("2d");
+    this.context = canvas.getContext("2d");
 
-    this.playfieldBorderWidth = 4;
-    this.playfieldX = this.playfieldBorderWidth;
-    this.playfieldY = this.playfieldBorderWidth;
-    this.playfieldWidth = (this.width * 2) / 3;
-    this.playfieldHeight = this.heigth;
-    this.playfieldInnerWidth =
-      this.playfieldWidth - this.playfieldBorderWidth * 2;
-    this.playfieldInnerHeight =
-      this.playfieldHeight - this.playfieldBorderWidth * 2;
+    this.playFieldWidth = (this.width * 2) / 3;
+    this.playFieldHeight = this.height;
 
-    this.blockWidth = this.playfieldInnerWidth / columns;
-    this.blockHeight = this.playfieldInnerHeight / rows;
+    const playFieldInnerWidth = this.playFieldWidth - 8;
+    const playFieldInnerHeight = this.playFieldHeight - 8;
 
-    this.panelX = this.playfieldWidth + 10;
-    this.panelY = 0;
-    this.panelWidth = this.width / 3;
-    this.panelHeight = this.heigth;
+    this.blockWidth = playFieldInnerWidth / columns;
+    this.blockHeight = playFieldInnerHeight / rows;
 
-    this.el.appendChild(this.canvas);
+    this.panelX = this.playFieldWidth + 10;
+
+    this.el.appendChild(canvas);
   }
 
   renderMainScreen(state) {
     this.clearScreen();
-    this.renderPlayfield(state);
+    this.renderPlayField(state);
     this.renderPanel(state);
   }
 
@@ -55,52 +70,55 @@ export default class View {
     this.context.fillText(
       "Press ENTER to Start",
       this.width / 2,
-      this.heigth / 2
+      this.height / 2
     );
   }
 
   renderPauseScreen() {
     this.context.fillStyle = "rgba(0, 0, 0, 0.75)";
-    this.context.fillRect(0, 0, this.width, this.heigth);
+    this.context.fillRect(0, 0, this.width, this.height);
     this.context.fillStyle = "white";
     this.context.font = '24px "Rajdhani"';
     this.context.textAlign = "center";
     this.context.textBaseLine = "middle";
     this.context.fillText(
-      "Press SPACE or ENTER to Resume",
+      "Press SPACE to Resume",
       this.width / 2,
-      this.heigth / 2
+      this.height / 2
     );
   }
 
-  renderGameOverScreen({ score }) {
+  renderGameOverScreen({ score, level }) {
     this.clearScreen();
     this.context.fillStyle = "white";
     this.context.font = '24px "Rajdhani"';
     this.context.textAlign = "center";
+    this.context.lineHeight = "1.5";
     this.context.textBaseLine = "middle";
-    this.context.fillText("GAME OVER", this.width / 2, this.heigth / 2 - 48);
-    this.context.fillText(`Score: ${score}`, this.width / 2, this.heigth / 2);
-    this.context.fillText(
-      `Press ENTER to Restart`,
-      this.width / 2,
-      this.heigth / 2 + 48
-    );
+    this.context.fillText("GAME OVER", this.width / 2, this.height / 2 - 144);
+    this.context.fillText(`Score: ${score} / Level: ${level}`, this.width / 2, this.height / 2 - 96);
+    this.context.fillText("Press ENTER to Restart", this.width / 2, this.height / 2 - 48);
+    this.context.fillText("Your best scores:", this.width / 2, this.height / 2 + 15);
 
-    localStorage.setItem('score', score);
+    const scores = getItemFromLocalStorage('scores') || [];
+
+    this.context.textAlign = "left";
+    scores.forEach((savedScore, index) => {
+      this.context.fillText(`Top ${index + 1}: ${savedScore}`, this.width / 2.6, this.height / 2 + index * 20 + 60);
+    });
   }
 
   clearScreen() {
-    this.context.clearRect(0, 0, this.width, this.heigth);
+    this.context.clearRect(0, 0, this.width, this.height);
   }
 
-  renderPlayfield({ playfield }) {
-    playfield.forEach((line, y) =>
+  renderPlayField({ playField }) {
+    playField.forEach((line, y) =>
       line.forEach((block, x) => {
         if (block) {
           this.renderBlock(
-            this.playfieldX + x * this.blockWidth,
-            this.playfieldY + y * this.blockHeight,
+            4 + x * this.blockWidth,
+            4 + y * this.blockHeight,
             this.blockWidth,
             this.blockHeight,
             View.colors[block]
@@ -110,8 +128,8 @@ export default class View {
     );
 
     this.context.strokeStyle = "white";
-    this.context.lineWidth = this.playfieldBorderWidth;
-    this.context.strokeRect(0, 0, this.playfieldWidth, this.playfieldHeight);
+    this.context.lineWidth = 4;
+    this.context.strokeRect(0, 0, this.playFieldWidth, this.playFieldHeight);
   }
 
   renderPanel({ level, score, lines, nextFigure }) {

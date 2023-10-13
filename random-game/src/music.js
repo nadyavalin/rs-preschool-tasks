@@ -14,13 +14,9 @@ function pauseBackgroundMusic() {
   volumeOn.style.display = "none";
 }
 
-volumeOn.addEventListener("click", () => {
-  pauseBackgroundMusic();
-});
+volumeOn.addEventListener("click", pauseBackgroundMusic);
 
-volumeOff.addEventListener("click", () => {
-  playBackgroundMusic();
-});
+volumeOff.addEventListener("click", playBackgroundMusic);
 
 if (!backgroundMusic.paused) {
   playBackgroundMusic();
