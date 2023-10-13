@@ -8,21 +8,17 @@ export default class Game {
     4: 1200,
   };
 
-  score;
+  score = 0;
 
-  lines;
+  lines = 0;
 
-  topOut;
+  topOut = false;
 
-  playField;
+  playField = createPlayField();
 
   activeFigure = createFigure();
 
   nextFigure = createFigure();
-
-  constructor() {
-    this.reset();
-  }
 
   get level() {
     return Math.floor(this.lines * 0.1);
@@ -59,6 +55,8 @@ export default class Game {
     this.lines = 0;
     this.topOut = false;
     this.playField = createPlayField();
+    this.activeFigure = this.createFigure();
+    this.nextFigure = this.createFigure();
   }
 
   moveFigureLeft() {
@@ -124,25 +122,25 @@ export default class Game {
   }
 
   hasCollision() {
-    const { y: figureY, x: fitureX, blocks } = this.activeFigure;
+    const { y: figureY, x: figureX, blocks } = this.activeFigure;
 
     return blocks.some((row, y) =>
       row.some(
         (block, x) =>
           block &&
           (this.playField[figureY + y] === undefined ||
-            this.playField[figureY + y][fitureX + x] === undefined ||
-            this.playField[figureY + y][fitureX + x])
+            this.playField[figureY + y][figureX + x] === undefined ||
+            this.playField[figureY + y][figureX + x])
       )
     );
   }
 
   lockFigure() {
-    const { y: figureY, x: fitureX, blocks } = this.activeFigure;
+    const { y: figureY, x: figureX, blocks } = this.activeFigure;
     blocks.forEach((row, y) =>
       row.forEach((block, x) => {
         if (block) {
-          this.playField[figureY + y][fitureX + x] = block;
+          this.playField[figureY + y][figureX + x] = block;
         }
       })
     );

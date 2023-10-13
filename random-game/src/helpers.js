@@ -1,6 +1,6 @@
 export function createPlayField() {
-  const playfield = Array.from({ length: 20 }, () => Array(10).fill(0));
-  return playfield;
+  const playField = Array.from({ length: 20 }, () => Array(10).fill(0));
+  return playField;
 }
 
 export function createFigure() {
