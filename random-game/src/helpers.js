@@ -85,30 +85,9 @@ export function getItemFromLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
 
-export function saveScore(score) {
-  const scores = getItemFromLocalStorage('scores') || [];
+export function saveScoreToLocalStorage(score) {
+  let scores = getItemFromLocalStorage('scores') || [];
   scores.push(score);
+  scores = scores.sort((a, b) => b - a).slice(0, 10);
   setItemToLocalStorage('scores', scores);
-}
-
-export function renderScores() {
-  const scores = getItemFromLocalStorage('scores') || [];
-  scores.forEach((score, index) => {
-    console.log(`Result ${index + 1}: ${score}`);
-  });
-}
-
-export function topScores() {
-  const scores = getItemFromLocalStorage('scores') || [];
-  const sortedScores = scores.sort((a, b) => b - a);
-  const topScoresList = sortedScores.slice(0, 10);
-
-  const topScoreContainer = document.querySelector('.top-score__container');
-  topScoreContainer.innerHTML = '';
-  
-  topScoresList.forEach((score, index) => {
-    const scoreElement = document.createElement('div');
-    scoreElement.textContent = `Top ${index + 1}: ${score}`;
-    topScoreContainer.appendChild(scoreElement);
-  });
 }

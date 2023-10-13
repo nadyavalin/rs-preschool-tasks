@@ -1,4 +1,4 @@
-import { renderScores, topScores } from "./helpers.js";
+import { getItemFromLocalStorage } from "./helpers.js";
 
 export default class View {
   static colors = {
@@ -93,13 +93,19 @@ export default class View {
     this.context.fillStyle = "white";
     this.context.font = '24px "Rajdhani"';
     this.context.textAlign = "center";
+    this.context.lineHeight = "1.5";
     this.context.textBaseLine = "middle";
     this.context.fillText("GAME OVER", this.width / 2, this.height / 2 - 144);
     this.context.fillText(`Score: ${score} / Level: ${level}`, this.width / 2, this.height / 2 - 96);
     this.context.fillText("Press ENTER to Restart", this.width / 2, this.height / 2 - 48);
-    this.context.fillText("Your previous best scores:", this.width / 2, this.height / 2 + 15);
-    renderScores();
-    topScores();
+    this.context.fillText("Your best scores:", this.width / 2, this.height / 2 + 15);
+
+    const scores = getItemFromLocalStorage('scores') || [];
+
+    this.context.textAlign = "left";
+    scores.forEach((savedScore, index) => {
+      this.context.fillText(`Top ${index + 1}: ${savedScore}`, this.width / 2.6, this.height / 2 + index * 20 + 60);
+    });
   }
 
   clearScreen() {

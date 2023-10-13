@@ -13,12 +13,12 @@ export default class Game {
   lines;
 
   topOut;
-  
+
   playField;
-  
-  activeFigure;
-  
-  nextFigure;
+
+  activeFigure = createFigure();
+
+  nextFigure = createFigure();
 
   constructor() {
     this.reset();
@@ -59,8 +59,6 @@ export default class Game {
     this.lines = 0;
     this.topOut = false;
     this.playField = createPlayField();
-    this.activeFigure = createFigure();
-    this.nextFigure = createFigure();
   }
 
   moveFigureLeft() {
