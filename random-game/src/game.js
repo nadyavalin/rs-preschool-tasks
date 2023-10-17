@@ -141,10 +141,12 @@ export default class Game {
 
   lockFigure() {
     const { y: figureY, x: fitureX, blocks } = this.activeFigure;
+    const sound = document.querySelector(".lock-figure-music");
     blocks.forEach((row, y) =>
       row.forEach((block, x) => {
         if (block) {
           this.playField[figureY + y][fitureX + x] = block;
+          sound.play();
         }
       })
     );
@@ -154,6 +156,7 @@ export default class Game {
     const rows = 20;
     const columns = 10;
     const lines = [];
+    const sound = document.querySelector(".clear-line-music");
 
     for (let y = rows - 1; y >= 0; y -= 1) {
       let numberOfBlocks = 0;
@@ -166,6 +169,7 @@ export default class Game {
 
       if (numberOfBlocks === columns) {
         lines.unshift(y);
+        sound.play();
       } else if (numberOfBlocks === 0) {
         break;
       }
