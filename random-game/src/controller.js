@@ -1,4 +1,4 @@
-import { saveScore } from "./helpers.js";
+import { saveScoreToLocalStorage } from "./helpers.js";
 
 export default class Controller {
   game;
@@ -42,12 +42,10 @@ export default class Controller {
 
   updateView() {
     const state = this.game.getState();
-    const topScoreContainer = document.querySelector('.top-score__container');
     if (state.isGameOver) {
+      saveScoreToLocalStorage(state.score);
       this.view.renderGameOverScreen(state);
-      saveScore(state.score);
       this.stopTimer();
-      topScoreContainer.style.display = "block";
     } else if (!this.isPlaying) {
       this.view.renderPauseScreen();
     } else {
@@ -76,16 +74,13 @@ export default class Controller {
 
   handleKeyDown(event) {
     const state = this.game.getState();
-    const topScoreContainer = document.querySelector('.top-score__container');
 
     switch (event.key) {
       case "Enter":
         if (state.isGameOver) {
           this.reset();
-          topScoreContainer.style.display = "none";
         } else {
           this.play();
-          topScoreContainer.style.display = "none";
         }
         break;
 
@@ -126,16 +121,5 @@ export default class Controller {
         break;
       default:
     }
-  }
-
-  processDownKeyPress() {
-    if (!this.isPlaying) {
-      return;
-    }
-
-    this.stopTimer();
-    this.game.moveFigureDown();
-    this.updateView();
-    this.startTimer();
   }
 }
